@@ -1,0 +1,139 @@
+{
+    "name": "Cisco",
+    "description": "954088 Cisco Systems, Inc. is an American multinational technology conglomerate headquartered in San Jose, California, in the center of Silicon Valley, that develops, manufactures and sells networking hardware, telecommunications equipment and other hi...",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1515-cisco-unity-connection-messaging-interface.jpg",
+    "tags": [
+        "have api",
+        "have swagger",
+        "isp",
+        "messages",
+        "networking",
+        "relative data",
+        "service api"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/cisco\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Cisco PSIRT openVuln",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1515-cisco-unity-connection-messaging-interface.jpg",
+            "humanURL": "http:\/\/cisco.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/cisco-psirt-openvuln-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/cisco-psirt-openvuln.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/cisco-psirt-openvuln-postman-collection.json"
+                }
+            ]
+        },
+        {
+            "name": "Cisco PSIRT open Vuln",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1515-cisco-unity-connection-messaging-interface.jpg",
+            "humanURL": "http:\/\/cisco.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/cisco-psirt-open-vuln-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/cisco-psirt-open-vuln.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/cisco-psirt-open-vuln-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Website",
+            "url": "http:\/\/docwiki.cisco.com\/wiki\/Cisco_Unity_Connection_Messaging_Interface_%28CUMI%29_API"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/cisco"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/developer.cisco.com\/"
+        },
+        {
+            "type": "Email",
+            "url": "info-pt@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "info-ru@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "ciscoj-newgrad@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "recruit-jp@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "cin-china@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "privacy@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "ethics@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "web-help@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "BusinessInsights@cisco.com"
+        },
+        {
+            "type": "Email",
+            "url": "hk_assistant@cisco.com"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/1515-2019-09-03-16-07-13.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/1515-2019-09-03-18-04-20.json"
+        },
+        {
+            "type": "Support",
+            "url": "https:\/\/developer.cisco.com\/site\/devnet\/support\/"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/Cisco"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/cisco.com"
+        }
+    ]
+}
