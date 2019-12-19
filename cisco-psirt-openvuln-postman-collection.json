@@ -1,0 +1,642 @@
+{
+    "id": "0b8f017e90f3182aa442a837c0119a84",
+    "name": "Cisco PSIRT openVuln",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "c0e4b35f0f9cd1b6318eb5a8a7bb318d",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/advisory\/{advisory_id}",
+            "description": "Used to obtain an advisory in CVRF format for a given advisory ID `advisory_id` (i.e., cisco-sa-20150819-pcp)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "advisory_id",
+                    "description": "advisory ID",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "744aa0de0e1fb5d55ed274829702fdcc",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/all",
+            "description": "Used to obtain all advisories in Common Vulnerability Reporting Format (CVRF). For more information about CVRF go to https:\/\/communities.cisco.com\/docs\/DOC-63156 . By default the output is in JSON. To obtain the output in XML use the .xml extension. For example, \/advisories\/cvrf\/all.xml\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "f67906968d8519e59f69d1bbeb877421",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/cve\/{cve_id}",
+            "description": "Used to obtain an advisory in CVRF format for a given Common Vulnerability Enumerator (CVE). The `cve_id` format is CVE-YYYY-NNNN. For more information about CVE visit http:\/\/cve.mitre.org\/\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "cve_id",
+                    "description": "CVE Identifier (i.e., CVE-YYYY-NNNN)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "cb2875fd84f534defaea539b3e17d68b",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/latest\/{number}",
+            "description": "Used to obtain all the latest security advisories in CVRF format given an absolute number. For instance, the latest 10 or latest 5.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "number",
+                    "description": "An absolute number to obtain the latest security advisories.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "935bc991a07a514d2521ee4459030a3d",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/product",
+            "description": "Used to obtain all the advisories that affects the given product name.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "product",
+                    "description": "An product name to obtain security advisories that matches given product name.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "c1b5f3e8400d3b3d04476eda284b20ed",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/severity\/{severity}",
+            "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "severity",
+                    "description": "Critical, High, Medium, Low",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "4042596dc51371fff081343d86b3730e",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/severity\/{severity}\/firstpublished",
+            "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format and additionally filter based of firstpublished start date and enddate\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "severity",
+                    "description": "Critical, High, Medium, Low",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "startDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "endDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "6366d05b8c03b54121960313923e3f57",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/severity\/{severity}\/lastpublished",
+            "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "severity",
+                    "description": "Critical, High, Medium, Low",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "startDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "endDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "60c8d75042435c5fc1fa02c2b6201c4a",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/cvrf\/year\/{year}",
+            "description": "Used to obtain all security advisories that have were orginally published in a specific year `YYYY`.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "year",
+                    "description": "The four digit year.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "4f9ccea0a31a4c37c9cbcb9108c36a97",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/ios",
+            "description": "Used to obtain all advisories that affects the given ios version\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "version",
+                    "description": "IOS version to obtain security advisories",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "8e247412f6476c4cfaab39e1a6c88e83",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/iosxe",
+            "description": "Used to obtain all advisories that affects the given ios version\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "version",
+                    "description": "IOS version to obtain security advisories",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "a3d2ecbd6c6463db3522ada155cd68b3",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/advisory\/{advisory_id}",
+            "description": "Used to obtain OVAL definitions for a given advisory ID `advisory_id` (i.e., cisco-sa-20150819-pcp)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "advisory_id",
+                    "description": "advisory ID",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "21e7f0947f4a449d79b2204af6233da3",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/all",
+            "description": "Used to obtain all Open Vulnerability and Assessment Language (OVAL) definitions available for Cisco security vulnerabilities. For more information about OVAL go to https:\/\/communities.cisco.com\/docs\/DOC-63158 . By default the output is in JSON. To obtain the output in XML use the .xml extension. For example, \/advisories\/oval\/all.xml\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "79b9bd68ea6ec0c4566c5a62c4577381",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/cve\/{cve_id}",
+            "description": "Used to obtain OVAL definitions for a given CVE Identifier. The `cve_id` format is CVE-YYYY-NNNN.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "cve_id",
+                    "description": "CVE Identifier (i.e., CVE-YYYY-NNNN)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "d7bb7927fe5cc5fe5408311476d8733d",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/latest\/{number}",
+            "description": "Used to obtain all the latest OVAL definitions given an absolute number. For instance, the latest 10 or latest 5.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "number",
+                    "description": "An absolute number to obtain the latest security advisories.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "be5e4b49df3e67f90eb46f9a992cc9da",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/product",
+            "description": "Used to obtain all the oval advisories that affects the given product name.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "product",
+                    "description": "An product name to obtain security advisories that matches given product name.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "c74013251dae9fe6d6e5325b70420774",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/severity\/{severity}",
+            "description": "Used to obtain all OVAL definitions for a given security impact rating (critical, high, medium, or low).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "severity",
+                    "description": "Critical, High, Medium, Low",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "ab5a2555538ba43f2eedafcdd72c3b07",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/severity\/{severity}\/firstpublished",
+            "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in OVAL format.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "severity",
+                    "description": "Critical, High, Medium, Low",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "startDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "endDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        },
+        {
+            "id": "f795345dc59018f06a95b14e73bde91f",
+            "name": "",
+            "url": "http:\/\/api.cisco.com\/\/security\/advisories\/oval\/severity\/{severity}\/lastpublished",
+            "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in OVAL format.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "severity",
+                    "description": "Critical, High, Medium, Low",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "startDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "endDate",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0b8f017e90f3182aa442a837c0119a84",
+            "rawModeData": ""
+        }
+    ]
+}
