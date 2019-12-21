@@ -1,5 +1,5 @@
 {
-    "id": "b95a25e11c0a95d0a59f9d77e7bcb304",
+    "id": "b43a617632301594c9ef4be7d87dcda6",
     "name": "Cisco PSIRT open Vuln",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "3f33786885c143ff2d5e26337dbf7c42",
+            "id": "fbe4300bd43978600e80b93791945dc7",
             "name": "Get Security Advisories Advisory Advisory",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/advisory\/{advisory_id}",
             "description": "Used to obtain an advisory in CVRF format for a given advisory ID `advisory_id` (i.e., cisco-sa-20150819-pcp)\n",
@@ -37,11 +37,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "f8aab46649fa5a9b5d01ab67daabaa58",
+            "id": "329e20104b850e6d3fc0738711d4555a",
             "name": "Get Security Advisories All",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/all",
             "description": "Used to obtain all advisories in Common Vulnerability Reporting Format (CVRF). For more information about CVRF go to https:\/\/communities.cisco.com\/docs\/DOC-63156 . By default the output is in JSON. To obtain the output in XML use the .xml extension. For example, \/advisories\/cvrf\/all.xml\n",
@@ -60,11 +60,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "7a3ffe55d9df125590aa91c622403232",
+            "id": "4399341047f6a628df685052f3d20748",
             "name": "Get Security Advisories",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/cve\/{cve_id}",
             "description": "Used to obtain an advisory in CVRF format for a given Common Vulnerability Enumerator (CVE). The `cve_id` format is CVE-YYYY-NNNN. For more information about CVE visit http:\/\/cve.mitre.org\/\n",
@@ -91,11 +91,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "595443bd60fb8bfd8a779d2dd2d73666",
+            "id": "443c5526de813bab6ad0400371653d7d",
             "name": "Get Security Advisories Latest Number",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/latest\/{number}",
             "description": "Used to obtain all the latest security advisories in CVRF format given an absolute number. For instance, the latest 10 or latest 5.\n",
@@ -122,11 +122,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "7ee82c75361bfe329f77eb90628354af",
+            "id": "fcc9a15e4c8ed13b975f4dc1a547f78c",
             "name": "Get Security Advisories Product",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/product",
             "description": "Used to obtain all the advisories that affects the given product name.\n",
@@ -153,11 +153,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "9b6b59af35efdb9295077b39d58b39f4",
+            "id": "c554c8b00166169116f8e78e67be4a4e",
             "name": "Get Security Advisories Severity Severity",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/severity\/{severity}",
             "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format.\n",
@@ -184,11 +184,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "0586bc3c9bdac06a776c2e20f281ac12",
+            "id": "a5a6db466f64fd1256619ed19dbe623b",
             "name": "Get Security Advisories Severity Severity Firstpublished",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/severity\/{severity}\/firstpublished",
             "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format and additionally filter based of firstpublished start date and enddate\n",
@@ -229,11 +229,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "a4b23a3b824da9230683d2a350a5d24e",
+            "id": "e79ed42752923d71078c2155c95e60b9",
             "name": "Get Security Advisories Severity Severity Lastpublished",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/severity\/{severity}\/lastpublished",
             "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format.\n",
@@ -274,11 +274,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "b33ed5eaaeef317b09de847ac89fbd33",
+            "id": "437d2004e29269f58c761a030a8e424b",
             "name": "Get Security Advisories Year Year",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/cvrf\/year\/{year}",
             "description": "Used to obtain all security advisories that have were orginally published in a specific year `YYYY`.\n",
@@ -305,11 +305,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "d5fb37ce066009b201a3feae167bf49b",
+            "id": "b991b5451796b0005103e0a4af1277f7",
             "name": "Get Security Advisories Ios",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/ios",
             "description": "Used to obtain all advisories that affects the given ios version\n",
@@ -336,11 +336,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "aa200753d5097b4a82f140dda71a1cba",
+            "id": "10e5a87223e160f0a6e48504bb1b3849",
             "name": "Get Security Advisories Iosxe",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/iosxe",
             "description": "Used to obtain all advisories that affects the given ios version\n",
@@ -367,11 +367,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "b41b0607f1bd3f0f1514da54987fcf46",
+            "id": "01a76fddd8afd0e908dc75e3112852f6",
             "name": "Get Security Advisories Oval Advisory Advisory",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/advisory\/{advisory_id}",
             "description": "Used to obtain OVAL definitions for a given advisory ID `advisory_id` (i.e., cisco-sa-20150819-pcp)\n",
@@ -398,11 +398,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "8299b9722c04cdb81a7e5813c65820ec",
+            "id": "deb1810f4da1732e614a1048cc88c1d5",
             "name": "Get Security Advisories Oval All",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/all",
             "description": "Used to obtain all Open Vulnerability and Assessment Language (OVAL) definitions available for Cisco security vulnerabilities. For more information about OVAL go to https:\/\/communities.cisco.com\/docs\/DOC-63158 . By default the output is in JSON. To obtain the output in XML use the .xml extension. For example, \/advisories\/oval\/all.xml\n",
@@ -421,11 +421,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "34c0f62967a29eb555f299c25987b44e",
+            "id": "39374e4610fbf919783886dbcd9c1e7b",
             "name": "Get Security Advisories Oval",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/cve\/{cve_id}",
             "description": "Used to obtain OVAL definitions for a given CVE Identifier. The `cve_id` format is CVE-YYYY-NNNN.\n",
@@ -452,11 +452,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "1a3b711ffb06603f974e0a295ded2ce2",
+            "id": "8a3b98ea4d5040b7aedde83210f2dd18",
             "name": "Get Security Advisories Oval Latest Number",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/latest\/{number}",
             "description": "Used to obtain all the latest OVAL definitions given an absolute number. For instance, the latest 10 or latest 5.\n",
@@ -483,11 +483,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "92361aba562ce5feab2d47ecf5f116f0",
+            "id": "281fc607c3df4f87e644e370aa74fe3c",
             "name": "Get Security Advisories Oval Product",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/product",
             "description": "Used to obtain all the oval advisories that affects the given product name.\n",
@@ -514,11 +514,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "bd6f30bab42736752162a70d7a863691",
+            "id": "137b00522fdeb69a6849700a80dce945",
             "name": "Get Security Advisories Oval Severity Severity",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/severity\/{severity}",
             "description": "Used to obtain all OVAL definitions for a given security impact rating (critical, high, medium, or low).\n",
@@ -545,11 +545,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "914a7c9c297ab4cd733d888795e022ce",
+            "id": "ad3c9612e19aea9ae4a43a5ffb9edde1",
             "name": "Get Security Advisories Oval Severity Severity Firstpublished",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/severity\/{severity}\/firstpublished",
             "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in OVAL format.\n",
@@ -590,11 +590,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         },
         {
-            "id": "66e52e7f8dd5f2120dcaddfc1849a9b7",
+            "id": "77341fdd577e26aba62c8b5878e31291",
             "name": "Get Security Advisories Oval Severity Severity Lastpublished",
             "url": "httpsapi.cisco.com\/\/security\/advisories\/oval\/severity\/{severity}\/lastpublished",
             "description": "Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in OVAL format.\n",
@@ -635,7 +635,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b95a25e11c0a95d0a59f9d77e7bcb304",
+            "collectionId": "b43a617632301594c9ef4be7d87dcda6",
             "rawModeData": ""
         }
     ]
