@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cisco/refs/heads/main/json-schema/cisco-meraki-api-organization-schema.json",
+  "title": "Organization",
+  "description": "A Meraki organization.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Organization ID." },
+    "name": { "type": "string", "description": "Organization name." },
+    "url": { "type": "string", "description": "Organization URL in the Meraki dashboard." }
+  }
+}

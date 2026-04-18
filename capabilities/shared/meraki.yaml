@@ -1,0 +1,97 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Cisco Meraki Dashboard API"
+  description: "Cloud-managed networking device management via the Meraki Dashboard API."
+  tags:
+    - Cisco
+    - Meraki
+    - Network Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      MERAKI_API_KEY: MERAKI_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: meraki
+      baseUri: https://api.meraki.com/api/v1
+      description: "Cisco Meraki Dashboard API v1"
+      authentication:
+        type: apikey
+        key: X-Cisco-Meraki-API-Key
+        value: "{{MERAKI_API_KEY}}"
+        placement: header
+      resources:
+        - name: organizations
+          path: /organizations
+          description: "Meraki organizations"
+          operations:
+            - name: list-organizations
+              method: GET
+              description: "List organizations"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: networks
+          path: /organizations/{organizationId}/networks
+          description: "Networks within an organization"
+          operations:
+            - name: list-networks
+              method: GET
+              description: "List networks in an organization"
+              inputParameters:
+                - name: organizationId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: devices
+          path: /networks/{networkId}/devices
+          description: "Devices in a network"
+          operations:
+            - name: list-devices
+              method: GET
+              description: "List devices in a network"
+              inputParameters:
+                - name: networkId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: mcp
+      port: 9100
+      namespace: meraki-mcp
+      transport: http
+      tools:
+        - name: list-organizations
+          description: "List Meraki organizations"
+          hints:
+            readOnly: true
+          call: "meraki.list-organizations"
+        - name: list-networks
+          description: "List networks in a Meraki organization"
+          hints:
+            readOnly: true
+          call: "meraki.list-networks"
+        - name: list-devices
+          description: "List devices in a Meraki network"
+          hints:
+            readOnly: true
+          call: "meraki.list-devices"

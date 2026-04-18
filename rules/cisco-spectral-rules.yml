@@ -1,0 +1,110 @@
+rules:
+  info-title-prefix:
+    description: Info title should start with "Cisco"
+    given: $.info
+    severity: warn
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: "^Cisco"
+
+  info-description-required:
+    description: Info description must be present
+    given: $.info
+    severity: error
+    then:
+      field: description
+      function: truthy
+
+  paths-kebab-case:
+    description: Paths should use kebab-case
+    given: $.paths
+    severity: warn
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9\\-/{}_]+$"
+
+  operation-operationId-required:
+    description: Every operation must have an operationId
+    given: "$.paths[*][get,post,put,patch,delete]"
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+
+  operation-summary-required:
+    description: Every operation must have a summary
+    given: "$.paths[*][get,post,put,patch,delete]"
+    severity: error
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-prefix:
+    description: Operation summaries should start with "Cisco"
+    given: "$.paths[*][get,post,put,patch,delete]"
+    severity: warn
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: "^Cisco"
+
+  operation-tags-required:
+    description: Every operation must have tags
+    given: "$.paths[*][get,post,put,patch,delete]"
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  parameter-description-required:
+    description: Every parameter must have a description
+    given: "$.paths[*][get,post,put,patch,delete].parameters[*]"
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  response-success-required:
+    description: Every operation must have a success response
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+            - required: ["204"]
+
+  security-global-defined:
+    description: Global security must be defined
+    given: "$"
+    severity: error
+    then:
+      field: security
+      function: truthy
+
+  security-api-key-header:
+    description: API keys should be sent in headers
+    given: "$.components.securitySchemes[*]"
+    severity: warn
+    then:
+      field: in
+      function: enumeration
+      functionOptions:
+        values: [header]
+
+  schema-properties-description:
+    description: Schema properties should have descriptions
+    given: "$.components.schemas[*].properties[*]"
+    severity: info
+    then:
+      field: description
+      function: truthy

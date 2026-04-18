@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cisco/refs/heads/main/json-schema/cisco-meraki-api-device-schema.json",
+  "title": "Device",
+  "description": "A Meraki network device.",
+  "type": "object",
+  "properties": {
+    "serial": { "type": "string", "description": "Device serial number." },
+    "name": { "type": "string", "description": "Device name." },
+    "mac": { "type": "string", "description": "Device MAC address." },
+    "model": { "type": "string", "description": "Device model." },
+    "networkId": { "type": "string", "description": "Network ID." },
+    "lanIp": { "type": "string", "description": "LAN IP address." },
+    "firmware": { "type": "string", "description": "Firmware version." }
+  }
+}

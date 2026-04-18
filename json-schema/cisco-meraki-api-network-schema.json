@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cisco/refs/heads/main/json-schema/cisco-meraki-api-network-schema.json",
+  "title": "Network",
+  "description": "A Meraki network.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Network ID." },
+    "organizationId": { "type": "string", "description": "Organization ID." },
+    "name": { "type": "string", "description": "Network name." },
+    "productTypes": { "type": "array", "items": { "type": "string" }, "description": "Product types in the network." },
+    "timeZone": { "type": "string", "description": "Timezone of the network." },
+    "tags": { "type": "array", "items": { "type": "string" }, "description": "Tags applied to the network." }
+  }
+}

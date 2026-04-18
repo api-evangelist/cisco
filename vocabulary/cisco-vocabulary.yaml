@@ -1,0 +1,75 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Cisco"
+  description: "Vocabulary for Cisco networking APIs covering Meraki, Catalyst Center, and SD-WAN domains."
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+operational:
+  apis:
+    - name: Meraki Dashboard API
+      namespace: meraki
+      version: "1.0"
+      baseUrl: https://api.meraki.com/api/v1
+      status: active
+
+  resources:
+    - name: Organizations
+      api: Meraki Dashboard API
+      actions: [list, get, create, update]
+    - name: Networks
+      api: Meraki Dashboard API
+      actions: [list, get, create, update, delete]
+    - name: Devices
+      api: Meraki Dashboard API
+      actions: [list, get, update, claim]
+    - name: Clients
+      api: Meraki Dashboard API
+      actions: [list, get]
+
+  actions:
+    - name: list
+      method: GET
+      pattern: read
+    - name: get
+      method: GET
+      pattern: read
+    - name: create
+      method: POST
+      pattern: write
+    - name: update
+      method: PUT
+      pattern: write
+    - name: delete
+      method: DELETE
+      pattern: destructive
+
+  authentication:
+    schemes:
+      - type: API Key
+        placement: header
+        keyName: X-Cisco-Meraki-API-Key
+
+capability:
+  workflows:
+    - name: Network Management
+      file: capabilities/network-management.yaml
+      description: "Unified network management combining Meraki and other Cisco APIs"
+      tools: 3
+      personas: [Network Admin]
+
+  personas:
+    - id: network-admin
+      name: Network Admin
+      description: "Network administrators managing Cisco infrastructure"
+
+crossReference:
+  - resource: Organizations
+    operations: [list-organizations]
+    workflows: [Network Management]
+    personas: [Network Admin]
+  - resource: Networks
+    operations: [list-networks]
+    workflows: [Network Management]
+    personas: [Network Admin]

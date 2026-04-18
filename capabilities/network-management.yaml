@@ -1,0 +1,66 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Cisco Network Management"
+  description: "Unified network management workflow combining Meraki, Catalyst Center, and SD-WAN APIs for network administrators."
+  tags:
+    - Cisco
+    - Network Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      MERAKI_API_KEY: MERAKI_API_KEY
+
+capability:
+  consumes:
+    - import: meraki
+      location: ./shared/meraki.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: network-management-api
+      description: "Unified REST API for Cisco network management."
+      resources:
+        - path: /v1/organizations
+          name: organizations
+          description: "Network organizations"
+          operations:
+            - method: GET
+              name: list-organizations
+              description: "List organizations"
+              call: "meraki.list-organizations"
+        - path: /v1/networks
+          name: networks
+          description: "Networks"
+          operations:
+            - method: GET
+              name: list-networks
+              description: "List networks"
+              call: "meraki.list-networks"
+
+    - type: mcp
+      port: 9090
+      namespace: network-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted network management."
+      tools:
+        - name: list-organizations
+          description: "List Meraki organizations"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "meraki.list-organizations"
+        - name: list-networks
+          description: "List networks in organization"
+          hints:
+            readOnly: true
+          call: "meraki.list-networks"
+        - name: list-devices
+          description: "List devices in network"
+          hints:
+            readOnly: true
+          call: "meraki.list-devices"

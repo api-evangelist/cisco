@@ -1,0 +1,318 @@
+openapi: 3.0.3
+info:
+  title: Cisco Meraki Dashboard API
+  description: >-
+    RESTful API for managing Cisco Meraki cloud-managed networking devices
+    including wireless access points, switches, security appliances, and cameras.
+  version: '1.0'
+  contact:
+    name: Cisco DevNet
+    url: https://developer.cisco.com/meraki/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+  - url: https://api.meraki.com/api/v1
+    description: Meraki Dashboard API v1
+security:
+  - apiKeyAuth: []
+tags:
+  - name: Organizations
+    description: Manage Meraki organizations
+  - name: Networks
+    description: Manage networks within an organization
+  - name: Devices
+    description: Manage network devices
+  - name: Clients
+    description: View client information
+paths:
+  /organizations:
+    get:
+      operationId: getOrganizations
+      summary: Cisco Meraki List Organizations
+      description: List the organizations that the user has privileges on.
+      tags:
+        - Organizations
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+              examples:
+                GetOrganizations200Example:
+                  summary: Default getOrganizations 200 response
+                  x-microcks-default: true
+                  value:
+                    - id: "500123"
+                      name: "Acme Corp"
+                      url: "https://dashboard.meraki.com/o/abc123/manage/organization/overview"
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /organizations/{organizationId}/networks:
+    get:
+      operationId: getOrganizationNetworks
+      summary: Cisco Meraki List Organization Networks
+      description: List the networks that the user has privileges on in an organization.
+      tags:
+        - Networks
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          description: The organization ID.
+          schema:
+            type: string
+          example: "500123"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Network'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOrganizationNetwork
+      summary: Cisco Meraki Create Organization Network
+      description: Create a network in an organization.
+      tags:
+        - Networks
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          description: The organization ID.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkCreate'
+      responses:
+        '201':
+          description: Network created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /networks/{networkId}/devices:
+    get:
+      operationId: getNetworkDevices
+      summary: Cisco Meraki List Network Devices
+      description: List the devices in a network.
+      tags:
+        - Devices
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The network ID.
+          schema:
+            type: string
+          example: "L_500123"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /networks/{networkId}/clients:
+    get:
+      operationId: getNetworkClients
+      summary: Cisco Meraki List Network Clients
+      description: List the clients that have used this network in the timespan.
+      tags:
+        - Clients
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The network ID.
+          schema:
+            type: string
+        - name: timespan
+          in: query
+          description: Timespan in seconds for which clients will be fetched.
+          schema:
+            type: integer
+            default: 86400
+          example: 86400
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Cisco-Meraki-API-Key
+      description: Meraki Dashboard API key.
+  schemas:
+    Organization:
+      type: object
+      description: A Meraki organization.
+      properties:
+        id:
+          type: string
+          description: Organization ID.
+          example: "500123"
+        name:
+          type: string
+          description: Organization name.
+          example: "Acme Corp"
+        url:
+          type: string
+          description: Organization URL in the Meraki dashboard.
+          example: "https://dashboard.meraki.com/o/abc123/manage/organization/overview"
+    Network:
+      type: object
+      description: A Meraki network.
+      properties:
+        id:
+          type: string
+          description: Network ID.
+          example: "L_500123"
+        organizationId:
+          type: string
+          description: Organization ID.
+          example: "500123"
+        name:
+          type: string
+          description: Network name.
+          example: "Main Office"
+        productTypes:
+          type: array
+          items:
+            type: string
+          description: Product types in the network.
+          example: ["appliance", "switch", "wireless"]
+        timeZone:
+          type: string
+          description: Timezone of the network.
+          example: "America/Los_Angeles"
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags applied to the network.
+          example: ["production", "campus"]
+    NetworkCreate:
+      type: object
+      description: Request body for creating a network.
+      required:
+        - name
+        - productTypes
+      properties:
+        name:
+          type: string
+          description: Network name.
+          example: "Main Office"
+        productTypes:
+          type: array
+          items:
+            type: string
+          description: Product types for the network.
+          example: ["appliance", "switch", "wireless"]
+        timeZone:
+          type: string
+          description: Timezone.
+          example: "America/Los_Angeles"
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags for the network.
+    Device:
+      type: object
+      description: A Meraki network device.
+      properties:
+        serial:
+          type: string
+          description: Device serial number.
+          example: "Q2QN-XXXX-XXXX"
+        name:
+          type: string
+          description: Device name.
+          example: "Office AP 01"
+        mac:
+          type: string
+          description: Device MAC address.
+          example: "aa:bb:cc:dd:ee:ff"
+        model:
+          type: string
+          description: Device model.
+          example: "MR46"
+        networkId:
+          type: string
+          description: Network ID.
+          example: "L_500123"
+        lanIp:
+          type: string
+          description: LAN IP address.
+          example: "10.0.1.10"
+        firmware:
+          type: string
+          description: Firmware version.
+          example: "wireless-29-8"
+    Client:
+      type: object
+      description: A network client.
+      properties:
+        id:
+          type: string
+          description: Client ID.
+          example: "k500123"
+        mac:
+          type: string
+          description: Client MAC address.
+          example: "aa:bb:cc:11:22:33"
+        ip:
+          type: string
+          description: Client IP address.
+          example: "10.0.1.100"
+        description:
+          type: string
+          description: Client description.
+          example: "Jane's Laptop"
+        os:
+          type: string
+          description: Operating system.
+          example: "Windows 11"
+        vlan:
+          type: integer
+          description: VLAN ID.
+          example: 10
+        status:
+          type: string
+          description: Client status.
+          example: "Online"

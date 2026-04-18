@@ -1,0 +1,8 @@
+{
+  "id": "L_500123",
+  "organizationId": "500123",
+  "name": "Main Office",
+  "productTypes": ["appliance", "switch", "wireless"],
+  "timeZone": "America/Los_Angeles",
+  "tags": ["production", "campus"]
+}

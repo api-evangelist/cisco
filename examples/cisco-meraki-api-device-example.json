@@ -1,0 +1,9 @@
+{
+  "serial": "Q2QN-XXXX-XXXX",
+  "name": "Office AP 01",
+  "mac": "aa:bb:cc:dd:ee:ff",
+  "model": "MR46",
+  "networkId": "L_500123",
+  "lanIp": "10.0.1.10",
+  "firmware": "wireless-29-8"
+}

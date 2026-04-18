@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "cisco": "https://cisco.dev/schema/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Organization": "cisco:Organization",
+    "Network": "cisco:Network",
+    "Device": "cisco:Device",
+    "Client": "cisco:Client",
+    "id": { "@id": "cisco:id", "@type": "xsd:string" },
+    "name": { "@id": "schema:name", "@type": "xsd:string" },
+    "serial": { "@id": "cisco:serial", "@type": "xsd:string" },
+    "mac": { "@id": "cisco:mac", "@type": "xsd:string" },
+    "model": { "@id": "cisco:model", "@type": "xsd:string" },
+    "networkId": { "@id": "cisco:networkId", "@type": "xsd:string" },
+    "lanIp": { "@id": "cisco:lanIp", "@type": "xsd:string" },
+    "firmware": { "@id": "cisco:firmware", "@type": "xsd:string" },
+    "productTypes": { "@id": "cisco:productTypes", "@container": "@set" },
+    "tags": { "@id": "cisco:tags", "@container": "@set" },
+    "timeZone": { "@id": "cisco:timeZone", "@type": "xsd:string" },
+    "ip": { "@id": "cisco:ip", "@type": "xsd:string" },
+    "os": { "@id": "cisco:os", "@type": "xsd:string" },
+    "status": { "@id": "cisco:status", "@type": "xsd:string" }
+  }
+}
