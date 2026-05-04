@@ -1,0 +1,83 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Cisco (Networking + Security + Collaboration)
+providerId: cisco
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Networking + Security
+  - Cloud
+  - Multi-Service
+description: Cisco (Networking + Security + Collaboration) is a multi-product platform — pricing is per-service.
+  This artifact catalogs the major service families and points to the vendor's pricing calculator. For
+  detailed per-service rates, use the vendor pricing pages directly.
+sources:
+  - https://www.cisco.com/c/en/us/products/index.html
+  - https://focus.finops.org/
+plans:
+  - id: cisco-platform-overview
+    name: Platform Pricing Overview
+    type: enterprise
+    description: Per-service pay-as-you-go + reserved/committed-use discounts.
+    entries:
+      - label: Per-service rates
+        name: varies
+        type: metered
+        metric: varies
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: see vendor pricing calculator
+        userMultiplied: false
+    elements:
+      - name: Meraki Dashboard API
+      - name: Catalyst Center API
+      - name: DNA Center API
+      - name: Webex API
+      - name: Webex Calling
+      - name: Cisco Secure Endpoint API
+      - name: Umbrella API
+      - name: AppDynamics API
+      - name: ThousandEyes API
+      - name: Cisco Intersight API
+  - id: cisco-committed-use
+    name: Committed Use / Reserved
+    type: enterprise
+    description: 1-year and 3-year commitments offer 30-72% discount over on-demand.
+    entries:
+      - label: Annual commitment (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: Reserved Instances / Savings Plans / Committed Use Discounts
+      - name: Volume discounts
+      - name: Negotiated enterprise agreements
+  - id: cisco-free-tier
+    name: Free Tier / Trial
+    type: freemium
+    description: Most platforms offer a free tier or starting credits.
+    entries:
+      - label: Free tier (varies)
+        name: free
+        type: quota
+        metric: service
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 12-month free trial allowances
+      - name: Always-free quotas
+      - name: New account credits
