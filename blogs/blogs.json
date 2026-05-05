@@ -1,0 +1,13 @@
+{
+  "repo": "cisco",
+  "feeds": [
+    {
+      "source": "https://blogs.cisco.com/developer",
+      "feed_url": "https://blogs.cisco.com/feed",
+      "saved": 9,
+      "title": "Cisco Blogs"
+    }
+  ],
+  "post_count": 9,
+  "fetched": "2026-05-03T23:25:14Z"
+}
