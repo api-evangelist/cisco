@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://blogs.cisco.com/developer",
-      "feed_url": "https://blogs.cisco.com/feed",
-      "saved": 9,
-      "title": "Cisco Blogs"
+      "feed_url": "https://blogs.cisco.com/developer/feed/",
+      "title": "Developer - Cisco Blogs",
+      "saved": 2
     }
   ],
-  "post_count": 9,
-  "fetched": "2026-05-03T23:25:14Z"
+  "post_count": 11,
+  "fetched": "2026-05-09T20:17:51Z"
 }
