@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cisco Meraki Dashboard API — Clients
+  description: 'Cisco Meraki Dashboard API — Clients. 1 operations. Lead operation: Cisco Meraki List Network Clients. Self-contained
+    Naftiko capability covering one Cisco business surface.'
+  tags:
+  - Cisco
+  - Clients
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CISCO_API_KEY: CISCO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: meraki-clients
+    baseUri: https://api.meraki.com/api/v1
+    description: Cisco Meraki Dashboard API — Clients business capability. Self-contained, no shared references.
+    resources:
+    - name: networks-networkId-clients
+      path: /networks/{networkId}/clients
+      operations:
+      - name: getnetworkclients
+        method: GET
+        description: Cisco Meraki List Network Clients
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The network ID.
+          required: true
+        - name: timespan
+          in: query
+          type: integer
+          description: Timespan in seconds for which clients will be fetched.
+    authentication:
+      type: apikey
+      key: X-Cisco-Meraki-API-Key
+      value: '{{env.CISCO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: meraki-clients-rest
+    port: 8080
+    description: REST adapter for Cisco Meraki Dashboard API — Clients. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/networks/{networkid}/clients
+      name: networks-networkid-clients
+      description: REST surface for networks-networkId-clients.
+      operations:
+      - method: GET
+        name: getnetworkclients
+        description: Cisco Meraki List Network Clients
+        call: meraki-clients.getnetworkclients
+        with:
+          networkId: rest.networkId
+          timespan: rest.timespan
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: meraki-clients-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cisco Meraki Dashboard API — Clients. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: cisco-meraki-list-network-clients
+      description: Cisco Meraki List Network Clients
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: meraki-clients.getnetworkclients
+      with:
+        networkId: tools.networkId
+        timespan: tools.timespan
+      outputParameters:
+      - type: object
+        mapping: $.

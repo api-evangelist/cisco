@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cisco Meraki Dashboard API — Devices
+  description: 'Cisco Meraki Dashboard API — Devices. 1 operations. Lead operation: Cisco Meraki List Network Devices. Self-contained
+    Naftiko capability covering one Cisco business surface.'
+  tags:
+  - Cisco
+  - Devices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CISCO_API_KEY: CISCO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: meraki-devices
+    baseUri: https://api.meraki.com/api/v1
+    description: Cisco Meraki Dashboard API — Devices business capability. Self-contained, no shared references.
+    resources:
+    - name: networks-networkId-devices
+      path: /networks/{networkId}/devices
+      operations:
+      - name: getnetworkdevices
+        method: GET
+        description: Cisco Meraki List Network Devices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The network ID.
+          required: true
+    authentication:
+      type: apikey
+      key: X-Cisco-Meraki-API-Key
+      value: '{{env.CISCO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: meraki-devices-rest
+    port: 8080
+    description: REST adapter for Cisco Meraki Dashboard API — Devices. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/networks/{networkid}/devices
+      name: networks-networkid-devices
+      description: REST surface for networks-networkId-devices.
+      operations:
+      - method: GET
+        name: getnetworkdevices
+        description: Cisco Meraki List Network Devices
+        call: meraki-devices.getnetworkdevices
+        with:
+          networkId: rest.networkId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: meraki-devices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cisco Meraki Dashboard API — Devices. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: cisco-meraki-list-network-devices
+      description: Cisco Meraki List Network Devices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: meraki-devices.getnetworkdevices
+      with:
+        networkId: tools.networkId
+      outputParameters:
+      - type: object
+        mapping: $.

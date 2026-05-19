@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cisco Meraki Dashboard API — Networks
+  description: 'Cisco Meraki Dashboard API — Networks. 2 operations. Lead operation: Cisco Meraki List Organization Networks.
+    Self-contained Naftiko capability covering one Cisco business surface.'
+  tags:
+  - Cisco
+  - Networks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CISCO_API_KEY: CISCO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: meraki-networks
+    baseUri: https://api.meraki.com/api/v1
+    description: Cisco Meraki Dashboard API — Networks business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-networks
+      path: /organizations/{organizationId}/networks
+      operations:
+      - name: getorganizationnetworks
+        method: GET
+        description: Cisco Meraki List Organization Networks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          description: The organization ID.
+          required: true
+      - name: createorganizationnetwork
+        method: POST
+        description: Cisco Meraki Create Organization Network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          description: The organization ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Cisco-Meraki-API-Key
+      value: '{{env.CISCO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: meraki-networks-rest
+    port: 8080
+    description: REST adapter for Cisco Meraki Dashboard API — Networks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/networks
+      name: organizations-organizationid-networks
+      description: REST surface for organizations-organizationId-networks.
+      operations:
+      - method: GET
+        name: getorganizationnetworks
+        description: Cisco Meraki List Organization Networks
+        call: meraki-networks.getorganizationnetworks
+        with:
+          organizationId: rest.organizationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorganizationnetwork
+        description: Cisco Meraki Create Organization Network
+        call: meraki-networks.createorganizationnetwork
+        with:
+          organizationId: rest.organizationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: meraki-networks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cisco Meraki Dashboard API — Networks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: cisco-meraki-list-organization-networks
+      description: Cisco Meraki List Organization Networks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: meraki-networks.getorganizationnetworks
+      with:
+        organizationId: tools.organizationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cisco-meraki-create-organization-network
+      description: Cisco Meraki Create Organization Network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: meraki-networks.createorganizationnetwork
+      with:
+        organizationId: tools.organizationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
