@@ -2,12 +2,20 @@
   "repo": "cisco",
   "feeds": [
     {
-      "source": "https://blogs.cisco.com/developer",
+      "source": "https://blogs.cisco.com/developer/feed/",
       "feed_url": "https://blogs.cisco.com/developer/feed/",
-      "title": "Developer - Cisco Blogs",
-      "saved": 7
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://developer.cisco.com/learning/",
+      "feed_url": "https://developer.cisco.com/learning/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 18,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 20,
+  "fetched": "2026-06-01T23:35:02Z"
 }
