@@ -46,6 +46,8 @@ apis:
     url: capabilities/meraki-networks.yaml
   - type: NaftikoCapability
     url: capabilities/meraki-organizations.yaml
+  - type: GraphQL
+    url: graphql/cisco-graphql.md
 - aid: cisco:webex-api
   name: Cisco Webex API
   description: REST API for Webex collaboration platform enabling messaging, meeting management, device control, and administration.

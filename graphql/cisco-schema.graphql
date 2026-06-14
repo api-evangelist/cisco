@@ -1,0 +1,1101 @@
+# Cisco Unified GraphQL Schema
+# Covers: Meraki, Webex, Catalyst Center (DNA Center), NSO
+# Source: https://developer.cisco.com/ | https://developer.webex.com/
+
+# ---------------------------------------------------------------------------
+# Shared / Root Types
+# ---------------------------------------------------------------------------
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+input TimeRange {
+  startTime: String
+  endTime: String
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type GeoLocation {
+  lat: Float
+  lng: Float
+  address: String
+  city: String
+  country: String
+}
+
+type Annotation {
+  id: ID!
+  text: String
+  createdBy: String
+  createdAt: String
+}
+
+type AuditLog {
+  id: ID!
+  action: String!
+  resource: String!
+  resourceId: String
+  performedBy: String
+  timestamp: String!
+  detail: String
+}
+
+type HealthScore {
+  score: Int
+  reason: String
+  time: String
+}
+
+type TagLabel {
+  name: String!
+  value: String
+}
+
+type MetricDataPoint {
+  timestamp: String!
+  value: Float!
+  unit: String
+}
+
+# ---------------------------------------------------------------------------
+# Meraki Types
+# ---------------------------------------------------------------------------
+
+type Organization {
+  id: ID!
+  name: String!
+  url: String
+  samlEnabled: Boolean
+  networks: [Network]
+  licenses: [License]
+  inventory: [Inventory]
+  admins: [AdminUser]
+  alerts: [Alert]
+}
+
+type Network {
+  id: ID!
+  organizationId: String!
+  name: String!
+  productTypes: [String]
+  timeZone: String
+  tags: [String]
+  enrollmentString: String
+  notes: String
+  devices: [Device]
+  clients: [Client]
+  ssids: [SSID]
+  vlans: [VLAN]
+  trafficShaping: TrafficShaping
+  contentFiltering: ContentFiltering
+  firewall: MXFirewall
+  alerts: [Alert]
+}
+
+type Device {
+  serial: String!
+  name: String
+  model: String
+  mac: String
+  lanIp: String
+  wan1Ip: String
+  wan2Ip: String
+  firmware: String
+  networkId: String
+  tags: [String]
+  lat: Float
+  lng: Float
+  address: String
+  notes: String
+  status: DeviceStatus
+}
+
+type DeviceStatus {
+  serial: String!
+  name: String
+  status: String
+  lastReportedAt: String
+  publicIp: String
+  lanIp: String
+  gateway: String
+  ipType: String
+  primaryDns: String
+  secondaryDns: String
+}
+
+type Client {
+  id: ID!
+  mac: String!
+  description: String
+  ip: String
+  ip6: String
+  user: String
+  vlan: String
+  switchport: String
+  status: String
+  firstSeen: String
+  lastSeen: String
+  manufacturer: String
+  os: String
+  usage: ClientUsage
+}
+
+type ClientUsage {
+  sent: Float
+  recv: Float
+}
+
+type AccessPoint {
+  serial: String!
+  name: String
+  model: String
+  mac: String
+  lanIp: String
+  firmware: String
+  networkId: String
+  tags: [String]
+  lat: Float
+  lng: Float
+  ssids: [SSID]
+}
+
+type Switch {
+  serial: String!
+  name: String
+  model: String
+  mac: String
+  lanIp: String
+  firmware: String
+  networkId: String
+  tags: [String]
+  ports: [String]
+}
+
+type MXFirewall {
+  networkId: String!
+  settings: MXFirewallSettings
+  l3Rules: [L3FirewallRule]
+  l7Rules: [L7FirewallRule]
+  securityEvents: [SecurityEvent]
+}
+
+type MXFirewallSettings {
+  spoofingProtection: Boolean
+  udpTimeoutSeconds: Int
+  icmpTimeoutSeconds: Int
+  tcpEstablishedTimeoutSeconds: Int
+  tcpClosingTimeoutSeconds: Int
+}
+
+type SSID {
+  number: Int!
+  name: String
+  enabled: Boolean
+  authMode: String
+  encryptionMode: String
+  psk: String
+  ipAssignmentMode: String
+  useVlanTagging: Boolean
+  defaultVlanId: Int
+  visible: Boolean
+  availableOnAllAps: Boolean
+  bandSelection: String
+  perClientBandwidthLimitUp: Int
+  perClientBandwidthLimitDown: Int
+}
+
+type VLAN {
+  id: ID!
+  networkId: String!
+  name: String
+  applianceIp: String
+  subnet: String
+  fixedIpAssignments: String
+  reservedIpRanges: [String]
+  dnsNameservers: String
+  dhcpHandling: String
+  dhcpLeaseTime: String
+}
+
+type TrafficShaping {
+  networkId: String!
+  defaultRulesEnabled: Boolean
+  rules: [FirewallRule]
+}
+
+type ContentFiltering {
+  networkId: String!
+  allowedUrlPatterns: [String]
+  blockedUrlPatterns: [String]
+  blockedUrlCategories: [String]
+}
+
+type FirewallRule {
+  comment: String
+  policy: String
+  protocol: String
+  destPort: String
+  destCidr: String
+  srcPort: String
+  srcCidr: String
+  syslogEnabled: Boolean
+}
+
+type L3FirewallRule {
+  comment: String
+  policy: String
+  protocol: String
+  destPort: String
+  destCidr: String
+  srcPort: String
+  srcCidr: String
+  syslogEnabled: Boolean
+}
+
+type L7FirewallRule {
+  policy: String
+  type: String
+  value: String
+}
+
+type SecurityEvent {
+  ts: String
+  eventType: String
+  srcIp: String
+  destIp: String
+  srcPort: Int
+  destPort: Int
+  protocol: String
+  uri: String
+  priority: String
+  classification: String
+  ruleId: String
+  message: String
+  signature: String
+  sigSource: String
+  blocked: Boolean
+}
+
+type Alert {
+  id: ID!
+  networkId: String
+  type: String
+  alertData: String
+  sentAt: String
+  severity: String
+}
+
+type Inventory {
+  serial: String!
+  mac: String
+  model: String
+  networkId: String
+  orderNumber: String
+  addedAt: String
+  name: String
+  tags: [String]
+  licenseExpirationDate: String
+}
+
+type License {
+  id: ID!
+  licenseType: String
+  licenseKey: String
+  orderNumber: String
+  deviceSerial: String
+  networkId: String
+  state: String
+  seatCount: Int
+  totalDurationInDays: Int
+  durationInDays: Int
+  permanentlyQueuedLicenses: [String]
+  activationDate: String
+  expirationDate: String
+  headLicenseId: String
+}
+
+# ---------------------------------------------------------------------------
+# Webex Types
+# ---------------------------------------------------------------------------
+
+type Room {
+  id: ID!
+  title: String
+  type: String
+  isLocked: Boolean
+  teamId: String
+  lastActivity: String
+  creatorId: String
+  created: String
+  messages: [Message]
+  memberships: [Membership]
+}
+
+type Message {
+  id: ID!
+  roomId: String!
+  roomType: String
+  text: String
+  markdown: String
+  html: String
+  files: [String]
+  personId: String
+  personEmail: String
+  mentionedPeople: [String]
+  mentionedGroups: [String]
+  attachments: [String]
+  created: String
+  updated: String
+  isVoiceClip: Boolean
+}
+
+type Membership {
+  id: ID!
+  roomId: String!
+  personId: String
+  personEmail: String
+  personDisplayName: String
+  personOrgId: String
+  isModerator: Boolean
+  isMonitor: Boolean
+  isRoomHidden: Boolean
+  created: String
+}
+
+type Team {
+  id: ID!
+  name: String
+  creatorId: String
+  created: String
+  memberships: [TeamMembership]
+  rooms: [Room]
+}
+
+type TeamMembership {
+  id: ID!
+  teamId: String!
+  personId: String
+  personEmail: String
+  personDisplayName: String
+  personOrgId: String
+  isModerator: Boolean
+  created: String
+}
+
+type Meeting {
+  id: ID!
+  meetingNumber: String
+  title: String
+  agenda: String
+  password: String
+  meetingType: String
+  state: String
+  timezone: String
+  start: String
+  end: String
+  hostUserId: String
+  hostEmail: String
+  hostDisplayName: String
+  webLink: String
+  sipAddress: String
+  dialInIpAddress: String
+  enabledAutoRecordMeeting: Boolean
+  invitees: [MeetingInvitee]
+  recordings: [Recording]
+}
+
+type MeetingInvitee {
+  id: ID!
+  meetingId: String!
+  email: String
+  displayName: String
+  coHost: Boolean
+  host: Boolean
+  panelist: Boolean
+}
+
+type Recording {
+  id: ID!
+  meetingId: String
+  scheduledMeetingId: String
+  topic: String
+  createTime: String
+  timeRecorded: String
+  siteUrl: String
+  downloadUrl: String
+  playbackUrl: String
+  password: String
+  temporaryDirectDownloadLinks: String
+  status: String
+  durationSeconds: Int
+  sizeBytes: Int
+  shareToMe: Boolean
+  transcript: Transcript
+}
+
+type Transcript {
+  id: ID!
+  meetingId: String
+  scheduledMeetingId: String
+  meetingSeriesId: String
+  status: String
+  startedAt: String
+  endedAt: String
+  siteUrl: String
+  hostEmail: String
+  snippet: String
+}
+
+type Webhook {
+  id: ID!
+  name: String
+  targetUrl: String
+  resource: String
+  event: String
+  orgId: String
+  createdBy: String
+  appId: String
+  ownedBy: String
+  status: String
+  secret: String
+  created: String
+}
+
+type Person {
+  id: ID!
+  emails: [String]
+  phoneNumbers: [String]
+  displayName: String
+  nickName: String
+  firstName: String
+  lastName: String
+  avatar: String
+  orgId: String
+  roles: [String]
+  licenses: [String]
+  department: String
+  manager: String
+  managerId: String
+  siteUrls: [String]
+  created: String
+  lastModified: String
+  lastActivity: String
+  status: String
+  invitePending: Boolean
+  loginEnabled: Boolean
+  type: String
+}
+
+type Bot {
+  id: ID!
+  emails: [String]
+  displayName: String
+  avatar: String
+  orgId: String
+  created: String
+  type: String
+}
+
+type AdminUser {
+  id: ID!
+  name: String
+  email: String
+  orgId: String
+  roles: [String]
+  accountStatus: String
+  lastActiveAt: String
+}
+
+type WebexLicense {
+  id: ID!
+  name: String
+  totalUnits: Int
+  consumedUnits: Int
+  subscriptionId: String
+  siteUrl: String
+  siteType: String
+}
+
+type WebexEvent {
+  id: ID!
+  resource: String
+  type: String
+  appId: String
+  actorId: String
+  orgId: String
+  created: String
+  data: String
+}
+
+type DeviceActivation {
+  id: ID!
+  activationCode: String
+  expiryTime: String
+  placeId: String
+}
+
+# ---------------------------------------------------------------------------
+# Catalyst Center / DNA Center Types
+# ---------------------------------------------------------------------------
+
+type CatalystDevice {
+  id: ID!
+  hostname: String
+  managementIpAddress: String
+  platformId: String
+  softwareVersion: String
+  softwareType: String
+  collectionStatus: String
+  reachabilityStatus: String
+  reachabilityFailureReason: String
+  errorCode: String
+  errorDescription: String
+  lastUpdated: String
+  macAddress: String
+  serialNumber: String
+  upTime: String
+  role: String
+  family: String
+  type: String
+  location: String
+  locationName: String
+  description: String
+  inventoryStatusDetail: String
+  interfaces: [CatalystInterface]
+  tags: [NetworkTag]
+  healthScore: HealthScore
+}
+
+type CatalystInterface {
+  id: ID!
+  deviceId: String
+  portName: String
+  adminStatus: String
+  operationalStatus: String
+  interfaceType: String
+  ipv4Address: String
+  ipv4Mask: String
+  isisSupport: String
+  lastUpdated: String
+  macAddress: String
+  mappedPhysicalInterfaceId: String
+  mappedPhysicalInterfaceName: String
+  mediaType: String
+  nativeVlanId: String
+  ospfSupport: String
+  pid: String
+  portMode: String
+  portType: String
+  serialNo: String
+  series: String
+  speed: String
+  status: String
+  vlanId: String
+  voiceVlan: String
+}
+
+type Topology {
+  nodes: [TopologyNode]
+  links: [TopologyLink]
+}
+
+type TopologyNode {
+  id: ID!
+  label: String
+  ip: String
+  deviceType: String
+  platformId: String
+  family: String
+  role: String
+  softwareVersion: String
+  nodeType: String
+  fixed: Boolean
+  additionalInfo: String
+  tags: [String]
+  upperNode: String
+  x: Float
+  y: Float
+}
+
+type TopologyLink {
+  source: String
+  target: String
+  id: ID!
+  startPortID: String
+  endPortID: String
+  startPortName: String
+  endPortName: String
+  startPortSpeed: String
+  endPortSpeed: String
+  greyOut: Boolean
+  linkStatus: String
+  additionalInfo: String
+}
+
+type PathTrace {
+  id: ID!
+  sourceIP: String
+  destIP: String
+  sourcePort: String
+  destPort: String
+  protocol: String
+  status: String
+  lastUpdate: String
+  networkElementsInfo: [String]
+  properties: String
+  request: String
+}
+
+type Site {
+  id: ID!
+  name: String
+  siteNameHierarchy: String
+  additionalInfo: [String]
+  buildings: [Building]
+  devices: [CatalystDevice]
+}
+
+type Building {
+  id: ID!
+  name: String
+  siteId: String
+  address: String
+  latitude: Float
+  longitude: Float
+  country: String
+  floors: [Floor]
+}
+
+type Floor {
+  id: ID!
+  name: String
+  buildingId: String
+  rfModel: String
+  width: Float
+  length: Float
+  height: Float
+  floorNumber: Int
+}
+
+type IPPool {
+  id: ID!
+  ipPoolName: String
+  ipPoolCidr: String
+  gateway: String
+  dhcpServerIps: [String]
+  dnsServerIps: [String]
+  overlapping: Boolean
+  ipPoolType: String
+  usedPercentage: String
+  usedIpAddressCount: Int
+  availableIpAddressCount: Int
+}
+
+type Template {
+  id: ID!
+  name: String
+  description: String
+  composite: Boolean
+  deviceTypes: [String]
+  softwareType: String
+  softwareVariant: String
+  softwareVersion: [String]
+  tags: [String]
+  templateContent: String
+  createTime: String
+  lastUpdateTime: String
+  projectId: String
+  projectName: String
+}
+
+type TemplateProject {
+  id: ID!
+  name: String
+  description: String
+  tags: [String]
+  templates: [Template]
+  createTime: String
+  lastUpdateTime: String
+}
+
+type Policy {
+  id: ID!
+  policyName: String
+  policyType: String
+  cfsChangeInfo: [String]
+  customProvisions: [String]
+  deletePolicyStatus: String
+  exclusiveContract: String
+  identitySource: String
+  producer: String
+  consumer: String
+}
+
+type QoSPolicy {
+  id: ID!
+  name: String
+  description: String
+  policyScope: String
+  priority: String
+  advancedPolicyScope: String
+  exclusiveContract: String
+  producer: String
+  consumer: String
+  createTime: String
+  lastUpdateTime: String
+}
+
+type NetworkIssue {
+  issueId: ID!
+  name: String
+  siteId: String
+  deviceId: String
+  deviceRole: String
+  aiDriven: String
+  clientMac: String
+  issueOccurrenceCount: Int
+  status: String
+  priority: String
+  category: String
+  lastOccurrenceTime: String
+}
+
+type CommandRunner {
+  command: String!
+  deviceUuids: [String]!
+  description: String
+  timeout: Int
+}
+
+type Task {
+  id: ID!
+  data: String
+  endTime: String
+  errorCode: String
+  errorKey: String
+  failureReason: String
+  isError: Boolean
+  lastUpdate: String
+  operationIdList: [String]
+  parentId: String
+  progress: String
+  rootId: String
+  serviceType: String
+  startTime: String
+  username: String
+  version: Int
+}
+
+type FileInfo {
+  id: ID!
+  name: String
+  size: Int
+  nameSpace: String
+  fileFormat: String
+  md5Checksum: String
+  sha1Checksum: String
+  downloadPath: String
+}
+
+type NetworkTag {
+  id: ID!
+  name: String!
+  description: String
+  systemTag: Boolean
+  dynamicRules: [String]
+  instanceTenantId: String
+}
+
+type NetworkUser {
+  id: ID!
+  username: String
+  role: String
+  authSource: String
+  passphraseUpdateTime: String
+  passphraseUpdateTimeEpoch: String
+  roleList: [NetworkRole]
+}
+
+type NetworkRole {
+  roleId: ID!
+  name: String
+  description: String
+  type: String
+  resourceTypes: [String]
+}
+
+# ---------------------------------------------------------------------------
+# NSO Types
+# ---------------------------------------------------------------------------
+
+type NSOService {
+  name: ID!
+  serviceType: String
+  description: String
+  status: String
+  devices: [NSODevice]
+  configuration: NSOConfiguration
+  template: NSOTemplate
+  lastModified: String
+}
+
+type NSODevice {
+  name: ID!
+  address: String
+  port: Int
+  authgroup: String
+  deviceType: String
+  nedId: String
+  state: String
+  syncStatus: NSOSync
+  liveStatus: NSOLiveStatus
+  modules: [NSOModule]
+  configuration: NSOConfiguration
+  cli: NSODeviceCLI
+}
+
+type NSODeviceGroup {
+  name: ID!
+  description: String
+  deviceNames: [String]
+  devices: [NSODevice]
+}
+
+type NSOConfiguration {
+  path: String!
+  value: String
+  lastCommit: NSOCommit
+  rollbacks: [NSORollback]
+}
+
+type NSORollback {
+  id: ID!
+  timestamp: String
+  label: String
+  comment: String
+  creator: String
+  type: String
+  isUnsaved: Boolean
+}
+
+type NSOAlarm {
+  id: ID!
+  managed_device: String
+  type: String
+  specific_problem: String
+  perceived_severity: String
+  event_time: String
+  alarm_text: String
+  last_status_change: String
+  is_cleared: Boolean
+}
+
+type NSOLiveStatus {
+  deviceName: String!
+  data: String
+  timestamp: String
+}
+
+type NSOSync {
+  deviceName: String!
+  result: String
+  info: String
+  inSync: Boolean
+}
+
+type NSODeviceCLI {
+  deviceName: String!
+  output: String
+  error: String
+}
+
+type NSOModule {
+  name: ID!
+  revision: String
+  namespace: String
+  prefix: String
+  featureList: [String]
+}
+
+type NSOTemplate {
+  name: ID!
+  description: String
+  variables: [String]
+  deviceList: [String]
+}
+
+type NSOCommit {
+  id: ID!
+  timestamp: String
+  user: String
+  comment: String
+  label: String
+}
+
+# ---------------------------------------------------------------------------
+# Root Operations
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Meraki
+  organization(id: ID!): Organization
+  organizations: [Organization]
+  network(id: ID!): Network
+  networks(organizationId: ID!): [Network]
+  device(serial: String!): Device
+  devices(networkId: ID!): [Device]
+  deviceStatuses(organizationId: ID!): [DeviceStatus]
+  clients(networkId: ID!, timespan: Int): [Client]
+  client(clientId: ID!, networkId: ID!): Client
+  ssids(networkId: ID!): [SSID]
+  vlans(networkId: ID!): [VLAN]
+  firewall(networkId: ID!): MXFirewall
+  securityEvents(networkId: ID!, timespan: Int): [SecurityEvent]
+  inventory(organizationId: ID!): [Inventory]
+  licenses(organizationId: ID!): [License]
+  alerts(networkId: ID!): [Alert]
+
+  # Webex
+  room(id: ID!): Room
+  rooms(teamId: String, type: String): [Room]
+  message(id: ID!): Message
+  messages(roomId: ID!): [Message]
+  membership(id: ID!): Membership
+  memberships(roomId: ID!): [Membership]
+  team(id: ID!): Team
+  teams: [Team]
+  teamMemberships(teamId: ID!): [TeamMembership]
+  meeting(id: ID!): Meeting
+  meetings: [Meeting]
+  recording(id: ID!): Recording
+  recordings(meetingId: ID): [Recording]
+  transcript(id: ID!): Transcript
+  transcripts(meetingId: ID): [Transcript]
+  webhooks: [Webhook]
+  person(id: ID!): Person
+  people(email: String, displayName: String): [Person]
+  webexLicenses(orgId: ID!): [WebexLicense]
+  webexEvents(resource: String, type: String): [WebexEvent]
+
+  # Catalyst Center
+  catalystDevice(id: ID!): CatalystDevice
+  catalystDevices: [CatalystDevice]
+  catalystInterface(id: ID!): CatalystInterface
+  catalystInterfaces(deviceId: ID!): [CatalystInterface]
+  topology: Topology
+  pathTrace(id: ID!): PathTrace
+  site(id: ID!): Site
+  sites: [Site]
+  building(id: ID!): Building
+  floor(id: ID!): Floor
+  ipPool(id: ID!): IPPool
+  ipPools: [IPPool]
+  template(id: ID!): Template
+  templates(projectId: ID): [Template]
+  templateProject(id: ID!): TemplateProject
+  templateProjects: [TemplateProject]
+  networkIssues(siteId: ID, priority: String): [NetworkIssue]
+  task(id: ID!): Task
+  networkTags: [NetworkTag]
+  networkUsers: [NetworkUser]
+  networkRoles: [NetworkRole]
+  fileInfo(id: ID!): FileInfo
+
+  # NSO
+  nsoService(name: ID!): NSOService
+  nsoServices: [NSOService]
+  nsoDevice(name: ID!): NSODevice
+  nsoDevices: [NSODevice]
+  nsoDeviceGroup(name: ID!): NSODeviceGroup
+  nsoDeviceGroups: [NSODeviceGroup]
+  nsoAlarms: [NSOAlarm]
+  nsoRollbacks: [NSORollback]
+  nsoModule(name: ID!): NSOModule
+  nsoModules(deviceName: ID!): [NSOModule]
+}
+
+type Mutation {
+  # Meraki
+  createNetwork(organizationId: ID!, name: String!, productTypes: [String]!): Network
+  updateNetwork(id: ID!, name: String, timeZone: String, tags: [String]): Network
+  deleteNetwork(id: ID!): Boolean
+  claimDevice(networkId: ID!, serial: String!): Device
+  updateDevice(serial: String!, name: String, tags: [String], notes: String): Device
+  updateSSID(networkId: ID!, number: Int!, enabled: Boolean, name: String, psk: String): SSID
+  createVlan(networkId: ID!, id: Int!, name: String!, applianceIp: String!, subnet: String!): VLAN
+  updateVlan(networkId: ID!, vlanId: Int!, name: String, applianceIp: String, subnet: String): VLAN
+  deleteVlan(networkId: ID!, vlanId: Int!): Boolean
+  updateFirewallRules(networkId: ID!, rules: [String]!): MXFirewall
+
+  # Webex
+  createRoom(title: String!, teamId: String): Room
+  updateRoom(id: ID!, title: String, isLocked: Boolean): Room
+  deleteRoom(id: ID!): Boolean
+  sendMessage(roomId: ID!, text: String, markdown: String, files: [String]): Message
+  deleteMessage(id: ID!): Boolean
+  createMembership(roomId: ID!, personEmail: String!, isModerator: Boolean): Membership
+  deleteMembership(id: ID!): Boolean
+  createTeam(name: String!): Team
+  updateTeam(id: ID!, name: String!): Team
+  deleteTeam(id: ID!): Boolean
+  createMeeting(title: String!, start: String!, end: String!, invitees: [String]): Meeting
+  updateMeeting(id: ID!, title: String, start: String, end: String): Meeting
+  deleteMeeting(id: ID!): Boolean
+  createWebhook(name: String!, targetUrl: String!, resource: String!, event: String!, secret: String): Webhook
+  updateWebhook(id: ID!, name: String, targetUrl: String, status: String): Webhook
+  deleteWebhook(id: ID!): Boolean
+  createDeviceActivation(placeId: ID!): DeviceActivation
+
+  # Catalyst Center
+  runCommandRunner(command: CommandRunner!): Task
+  createSite(name: String!, parentId: String, type: String!): Site
+  updateSite(id: ID!, name: String): Site
+  deleteSite(id: ID!): Task
+  claimCatalystDevice(hostname: String!, ipAddress: String!): Task
+  deleteNetworkTag(id: ID!): Boolean
+  createNetworkTag(name: String!, description: String): NetworkTag
+  deployTemplate(templateId: ID!, deviceId: ID!, parameters: String): Task
+  createIPPool(name: String!, cidr: String!, gateway: String): IPPool
+  deleteIPPool(id: ID!): Boolean
+
+  # NSO
+  syncNSODevice(name: ID!, direction: String!): NSOSync
+  checkSyncNSODevice(name: ID!): NSOSync
+  applyNSOTemplate(templateName: ID!, deviceNames: [String]!): Boolean
+  rollbackNSOConfiguration(id: ID!): NSOCommit
+  commitNSOConfiguration(comment: String, label: String): NSOCommit
+  createNSOService(name: ID!, serviceType: String!, parameters: String): NSOService
+  deleteNSOService(name: ID!): Boolean
+}
+
+type Subscription {
+  # Meraki
+  alertReceived(networkId: ID!): Alert
+  deviceStatusChanged(organizationId: ID!): DeviceStatus
+  clientConnected(networkId: ID!): Client
+
+  # Webex
+  messageCreated(roomId: ID!): Message
+  membershipCreated(roomId: ID!): Membership
+  meetingStarted: Meeting
+  roomUpdated(roomId: ID!): Room
+
+  # Catalyst Center
+  issueDetected: NetworkIssue
+  taskCompleted(id: ID!): Task
+  deviceReachabilityChanged: CatalystDevice
+
+  # NSO
+  nsoAlarmRaised: NSOAlarm
+  nsoSyncStatusChanged(deviceName: ID!): NSOSync
+  nsoConfigurationChanged(path: String!): NSOConfiguration
+}
