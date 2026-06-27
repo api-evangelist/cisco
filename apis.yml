@@ -12,11 +12,11 @@ modified: '2026-05-19'
 specificationVersion: '0.19'
 tags:
   - Fortune 100
-- Collaboration
-- Enterprise
-- Networking
-- Security
-- SD-WAN
+  - Collaboration
+  - Enterprise
+  - Networking
+  - Security
+  - SD-WAN
 apis:
 - aid: cisco:meraki-api
   name: Cisco Meraki Dashboard API
@@ -38,13 +38,13 @@ apis:
     url: https://developer.cisco.com/meraki/api-v1/getting-started/
   - type: Authentication
     url: https://developer.cisco.com/meraki/api-v1/#!authorization
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/meraki-clients.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/meraki-devices.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/meraki-networks.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/meraki-organizations.yaml
   - type: GraphQL
     url: graphql/cisco-graphql.md
