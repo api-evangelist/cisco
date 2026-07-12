@@ -166,6 +166,12 @@ apis:
   - type: APIReference
     url: https://developer.cisco.com/docs/thousandeyes/api-reference/
 common:
+- type: VulnerabilityDisclosure
+  url: security/cisco-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/cisco-domain-security.yml
+- type: Authentication
+  url: authentication/cisco-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/cisco
 - type: Portal
