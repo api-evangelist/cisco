@@ -1,3 +1,20 @@
+# cisco — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on meraki.com
+#   - path-params-casing: camel @ 100% (n=4)
+#   - operationid-casing: camel @ 100% (n=5)
+#   - schema-names-casing: pascal @ 100% (n=5)
+#   - schema-properties-casing: snake @ 74% (n=27)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - merge: kept 12 existing, added 6 measured, upgraded 0
+#   - added: servers-https-only, servers-expected-domain, operationid-casing, schema-names-casing, schema-properties-casing, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   info-title-prefix:
     description: Info title should start with "Cisco"
@@ -7,8 +24,7 @@ rules:
       field: title
       function: pattern
       functionOptions:
-        match: "^Cisco"
-
+        match: ^Cisco
   info-description-required:
     description: Info description must be present
     given: $.info
@@ -16,62 +32,55 @@ rules:
     then:
       field: description
       function: truthy
-
   paths-kebab-case:
     description: Paths should use kebab-case
     given: $.paths
     severity: warn
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        match: "^/[a-z0-9\\-/{}_]+$"
-
+        match: ^/[a-z0-9\-/{}_]+$
   operation-operationId-required:
     description: Every operation must have an operationId
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     severity: error
     then:
       field: operationId
       function: truthy
-
   operation-summary-required:
     description: Every operation must have a summary
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     severity: error
     then:
       field: summary
       function: truthy
-
   operation-summary-prefix:
     description: Operation summaries should start with "Cisco"
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     severity: warn
     then:
       field: summary
       function: pattern
       functionOptions:
-        match: "^Cisco"
-
+        match: ^Cisco
   operation-tags-required:
     description: Every operation must have tags
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     severity: warn
     then:
       field: tags
       function: truthy
-
   parameter-description-required:
     description: Every parameter must have a description
-    given: "$.paths[*][get,post,put,patch,delete].parameters[*]"
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
     severity: warn
     then:
       field: description
       function: truthy
-
   response-success-required:
     description: Every operation must have a success response
-    given: "$.paths[*][get,post,put,patch,delete].responses"
+    given: $.paths[*][get,post,put,patch,delete].responses
     severity: error
     then:
       function: schema
@@ -79,32 +88,81 @@ rules:
         schema:
           type: object
           anyOf:
-            - required: ["200"]
-            - required: ["201"]
-            - required: ["204"]
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   security-global-defined:
     description: Global security must be defined
-    given: "$"
+    given: $
     severity: error
     then:
       field: security
       function: truthy
-
   security-api-key-header:
     description: API keys should be sent in headers
-    given: "$.components.securitySchemes[*]"
+    given: $.components.securitySchemes[*]
     severity: warn
     then:
       field: in
       function: enumeration
       functionOptions:
-        values: [header]
-
+        values:
+        - header
   schema-properties-description:
     description: Schema properties should have descriptions
-    given: "$.components.schemas[*].properties[*]"
+    given: $.components.schemas[*].properties[*]
     severity: info
     then:
       field: description
+      function: truthy
+  servers-https-only:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  servers-expected-domain:
+    description: Server URLs should be on the meraki.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: meraki\.com
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
