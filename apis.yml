@@ -166,6 +166,8 @@ apis:
   - type: APIReference
     url: https://developer.cisco.com/docs/thousandeyes/api-reference/
 common:
+- type: AgenticAccess
+  url: agentic-access/cisco-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/cisco-vulnerability-disclosure.yml
 - type: DomainSecurity
