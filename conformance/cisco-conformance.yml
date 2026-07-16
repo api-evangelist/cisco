@@ -1,0 +1,40 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/cisco-meraki-api.yaml + developer.cisco.com docs (Meraki)
+scope: >-
+  Derived primarily from the curated Meraki Dashboard OpenAPI and Meraki
+  developer docs; other Cisco APIs (Webex, Intersight, ThousandEyes) vary.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: openapi/cisco-meraki-api.yaml is OpenAPI 3.0.3; Meraki publishes its full OpenAPI spec as the source of truth.
+  - id: rest
+    conforms: true
+    evidence: Resource-oriented JSON over HTTPS.
+  - id: rfc5988-web-linking
+    conforms: true
+    evidence: Meraki pagination uses the RFC 5988 Link header (first/prev/next/last). https://developer.cisco.com/meraki/api-v1/pagination/
+  - id: oauth2
+    conforms: true
+    evidence: Meraki supports OAuth 2.0 authorization-code for integrations; Webex and Intersight are OAuth2/OIDC based. (Meraki Dashboard also accepts an API-key header.)
+  - id: oidc
+    conforms: true
+    evidence: Webex identity is OpenID Connect based (webexapis.com OIDC discovery, auth-gated).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Meraki returns a plain JSON {errors:[...]} envelope, not application/problem+json.
+  - id: json-api
+    conforms: false
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: false
+    evidence: Webex supports SCIM for user provisioning, but not surfaced in this repo's specs.
+  - id: fapi
+    conforms: false
+  - id: idempotency-key
+    conforms: false
+    evidence: No Idempotency-Key header documented; Meraki writes are not idempotent by header.
+  - id: rate-limiting-429
+    conforms: true
+    evidence: Meraki enforces a per-organization rate limit (10 req/s) returning HTTP 429 with Retry-After. See rate-limits/cisco-rate-limits.yml

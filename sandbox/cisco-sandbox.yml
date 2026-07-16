@@ -1,0 +1,36 @@
+generated: '2026-06-20'
+method: searched
+source: https://developer.cisco.com/site/sandbox/ + https://developer.cisco.com/meraki/api-v1/getting-started/
+summary: >-
+  Cisco DevNet Sandbox provides both Always-On (shared, no reservation, often
+  read-only) and Reservable (private, VPN, full admin) environments across Cisco
+  platforms. Meraki additionally publishes a public read-only demo API key.
+model:
+  - type: always-on
+    description: Shared, always-available, no reservation; administrative access restricted (often read-only).
+  - type: reservable
+    description: Private access via VPN reservation; full administrative access to the equipment.
+meraki:
+  api: cisco:meraki-api
+  always_on_read_only:
+    base_url: https://api.meraki.com/api/v1
+    demo_api_key: '6bec40cf957de430a6f1f2baa056b99a4fac9ea0'
+    auth_header: X-Cisco-Meraki-API-Key
+    access: read-only
+    note: >-
+      Publicly published Meraki demo/read-only Dashboard API key for exploring the
+      Always-On Meraki sandbox. Verbatim from Cisco docs — do not use in production.
+    docs: https://developer.cisco.com/meraki/api-v1/getting-started/
+  reservable:
+    options: [Meraki Small Business, Meraki Enterprise]
+    access: full administrative (VPN)
+    docs: https://developer.cisco.com/site/sandbox/
+sandboxes:
+  - name: DevNet Sandbox catalog
+    url: https://developer.cisco.com/site/sandbox/
+    covers: [Meraki, Catalyst Center, ACI, ISE, Intersight, SD-WAN, Webex, ThousandEyes, NX-OS, IOS XE]
+  - name: Catalyst Center Always-On
+    base_url: https://sandboxdnac.cisco.com/dna
+    api: cisco:catalyst-center-api
+    credentials: {username: devnetuser, password: 'Cisco123!'}
+    note: Public Catalyst Center (DNA Center) always-on sandbox credentials published by Cisco DevNet.

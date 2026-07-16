@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/cisco-meraki-api.yaml ($ref links + id-reference fields)
+render: subway/cisco-subway-map.svg
+scope: Cisco Meraki Dashboard API core resource hierarchy.
+entities:
+  - name: Organization
+    id_field: id
+    id_example: '500123'
+    fields: [id, name, url]
+  - name: Network
+    id_field: id
+    id_example: L_500123
+    fields: [id, organizationId, name, productTypes, timeZone, tags]
+  - name: Device
+    id_field: serial
+    id_example: Q2QN-XXXX-XXXX
+    fields: [serial, name, mac, model, networkId, lanIp, firmware]
+  - name: Client
+    id_field: id
+    id_example: k500123
+    fields: [id, mac, ip, description, os, vlan, status]
+relationships:
+  - from: Organization
+    to: Network
+    type: has_many
+    via: organizationId
+    evidence: GET /organizations/{organizationId}/networks; Network.organizationId references Organization.id
+  - from: Network
+    to: Organization
+    type: belongs_to
+    via: organizationId
+  - from: Network
+    to: Device
+    type: has_many
+    via: networkId
+    evidence: GET /networks/{networkId}/devices; Device.networkId references Network.id
+  - from: Device
+    to: Network
+    type: belongs_to
+    via: networkId
+  - from: Network
+    to: Client
+    type: has_many
+    via: networkId
+    evidence: GET /networks/{networkId}/clients

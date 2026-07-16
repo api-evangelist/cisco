@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: searched
+source: live probes of Cisco / Meraki / Webex hosts
+notes: >-
+  Only cisco.com/.well-known/security.txt returned a genuine, machine-readable
+  document (a PGP-signed RFC 9116 security.txt). The api.meraki.com/.well-known/*
+  paths return HTTP 200 but serve the Meraki Dashboard HTML login page, not real
+  discovery documents, so they are recorded as soft-200 (not captured). Webex and
+  ThousandEyes OIDC discovery endpoints require auth (401).
+hosts:
+  - host: https://www.cisco.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: cisco-security.txt
+        type: SecurityTxt
+        format: rfc9116
+        signed: true
+      - path: /.well-known/csaf/provider-metadata.json
+        status: 200
+        note: CSAF provider metadata (referenced from security.txt)
+  - host: https://developer.cisco.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+  - host: https://api.meraki.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: soft-200 (serves Meraki Dashboard login HTML, not a security.txt) — not captured
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: soft-200 (serves Meraki Dashboard login HTML, not OIDC metadata) — not captured
+  - host: https://webexapis.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+  - host: https://intersight.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 404
+  - host: https://api.thousandeyes.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 401

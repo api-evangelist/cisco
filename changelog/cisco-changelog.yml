@@ -1,0 +1,35 @@
+generated: '2026-06-20'
+method: searched
+source: https://developer.cisco.com/meraki/whats-new/
+scope: Cisco Meraki Dashboard API (versioned, dated changelog).
+scheme: semver-minor (v1.MINOR.0)
+current_version: v1.72.0
+entries:
+  - version: v1.72.0
+    date: '2026-07'
+    operations_added: 4
+    operations_enhanced: 113
+    total_operations: 967
+    breaking: false
+    highlights: Syslog server updates for devices and organizations; switch stack enhancements; numerous nullable properties across appliance, camera, and wireless modules.
+  - version: v1.71.0
+    date: '2026-06'
+    operations_added: 20
+    operations_enhanced: 28
+    total_operations: 898
+    breaking: false
+    highlights: Appliance layer-3 interfaces; Umbrella domain management; extensive device liveTools additions (port status, power usage, routing table).
+  - version: v1.70.0
+    date: '2026-05'
+    operations_added: 25
+    operations_enhanced: 71
+    total_operations: 946
+    breaking: false
+    highlights: Cellular data profile management; VRF settings; SASE connector functionality.
+  - version: v1.69.0
+    date: '2026-04'
+    operations_added: 39
+    operations_enhanced: 37
+    total_operations: 926
+    breaking: false
+    highlights: Global firewall rulesets and group policies; comprehensive SASE site connectivity management.

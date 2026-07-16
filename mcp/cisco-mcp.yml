@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: https://github.com/CiscoDevNet/devnet-content-search-mcp
+servers:
+  - name: DevNet Content Search MCP
+    status: published
+    transport: http
+    url: https://devnet.cisco.com/v1/foundation-search-mcp/mcp
+    repo: https://github.com/CiscoDevNet/devnet-content-search-mcp
+    docs: https://blogs.cisco.com/developer/devnet-content-search-mcp-server
+    official: true
+    hosted: true
+    description: >-
+      Cisco-hosted MCP server that lets IDE agents (VS Code Copilot, Cursor,
+      Claude Desktop) semantically search official Cisco product API documentation
+      on DevNet. One-click install; grounds code suggestions in live Cisco API specs.
+    covers: [Meraki Dashboard API, Catalyst Center API]
+    tools:
+      - name: Meraki-API-Doc-Search
+        description: Search Meraki API documentation (networking, security policies, wireless, monitoring).
+      - name: CatalystCenter-API-Doc-Search
+        description: Search Catalyst Center API documentation (network management, automation, orchestration).
+      - name: Meraki-API-OperationId-Search
+        description: Retrieve specific Meraki API endpoint details by exact operationId.
+  # Community / product-specific MCP servers published under the CiscoDevNet org
+  - name: ThousandEyes MCP Server (official)
+    status: published
+    transport: stdio
+    repo: https://github.com/CiscoDevNet/ThousandEyes-MCP-Server-official
+    api: cisco:thousandeyes-api
+    official: true
+  - name: Catalyst SD-WAN MCP (community)
+    status: published
+    transport: stdio
+    repo: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
+    api: cisco:sdwan-api
+    official: false
+    description: Exposes vManage / Catalyst SD-WAN Manager REST API capabilities as MCP tools.
+  - name: XDR MCP (community)
+    status: published
+    transport: stdio
+    repo: https://github.com/CiscoDevNet/xdr-mcp-community
+    official: false
+  - name: Splunk MCP Server (official)
+    status: published
+    transport: stdio
+    repo: https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/Splunk-MCP-Server-official/
+    official: true

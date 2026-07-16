@@ -1,0 +1,44 @@
+generated: '2026-06-20'
+method: searched
+source: developer.cisco.com/meraki (pagination, errors, rate-limit, auth) + openapi/cisco-meraki-api.yaml
+scope: Cisco Meraki Dashboard API (representative of the DevNet REST surface; other products differ).
+authentication:
+  style: api-key-header
+  header: X-Cisco-Meraki-API-Key
+  alternative: OAuth 2.0 (authorization code) for integrations
+  ref: authentication/cisco-authentication.yml
+  docs: https://developer.cisco.com/meraki/api-v1/#!authorization
+base_url: https://api.meraki.com/api/v1
+content_type: application/json
+pagination:
+  style: rfc5988-web-linking
+  request_params:
+    - perPage: number of entries per page
+    - startingAfter: token/id to start after (forward)
+    - endingBefore: token/id to end before (backward)
+  response_header: Link
+  link_relations: [first, prev, next, last]
+  docs: https://developer.cisco.com/meraki/api-v1/pagination/
+idempotency:
+  supported: false
+  note: No Idempotency-Key header documented; write operations are not idempotent by header.
+versioning:
+  style: uri-path
+  current: v1
+  ref: lifecycle/cisco-lifecycle.yml
+rate_limiting:
+  limit: 10 requests/second per organization
+  response_status: 429
+  signal_header: Retry-After
+  ref: rate-limits/cisco-rate-limits.yml
+  docs: https://developer.cisco.com/meraki/api-v1/rate-limit/
+error_envelope:
+  shape: '{"errors": ["message", ...]}'
+  ref: errors/cisco-problem-types.yml
+request_tracing:
+  request_id_header: null
+  note: No documented per-request correlation-id header on the Dashboard API.
+action_batches:
+  supported: true
+  note: Meraki supports Action Batches to submit many configuration changes in a single atomic request.
+  docs: https://developer.cisco.com/meraki/api-v1/action-batches-overview/

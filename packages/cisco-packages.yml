@@ -1,0 +1,116 @@
+generated: '2026-06-20'
+method: searched
+source: registry probes (PyPI/npm/pkg.go.dev) + developer.cisco.com SDK pages
+packages:
+  # --- Meraki Dashboard API (official meraki/ GitHub org) ---
+  - language: python
+    registry: pypi
+    name: meraki
+    version: 4.3.1
+    url: https://pypi.org/project/meraki/
+    install: pip install --upgrade meraki
+    repo: https://github.com/meraki/dashboard-api-python
+    api: cisco:meraki-api
+    official: true
+    notes: Official Meraki Dashboard API Python library, generated from the OpenAPI spec; sync + async (meraki.aio.AsyncDashboardAPI) clients.
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/meraki/dashboard-api-go/v3
+    url: https://pkg.go.dev/github.com/meraki/dashboard-api-go/v3
+    install: go get github.com/meraki/dashboard-api-go/v3
+    repo: https://github.com/meraki/dashboard-api-go
+    api: cisco:meraki-api
+    official: true
+  - language: ruby
+    registry: rubygems
+    name: meraki (see repo)
+    url: https://github.com/meraki/dashboard-api-ruby
+    repo: https://github.com/meraki/dashboard-api-ruby
+    api: cisco:meraki-api
+    official: true
+  - language: javascript
+    registry: npm
+    name: meraki
+    url: https://www.npmjs.com/package/meraki
+    install: npm install meraki
+    repo: https://github.com/meraki/dashboard-api-nodejs
+    api: cisco:meraki-api
+    official: true
+    notes: Published by npm user "merakiapi"; Meraki-authored Node.js Dashboard API library.
+
+  # --- Webex ---
+  - language: python
+    registry: pypi
+    name: webexpythonsdk
+    version: 2.0.6
+    url: https://pypi.org/project/webexpythonsdk/
+    install: pip install webexpythonsdk
+    repo: https://github.com/WebexCommunity/WebexPythonSDK
+    api: cisco:webex-api
+    official: true
+    notes: Current official Webex Python SDK (successor to webexteamssdk).
+  - language: python
+    registry: pypi
+    name: webexteamssdk
+    url: https://pypi.org/project/webexteamssdk/
+    install: pip install webexteamssdk
+    api: cisco:webex-api
+    official: true
+    notes: Predecessor Webex Teams Python SDK; deprecated in favor of webexpythonsdk.
+  - language: javascript
+    registry: npm
+    name: webex
+    version: 3.12.0
+    url: https://www.npmjs.com/package/webex
+    install: npm install webex
+    api: cisco:webex-api
+    official: true
+    notes: Official Webex JavaScript SDK (browser + Node).
+
+  # --- Catalyst Center (DNA Center) ---
+  - language: python
+    registry: pypi
+    name: dnacentersdk
+    version: 2.11.4
+    url: https://pypi.org/project/dnacentersdk/
+    install: pip install dnacentersdk
+    repo: https://github.com/cisco-en-programmability/dnacentersdk
+    api: cisco:catalyst-center-api
+    official: true
+    notes: Official Cisco Catalyst Center / DNA Center Python SDK.
+
+  # --- Intersight ---
+  - language: python
+    registry: pypi
+    name: intersight
+    version: 1.0.11.2026051817
+    url: https://pypi.org/project/intersight/
+    install: pip install intersight
+    repo: https://github.com/CiscoDevNet/intersight-python
+    api: cisco:intersight-api
+    official: true
+    notes: Official Cisco Intersight Python SDK (versioned to the API release).
+
+  # --- Identity Services Engine (ISE) ---
+  - language: python
+    registry: pypi
+    name: ciscoisesdk
+    version: 2.4.5
+    url: https://pypi.org/project/ciscoisesdk/
+    install: pip install ciscoisesdk
+    repo: https://github.com/CiscoISE/ciscoisesdk
+    api: cisco:ise-api
+    official: true
+    notes: Official Cisco ISE ERS/OpenAPI Python SDK.
+
+  # --- SD-WAN (Catalyst SD-WAN Manager / vManage) ---
+  - language: python
+    registry: pypi
+    name: catalystwan
+    version: 0.41.5
+    url: https://pypi.org/project/catalystwan/
+    install: pip install catalystwan
+    repo: https://github.com/CiscoDevNet/catalystwan
+    api: cisco:sdwan-api
+    official: true
+    notes: Official Cisco Catalyst WAN (SD-WAN Manager / vManage) Python SDK.

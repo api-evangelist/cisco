@@ -1,0 +1,42 @@
+generated: '2026-06-20'
+method: derived
+format: json-error-envelope
+source: openapi/cisco-meraki-api.yaml (4xx responses) + developer.cisco.com/meraki docs
+envelope:
+  description: >-
+    Meraki Dashboard API returns errors as a JSON object with an "errors" array
+    of human-readable strings, e.g. {"errors": ["Invalid API key"]}. It does NOT
+    use RFC 9457 application/problem+json.
+  fields:
+    - errors: array of message strings
+notes: >-
+  The curated OpenAPI only enumerates a 401 (Unauthorized) response. The status
+  rows below are enriched from the Meraki HTTP status-code documentation
+  (https://developer.cisco.com/meraki/api-v1/errors/). Titles/remediation are
+  from the docs; only 401 is spec-derived.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Malformed request, invalid parameters, or validation failure.
+    remediation: Check request body/query parameters against the operation schema.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or invalid API key / OAuth token.
+    remediation: Provide a valid X-Cisco-Meraki-API-Key header or OAuth bearer token.
+    source_operation: openapi/cisco-meraki-api.yaml#getOrganizations
+  - status: 403
+    title: Forbidden
+    meaning: Authenticated but not authorized for the target organization/network resource.
+    remediation: Ensure the key's account has privileges on the organization.
+  - status: 404
+    title: Not Found
+    meaning: Resource (organization, network, device) does not exist or is not visible to the key.
+    remediation: Verify the resource id and account scope.
+  - status: 429
+    title: Too Many Requests
+    meaning: Per-organization rate limit exceeded (default 10 requests/second).
+    remediation: Honor the Retry-After header and back off; see rate-limits/cisco-rate-limits.yml.
+  - status: 500
+    title: Internal Server Error
+    meaning: Unexpected server-side error.
+    remediation: Retry with backoff; contact Meraki support if persistent.

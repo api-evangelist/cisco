@@ -8,7 +8,7 @@ type: Index
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/cisco/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 tags:
   - Fortune 100
@@ -48,6 +48,12 @@ apis:
     url: capabilities/meraki-organizations.yaml
   - type: GraphQL
     url: graphql/cisco-graphql.md
+  - type: Overlay
+    url: overlays/cisco-meraki-api-overlay.yaml
+  - type: ErrorCatalog
+    url: errors/cisco-problem-types.yml
+  - type: DataModel
+    url: data-model/cisco-data-model.yml
 - aid: cisco:webex-api
   name: Cisco Webex API
   description: REST API for Webex collaboration platform enabling messaging, meeting management, device control, and administration.
@@ -168,6 +174,26 @@ apis:
 common:
 - type: AgenticAccess
   url: agentic-access/cisco-agentic-access.yml
+- type: Packages
+  url: packages/cisco-packages.yml
+- type: WellKnown
+  url: well-known/cisco-well-known.yml
+- type: SecurityTxt
+  url: well-known/cisco-security.txt
+- type: MCPServer
+  url: mcp/cisco-mcp.yml
+- type: LLMsTxt
+  url: llms/cisco-llms.txt
+- type: Conformance
+  url: conformance/cisco-conformance.yml
+- type: Lifecycle
+  url: lifecycle/cisco-lifecycle.yml
+- type: ChangeLog
+  url: changelog/cisco-changelog.yml
+- type: Conventions
+  url: conventions/cisco-conventions.yml
+- type: Components
+  url: components/cisco-components.yml
 - type: VulnerabilityDisclosure
   url: security/cisco-vulnerability-disclosure.yml
 - type: DomainSecurity
@@ -194,6 +220,8 @@ common:
   url: https://www.cisco.com/c/en/us/about/legal/privacy-full.html
 - type: Sandbox
   url: https://developer.cisco.com/site/sandbox/
+- type: Sandbox
+  url: sandbox/cisco-sandbox.yml
 - type: Training
   url: https://developer.cisco.com/certification/
 - type: YouTube

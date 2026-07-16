@@ -1,0 +1,39 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cisco Meraki Dashboard API
+  version: 1.0.0
+generated: '2026-06-20'
+method: generated
+extends: openapi/cisco-meraki-api.yaml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: cisco
+      x-apievangelist-api: cisco:meraki-api
+      x-apievangelist-artifacts:
+        authentication: authentication/cisco-authentication.yml
+        conventions: conventions/cisco-conventions.yml
+        errors: errors/cisco-problem-types.yml
+        lifecycle: lifecycle/cisco-lifecycle.yml
+        sandbox: sandbox/cisco-sandbox.yml
+        data_model: data-model/cisco-data-model.yml
+  - target: $.info
+    update:
+      x-apievangelist-pagination:
+        style: rfc5988-web-linking
+        params: [perPage, startingAfter, endingBefore]
+        response_header: Link
+        docs: https://developer.cisco.com/meraki/api-v1/pagination/
+  - target: $.components.securitySchemes.apiKeyAuth
+    update:
+      x-alternative-auth: >-
+        Meraki also supports OAuth 2.0 (authorization code) for integrations in
+        addition to the X-Cisco-Meraki-API-Key header. See
+        https://developer.cisco.com/meraki/api-v1/oauth-overview/
+  - target: $.servers
+    update:
+      x-sandbox:
+        always_on_read_only: true
+        base_url: https://api.meraki.com/api/v1
+        demo_api_key: '6bec40cf957de430a6f1f2baa056b99a4fac9ea0'
+        docs: https://developer.cisco.com/meraki/api-v1/getting-started/

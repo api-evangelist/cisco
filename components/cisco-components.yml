@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: searched
+source: developer.webex.com + npm registry (@webex/*)
+scope: Cisco Webex client-side / embeddable UI components (distinct from server SDKs in packages/).
+families:
+  - name: Webex Widgets
+    api: cisco:webex-api
+    description: Prebuilt, embeddable React/JS UI widgets (spaces/messaging, meetings) you drop into a web app.
+    loader:
+      registry: npm
+      name: '@webex/widgets'
+      url: https://www.npmjs.com/package/@webex/widgets
+    docs: https://developer.webex.com/docs/widgets
+  - name: Webex Components
+    api: cisco:webex-api
+    description: Open-source library of React components and adapters for building custom Webex experiences.
+    loader:
+      registry: npm
+      name: '@webex/components'
+      url: https://www.npmjs.com/package/@webex/components
+    docs: https://github.com/webex/components
+  - name: Webex Embedded Apps SDK
+    api: cisco:webex-api
+    description: SDK for building embedded apps that run inside the Webex meeting/messaging client surface.
+    loader:
+      registry: npm
+      name: '@webex/embedded-app-sdk'
+      url: https://www.npmjs.com/package/@webex/embedded-app-sdk
+    docs: https://developer.webex.com/docs/embedded-apps

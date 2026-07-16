@@ -1,0 +1,31 @@
+generated: '2026-06-20'
+method: searched
+source: developer.cisco.com/meraki (versioning, deprecation, whats-new) + status.meraki.com
+scope: Meraki Dashboard API (the repo's primary spec); other Cisco products noted where known.
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_source_of_truth: OpenAPI
+  docs: https://developer.cisco.com/meraki/api-v1/versioning/
+  notes: >-
+    The Meraki OpenAPI spec defines the publicly supported state of the Dashboard
+    API. Once a major version is released only backwards-compatible (minor) changes
+    are made. Only v1 is current; v0 was sunset.
+deprecation:
+  policy_url: https://developer.cisco.com/meraki/api-v1/deprecation/
+  mechanism: >-
+    Deprecated operations/versions are marked deprecated in the OpenAPI spec with a
+    documented alternative, then sunset after an announced deprecation period.
+  history:
+    - version: v0
+      status: sunset
+      sunset_date: '2022-02-05'
+      grace_period_end: '2022-08-05'
+sla:
+  url: https://www.meraki.com/support/#policies:sla
+  notes: SLAs are governed under Meraki/Cisco commercial support terms.
+status_pages:
+  - https://status.meraki.com/
+  - https://status.webex.com/
+changelog: https://developer.cisco.com/meraki/whats-new/
+deprecated_operations: []
