@@ -1,0 +1,141 @@
+arazzo: 1.0.1
+info:
+  title: Cisco Meraki Provision an Organization Network
+  summary: Verify organization access, guard against a duplicate network name, create the network, and read it back.
+  description: >-
+    The standard Meraki provisioning path. A Meraki Dashboard API key is scoped
+    to a user rather than to a single organization, so the flow first calls the
+    organizations endpoint to confirm the key actually has privileges on the
+    target organization. It then lists the organization's existing networks and
+    branches: when a network already carries the requested name the flow ends
+    without writing, and when no name matches it creates the network and
+    re-lists the organization to confirm the new network is present. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: merakiApi
+  url: ../openapi/cisco-meraki-api.yaml
+  type: openapi
+workflows:
+- workflowId: provision-meraki-network
+  summary: Create a network in a Meraki organization, skipping the write when the name is already taken.
+  description: >-
+    Confirms the API key has privileges on the organization, checks the existing
+    networks for a name collision, creates the network when the name is free,
+    and verifies the created network appears in the organization listing.
+  inputs:
+    type: object
+    required:
+    - organizationId
+    - networkName
+    - productTypes
+    properties:
+      organizationId:
+        type: string
+        description: The Meraki organization identifier (e.g. 500123).
+      networkName:
+        type: string
+        description: The name to give the new network (e.g. "Main Office").
+      productTypes:
+        type: array
+        items:
+          type: string
+        description: >-
+          Product types to enable on the network, such as appliance, switch,
+          wireless, or camera.
+      timeZone:
+        type: string
+        description: The network timezone in tz database form (e.g. America/Los_Angeles).
+      tags:
+        type: array
+        items:
+          type: string
+        description: Tags to apply to the new network (e.g. production, campus).
+  steps:
+  - stepId: verifyOrganizationAccess
+    description: >-
+      List the organizations the API key has privileges on and assert the target
+      organization is among them. A Meraki key is user-scoped, so this is the
+      cheapest way to fail fast on a wrong key or a wrong organization id before
+      attempting any write.
+    operationId: getOrganizations
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $[?(@.id == '$inputs.organizationId')]
+      type: jsonpath
+    outputs:
+      organizations: $response.body
+  - stepId: findExistingNetwork
+    description: >-
+      List the networks already in the organization and check whether one
+      already carries the requested name. The Meraki networks endpoint offers no
+      server-side name filter, so the match is evaluated against the returned
+      collection.
+    operationId: getOrganizationNetworks
+    parameters:
+    - name: organizationId
+      in: path
+      value: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      existingNetworks: $response.body
+    onSuccess:
+    - name: networkNameTaken
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $[?(@.name == '$inputs.networkName')].length() > 0
+        type: jsonpath
+    - name: networkNameFree
+      type: goto
+      stepId: createNetwork
+      criteria:
+      - context: $response.body
+        condition: $[?(@.name == '$inputs.networkName')].length() == 0
+        type: jsonpath
+  - stepId: createNetwork
+    description: >-
+      Create the network in the organization with the requested name, product
+      types, timezone, and tags.
+    operationId: createOrganizationNetwork
+    parameters:
+    - name: organizationId
+      in: path
+      value: $inputs.organizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.networkName
+        productTypes: $inputs.productTypes
+        timeZone: $inputs.timeZone
+        tags: $inputs.tags
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      networkId: $response.body#/id
+      networkName: $response.body#/name
+      productTypes: $response.body#/productTypes
+  - stepId: verifyNetworkCreated
+    description: >-
+      Re-list the organization's networks to confirm the newly created network
+      is present and readable, closing the create/read-back loop before any
+      downstream automation binds to the network id.
+    operationId: getOrganizationNetworks
+    parameters:
+    - name: organizationId
+      in: path
+      value: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $[?(@.id == '$steps.createNetwork.outputs.networkId')]
+      type: jsonpath
+    outputs:
+      networks: $response.body
+  outputs:
+    networkId: $steps.createNetwork.outputs.networkId
+    networkName: $steps.createNetwork.outputs.networkName
+    existingNetworks: $steps.findExistingNetwork.outputs.existingNetworks

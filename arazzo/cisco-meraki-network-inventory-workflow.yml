@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Cisco Meraki Network Inventory Snapshot
+  summary: Drill from organization to network to devices to connected clients in a single audited pass.
+  description: >-
+    The inventory drill-down every Meraki integration runs, whether it is
+    feeding a CMDB, a monitoring dashboard, or a compliance report. The flow
+    confirms the API key has privileges on the organization, confirms the target
+    network belongs to that organization, then collects the network's hardware
+    inventory and the clients seen on it over a caller-supplied timespan. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: merakiApi
+  url: ../openapi/cisco-meraki-api.yaml
+  type: openapi
+workflows:
+- workflowId: meraki-network-inventory
+  summary: Collect an organization-scoped inventory of one Meraki network's devices and clients.
+  description: >-
+    Verifies organization access, verifies the network is in scope for that
+    organization, lists the devices deployed in the network, and lists the
+    clients that have used the network within the requested timespan.
+  inputs:
+    type: object
+    required:
+    - organizationId
+    - networkId
+    properties:
+      organizationId:
+        type: string
+        description: The Meraki organization identifier (e.g. 500123).
+      networkId:
+        type: string
+        description: The Meraki network identifier to inventory (e.g. L_500123).
+      timespan:
+        type: integer
+        description: >-
+          Timespan in seconds over which clients are fetched. Defaults to 86400
+          (the trailing 24 hours) when omitted.
+        default: 86400
+  steps:
+  - stepId: verifyOrganizationAccess
+    description: >-
+      List the organizations the API key has privileges on and assert the target
+      organization is among them. This anchors the inventory to an organization
+      the key can actually read.
+    operationId: getOrganizations
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $[?(@.id == '$inputs.organizationId')]
+      type: jsonpath
+    outputs:
+      organizations: $response.body
+  - stepId: resolveNetwork
+    description: >-
+      List the organization's networks and assert the requested network id
+      belongs to it, so the inventory cannot silently cross an organization
+      boundary.
+    operationId: getOrganizationNetworks
+    parameters:
+    - name: organizationId
+      in: path
+      value: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $[?(@.id == '$inputs.networkId')]
+      type: jsonpath
+    outputs:
+      networks: $response.body
+  - stepId: listDevices
+    description: >-
+      List the devices deployed in the network — access points, switches,
+      appliances, and cameras — with their serials, models, firmware, and LAN
+      addressing.
+    operationId: getNetworkDevices
+    parameters:
+    - name: networkId
+      in: path
+      value: $inputs.networkId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      devices: $response.body
+      firstDeviceSerial: $response.body#/0/serial
+  - stepId: listClients
+    description: >-
+      List the clients that have used the network over the requested timespan,
+      with their MAC, IP, VLAN, operating system, and current status.
+    operationId: getNetworkClients
+    parameters:
+    - name: networkId
+      in: path
+      value: $inputs.networkId
+    - name: timespan
+      in: query
+      value: $inputs.timespan
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clients: $response.body
+  outputs:
+    networks: $steps.resolveNetwork.outputs.networks
+    devices: $steps.listDevices.outputs.devices
+    clients: $steps.listClients.outputs.clients

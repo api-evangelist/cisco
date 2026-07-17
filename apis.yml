@@ -172,6 +172,12 @@ apis:
   - type: APIReference
     url: https://developer.cisco.com/docs/thousandeyes/api-reference/
 common:
+- type: Arazzo
+  url: arazzo/cisco-meraki-network-inventory-workflow.yml
+  name: Cisco Meraki Network Inventory Snapshot
+- type: Arazzo
+  url: arazzo/cisco-provision-meraki-network-workflow.yml
+  name: Cisco Meraki Provision an Organization Network
 - type: AgenticAccess
   url: agentic-access/cisco-agentic-access.yml
 - type: Packages
