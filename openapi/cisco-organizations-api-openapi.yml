@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Cisco Meraki Dashboard Clients Organizations API
+  description: RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points, switches, security appliances, and cameras.
+  version: '1.0'
+  contact:
+    name: Cisco DevNet
+    url: https://developer.cisco.com/meraki/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://api.meraki.com/api/v1
+  description: Meraki Dashboard API v1
+security:
+- apiKeyAuth: []
+tags:
+- name: Organizations
+  description: Manage Meraki organizations
+paths:
+  /organizations:
+    get:
+      operationId: getOrganizations
+      summary: Cisco Meraki List Organizations
+      description: List the organizations that the user has privileges on.
+      tags:
+      - Organizations
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+              examples:
+                GetOrganizations200Example:
+                  summary: Default getOrganizations 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: '500123'
+                    name: Acme Corp
+                    url: https://dashboard.meraki.com/o/abc123/manage/organization/overview
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Organization:
+      type: object
+      description: A Meraki organization.
+      properties:
+        id:
+          type: string
+          description: Organization ID.
+          example: '500123'
+        name:
+          type: string
+          description: Organization name.
+          example: Acme Corp
+        url:
+          type: string
+          description: Organization URL in the Meraki dashboard.
+          example: https://dashboard.meraki.com/o/abc123/manage/organization/overview
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Cisco-Meraki-API-Key
+      description: Meraki Dashboard API key.

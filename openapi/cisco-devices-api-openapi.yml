@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Cisco Meraki Dashboard Clients Devices API
+  description: RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points, switches, security appliances, and cameras.
+  version: '1.0'
+  contact:
+    name: Cisco DevNet
+    url: https://developer.cisco.com/meraki/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://api.meraki.com/api/v1
+  description: Meraki Dashboard API v1
+security:
+- apiKeyAuth: []
+tags:
+- name: Devices
+  description: Manage network devices
+paths:
+  /networks/{networkId}/devices:
+    get:
+      operationId: getNetworkDevices
+      summary: Cisco Meraki List Network Devices
+      description: List the devices in a network.
+      tags:
+      - Devices
+      parameters:
+      - name: networkId
+        in: path
+        required: true
+        description: The network ID.
+        schema:
+          type: string
+        example: L_500123
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Device:
+      type: object
+      description: A Meraki network device.
+      properties:
+        serial:
+          type: string
+          description: Device serial number.
+          example: Q2QN-XXXX-XXXX
+        name:
+          type: string
+          description: Device name.
+          example: Office AP 01
+        mac:
+          type: string
+          description: Device MAC address.
+          example: aa:bb:cc:dd:ee:ff
+        model:
+          type: string
+          description: Device model.
+          example: MR46
+        networkId:
+          type: string
+          description: Network ID.
+          example: L_500123
+        lanIp:
+          type: string
+          description: LAN IP address.
+          example: 10.0.1.10
+        firmware:
+          type: string
+          description: Firmware version.
+          example: wireless-29-8
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Cisco-Meraki-API-Key
+      description: Meraki Dashboard API key.

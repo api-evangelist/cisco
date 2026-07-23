@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Cisco Meraki Dashboard Clients API
+  description: RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points, switches, security appliances, and cameras.
+  version: '1.0'
+  contact:
+    name: Cisco DevNet
+    url: https://developer.cisco.com/meraki/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://api.meraki.com/api/v1
+  description: Meraki Dashboard API v1
+security:
+- apiKeyAuth: []
+tags:
+- name: Clients
+  description: View client information
+paths:
+  /networks/{networkId}/clients:
+    get:
+      operationId: getNetworkClients
+      summary: Cisco Meraki List Network Clients
+      description: List the clients that have used this network in the timespan.
+      tags:
+      - Clients
+      parameters:
+      - name: networkId
+        in: path
+        required: true
+        description: The network ID.
+        schema:
+          type: string
+      - name: timespan
+        in: query
+        description: Timespan in seconds for which clients will be fetched.
+        schema:
+          type: integer
+          default: 86400
+        example: 86400
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Client:
+      type: object
+      description: A network client.
+      properties:
+        id:
+          type: string
+          description: Client ID.
+          example: k500123
+        mac:
+          type: string
+          description: Client MAC address.
+          example: aa:bb:cc:11:22:33
+        ip:
+          type: string
+          description: Client IP address.
+          example: 10.0.1.100
+        description:
+          type: string
+          description: Client description.
+          example: Jane's Laptop
+        os:
+          type: string
+          description: Operating system.
+          example: Windows 11
+        vlan:
+          type: integer
+          description: VLAN ID.
+          example: 10
+        status:
+          type: string
+          description: Client status.
+          example: Online
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Cisco-Meraki-API-Key
+      description: Meraki Dashboard API key.
