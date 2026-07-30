@@ -5,7 +5,20 @@ description: Cisco provides a comprehensive suite of APIs across its networking,
   Center, ACI, ISE, Intersight, ThousandEyes, SD-WAN, and other Cisco products to automate network operations, build integrations,
   and extend platform capabilities.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cisco.png
 url: https://raw.githubusercontent.com/api-evangelist/cisco/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-06-20'
@@ -20,8 +33,10 @@ tags:
 apis:
 - aid: cisco:meraki-api
   name: Cisco Meraki Dashboard API
-  description: RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points, switches,
-    security appliances, and cameras. Supports network configuration, monitoring, and automation at scale.
+  description: >-
+    RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points,
+    switches, security appliances, and cameras. Supports network configuration, monitoring, and automation
+    at scale.
   humanURL: https://developer.cisco.com/meraki/api-v1/
   baseURL: https://api.meraki.com/api/v1
   tags:
@@ -56,8 +71,9 @@ apis:
     url: data-model/cisco-data-model.yml
 - aid: cisco:webex-api
   name: Cisco Webex API
-  description: REST API for Webex collaboration platform enabling messaging, meeting management, device control, and administration.
-    Supports bots, integrations, and embedded apps for extending Webex functionality.
+  description: >-
+    REST API for Webex collaboration platform enabling messaging, meeting management, device control,
+    and administration. Supports bots, integrations, and embedded apps for extending Webex functionality.
   humanURL: https://developer.webex.com/docs/getting-started
   baseURL: https://webexapis.com/v1
   tags:
@@ -75,8 +91,10 @@ apis:
     url: https://developer.webex.com/docs/integrations
 - aid: cisco:catalyst-center-api
   name: Cisco Catalyst Center API
-  description: REST API for Cisco Catalyst Center (formerly DNA Center), providing intent-based networking capabilities including
-    network design, provisioning, assurance, and policy management for enterprise campus and branch networks.
+  description: >-
+    REST API for Cisco Catalyst Center (formerly DNA Center), providing intent-based networking capabilities
+    including network design, provisioning, assurance, and policy management for enterprise campus and
+    branch networks.
   humanURL: https://developer.cisco.com/docs/dna-center/
   baseURL: https://sandboxdnac.cisco.com/dna
   tags:
@@ -91,8 +109,9 @@ apis:
     url: https://developer.cisco.com/docs/dna-center/api/
 - aid: cisco:aci-api
   name: Cisco ACI API
-  description: REST API for Cisco Application Centric Infrastructure (ACI) providing programmable access to data center network
-    fabric configuration, policy management, and monitoring through the APIC controller.
+  description: >-
+    REST API for Cisco Application Centric Infrastructure (ACI) providing programmable access to data
+    center network fabric configuration, policy management, and monitoring through the APIC controller.
   humanURL: https://developer.cisco.com/docs/aci/
   baseURL: https://apic-ip/api
   tags:
@@ -108,8 +127,9 @@ apis:
     url: https://developer.cisco.com/docs/aci/apic-rest-api-user-guide/
 - aid: cisco:ise-api
   name: Cisco ISE API
-  description: REST API for Cisco Identity Services Engine (ISE) enabling network access policy management, guest services,
-    BYOD onboarding, and security group administration for zero-trust network access.
+  description: >-
+    REST API for Cisco Identity Services Engine (ISE) enabling network access policy management, guest
+    services, BYOD onboarding, and security group administration for zero-trust network access.
   humanURL: https://developer.cisco.com/docs/identity-services-engine/
   baseURL: https://ise-server/ers
   tags:
@@ -125,8 +145,9 @@ apis:
     url: https://developer.cisco.com/docs/identity-services-engine/ers-api-reference/
 - aid: cisco:intersight-api
   name: Cisco Intersight API
-  description: REST API for Cisco Intersight cloud operations platform providing infrastructure management, workload optimization,
-    and lifecycle automation for Cisco UCS, HyperFlex, and third-party infrastructure.
+  description: >-
+    REST API for Cisco Intersight cloud operations platform providing infrastructure management, workload
+    optimization, and lifecycle automation for Cisco UCS, HyperFlex, and third-party infrastructure.
   humanURL: https://intersight.com/apidocs/introduction/overview/
   baseURL: https://intersight.com/api/v1
   tags:
@@ -141,8 +162,9 @@ apis:
     url: https://intersight.com/apidocs/apirefs/
 - aid: cisco:sdwan-api
   name: Cisco SD-WAN API
-  description: REST API for Cisco SD-WAN (formerly Viptela) providing programmatic access to WAN edge device management, policy
-    configuration, monitoring, and analytics through the vManage controller.
+  description: >-
+    REST API for Cisco SD-WAN (formerly Viptela) providing programmatic access to WAN edge device management,
+    policy configuration, monitoring, and analytics through the vManage controller.
   humanURL: https://developer.cisco.com/docs/sdwan/
   baseURL: https://vmanage-ip/dataservice
   tags:
@@ -156,8 +178,9 @@ apis:
     url: https://developer.cisco.com/docs/sdwan/api-reference/
 - aid: cisco:thousandeyes-api
   name: Cisco ThousandEyes API
-  description: REST API for Cisco ThousandEyes digital experience monitoring platform, providing access to network, application,
-    and internet visibility data for monitoring end-to-end digital experiences.
+  description: >-
+    REST API for Cisco ThousandEyes digital experience monitoring platform, providing access to network,
+    application, and internet visibility data for monitoring end-to-end digital experiences.
   humanURL: https://developer.cisco.com/docs/thousandeyes/
   baseURL: https://api.thousandeyes.com/v7
   tags:
@@ -171,7 +194,49 @@ apis:
     url: https://developer.cisco.com/docs/thousandeyes/
   - type: APIReference
     url: https://developer.cisco.com/docs/thousandeyes/api-reference/
+- aid: cisco:cisco-clients-api
+  name: Cisco Clients API
+  description: View client information
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-clients-api-openapi.yml
+- aid: cisco:cisco-devices-api
+  name: Cisco Devices API
+  description: Manage network devices
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-devices-api-openapi.yml
+- aid: cisco:cisco-networks-api
+  name: Cisco Networks API
+  description: Manage networks within an organization
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-networks-api-openapi.yml
+- aid: cisco:cisco-organizations-api
+  name: Cisco Organizations API
+  description: Manage Meraki organizations
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-organizations-api-openapi.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/cisco/overview
 - type: Arazzo
   url: arazzo/cisco-meraki-network-inventory-workflow.yml
   name: Cisco Meraki Network Inventory Snapshot
