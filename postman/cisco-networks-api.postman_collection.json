@@ -1,0 +1,275 @@
+{
+  "info": {
+    "_postman_id": "55ad15ed-7a48-472d-ac0e-c56226a0b209",
+    "name": "Cisco Meraki Dashboard Clients Networks API",
+    "description": "RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points, switches, security appliances, and cameras.\n\nContact Support:\n Name: Cisco DevNet",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:21:10.000Z",
+    "updatedAt": "2026-07-28T01:21:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-55ad15ed-7a48-472d-ac0e-c56226a0b209"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "networks",
+              "item": [
+                {
+                  "name": "Cisco Meraki List Organization Networks",
+                  "id": "c0bc1b40-278b-406a-a412-c5d50a7b4f31",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organizationId/networks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organizationId",
+                        "networks"
+                      ],
+                      "variable": [
+                        {
+                          "id": "dec5b6a1-2efc-4b6c-8452-e09f39d1bb79",
+                          "key": "organizationId",
+                          "value": "<string>",
+                          "description": "(Required) The organization ID."
+                        }
+                      ]
+                    },
+                    "description": "List the networks that the user has privileges on in an organization."
+                  },
+                  "response": [
+                    {
+                      "id": "a03c4984-ae66-4e60-83e2-c37fe49ff0c6",
+                      "name": "Successful operation.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Cisco-Meraki-API-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/networks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "networks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"organizationId\": \"<string>\",\n    \"name\": \"<string>\",\n    \"productTypes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"timeZone\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"organizationId\": \"<string>\",\n    \"name\": \"<string>\",\n    \"productTypes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"timeZone\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+                      "createdAt": "2026-07-28T01:21:11.000Z",
+                      "updatedAt": "2026-07-28T01:21:11.000Z",
+                      "uid": "35240-a03c4984-ae66-4e60-83e2-c37fe49ff0c6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:21:11.000Z",
+                  "updatedAt": "2026-07-28T01:21:11.000Z",
+                  "uid": "35240-c0bc1b40-278b-406a-a412-c5d50a7b4f31"
+                },
+                {
+                  "name": "Cisco Meraki Create Organization Network",
+                  "id": "eb506cab-a07f-46a4-b441-ebb2c783334e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"productTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"timeZone\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organizationId/networks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organizationId",
+                        "networks"
+                      ],
+                      "variable": [
+                        {
+                          "id": "06a6a9d3-3064-4139-a689-93c662b38c71",
+                          "key": "organizationId",
+                          "value": "<string>",
+                          "description": "(Required) The organization ID."
+                        }
+                      ]
+                    },
+                    "description": "Create a network in an organization."
+                  },
+                  "response": [
+                    {
+                      "id": "5ba3120f-4416-4bd8-82c9-51d981907301",
+                      "name": "Network created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Cisco-Meraki-API-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"productTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"timeZone\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/networks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "networks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"productTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"timeZone\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:21:11.000Z",
+                      "updatedAt": "2026-07-28T01:21:11.000Z",
+                      "uid": "35240-5ba3120f-4416-4bd8-82c9-51d981907301"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:21:11.000Z",
+                  "updatedAt": "2026-07-28T01:21:11.000Z",
+                  "uid": "35240-eb506cab-a07f-46a4-b441-ebb2c783334e"
+                }
+              ],
+              "id": "d36a96d2-b5f2-4f7a-85c5-1fd076e8563d",
+              "createdAt": "2026-07-28T01:21:11.000Z",
+              "updatedAt": "2026-07-28T01:21:11.000Z",
+              "uid": "35240-d36a96d2-b5f2-4f7a-85c5-1fd076e8563d"
+            }
+          ],
+          "id": "e8926069-93b9-4621-bb4f-dd7c5830450c",
+          "createdAt": "2026-07-28T01:21:11.000Z",
+          "updatedAt": "2026-07-28T01:21:11.000Z",
+          "uid": "35240-e8926069-93b9-4621-bb4f-dd7c5830450c"
+        }
+      ],
+      "id": "cdfc343b-b7e3-4007-b93b-abb779321872",
+      "createdAt": "2026-07-28T01:21:11.000Z",
+      "updatedAt": "2026-07-28T01:21:11.000Z",
+      "uid": "35240-cdfc343b-b7e3-4007-b93b-abb779321872"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Cisco-Meraki-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.meraki.com/api/v1"
+    }
+  ]
+}

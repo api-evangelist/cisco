@@ -1,0 +1,20 @@
+{
+  "provider": "cisco",
+  "sources": [
+    "cisco-clients-api-openapi.yml",
+    "cisco-devices-api-openapi.yml",
+    "cisco-networks-api-openapi.yml",
+    "cisco-organizations-api-openapi.yml"
+  ],
+  "outputs": [
+    "cisco-clients-api-openapi.yml",
+    "cisco-devices-api-openapi.yml",
+    "cisco-networks-api-openapi.yml",
+    "cisco-organizations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

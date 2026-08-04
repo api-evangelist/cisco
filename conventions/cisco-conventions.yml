@@ -1,6 +1,6 @@
 generated: '2026-06-20'
 method: searched
-source: developer.cisco.com/meraki (pagination, errors, rate-limit, auth) + openapi/cisco-meraki-api.yaml
+source: developer.cisco.com/meraki (pagination, errors, rate-limit, auth) + https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json
 scope: Cisco Meraki Dashboard API (representative of the DevNet REST surface; other products differ).
 authentication:
   style: api-key-header

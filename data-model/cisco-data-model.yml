@@ -1,6 +1,6 @@
 generated: '2026-06-20'
 method: derived
-source: openapi/cisco-meraki-api.yaml ($ref links + id-reference fields)
+source: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json ($ref links + id-reference fields)
 render: subway/cisco-subway-map.svg
 scope: Cisco Meraki Dashboard API core resource hierarchy.
 entities:

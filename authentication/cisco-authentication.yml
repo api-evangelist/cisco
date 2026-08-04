@@ -1,6 +1,6 @@
 generated: '2026-07-11'
 method: derived
-source: openapi/cisco-meraki-api.yaml
+source: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json
 summary:
   types:
   - apiKey
@@ -13,4 +13,4 @@ schemes:
   parameter: X-Cisco-Meraki-API-Key
   description: Meraki Dashboard API key.
   sources:
-  - openapi/cisco-meraki-api.yaml
+  - https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json

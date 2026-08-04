@@ -13,7 +13,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: merakiApi
-  url: ../openapi/cisco-meraki-api.yaml
+  url: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json
   type: openapi
 workflows:
 - workflowId: meraki-network-inventory

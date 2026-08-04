@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 generated: '2026-06-20'
 method: generated
-extends: openapi/cisco-meraki-api.yaml
+extends: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json
 actions:
   - target: $.info
     update:

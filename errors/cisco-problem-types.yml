@@ -1,7 +1,7 @@
 generated: '2026-06-20'
 method: derived
 format: json-error-envelope
-source: openapi/cisco-meraki-api.yaml (4xx responses) + developer.cisco.com/meraki docs
+source: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json (4xx responses) + developer.cisco.com/meraki docs
 envelope:
   description: >-
     Meraki Dashboard API returns errors as a JSON object with an "errors" array
@@ -23,7 +23,7 @@ problems:
     title: Unauthorized
     meaning: Missing or invalid API key / OAuth token.
     remediation: Provide a valid X-Cisco-Meraki-API-Key header or OAuth bearer token.
-    source_operation: openapi/cisco-meraki-api.yaml#getOrganizations
+    source_operation: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json#getOrganizations
   - status: 403
     title: Forbidden
     meaning: Authenticated but not authorized for the target organization/network resource.

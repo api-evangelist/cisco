@@ -1,13 +1,13 @@
 generated: '2026-06-20'
 method: derived
-source: openapi/cisco-meraki-api.yaml + developer.cisco.com docs (Meraki)
+source: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json + developer.cisco.com docs (Meraki)
 scope: >-
   Derived primarily from the curated Meraki Dashboard OpenAPI and Meraki
   developer docs; other Cisco APIs (Webex, Intersight, ThousandEyes) vary.
 standards:
   - id: openapi-3.0
     conforms: true
-    evidence: openapi/cisco-meraki-api.yaml is OpenAPI 3.0.3; Meraki publishes its full OpenAPI spec as the source of truth.
+    evidence: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json is OpenAPI 3.0.3; Meraki publishes its full OpenAPI spec as the source of truth.
   - id: rest
     conforms: true
     evidence: Resource-oriented JSON over HTTPS.

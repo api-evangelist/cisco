@@ -1,0 +1,157 @@
+{
+  "info": {
+    "_postman_id": "c406bd96-37df-4046-aecb-b17ddb966f2f",
+    "name": "Cisco Meraki Dashboard Clients Devices API",
+    "description": "RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points, switches, security appliances, and cameras.\n\nContact Support:\n Name: Cisco DevNet",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:21:10.000Z",
+    "updatedAt": "2026-07-28T01:21:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c406bd96-37df-4046-aecb-b17ddb966f2f"
+  },
+  "item": [
+    {
+      "name": "networks",
+      "item": [
+        {
+          "name": "{networkId}",
+          "item": [
+            {
+              "name": "devices",
+              "item": [
+                {
+                  "name": "Cisco Meraki List Network Devices",
+                  "id": "7681a18c-3635-4059-82af-557d4c56b557",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/networks/:networkId/devices",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "networks",
+                        ":networkId",
+                        "devices"
+                      ],
+                      "variable": [
+                        {
+                          "id": "909e73d9-7a8e-402f-aaf9-f800fc5ecc1c",
+                          "key": "networkId",
+                          "value": "<string>",
+                          "description": "(Required) The network ID."
+                        }
+                      ]
+                    },
+                    "description": "List the devices in a network."
+                  },
+                  "response": [
+                    {
+                      "id": "e308939c-4dcf-444f-a4fe-7e608a3bfd04",
+                      "name": "Successful operation.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Cisco-Meraki-API-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/networks/:networkId/devices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "networks",
+                            ":networkId",
+                            "devices"
+                          ],
+                          "variable": [
+                            {
+                              "key": "networkId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"serial\": \"<string>\",\n    \"name\": \"<string>\",\n    \"mac\": \"<string>\",\n    \"model\": \"<string>\",\n    \"networkId\": \"<string>\",\n    \"lanIp\": \"<string>\",\n    \"firmware\": \"<string>\"\n  },\n  {\n    \"serial\": \"<string>\",\n    \"name\": \"<string>\",\n    \"mac\": \"<string>\",\n    \"model\": \"<string>\",\n    \"networkId\": \"<string>\",\n    \"lanIp\": \"<string>\",\n    \"firmware\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:21:10.000Z",
+                      "updatedAt": "2026-07-28T01:21:10.000Z",
+                      "uid": "35240-e308939c-4dcf-444f-a4fe-7e608a3bfd04"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:21:10.000Z",
+                  "updatedAt": "2026-07-28T01:21:10.000Z",
+                  "uid": "35240-7681a18c-3635-4059-82af-557d4c56b557"
+                }
+              ],
+              "id": "4794fd68-b0f0-49af-addf-c7bb27be1da1",
+              "createdAt": "2026-07-28T01:21:10.000Z",
+              "updatedAt": "2026-07-28T01:21:10.000Z",
+              "uid": "35240-4794fd68-b0f0-49af-addf-c7bb27be1da1"
+            }
+          ],
+          "id": "2d810356-9a26-4fd4-9bdb-249e0c188dea",
+          "createdAt": "2026-07-28T01:21:10.000Z",
+          "updatedAt": "2026-07-28T01:21:10.000Z",
+          "uid": "35240-2d810356-9a26-4fd4-9bdb-249e0c188dea"
+        }
+      ],
+      "id": "f321abe7-b91f-4389-ac16-67135826346a",
+      "createdAt": "2026-07-28T01:21:10.000Z",
+      "updatedAt": "2026-07-28T01:21:10.000Z",
+      "uid": "35240-f321abe7-b91f-4389-ac16-67135826346a"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Cisco-Meraki-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.meraki.com/api/v1"
+    }
+  ]
+}
