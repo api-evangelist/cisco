@@ -55,14 +55,6 @@ apis:
     url: https://developer.cisco.com/meraki/api-v1/getting-started/
   - type: Authentication
     url: https://developer.cisco.com/meraki/api-v1/#!authorization
-  - type: X-NaftikoCapability
-    url: capabilities/meraki-clients.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/meraki-devices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/meraki-networks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/meraki-organizations.yaml
   - type: GraphQL
     url: graphql/cisco-graphql.md
   - type: Overlay
@@ -208,7 +200,7 @@ common:
   url: arazzo/cisco-provision-meraki-network-workflow.yml
   name: Cisco Meraki Provision an Organization Network
 - type: AgenticAccess
-  url: agentic-access/cisco-agentic-access.yml
+  url: agentic-access/_scaffold/cisco-agentic-access.yml
 - type: Packages
   url: packages/cisco-packages.yml
 - type: WellKnown
