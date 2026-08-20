@@ -107,6 +107,12 @@ apis:
   baseURL: https://apic-ip/api
   tags:
   - ACI
+  - Data-Center
+  - Fabric
+  - REST
+  - SDN
+  tags_raw:
+  - ACI
   - Data Center
   - Fabric
   - REST
