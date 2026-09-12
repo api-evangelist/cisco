@@ -201,6 +201,8 @@ apis:
   - type: APIReference
     url: https://developer.cisco.com/docs/thousandeyes/api-reference/
 common:
+- type: Website
+  url: https://www.cisco.com/
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/cisco/overview
 - type: Arazzo
