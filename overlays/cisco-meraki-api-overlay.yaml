@@ -2,8 +2,8 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Cisco Meraki Dashboard API
   version: 1.0.0
-generated: '2026-06-20'
-method: generated
+x-generated: '2026-06-20'
+x-method: generated
 extends: https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json
 actions:
   - target: $.info
