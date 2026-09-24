@@ -67,8 +67,6 @@ apis:
     url: https://developer.cisco.com/meraki/api-v1/getting-started/
   - type: Authentication
     url: https://developer.cisco.com/meraki/api-v1/#!authorization
-  - type: GraphQL
-    url: graphql/cisco-graphql.md
   - type: Overlay
     url: overlays/cisco-meraki-api-overlay.yaml
   - type: ErrorCatalog
@@ -120,7 +118,7 @@ apis:
   baseURL: https://apic-ip/api
   tags:
   - ACI
-  - Data-Center
+  - Data Center
   - Fabric
   - REST
   - SDN
@@ -130,6 +128,7 @@ apis:
   - Fabric
   - REST
   - SDN
+  - Data-Center
   properties:
   - type: Documentation
     url: https://developer.cisco.com/docs/aci/
