@@ -1,0 +1,20 @@
+generated: '2026-10-03'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://developer.webex.com/blog/webhooks-for-service-app-authorizations
+sources:
+- https://developer.webex.com/blog/webhooks-for-service-app-authorizations
+- https://developer.webex.com/blog/using-a-webhook-secret
+- https://developer.webex.com/blog/webex-rest-api-adds-compliance-officer-webhooks
+- https://developer.webex.com/calling/docs/api/v1/webhook-interest-registrations
+description: Webex webhook event surface
+events:
+- event: serviceApp.authorized
+  description: Triggered when a Service App is authorized by a Webex admin.
+delivery:
+  signature: HMAC-SHA1 of the raw JSON body
+  content_type: application/json
+note: The pages describe a shared secret that results in an X‑Spark‑Signature header containing an HMAC‑SHA1 signature. Some webhook types also
+  provide HMAC‑SHA256 or HMAC‑SHA512 signatures in an X‑Webex‑Signature header. Retry behavior is not documented on the provided pages. 2 extracted
+  row(s) were dropped because their quote was not on the page.
+docs: https://developer.webex.com/blog/webhooks-for-service-app-authorizations

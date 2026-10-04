@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cisco/main/json-schema/cisco-get-v1-messages-y2-lzy29-zcgfyazovl3-vzl01-fu1-nbr0-uvmzizzwuyzjatowf-schema.json",
+  "title": "GetV1MessagesY2Lzy29Zcgfyazovl3Vzl01Fu1Nbr0Uvmzizzwuyzjatowf",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_ae-authored/cisco-openapi-generated.yml#/components/schemas/GetV1MessagesY2Lzy29Zcgfyazovl3Vzl01Fu1Nbr0Uvmzizzwuyzjatowf",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Message ID"
+    },
+    "roomId": {
+      "type": "string",
+      "description": "Room ID"
+    },
+    "personId": {
+      "type": "string",
+      "description": "Person ID of the creator"
+    },
+    "personEmail": {
+      "type": "string",
+      "description": "Email of the creator"
+    },
+    "text": {
+      "type": "string",
+      "description": "Message text"
+    },
+    "created": {
+      "type": "string",
+      "description": "Creation timestamp"
+    }
+  }
+}

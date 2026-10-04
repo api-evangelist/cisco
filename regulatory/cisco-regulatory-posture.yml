@@ -1,0 +1,37 @@
+generated: "2026-10-03"
+method: searched
+source:
+  - "https://www.cisco.com/c/en/us/about/legal/privacy-full.html"
+signals:
+  data_subject_request:
+    - evidence:
+        - source: "https://www.cisco.com/c/en/us/about/legal/privacy-full.html"
+          http_status: 200
+          fetched: "/tmp/privacy.html"
+          quote: "When Cisco is acting as a \"data controller,\" you may exercise your privacy rights (access, correction, deletion, objection) directly with Cisco as described in the specific website and Solution documentation or by submitting a request through the Privacy Request form as permitted by applicable data protection laws."
+      section: "Your privacy rights"
+      note: "Cisco outlines how data subjects can exercise rights."
+  subprocessors:
+    - evidence:
+        - source: "https://www.cisco.com/c/en/us/about/legal/privacy-full.html"
+          http_status: 200
+          fetched: "/tmp/privacy.html"
+          quote: "Cisco-U.S. is responsible for the processing of Personal Data it receives under the DPF, and subsequently may transfer it to third parties acting as agents on its behalf."
+      section: "Data processing and transfers"
+      note: "Mentions use of third‑party agents (sub‑processors)."
+  incident_notification:
+    - evidence:
+        - source: "https://www.cisco.com/c/en/us/about/legal/privacy-full.html"
+          http_status: 200
+          fetched: "/tmp/privacy.html"
+          quote: "Cisco-U.S. may be required to disclose Personal Data in response to lawful requests by public authorities, including to meet national security or law enforcement requirements."
+      section: "Legal requests"
+      note: "Describes notification to authorities and potential disclosures."
+  data_residency:
+    - evidence:
+        - source: "https://www.cisco.com/c/en/us/about/legal/privacy-full.html"
+          http_status: 200
+          fetched: "/tmp/privacy.html"
+          quote: "Cisco-U.S. complies with the DPF Principles for all onward transfers of Personal Data from the EU, EEA, U.K. (and Gibraltar), and Switzerland."
+      section: "International data transfers"
+      note: "Indicates data residency considerations for EU/EEA/UK/Switzerland."

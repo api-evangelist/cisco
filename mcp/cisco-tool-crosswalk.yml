@@ -1,0 +1,12 @@
+generated: '2026-10-04'
+method: derived
+source: mcp/cisco-mcp.yml
+crosswalk: []
+rest_only: []
+mcp_only:
+  - tool: Meraki-API-Doc-Search
+    reason: no public REST operationId
+  - tool: CatalystCenter-API-Doc-Search
+    reason: no public REST operationId
+  - tool: Meraki-API-OperationId-Search
+    reason: no public REST operationId

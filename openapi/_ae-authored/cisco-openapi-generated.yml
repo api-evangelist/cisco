@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  title: Cisco API
+  version: '2026-10-03'
+  description: 'GENERATED FROM DOCUMENTATION by API Evangelist on 2026-10-03: 1 operation(s) read from 1 public documentation page(s) (each operation
+    names its page in x-source). This is not the provider''s published contract; Cisco has published no machine-readable contract that the pipeline
+    could find. Engine: local.'
+  x-evidence-tiers:
+    code-example: 0
+    documentation: 1
+    pages-with-code: 0
+    pages-read: 1
+  x-generated-from: documentation
+  x-provenance: generated
+  x-authored-by: API Evangelist
+  x-generated: '2026-10-03'
+  x-generator: generate-contract-from-docs.py
+  x-engine: local
+  x-sources:
+  - https://developer.webex.com/messaging/docs/api/guides/webhooks
+servers:
+- url: https://webexapis.com
+paths:
+  /v1/messages/Y2lzY29zcGFyazovL3VzL01FU1NBR0UvMzIzZWUyZjAtOWFhZC0xMWU1LTg1YmYtMWRhZjhkNDJlZjlj:
+    get:
+      operationId: get_v1_messages_Y2lzY29zcGFyazovL3VzL01FU1NBR0UvMzIzZWUyZjAtOWFhZC0xMWU1LTg1YmYt
+      tags:
+      - Messages
+      summary: Get a message by ID
+      x-source: https://developer.webex.com/messaging/docs/api/guides/webhooks
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetV1MessagesY2Lzy29Zcgfyazovl3Vzl01Fu1Nbr0Uvmzizzwuyzjatowf'
+      x-evidence:
+        kind: documentation
+components:
+  schemas:
+    GetV1MessagesY2Lzy29Zcgfyazovl3Vzl01Fu1Nbr0Uvmzizzwuyzjatowf:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Message ID
+        roomId:
+          type: string
+          description: Room ID
+        personId:
+          type: string
+          description: Person ID of the creator
+        personEmail:
+          type: string
+          description: Email of the creator
+        text:
+          type: string
+          description: Message text
+        created:
+          type: string
+          description: Creation timestamp
+tags:
+- name: Messages
