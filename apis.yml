@@ -352,6 +352,8 @@ common:
   x-generated-by: cisco-family:2026-08-19
   x-acquired: 2007
 
+- type: SpectralRules
+  url: https://github.com/CiscoAandI/flowlint/blob/301e9ee861aa9f488c83e9cf0f5a55945404e2af/flowlint/rulesets/securex_ruleset.yaml
 apis:
 - aid: cisco:meraki-api
   name: Cisco Meraki Dashboard API
