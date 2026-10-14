@@ -28,3 +28,15 @@
     detected: '2026-10-13'
   status: not-a-workflow
   arazzo: null
+- slug: cisco-github-marketplace-apps
+  label: GitHub Marketplace (apps)
+  partner: github
+  partner_name: GitHub Marketplace (apps)
+  type: marketplace
+  marketplace: github-apps
+  channel: partner-built
+  evidence: https://github.com/marketplace/panoptica-github
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
