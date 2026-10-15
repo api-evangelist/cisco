@@ -156,3 +156,95 @@
     detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
+- slug: cisco-fedramp
+  label: FedRAMP
+  partner_name: FedRAMP
+  category: FedRAMP authorization
+  type: contract
+  channel: regulator-register
+  evidence: https://marketplace.fedramp.gov/products/F1604017885
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FedRAMP Marketplace data (github.com/18F/fedramp-data data/data.json @4b73d9247f)
+    standard: FedRAMP
+    spec_file: null
+    role: fedramp-authorized
+    registered_name: Cisco Systems Inc.
+    register_id: F1604017885
+    matched_domain: cisco.com
+    matched_by: domain+name-among-holders
+    domain_source: poc-email
+    designations:
+    - Compliant
+    - In Process
+    packages:
+    - Cisco Cloudlock for Government
+    - Cisco Meraki for Government
+    - Cisco SD-WAN for Government
+    - Cisco Umbrella for Government
+    - Cisco Unified Communications Manager Cloud for Government (Cisco UCM Cloud for Government)
+    - WebEx Contact Center Enterprise for Government (WxCCE-G)
+    - Webex for Government
+    service_models:
+    - SaaS
+    paths:
+    - Agency
+    - JAB
+    signal_note: certified_products = one entry per AUTHORIZED impact level, never per package; packages, service
+      models, paths and leveraging agencies are context, never counted. The register lists current designations
+      only (revoked / expired are removed), so lapsed is always false
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+    certified_products:
+    - product: FedRAMP Moderate
+      impact_level: Moderate
+      lapsed: false
+      latest_authorization: '2023-02-24'
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-govramp
+  label: GovRAMP
+  partner_name: GovRAMP
+  category: GovRAMP authorization
+  type: register
+  channel: standard-directory
+  evidence: https://govramp.org/program-participants
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: GovRAMP Program Participants (govramp.org/program-participants)
+    standard: GovRAMP
+    spec_file: null
+    role: govramp-authorized
+    registered_name: Cisco Systems, Inc.
+    register_id: SR26018
+    matched_domain: cisco.com
+    matched_by: domain+name-among-holders
+    domain_source: contact-email
+    statuses:
+    - Authorized
+    - Pending
+    offerings:
+    - Catalyst SD WAN
+    - Cisco Meraki for Government
+    - Cloudlock
+    - Duo Federal
+    - Security Cloud for Government
+    - Spaces for Government
+    - ThousandEyes for Government
+    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
+      never per offering; Progressing / Pending / Ready / Core are participation only
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+    certified_products:
+    - product: GovRAMP High
+      impact_level: High
+      lapsed: false
+      latest_authorization: '2024-08-19'
+    - product: GovRAMP Moderate
+      impact_level: Moderate
+      lapsed: false
+      latest_authorization: '2026-08-06'
+  status: not-a-workflow
+  arazzo: null
