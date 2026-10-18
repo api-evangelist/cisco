@@ -525,6 +525,8 @@ apis:
   humanURL: https://developer.cisco.com/meraki/api-v1/
   baseURL: https://api.meraki.com/api/v1
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
