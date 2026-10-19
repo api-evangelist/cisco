@@ -1,0 +1,1471 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Location Call Settings: Schedules API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Location Call Settings:  Schedules'
+paths:
+  /telephony/config/locations/{locationId}/schedules:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - schedules
+                properties:
+                  schedules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListScheduleObject'
+                    description: Array of schedules.
+              example:
+                schedules:
+                - id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+                  name: AUTOATTENDANT-BUSINESS-HOURS
+                  type: businessHours
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+                - id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+                  name: AUTOATTENDANT-HOLIDAY
+                  type: holidays
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Schedules
+      operationId: ReadTheListOfSchedules
+      description: 'List all schedules for the given location of the organization.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Retrieving this list requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of schedules for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List schedules for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of objects returned to this maximum count.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects.
+        example: '0'
+        schema:
+          type: number
+      - name: name
+        in: query
+        description: Only return schedules with the matching name.
+        example: AUTOATTENDANT-BUSINESS-HOURS
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Type of the schedule.
+        example: businessHours
+        schema:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Schedules
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created schedule.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Schedule
+      operationId: CreateASchedule
+      description: 'Create new Schedule for the given location.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Creating a schedule requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create the schedule for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the schedule for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: AUTOATTENDANT-BUSINESS-HOURS
+              type: businessHours
+              events:
+              - name: Monday 1
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: 09:00
+                endTime: '11:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: true
+                    tuesday: false
+                    wednesday: false
+                    thursday: false
+                    friday: false
+                    saturday: false
+              - name: Monday 2
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: '12:00'
+                endTime: '17:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: true
+                    tuesday: false
+                    wednesday: false
+                    thursday: false
+                    friday: false
+                    saturday: false
+              - name: Tuesday 1
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: 09:00
+                endTime: '11:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: true
+                    wednesday: false
+                    thursday: false
+                    friday: false
+                    saturday: false
+              - name: Tuesday 2
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: '12:00'
+                endTime: '17:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: true
+                    wednesday: false
+                    thursday: false
+                    friday: false
+                    saturday: false
+              - name: Wednesday 1
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: 09:00
+                endTime: '11:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: true
+                    thursday: false
+                    friday: false
+                    saturday: false
+              - name: Wednesday 2
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: '12:00'
+                endTime: '17:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: true
+                    thursday: false
+                    friday: false
+                    saturday: false
+              - name: Thursday 1
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: 09:00
+                endTime: '11:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: false
+                    thursday: true
+                    friday: false
+                    saturday: false
+              - name: Thursday 2
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: '12:00'
+                endTime: '17:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: false
+                    thursday: true
+                    friday: false
+                    saturday: false
+              - name: Friday 1
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: 09:00
+                endTime: '11:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: false
+                    thursday: false
+                    friday: true
+                    saturday: false
+              - name: Friday 2
+                startDate: '2021-11-03'
+                endDate: '2021-11-03'
+                startTime: '12:00'
+                endTime: '17:00'
+                allDayEnabled: false
+                recurrence:
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: false
+                    thursday: false
+                    friday: true
+                    saturday: false
+            schema:
+              $ref: '#/components/schemas/PostScheduleObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Schedule
+  /telephony/config/locations/{locationId}/schedules/{type}/{scheduleId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScheduleObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+                name: AUTOATTENDANT-HOLIDAY
+                type: holidays
+                events:
+                - id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RtVjNJRmxsWVhJbmN5QkVZWGs
+                  name: New Year's Day
+                  startDate: '2022-01-01'
+                  endDate: '2022-01-01'
+                  allDayEnabled: true
+                  recurrence:
+                    recurForEver: true
+                    recurYearlyByDate:
+                      dayOfMonth: 1
+                      month: JANUARY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for a Schedule
+      operationId: GetDetailsForASchedule
+      description: 'Retrieve Schedule details.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Retrieving schedule details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve schedule details in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: Type of the schedule.
+        required: true
+        example: businessHours
+        schema:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Retrieve the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve schedule details from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for a Schedule
+    put:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the target schedule.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1RrVlhMVmxGUVZJdFNFOU1TVVJCV1E
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Schedule
+      operationId: UpdateASchedule
+      description: 'Update the designated schedule.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Updating a schedule requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Schedule ID will change upon modification of the Schedule name.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this schedule exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: Type of schedule.
+        required: true
+        example: businessHours
+        schema:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Update schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update schedule from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: NEW-YEAR-HOLIDAY
+              events:
+              - name: New Year
+                newName: New Year's Day
+                startDate: '2022-01-01'
+                endDate: '2022-01-01'
+                allDayEnabled: true
+                recurrence:
+                  recurForEver: true
+                  recurYearlyByDate:
+                    dayOfMonth: 1
+                    month: JANUARY
+            schema:
+              $ref: '#/components/schemas/ModifyScheduleObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Schedule
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Schedule
+      operationId: DeleteASchedule
+      description: 'Delete the designated Schedule.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Deleting a schedule requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete a schedule.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: Type of the schedule.
+        required: true
+        example: businessHours
+        schema:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Delete the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the schedule from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Schedule
+  /telephony/config/locations/{locationId}/schedules/{type}/{scheduleId}/events/{eventId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScheduleEventObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RtVjNJRmxsWVhJbmN3
+                name: New Year's
+                startDate: '2022-01-01'
+                endDate: '2022-01-01'
+                allDayEnabled: true
+                recurrence:
+                  recurForEver: true
+                  recurYearlyByDate:
+                    dayOfMonth: 1
+                    month: JANUARY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for a Schedule Event
+      operationId: GetDetailsForAScheduleEvent
+      description: 'Retrieve Schedule Event details.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Retrieving a schedule event''s details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve schedule event details in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: Type of schedule.
+        required: true
+        example: businessHours
+        schema:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Retrieve the schedule event with the matching schedule ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        description: Retrieve the schedule event with the matching schedule event ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RtVjNJRmxsWVhJbmN3
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve schedule event details from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for a Schedule Event
+    put:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the target schedule event.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RtVjNJRmxsWVhJbmN5QkVZWGs
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Schedule Event
+      operationId: UpdateAScheduleEvent
+      description: 'Update the designated Schedule Event.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Updating a schedule event requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The schedule event ID will change upon modification of the schedule event name.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this schedule event exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: 'Type of schedule.
+
+
+          + `businessHours` - Business hours schedule type.
+
+
+          + `holidays` - Holidays schedule type.'
+        required: true
+        example: businessHours
+        schema:
+          type: string
+      - name: scheduleId
+        in: path
+        description: Update schedule event with the matching schedule ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        description: Update the schedule event with the matching schedule event ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RtVjNJRmxsWVhJbmN5QkVZWGs
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update schedule from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: New Year's Day
+              startDate: '2022-01-01'
+              endDate: '2022-01-01'
+              allDayEnabled: true
+              recurrence:
+                recurForEver: true
+                recurYearlyByDate:
+                  dayOfMonth: 1
+                  month: JANUARY
+            schema:
+              $ref: '#/components/schemas/ModifyScheduleEventObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Schedule Event
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Schedule Event
+      operationId: DeleteAScheduleEvent
+      description: 'Delete the designated Schedule Event.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Deleting a schedule event requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete a schedule.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: Type of schedule.
+        required: true
+        example: businessHours
+        schema:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Delete the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        description: Delete the schedule event with the matching schedule event ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RtVjNJRmxsWVhJbmN5QkVZWGs
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the schedule from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Schedule Event
+  /telephony/config/locations/{locationId}/schedules/{type}/{scheduleId}/events:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created schedule event.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RtVjNJRmxsWVhJbmN5QkVZWGs
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Schedule Event
+      operationId: CreateAScheduleEvent
+      description: 'Create new Event for the given location Schedule.
+
+
+        A time schedule establishes a set of times during the day or holidays in the year in which a feature, for example auto attendants, can perform a specific action.
+
+
+        Creating a schedule event requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Schedules'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create the schedule for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: Type of schedule.
+        required: true
+        example: businessHours
+        schema:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Create event for a given schedule ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFJVDB4SlJFRlo
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the schedule for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: New Year's Day
+              startDate: '2022-01-01'
+              endDate: '2022-01-01'
+              allDayEnabled: true
+              recurrence:
+                recurYearlyByDate:
+                  dayOfMonth: 1
+                  month: JANUARY
+            schema:
+              $ref: '#/components/schemas/PostScheduleEventObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Schedule Event
+components:
+  schemas:
+    ScheduleEventObject:
+      type: object
+      required:
+      - name
+      - startDate
+      - endDate
+      properties:
+        name:
+          type: string
+          example: MondaySchedule
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start date of event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End date of event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event. Mandatory if the event is not all day.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event. Mandatory if the event is not all day.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not. Mandatory if the `startTime` and `endTime` are not defined.
+        recurrence:
+          $ref: '#/components/schemas/RecurrenceObject'
+          description: Recurrence definition.
+    RecurWeeklyObject:
+      type: object
+      required:
+      - sunday
+      properties:
+        sunday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Sunday.
+        monday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Monday.
+        tuesday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Tuesday.
+        wednesday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Wednesday.
+        thursday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Thursday.
+        friday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Friday.
+        saturday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Saturday.
+    ModifyScheduleObject:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Unique name for the schedule.
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModifyScheduleEventListObject'
+          description: List of schedule events.
+    PostScheduleObject:
+      type: object
+      required:
+      - type
+      - name
+      properties:
+        type:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        name:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Unique name for the schedule.
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleEventObject'
+          description: List of schedule events.
+    RecurrenceObject:
+      type: object
+      properties:
+        recurForEver:
+          type: boolean
+          description: Flag to indicate if event will recur forever.
+        recurEndDate:
+          type: string
+          example: '2021-11-30'
+          description: End date of recurrence.
+        recurWeekly:
+          $ref: '#/components/schemas/RecurWeeklyObject'
+          description: Weekly recurrence definition.
+        recurYearlyByDate:
+          $ref: '#/components/schemas/RecurYearlyByDateObject'
+          description: Recurrence definition yearly by date.
+        recurYearlyByDay:
+          $ref: '#/components/schemas/RecurYearlyByDayObject'
+          description: Recurrence definition yearly by day.
+    ModifyScheduleEventObject:
+      type: object
+      required:
+      - name
+      - startDate
+      - endDate
+      properties:
+        name:
+          type: string
+          example: MondaySchedule
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start date of event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End date of event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event. Mandatory if the event is not all day.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event. Mandatory if the event is not all day.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not. Mandatory if the `startTime` and `endTime` are not defined.
+        recurrence:
+          $ref: '#/components/schemas/RecurrenceObject'
+          description: Recurrence definition.
+    RecurYearlyByDayObject:
+      type: object
+      required:
+      - day
+      - week
+      - month
+      properties:
+        day:
+          type: string
+          enum:
+          - SUNDAY
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          description: Schedule the event on a specific day.
+        week:
+          type: string
+          enum:
+          - FIRST
+          - SECOND
+          - THIRD
+          - FOURTH
+          - LAST
+          description: Schedule the event on a specific week.
+        month:
+          type: string
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+          description: Schedule the event on a specific month.
+    ModifyScheduleEventListObject:
+      type: object
+      required:
+      - name
+      - newName
+      - startDate
+      - endDate
+      properties:
+        name:
+          type: string
+          example: Schedule
+          description: Current name for the event.
+        newName:
+          type: string
+          example: MondaySchedule
+          description: New name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start date of event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End date of event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event. Mandatory if the event is not all day.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event. Mandatory if the event is not all day.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not. Mandatory if the `startTime` and `endTime` are not defined.
+        recurrence:
+          $ref: '#/components/schemas/RecurrenceObject'
+          description: Recurrence definition.
+    ListScheduleObject:
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - locationName
+      - locationId
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+          description: A unique identifier for the schedule.
+        name:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Unique name for the schedule.
+        type:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        locationName:
+          type: string
+          example: Alaska
+          description: Name of location for schedule.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: ID of the location for the schedule.
+    PostScheduleEventObject:
+      type: object
+      required:
+      - name
+      - startDate
+      - endDate
+      properties:
+        name:
+          type: string
+          example: MondaySchedule
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start Date of Event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End Date of Event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event. Mandatory if the event is not all day.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event. Mandatory if the event is not all day.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not. Mandatory if the `startTime` and `endTime` are not defined.
+        recurrence:
+          $ref: '#/components/schemas/RecurrenceObject'
+          description: Recurrence definition.
+    GetScheduleObject:
+      type: object
+      required:
+      - id
+      - name
+      - type
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+          description: A unique identifier for the schedule.
+        name:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Unique name for the schedule.
+        type:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetScheduleEventObject'
+          description: List of schedule events.
+    RecurYearlyByDateObject:
+      type: object
+      required:
+      - dayOfMonth
+      - month
+      properties:
+        dayOfMonth:
+          type: number
+          example: 1
+          description: Schedule the event on a specific day of the month.
+        month:
+          type: string
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+          description: Schedule the event on a specific month of the year.
+    GetScheduleEventObject:
+      type: object
+      required:
+      - id
+      - name
+      - startDate
+      - endDate
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RXOXVaR0Y1VTJOb1pXUjFiR1U
+          description: A unique identifier for the schedule event.
+        name:
+          type: string
+          example: MondaySchedule
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start Date of Event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End Date of Event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not.
+        recurrence:
+          $ref: '#/components/schemas/RecurrenceObject'
+          description: Recurrence definition.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

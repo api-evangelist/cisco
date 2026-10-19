@@ -1,0 +1,227 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Telephony API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Telephony
+paths:
+  /telephony/config/people/me/settings/contactCenterExtensions:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactCenterExtensionsGetObject'
+              example:
+                ccExtensions:
+                - directNumber: '+13374831550'
+                  extension: '1550'
+                  type: PRIMARY
+                  lineOwnerType: PEOPLE
+                  lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS85NWM4MGY0My1mNjBlLTQzYTAtYTkwMy1iNWQ3ZDg0MThiNDU
+                  preferredAnsweringEndPointId: Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Q0OTE3ZWFiLTQ4Y2EtNGRlZC1iOTczLWQzNTFhOTU5OWZhZB
+                  endpoints:
+                  - id: Y2lzY29zcGFyazovL3VzL0hPVERFU0tJTkdfR1VFU1QvNDE1YjFkODUtZDA3NS00ZTNmLWExMGItMGVjOGExMjRjMWQ4
+                    type: HOTDESKING_GUEST
+                  - id: Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Q0OTE3ZWFiLTQ4Y2EtNGRlZC1iOTczLWQzNTFhOTU5OWZhZB
+                    type: CALLING_DEVICE
+                  - id: Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2QxYzM5M2QwLTg1M2ItNDc3MC1iZjA1LWQyMDU2MWRhM2NjZh
+                    type: APPLICATION
+                endpoints:
+                - id: Y2lzY29zcGFyazovL3VzL0hPVERFU0tJTkdfR1VFU1QvNDE1YjFkODUtZDA3NS00ZTNmLWExMGItMGVjOGExMjRjMWQ4
+                  type: HOTDESKING_GUEST
+                  name: Cisco HotDesking
+                  status: CONNECTED
+                - id: Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Q0OTE3ZWFiLTQ4Y2EtNGRlZC1iOTczLWQzNTFhOTU5OWZhZB
+                  type: CALLING_DEVICE
+                  name: Cisco 9841
+                  status: CONNECTED
+                - id: Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2QxYzM5M2QwLTg1M2ItNDc3MC1iZjA1LWQyMDU2MWRhM2NjZh
+                  type: APPLICATION
+                  name: Webex Desktop Application
+                  status: CONNECTED
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the Contact Center Extensions
+      operationId: ReadTheContactCenterExtensions
+      description: 'Retrieves the Contact Center phone number, extension, virtual numbers, endpoints, and endpoints registration status associated with the authenticated user. This API returns all primary and secondary endpoints, the hot desk guest profiles currently hosted on the agent''s own devices, if any, and registration status of those endpoints. Only virtual line extensions hosted exclusively on the agent''s devices and the registration status of those virtual line endpoints will be retrieved. Any virtual lines shared with devices not owned by the current user will be excluded.
+
+
+        A Webex Calling Contact Center extension is a calling extension assigned to a user or device within the Webex Contact Center for internal dialing.
+
+
+        This API requires a user auth token with a scope of spark:telephony_config_read.'
+      tags:
+      - Telephony
+      parameters: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the Contact Center Extensions
+components:
+  schemas:
+    UserEndpoints:
+      type: object
+      required:
+      - id
+      - type
+      - name
+      - status
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS85MGQyMmM0Yy0wMGI3LTQ4YzAtYjUwNi0yM2UwY2E2MTlkYmM
+          description: Unique identifier of the endpoint.
+        type:
+          $ref: '#/components/schemas/EndpointType'
+          description: Type of the endpoint.
+        name:
+          type: string
+          example: Webex Go Device
+          description: Name of the endpoint.
+        status:
+          $ref: '#/components/schemas/EndpointStatus'
+          description: SIP Registration status of the device.
+    ContactCenterExtensionsGetObject:
+      type: object
+      required:
+      - ccExtensions
+      - endpoints
+      properties:
+        ccExtensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserExtensions'
+          description: List of user extensions.
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEndpoints'
+          description: List of user endpoints details.
+    UserExtensions:
+      type: object
+      required:
+      - directNumber
+      - extension
+      - type
+      - lineOwnerType
+      - lineOwnerId
+      - preferredAnsweringEndPointId
+      - endpoints
+      properties:
+        directNumber:
+          type: string
+          example: '+13374831550'
+          description: Direct number of the user.
+        extension:
+          type: string
+          example: '1550'
+          description: Extension of the user.
+        type:
+          type: string
+          $ref: '#/components/schemas/ExtensionType'
+          description: Type of User Extension.
+        lineOwnerType:
+          type: string
+          $ref: '#/components/schemas/LineOwnerType'
+          description: Type of the line owner. Indicates whether the line is owned by a person, workspace, or virtual line.
+        lineOwnerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS85NWM4MGY0My1mNjBlLTQzYTAtYTkwMy1iNWQ3ZDg0MThiNDU
+          description: Unique identifier of the line owner.
+        preferredAnsweringEndPointId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Q0OTE3ZWFiLTQ4Y2EtNGRlZC1iOTczLWQzNTFhOTU5OWZhZB
+          description: Unique identifier of the set preferred answering endpoint.
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEndpointType'
+          description: List of user endpoints with type.
+    LineOwnerType:
+      type: string
+      enum:
+      - PEOPLE
+      - PLACE
+      - VIRTUAL_LINE
+      description: " * `PEOPLE` - The line is owned by a person.\n * `PLACE` - The line is owned by a workspace.\n * `VIRTUAL_LINE` - The line is owned by a virtual line.\n"
+    EndpointType:
+      type: string
+      enum:
+      - CALLING_DEVICE
+      - APPLICATION
+      - HOTDESKING_GUEST
+      description: " * `CALLING_DEVICE` - Endpoint is a calling device.\n * `APPLICATION` - Endpoint is an application.\n * `HOTDESKING_GUEST` - Endpoint is a hotdesking guest.\n"
+    EndpointStatus:
+      type: string
+      enum:
+      - CONNECTED
+      - NOT_CONNECTED
+      description: " * `CONNECTED` - Device is connected.\n * `NOT_CONNECTED` - Device is not connected.\n"
+    UserEndpointType:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS85MGQyMmM0Yy0wMGI3LTQ4YzAtYjUwNi0yM2UwY2E2MTlkYmM
+          description: Unique identifier of the endpoint.
+        type:
+          $ref: '#/components/schemas/EndpointType'
+          description: Type of the endpoint.
+    ExtensionType:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      description: " * `PRIMARY` - Indicates that the extension is owned by the user.\n * `SECONDARY` - Indicates that the extension is not owned by the user and is a secondary line on one of the users devices.\n"
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

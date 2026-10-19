@@ -1,0 +1,1840 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Device Call Settings With Device…
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Device Call Settings With Device Dynamic Settings
+paths:
+  /telephony/config/supportedDevices:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/supportedDevicesObject'
+              example:
+                upgradeChannelList:
+                - STABLE
+                - STABLE_DELAY
+                - PREVIEW
+                - BETA
+                - TESTING
+                devices:
+                - model: 2N Customer Managed
+                  displayName: 2N Customer Managed
+                  type: GENERIC_SIP
+                  manufacturer: THIRD_PARTY
+                  managedBy: CUSTOMER
+                  supportedFor:
+                  - PEOPLE
+                  - PLACE
+                  onboardingMethod:
+                  - MAC_ADDRESS
+                  allowConfigureLayoutEnabled: false
+                  numberOfLinePorts: 20
+                  kemSupportEnabled: true
+                  kemModuleCount: 1
+                  kemModuleType:
+                  - KEM_20_KEYS
+                  upgradeChannelEnabled: false
+                  additionalPrimaryLineAppearancesEnabled: false
+                  basicEmergencyNomadicEnabled: false
+                  customizedBehaviorsEnabled: false
+                  allowConfigurePortsEnabled: false
+                  customizableLineLabelEnabled: false
+                  supportsLinePortReorderingEnabled: false
+                  kemLinesSupportEnabled: false
+                  portNumberSupportEnabled: false
+                  numberOfLineKeyButtons: 0
+                  t38Enabled: false
+                  callDeclinedEnabled: false
+                  touchScreenPhone: false
+                  deviceSettingsConfiguration: NONE
+                  allowHotelingHostEnabled: false
+                  supportsLogCollection: NONE
+                  supportsApplyChangesEnabled: false
+                  allowConfigureLinesEnabled: true
+                  allowConfigurePhoneSettingsEnabled: false
+                  supportsHotlineEnabled: false
+                  supportsVirtualLineEnabled: false
+                - model: DMS Polycom EE400
+                  displayName: Polycom EE400
+                  familyDisplayName: Poly
+                  type: GENERIC_SIP
+                  manufacturer: THIRD_PARTY
+                  managedBy: CISCO
+                  supportedFor:
+                  - PEOPLE
+                  - PLACE
+                  onboardingMethod:
+                  - MAC_ADDRESS
+                  allowConfigureLayoutEnabled: false
+                  numberOfLinePorts: 14
+                  kemSupportEnabled: false
+                  upgradeChannelEnabled: false
+                  additionalPrimaryLineAppearancesEnabled: true
+                  basicEmergencyNomadicEnabled: false
+                  customizedBehaviorsEnabled: true
+                  allowConfigurePortsEnabled: false
+                  customizableLineLabelEnabled: false
+                  supportsLinePortReorderingEnabled: true
+                  kemLinesSupportEnabled: false
+                  portNumberSupportEnabled: false
+                  numberOfLineKeyButtons: 0
+                  touchScreenPhone: false
+                  t38Enabled: false
+                  callDeclinedEnabled: true
+                  deviceSettingsConfiguration: WEBEX_CALLING_DYNAMIC_DEVICE_CONFIGURATION
+                  allowHotelingHostEnabled: true
+                  supportsLogCollection: NONE
+                  supportsApplyChangesEnabled: true
+                  allowConfigureLinesEnabled: true
+                  allowConfigurePhoneSettingsEnabled: true
+                  supportsHotlineEnabled: true
+                  supportsVirtualLineEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Supported Devices
+      operationId: readTheListOfSupportedDevices
+      description: 'Gets the list of supported devices for an organization.
+
+
+        Retrieving this list requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: List supported devices for an organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: allowConfigureLayoutEnabled
+        in: query
+        description: List supported devices that allow the user to configure the layout.
+        example: true
+        schema:
+          type: boolean
+      - name: type
+        in: query
+        description: List supported devices of a specific type. To excluded device types from a request or query, add `type=not:DEVICE_TYPE`. For example, `type=not:MPP`.
+        example: MPP
+        schema:
+          type: string
+  /telephony/config/devices/dynamicSettings/settingsGroups:
+    get:
+      responses:
+        '200':
+          description: OK.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceDynamicSettingsSettingsGroupsGet'
+              example:
+                settingsGroups:
+                - path: Voice.Codec Preferences
+                  friendlyName: voice.codecPref.G711Mu
+                  tab: Poly
+                  familyOrModelDisplayName: Poly
+                  tags:
+                  - tagBlock:
+                    - '%G711U_ORDER%'
+                - path: Feature.Bluetooth
+                  friendlyName: feature.bluetooth.enabled
+                  tab: Poly
+                  familyOrModelDisplayName: Poly
+                  tags:
+                  - tagBlock:
+                    - '%ENABLE_BLUETOOTH%'
+                - path: User Interface.Menu
+                  friendlyName: ui.menu.background
+                  tab: Poly
+                  familyOrModelDisplayName: Poly
+                  tags:
+                  - tagBlock:
+                    - '%DO_UI_MENU_BACKGROUND%'
+                settingsTabs:
+                - Poly
+                - MPP
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      operationId: getSettingsGroups
+      summary: Get Settings Groups
+      description: 'This API returns the `settingsGroups` that define the structure and association of tags for device dynamic settings.
+
+
+        The `settingsGroups` are used to organize the tags into logical groups, making it easier to manage and configure device dynamic settings.'
+      parameters:
+      - name: orgId
+        in: query
+        description: Settings groups for devices in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: familyOrModelDisplayName
+        in: query
+        description: Device family or model display name to filter the `settingsGroups`.
+        example: Poly
+        schema:
+          type: string
+      - name: includeSettingsType
+        in: query
+        description: To show groups or tabs or both. Query param is case insensitive. Default is `ALL`.
+        example: ALL
+        schema:
+          type: string
+          enum:
+          - TABS
+          - GROUPS
+          - ALL
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+  /telephony/config/lists/devices/dynamicSettings/actions/getSettings/invoke:
+    post:
+      responses:
+        '200':
+          description: OK.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerDeviceDynamicSettingsListPostResponse'
+              example:
+                tags:
+                - familyOrModelDisplayName: Poly
+                  tag: '%DO_MENU_ITEM_BACKGROUND%'
+                  value: '#RRGGBB'
+                  parentValue: '#FFFFFF'
+                  parentLevel: ORGANIZATION
+                - familyOrModelDisplayName: Poly
+                  tag: '%ENABLE_BLUETOOTH%'
+                  value: '1'
+                  parentValue: '0'
+                  parentLevel: SYSTEM_DEFAULT
+                - familyOrModelDisplayName: Poly
+                  tag: '%DO_MENU_TITLE_BACKGROUND%'
+                  value: '#1A1A1A'
+                  parentValue: '#FFFFFF'
+                  parentLevel: REGIONAL_DEFAULT
+                lastUpdateTime: 1651396800000
+                updateInProgress: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      operationId: getCustomerDeviceDynamicSettings
+      summary: Get Customer Device Dynamic Settings
+      description: 'Retrieve dynamic settings for specific device tags at customer level, allowing filters by `familyOrModelDisplayName` and `tag` identifier.
+
+
+        This API lets you request the values of multiple `Device Settings` at once by specifying a list of `familyOrModelDisplayName` and tag combinations.
+
+
+        This requires a full, device, or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      parameters:
+      - name: orgId
+        in: query
+        description: List of device dynamic settings in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: familyOrModelDisplayName
+        in: query
+        required: true
+        description: The family or model name for the device. If no tag is specified, all tags related to `familyOrModelDisplayName` are returned.
+        example: Poly
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 40
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDeviceDynamicSettingsListPostRequest'
+            example:
+              tags:
+              - '%DO_MENU_ITEM_BACKGROUND%'
+              - '%ENABLE_BLUETOOTH%'
+              - '%DO_MENU_TITLE_BACKGROUND%'
+        description: Request body containing the list of device tags to retrieve settings for.
+        required: false
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+  /telephony/config/lists/locations/{locationId}/devices/dynamicSettings/actions/getSettings/invoke:
+    post:
+      responses:
+        '200':
+          description: OK.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationDeviceDynamicSettingsListPostResponse'
+              example:
+                tags:
+                - familyOrModelDisplayName: Poly
+                  tag: '%G711U_ORDER%'
+                  value: '4'
+                  parentValue: '3'
+                  parentLevel: ORGANIZATION
+                - familyOrModelDisplayName: Poly
+                  tag: '%ENABLE_BLUETOOTH%'
+                  value: '1'
+                  parentValue: '0'
+                  parentLevel: SYSTEM_DEFAULT
+                - familyOrModelDisplayName: Poly
+                  tag: '%DO_UI_MENU_BACKGROUND%'
+                  value: '#1A1A1A'
+                  parentValue: '#FFFFFF'
+                  parentLevel: LOCATION
+                lastUpdateTime: 1651396800000
+                updateInProgress: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      operationId: getLocationDeviceDynamicSettings
+      summary: Get Location Device Dynamic Settings
+      description: 'Retrieve dynamic settings for specific device tags at the specified location level, allowing filters by `familyOrModelDisplayName` and `tag` identifier.
+
+
+        This API lets you request the values of multiple `Device Settings` at once by specifying a list of `familyOrModelDisplayName` and tag combinations for a specific location.
+
+
+        This requires a full, device, or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      parameters:
+      - name: locationId
+        in: path
+        required: true
+        description: Unique identifier for the `location`.
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMzZjBlZDFiLWQ1YjctNGI4Mi1iMzIzLTg4ZTFmODMzNGNmMw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the `organization` to which this location belongs.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: familyOrModelDisplayName
+        in: query
+        required: true
+        description: The family or model name for the device. If no tag is specified, all tags related to `familyOrModelDisplayName` are returned.
+        example: Poly
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 40
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationDeviceDynamicSettingsListPostRequest'
+            example:
+              tags:
+              - '%G711U_ORDER%'
+              - '%ENABLE_BLUETOOTH%'
+              - '%DO_UI_MENU_BACKGROUND%'
+        description: Request body containing the list of device tags to retrieve settings for.
+        required: false
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+  /telephony/config/lists/devices/{deviceId}/dynamicSettings/actions/getSettings/invoke:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceDynamicSettingsListPostResponse'
+              example:
+                tags:
+                - familyOrModelDisplayName: Poly
+                  tag: '%G711U_ORDER%'
+                  value: '4'
+                  parentValue: '3'
+                  parentLevel: ORGANIZATION
+                - familyOrModelDisplayName: Poly
+                  tag: '%ENABLE_BLUETOOTH%'
+                  parentValue: '0'
+                  parentLevel: SYSTEM_DEFAULT
+                - familyOrModelDisplayName: Poly
+                  tag: '%DO_UI_MENU_BACKGROUND%'
+                  value: '#1A1A1A'
+                  parentValue: '#FFFFFF'
+                  parentLevel: LOCATION
+                lastUpdateTime: 1651396800000
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      operationId: getDeviceDynamicSettings
+      summary: Get Device Dynamic Settings
+      description: 'Retrieve settings for a specified device.
+
+
+        This API retrieves device settings based on the specified `tags`; if the `tags` field is empty or missing, all settings for the device are returned.
+
+
+        This requires a full, device, or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      parameters:
+      - name: deviceId
+        in: path
+        required: true
+        description: Device for which to retrieve settings.
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS8zMDAyZWJiZi1iMTVmLTQ1ODktYWNiZS1kZjY3OTA3MTU5NWE=
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Organization to which the `device` belongs.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceDynamicSettingsListPostRequest'
+            example:
+              tags:
+              - '%G711U_ORDER%'
+              - '%ENABLE_BLUETOOTH%'
+              - '%DO_UI_MENU_BACKGROUND%'
+        description: Request body containing the list of device tags to retrieve settings for.
+        required: true
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+  /telephony/config/devices/{deviceId}/dynamicSettings:
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      operationId: updateSpecifiedSettingsForTheDevice
+      summary: Update Device Dynamic Settings
+      description: 'Modify dynamic settings for a specified device.
+
+
+        This API updates device settings based on the specified `tags`. If the `tags` field is empty, the request has no effect.
+
+
+        This requires a full, device, or read-only administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      parameters:
+      - name: deviceId
+        in: path
+        required: true
+        description: Device for which to update settings.
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS8zMDAyZWJiZi1iMTVmLTQ1ODktYWNiZS1kZjY3OTA3MTU5NWE=
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Organization to which the device belongs.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceDynamicSettingsPutRequest'
+            example:
+              tags:
+              - action: CLEAR
+                tag: '%G711A_ORDER%'
+              - action: SET
+                tag: '%ENABLE_BLUETOOTH%'
+                value: '0'
+        description: Request body containing the list of device tags for which the values will be updated.
+        required: true
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+  /telephony/config/jobs/devices/dynamicDeviceSettings:
+    post:
+      responses:
+        '202':
+          description: Accepted
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDynamicDeviceSettingsJobResponse'
+              example:
+                name: dynamicdevicesettings
+                id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wZTJjNmI5NC1hNDdlLTQxZGUtODE5ZS04YTcwNTZjMTc5MDk
+                trackingId: NA_a9ef6908-60cf-40e6-b56f-461abffd6fa3
+                sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85OThhMThhYi1kZjY5LTQ5MWYtYmViZi03MzUxMGE3ODI5N2I
+                sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+                targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+                instanceId: 0
+                jobExecutionStatus:
+                - id: 0
+                  startTime: '2025-05-13T10:59:44.106Z'
+                  lastUpdated: '2025-05-13T10:59:44.106Z'
+                  statusMessage: STARTED
+                  exitCode: UNKNOWN
+                  createdTime: '2025-05-13T10:50:01.352Z'
+                  timeElapsed: PT11.476S
+                latestExecutionStatus: STARTED
+                latestExecutionExitCode: UNKNOWN
+                target: CUSTOMER
+                locationId: ''
+                percentageComplete: 0
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Device Dynamic Settings Across Organization or Location
+      operationId: updatesDynamicDeviceSettingsAcrossOrganizationOrLocation
+      description: 'Creates a job to update device settings at location or organization level.
+
+
+        The job runs asynchronously and persistently, applying the requested settings in bulk to all relevant devices, which may belong to multiple families as specified in the request. If a `locationId` is provided, only devices in that location are affected.
+
+
+        A unique job ID is returned to track status and errors.
+
+
+        Only one job can run per customer per organization at a time. Additionally, this job cannot run in parallel with other device jobs such as Call device settings and Rebuild Phones.
+
+
+        Running a job requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Apply update device dynamic settings for all the devices under this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              locationId: ''
+              tags:
+              - familyOrModelDisplayName: Poly
+                tag: '%DO_MENU_TITLE_BACKGROUND%'
+                action: CLEAR
+              - familyOrModelDisplayName: Poly
+                tag: '%ENABLE_BLUETOOTH%'
+                action: SET
+                value: '1'
+            schema:
+              $ref: '#/components/schemas/PostDynamicSettingsUpdateStartJobRequest'
+        required: true
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicDeviceSettingsJobListResponse'
+              example:
+                items:
+                - name: dynamicdevicesettings
+                  id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wZTJjNmI5NC1hNDdlLTQxZGUtODE5ZS04YTcwNTZjMTc5MDk
+                  trackingId: NA_a9ef6908-60cf-40e6-b56f-461abffd6fa3
+                  sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85OThhMThhYi1kZjY5LTQ5MWYtYmViZi03MzUxMGE3ODI5N2I
+                  sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+                  targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+                  instanceId: 0
+                  jobExecutionStatus:
+                  - id: 0
+                    startTime: '2023-07-05T21:36:53.749Z'
+                    endTime: '2023-07-05T21:37:06.105Z'
+                    lastUpdated: '2023-07-05T21:37:06.714Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    createdTime: '2023-07-05T21:36:53.551Z'
+                    stepExecutionStatuses:
+                    - id: 0
+                      startTime: '2023-07-05T21:36:54.601Z'
+                      endTime: '2023-07-05T21:37:06.077Z'
+                      lastUpdated: '2023-07-05T21:37:06.078Z'
+                      statusMessage: COMPLETED
+                      exitCode: COMPLETED
+                      name: dynamicdevicesettingsUpdate
+                      timeElapsed: PT11.476S
+                    timeElapsed: PT11.476S
+                  latestExecutionStatus: COMPLETED
+                  latestExecutionExitCode: COMPLETED
+                  target: LOCATION
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzgwZmUxMzdkLTg5NDgtNDlhYS1iODdiLTk4MGMxN2I2YzdiYg
+                  percentageComplete: 100
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Device Dynamic Settings Jobs
+      operationId: listDynamicDeviceSettingsJobs
+      description: 'List device dynamic settings jobs.
+
+
+        Lists all the jobs for job type `dynamicdevicesettings` for the given organization in order of most recent one to oldest one irrespective of its status.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve list of device dynamic settings jobs for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of jobs. Default is 0.
+        example: 0
+        schema:
+          type: number
+      - name: max
+        in: query
+        description: Limit the number of jobs returned to this maximum count. Default is 2000.
+        example: 100
+        schema:
+          type: number
+  /telephony/config/jobs/devices/dynamicDeviceSettings/{jobId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDynamicDeviceSettingsJobResponse'
+              example:
+                name: dynamicdevicesettings
+                id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wMTA4NDJjMy1mNWQ5LTRjOWQtOGZiYi0yYzIxZmU4OWI0YzQ
+                trackingId: ATLAS_89144033-afb5-44e8-bae8-946e84c71fa3_0
+                sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85OThhMThhYi1kZjY5LTQ5MWYtYmViZi03MzUxMGE3ODI5N2I
+                sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+                targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+                instanceId: 235690
+                jobExecutionStatus:
+                - id: 236410
+                  startTime: '2022-08-15T12:54:50.380Z'
+                  endTime: '2022-08-15T12:55:01.833Z'
+                  lastUpdated: '2022-08-15T12:55:02.160Z'
+                  statusMessage: COMPLETED
+                  exitCode: COMPLETED
+                  createdTime: '2022-08-15T12:54:50.350Z'
+                  stepExecutionStatuses:
+                  - id: 1159389
+                    startTime: '2022-08-15T12:54:50.433Z'
+                    endTime: '2022-08-15T12:55:01.826Z'
+                    lastUpdated: '2022-08-15T12:55:01.826Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    name: dynamicdevicesettingsUpdate
+                    timeElapsed: PT11.393S
+                  timeElapsed: PT11.393S
+                latestExecutionStatus: COMPLETED
+                latestExecutionExitCode: COMPLETED
+                target: CUSTOMER
+                locationId: ''
+                percentageComplete: 100
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Device Dynamic Settings Job Status
+      operationId: getDeviceDynamicSettingsJobStatus
+      description: 'Get device dynamic settings job status.
+
+
+        Provides details of the job with `jobId` of `jobType` `dynamicdevicesettings`.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+      parameters:
+      - name: jobId
+        in: path
+        description: Retrieve job details for this `jobId`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wMTA4NDJjMy1mNWQ5LTRjOWQtOGZiYi0yYzIxZmU4OWI0YzQ
+        schema:
+          type: string
+  /telephony/config/jobs/devices/dynamicDeviceSettings/{jobId}/errors:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseObject'
+              example:
+                items:
+                - itemNumber: 0
+                  error:
+                    key: error.key
+                    message:
+                    - description: Error description
+                      code: '1001'
+                      locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMzZjBlZDFiLWQ1YjctNGI4Mi1iMzIzLTg4ZTFmODMzNGNmMw
+                  trackingId: ROUTER_62F66055-8D70-01BB-0137-AC10A8310137
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Device Dynamic Settings Job Errors
+      operationId: listDynamicDeviceSettingsJobErrors
+      description: 'List Update device dynamic settings job errors.
+
+
+        Lists all error details of the job with `jobId` of `jobType` `dynamicdevicesettings`.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Device Call Settings With Device Dynamic Settings
+      parameters:
+      - name: jobId
+        in: path
+        description: Retrieve job details for this `jobId`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wMTA4NDJjMy1mNWQ5LTRjOWQtOGZiYi0yYzIxZmU4OWI0YzQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve the status of job for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Specifies the offset from the first result that you want to fetch. Default is 0.
+        example: 0
+        schema:
+          type: number
+      - name: max
+        in: query
+        description: Specifies the maximum number of records that you want to fetch. Default is 2000
+        example: 100
+        schema:
+          type: number
+components:
+  schemas:
+    Action:
+      type: string
+      enum:
+      - ADD
+      - DELETE
+      description: " * `ADD` - Add action.\n * `DELETE` - Delete action.\n"
+    DevicePostResponseTag:
+      type: object
+      required:
+      - familyOrModelDisplayName
+      - tag
+      properties:
+        familyOrModelDisplayName:
+          type: string
+          description: The display name of the device family or model associated with the returned tag.
+          example: Poly
+        tag:
+          type: string
+          description: The unique identifier for the device setting.
+          example: '%G711U_ORDER%'
+        value:
+          type: string
+          description: The current value of the setting at device level. If the tag value is not set at the device level, this field will not be included in the response.
+          example: '4'
+        parentValue:
+          type: string
+          description: The setting value at the next available `parentLevel`. It is used if `value` is not set and is omitted when no parent level exists for the tag.
+          example: '3'
+        parentLevel:
+          $ref: '#/components/schemas/DeviceParentLevel'
+    DeviceDynamicSettingsSettingsGroupsGet:
+      type: object
+      example:
+        settingsGroups:
+        - path: Voice.Codec Preferences
+          friendlyName: voice.codecPref.G711Mu
+          tab: Poly
+          familyOrModelDisplayName: Poly
+          tags:
+          - tagBlock:
+            - '%G711U_ORDER%'
+        settingsTabs:
+        - Poly
+        - MPP
+      properties:
+        settingsGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceSettingsGroup'
+          description: Array of settings groups defining structure and association of tags.
+        settingsTabs:
+          type: array
+          items:
+            type: string
+          description: Array of settings tabs names. Can be filtered using the `includeSettingsType` parameter.
+    CustomerDeviceDynamicSettingsListPostRequest:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 64
+          description: Optional array of device tag identifiers to request settings for. Each identifier must have a length between 1 and 64 characters.
+          minItems: 0
+    DeviceSettingsGroupTag:
+      type: object
+      properties:
+        tagBlock:
+          type: array
+          items:
+            type: string
+          description: Array of tags associated with the settings group.
+          example:
+          - '%G711U_ORDER%'
+    DeviceSettingsGroup:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path of the settings group. Creates an easily navigable settings hierarchy.
+          example: Voice.Codec Preferences
+        friendlyName:
+          type: string
+          description: Friendly name of the settings group.
+          example: voice.codecPref.G711Mu
+        tab:
+          type: string
+          description: Tab name associated with the settings group.
+          example: Poly
+        familyOrModelDisplayName:
+          type: string
+          description: Family or model display name associated with the settings group.
+          example: Poly
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceSettingsGroupTag'
+          description: List of `tagBlock` objects associated with the settings group.
+    MemberType:
+      type: string
+      enum:
+      - PEOPLE
+      - PLACE
+      description: " * `PEOPLE` - Indicates the associated member is a person.\n * `PLACE` - Indicates the associated member is a workspace.\n"
+    UpgradeChannelObject:
+      type: string
+      enum:
+      - STABLE
+      - STABLE_DELAY
+      - PREVIEW
+      - BETA
+      - TESTING
+    stepExecutionStatusesObject:
+      type: object
+      required:
+      - id
+      - lastUpdated
+      - statusMessage
+      - name
+      - timeElapsed
+      properties:
+        id:
+          type: number
+          example: 3624681
+          description: Unique identifier that identifies each step in a job.
+        startTime:
+          type: string
+          example: '2023-05-30T13:04:00.469Z'
+          description: The date and time with seconds, the step execution has started in UTC format.
+        endTime:
+          type: string
+          example: '2023-05-30T13:04:03.245Z'
+          description: The date and time with seconds, the step execution has ended in UTC format.
+        lastUpdated:
+          type: string
+          example: '2023-05-30T13:04:03.574Z'
+          description: The date and time with seconds, the step has last updated in UTC format.
+        statusMessage:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Displays status for a step.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        exitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Exit Code for a step.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        name:
+          type: string
+          example: moveusersvalidateAndMove
+          description: Step name.
+        timeElapsed:
+          type: string
+          example: PT2.752S
+          description: Time lapsed in seconds since the job execution started.
+    ErrorObject:
+      type: object
+      properties:
+        key:
+          type: string
+          description: HTTP error code.
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorMessageObject'
+          description: Message string with further error information.
+    ErrorResponseObject:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemObject'
+    DynamicSettingsUpdateJobDevicePostItem:
+      type: object
+      required:
+      - familyOrModelDisplayName
+      - tag
+      - action
+      properties:
+        familyOrModelDisplayName:
+          type: string
+          description: The `familyOrModelDisplayName` of the device to which the tag applies. This value must exist in the validation schema.
+          example: Poly
+          minLength: 1
+          maxLength: 40
+        tag:
+          type: string
+          description: The unique identifier for the setting to be updated.
+          example: '%G711U_ORDER%'
+          minLength: 1
+          maxLength: 64
+        action:
+          $ref: '#/components/schemas/Action'
+        value:
+          type: string
+          description: The new value to set for the setting. This field is required when `action` is `SET` and ignored otherwise.
+          example: '4'
+          minLength: 1
+          maxLength: 256
+    ItemObject:
+      type: object
+      properties:
+        item:
+          type: string
+          description: Phone number
+        itemNumber:
+          type: number
+          description: Index of error number.
+        trackingId:
+          type: string
+          description: Unique identifier to track the HTTP requests.
+        error:
+          $ref: '#/components/schemas/ErrorObject'
+    CustomerDevicePostTag:
+      type: object
+      properties:
+        familyOrModelDisplayName:
+          type: string
+          description: The `familyOrModelDisplayName` of the device.
+          example: Poly
+        tag:
+          type: string
+          description: The unique identifier for the setting.
+          example: '%G711U_ORDER%'
+        value:
+          type: string
+          description: The current value of the setting at `ORGANIZATION` level. If the tag value is not set at the `ORGANIZATION` level, this field will not be included in the response.
+          example: '4'
+        parentValue:
+          type: string
+          description: The value inherited from the immediate parent level above `ORGANIZATION`. It can be `SYSTEM_DEFAULT`, `REGIONAL_DEFAULT`, or `ORGANIZATION`, depending on which level the setting is actually configured at. If there is no parent level for this tag, this field will not be included in the response.
+          example: '3'
+        parentLevel:
+          $ref: '#/components/schemas/DynamicDeviceSettingsCustomerParentLevel'
+    JobExecutionStatusObject:
+      type: object
+      required:
+      - id
+      - lastUpdated
+      - statusMessage
+      - createdTime
+      - timeElapsed
+      properties:
+        id:
+          type: number
+          example: 735206
+          description: Unique identifier that identifies each instance of the job.
+        startTime:
+          type: string
+          example: '2023-05-30T13:04:00.469Z'
+          description: The date and time with seconds, the job has started in UTC format.
+        endTime:
+          type: string
+          example: '2023-05-30T13:04:03.245Z'
+          description: The date and time with seconds, the job has ended in UTC format.
+        lastUpdated:
+          type: string
+          example: '2023-05-30T13:04:03.574Z'
+          description: The date and time with seconds, the job has last updated in UTC format post one of the step execution completion.
+        statusMessage:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Displays status for overall steps that are part of the job.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        exitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Exit Code for a job.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        createdTime:
+          type: string
+          example: '2023-05-30T13:04:00.457Z'
+          description: The date and time with seconds, the job has created in UTC format.
+        timeElapsed:
+          type: string
+          example: PT2.752S
+          description: Time lapsed in seconds since the job execution started.
+        stepExecutionStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/stepExecutionStatusesObject'
+          description: Status of each step within a job.
+    DeviceDynamicSettingsPutRequest:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevicePutItem'
+          description: Optional array of `tag` identifiers representing specific settings to update. If omitted or provided as an empty array, the request will have no effect.
+          minItems: 0
+    DeviceObject:
+      type: object
+      required:
+      - id
+      - model
+      - primaryOwner
+      - type
+      - owner
+      - activationState
+      - location
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMl9hL0RFVklDRS9hNmYwYjhkMi01ZjdkLTQzZDItODAyNi0zM2JkNDg3NjYzMTg=
+          description: Unique identifier for a device.
+        description:
+          type: array
+          items:
+            type: string
+          description: Comma separated array of tags used to describe device.
+        model:
+          type: string
+          example: DMS Cisco 6871
+          description: Identifier for device model.
+        mac:
+          type: string
+          example: '123451234502'
+          description: MAC address of device.
+        primaryOwner:
+          type: boolean
+          description: Indicates whether the person or the workspace is the owner of the device and points to a primary Line/Port of the device.
+        type:
+          $ref: '#/components/schemas/LineType'
+          description: Indicates if the line is acting as a primary line or a shared line for this device.
+        owner:
+          $ref: '#/components/schemas/deviceOwner'
+          description: Owner of the device.
+        activationState:
+          $ref: '#/components/schemas/DeviceActivationStates'
+          description: Activation state of a device.
+        location:
+          type: object
+          required:
+          - id
+          - name
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+              description: ID of location associated with virtual line.
+            name:
+              type: string
+              example: Main Location Test
+              description: Name of location associated with virtual line.
+          description: Location details of virtual line.
+    DeviceDynamicSettingsListPostResponse:
+      type: object
+      required:
+      - tags
+      example:
+        tags:
+        - familyOrModelDisplayName: Poly
+          tag: '%G711U_ORDER%'
+          value: '4'
+          parentValue: '3'
+          parentLevel: ORGANIZATION
+        lastUpdateTime: 1651396800000
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevicePostResponseTag'
+          description: Array of device setting values matching the requested tags.
+        lastUpdateTime:
+          type: integer
+          format: int64
+          description: Timestamp of the last update to these settings.
+    LocationParentLevel:
+      type: string
+      enum:
+      - SYSTEM_DEFAULT
+      - REGIONAL_DEFAULT
+      - ORGANIZATION
+      - LOCATION
+      description: The level from which the tag's parent value is inherited. If there is no parent level for this tag, this field will not be included in the response.
+    CustomerDeviceDynamicSettingsListPostResponse:
+      type: object
+      example:
+        tags:
+        - familyOrModelDisplayName: Poly
+          tag: '%DO_MENU_ITEM_BACKGROUND%'
+          value: '#RRGGBB'
+          parentValue: '#FFFFFF'
+          parentLevel: ORGANIZATION
+        lastUpdateTime: 1651396800000
+        updateInProgress: false
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerDevicePostTag'
+          description: Array of device setting values matching the requested tags.
+        lastUpdateTime:
+          type: integer
+          format: int64
+          description: Timestamp of the last update to these settings.
+        updateInProgress:
+          type: boolean
+          description: Flag indicating if an update to these settings is currently in progress.
+    supportedDevicesObject:
+      type: object
+      required:
+      - devices
+      - upgradeChannelList
+      example:
+        upgradeChannelList:
+        - STABLE
+        - STABLE_DELAY
+        - PREVIEW
+        - BETA
+        - TESTING
+        devices:
+        - model: 2N Customer Managed
+          displayName: 2N Customer Managed
+          type: GENERIC_SIP
+          manufacturer: THIRD_PARTY
+          managedBy: CUSTOMER
+          supportedFor:
+          - PEOPLE
+          - PLACE
+          onboardingMethod:
+          - MAC_ADDRESS
+          allowConfigureLayoutEnabled: false
+          numberOfLinePorts: 20
+          kemSupportEnabled: true
+          kemModuleCount: 1
+          kemLinesSupportEnabled: false
+          kemModuleType:
+          - KEM_20_KEYS
+          upgradeChannelEnabled: false
+          additionalPrimaryLineAppearancesEnabled: false
+          basicEmergencyNomadicEnabled: false
+          customizedBehaviorsEnabled: false
+          allowConfigurePortsEnabled: false
+          customizableLineLabelEnabled: false
+          supportsLinePortReorderingEnabled: false
+          portNumberSupportEnabled: false
+          t38Enabled: false
+          callDeclinedEnabled: false
+          touchScreenPhone: false
+          numberOfLineKeyButtons: 0
+          deviceSettingsConfiguration: NONE
+          allowHotelingHostEnabled: false
+          supportsLogCollection: NONE
+          supportsApplyChangesEnabled: false
+          allowConfigureLinesEnabled: true
+          allowConfigurePhoneSettingsEnabled: false
+          supportsHotlineEnabled: false
+          supportsVirtualLineEnabled: false
+        - model: DMS Polycom EE400
+          displayName: Polycom EE400
+          familyDisplayName: Poly
+          type: GENERIC_SIP
+          manufacturer: THIRD_PARTY
+          managedBy: CISCO
+          supportedFor:
+          - PEOPLE
+          - PLACE
+          onboardingMethod:
+          - MAC_ADDRESS
+          allowConfigureLayoutEnabled: false
+          numberOfLinePorts: 14
+          kemSupportEnabled: false
+          kemLinesSupportEnabled: false
+          upgradeChannelEnabled: false
+          additionalPrimaryLineAppearancesEnabled: true
+          basicEmergencyNomadicEnabled: false
+          customizedBehaviorsEnabled: true
+          allowConfigurePortsEnabled: false
+          customizableLineLabelEnabled: false
+          supportsLinePortReorderingEnabled: true
+          portNumberSupportEnabled: false
+          t38Enabled: false
+          callDeclinedEnabled: true
+          touchScreenPhone: false
+          numberOfLineKeyButtons: 0
+          deviceSettingsConfiguration: WEBEX_CALLING_DYNAMIC_DEVICE_CONFIGURATION
+          allowHotelingHostEnabled: true
+          supportsLogCollection: NONE
+          supportsApplyChangesEnabled: true
+          allowConfigureLinesEnabled: true
+          allowConfigurePhoneSettingsEnabled: true
+          supportsHotlineEnabled: true
+          supportsVirtualLineEnabled: true
+      properties:
+        upgradeChannelList:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpgradeChannelObject'
+          description: "List of available upgrade channels.\n * `STABLE` - These are standard stable releases.\n * `STABLE_DELAY` - These are delayed stable releases.\n * `PREVIEW` - These are Preview/pre-release versions.\n * `BETA` - These are Beta testing versions.\n * `TESTING` - These are testing versions.\n"
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceObject'
+          description: List of supported devices.
+    PostDynamicSettingsUpdateStartJobRequest:
+      type: object
+      required:
+      - tags
+      properties:
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+          description: If present, the requested settings will be updated to devices under this location.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicSettingsUpdateJobDevicePostItem'
+          description: Array of tag identifiers for settings to be updated. Each setting is identified by a `familyOrModelDisplayName` and `tag`. Supports updating multiple settings across different device families in a single request.
+          minItems: 1
+    DevicePutItem:
+      type: object
+      required:
+      - tag
+      - action
+      properties:
+        tag:
+          type: string
+          description: The unique identifier for the setting to be updated.
+          example: '%G711U_ORDER%'
+          minLength: 1
+          maxLength: 64
+        action:
+          $ref: '#/components/schemas/Action'
+        value:
+          type: string
+          description: The new value to set for the setting. This field is required when `action` is `SET` and ignored otherwise.
+          example: '4'
+          minLength: 1
+          maxLength: 256
+    DeviceActivationStates:
+      type: string
+      enum:
+      - ACTIVATING
+      - ACTIVATED
+      - DEACTIVATED
+      description: " * `ACTIVATING` - Indicates a device is activating.\n * `ACTIVATED` - Indicates a device is activated.\n * `DEACTIVATED` - Indicates a device is deactivated.\n"
+    DeviceDynamicSettingsListPostRequest:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional array of tag identifiers representing specific settings to fetch. If omitted or provided as an empty array, all settings for the device will be returned.
+          minItems: 0
+    DeviceParentLevel:
+      type: string
+      enum:
+      - SYSTEM_DEFAULT
+      - REGIONAL_DEFAULT
+      - ORGANIZATION
+      - LOCATION
+      description: The level from which the tag's parent value is inherited. If there is no parent level for this tag, this field will not be included in the response.
+    LineType:
+      type: string
+      enum:
+      - PRIMARY
+      - SHARED_CALL_APPEARANCE
+      description: " * `PRIMARY` - Primary line for the member.\n * `SHARED_CALL_APPEARANCE` - Shared line for the member. A shared line allows users to receive and place calls to and from another user's extension, using their own device.\n"
+    DynamicDeviceSettingsJobListResponse:
+      type: object
+      required:
+      - items
+      example:
+        items:
+        - name: dynamicdevicesettings
+          id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wZTJjNmI5NC1hNDdlLTQxZGUtODE5ZS04YTcwNTZjMTc5MDk
+          trackingId: NA_a9ef6908-60cf-40e6-b56f-461abffd6fa3
+          sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85OThhMThhYi1kZjY5LTQ5MWYtYmViZi03MzUxMGE3ODI5N2I
+          sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+          targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hNDVkNmNkYS1hZTVhLTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+          instanceId: 0
+          jobExecutionStatus: []
+          latestExecutionStatus: COMPLETED
+          latestExecutionExitCode: COMPLETED
+          target: LOCATION
+          locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzgwZmUxMzdkLTg5NDgtNDlhYS1iODdiLTk4MGMxN2I2YzdiYg
+          percentageComplete: 100
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostDynamicDeviceSettingsJobResponse'
+          description: Lists all jobs for the customer of type `dynamicdevicesettings` in order of most recent one to oldest one irrespective of its status.
+    LocationDeviceDynamicSettingsListPostResponse:
+      type: object
+      example:
+        tags:
+        - familyOrModelDisplayName: Poly
+          tag: '%G711U_ORDER%'
+          value: '4'
+          parentValue: '3'
+          parentLevel: ORGANIZATION
+        lastUpdateTime: 1651396800000
+        updateInProgress: false
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationDevicePostResponseTag'
+          description: Array of device setting values matching the requested tags.
+        lastUpdateTime:
+          type: integer
+          format: int64
+          description: Timestamp of the last update to these settings.
+        updateInProgress:
+          type: boolean
+          description: Flag indicating if an update to these settings is currently in progress.
+    ErrorMessageObject:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Internal error code.
+        locationId:
+          type: string
+          description: Error messages describing the location ID in which the error occurs. For a move operation, this is the target location ID.
+    DynamicDeviceSettingsCustomerParentLevel:
+      type: string
+      enum:
+      - SYSTEM_DEFAULT
+      - REGIONAL_DEFAULT
+      - ORGANIZATION
+      description: The level from which the tag's parent value is inherited. If there is no parent level for this tag, this field will not be included in the response.
+    LocationDeviceDynamicSettingsListPostRequest:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 64
+          description: Optional array of device tag identifiers to request settings for. Each identifier must have a length between 1 and 64 characters.
+          minItems: 0
+    deviceOwner:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+          description: Unique identifier of a person or a workspace.
+        type:
+          $ref: '#/components/schemas/MemberType'
+          description: Enumeration that indicates if the member is of type `PEOPLE` or `PLACE`.
+        firstName:
+          type: string
+          example: Christian
+          description: The first name of the device owner.
+        lastName:
+          type: string
+          example: Smith
+          description: The last name of the device owner.
+    LatestExecutionStatus:
+      type: string
+      enum:
+      - STARTING
+      - STARTED
+      - COMPLETED
+      - FAILED
+      description: " * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has been completed.\n * `FAILED` - Job has failed.\n"
+    PostDynamicDeviceSettingsJobResponse:
+      type: object
+      required:
+      - name
+      - id
+      - trackingId
+      - sourceUserId
+      - sourceCustomerId
+      - targetCustomerId
+      - instanceId
+      - jobExecutionStatus
+      - latestExecutionStatus
+      - latestExecutionExitCode
+      - target
+      - percentageComplete
+      example:
+        name: dynamicdevicesettings
+        id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wNjZkOTQzNC1kODEyLTQzODItODVhMC00MjBlOTFlODg3ZTY
+        trackingId: ROUTERGW_1d458245-ee34-48c8-8ed6-92ea16ed48aa
+        sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS81MDRhZmQ1YS0zODRiLTQ0NjYtYTJlNC05Y2ExZjUwMDRlYWQ
+        sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lYTRiZTEyNS00Y2ZjLTQ5OTItOGMwNi00Y2U4Mzc2ZDU4MmE
+        targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lYTRiZTEyNS00Y2ZjLTQ5OTItOGMwNi00Y2U4Mzc2ZDU4MmE
+        instanceId: 428989
+        jobExecutionStatus:
+        - id: 0
+          startTime: '2025-05-13T10:59:44.106Z'
+          lastUpdated: '2025-05-13T10:59:44.106Z'
+          statusMessage: STARTED
+          exitCode: UNKNOWN
+          createdTime: '2025-05-13T10:50:01.352Z'
+          timeElapsed: PT11.476S
+        latestExecutionStatus: STARTED
+        latestExecutionExitCode: UNKNOWN
+        target: CUSTOMER
+        locationId: ''
+        percentageComplete: 100
+      properties:
+        name:
+          type: string
+          example: dynamicdevicesettings
+          description: Name of the job which in this case, is `dynamicdevicesettings`.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wNjZkOTQzNC1kODEyLTQzODItODVhMC00MjBlOTFlODg3ZTY
+          description: Unique identifier of the job.
+        trackingId:
+          type: string
+          example: ROUTERGW_1d458245-ee34-48c8-8ed6-92ea16ed48aa
+          description: Unique identifier to track the flow of HTTP requests.
+        sourceUserId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS81MDRhZmQ1YS0zODRiLTQ0NjYtYTJlNC05Y2ExZjUwMDRlYWQ
+          description: Unique identifier of the user who has run the job.
+        sourceCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lYTRiZTEyNS00Y2ZjLTQ5OTItOGMwNi00Y2U4Mzc2ZDU4MmE
+          description: Unique identifier of the customer who has run the job.
+        targetCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lYTRiZTEyNS00Y2ZjLTQ5OTItOGMwNi00Y2U4Mzc2ZDU4MmE
+          description: Unique identifier of the customer for which the job was run.
+        instanceId:
+          type: number
+          example: 428989
+          description: Unique identifier to identify the instance of the job.
+        jobExecutionStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobExecutionStatusObject'
+          description: Displays the most recent step's execution status. Contains execution statuses of all the steps involved in the execution of the job.
+        latestExecutionStatus:
+          $ref: '#/components/schemas/LatestExecutionStatus'
+        latestExecutionExitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          description: "Most recent exit code of the job at the time of invocation.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n"
+        target:
+          type: string
+          enum:
+          - CUSTOMER
+          - LOCATION
+          example: LOCATION
+          description: Indicates the target entity.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzQ0Y2UwNDBhLTEzNmMtNDc3NS1hMjIzLTY5OTczYmEyYWNhYw
+          description: Unique identifier of a location.
+        locationName:
+          type: string
+          example: Brampton
+          description: Name of the location. Included only when `target` is `LOCATION`.
+        percentageComplete:
+          type: integer
+          example: 10
+          description: Indicates the progress of the job.
+    LocationDevicePostResponseTag:
+      type: object
+      properties:
+        familyOrModelDisplayName:
+          type: string
+          description: The `familyOrModelDisplayName` of the device.
+          example: Poly
+        tag:
+          type: string
+          description: The unique identifier for the setting.
+          example: '%G711U_ORDER%'
+        value:
+          type: string
+          description: The current value of the setting at `LOCATION` level. If the tag value is not set at the `LOCATION` level, this field will not be included in the response.
+          example: '4'
+        parentValue:
+          type: string
+          description: The value inherited from the immediate parent level above `LOCATION`. It can be `SYSTEM_DEFAULT`, `REGIONAL_DEFAULT`, `ORGANIZATION`, or `LOCATION`, depending on which level the setting is actually configured at. If there is no parent level for this tag, this field will not be included in the response.
+          example: '3'
+        parentLevel:
+          $ref: '#/components/schemas/LocationParentLevel'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

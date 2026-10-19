@@ -1,0 +1,821 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Call Pickup API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features:  Call Pickup'
+paths:
+  /telephony/config/locations/{locationId}/callPickups:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callPickups
+                properties:
+                  callPickups:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListCallPickupObject'
+                    description: Array of call pickups.
+              example:
+                callPickups:
+                - name: North Alaska-Group
+                  id: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNERT0
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+                - name: South Alaska-Group
+                  id: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNEST0
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Call Pickups
+      operationId: ReadTheListOfCallPickups
+      description: 'List all Call Pickups for the organization.
+
+
+        Call Pickup enables a user (agent) to answer any ringing line within their pickup group.
+
+
+        Retrieving this list requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.
+
+
+        **NOTE**: The Call Pickup ID will change upon modification of the Call Pickup name.'
+      tags:
+      - 'Features:  Call Pickup'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of call pickups for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List call pickups for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of call pickups returned to this maximum count. Default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching call pickups. Default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: order
+        in: query
+        description: Sort the list of call pickups by name, either ASC or DSC. Default is ASC.
+        example: ASC
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Return the list of call pickups that contains the given name. The maximum length is 80.
+        example: Alaska-Group
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Call Pickups
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created call pickup.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNEST0
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Call Pickup
+      operationId: CreateACallPickup
+      description: 'Create new Call Pickups for the given location.
+
+
+        Call Pickup enables a user (agent) to answer any ringing line within their pickup group.
+
+
+        Creating a call pickup requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Pickup ID will change upon modification of the Call Pickup name.'
+      tags:
+      - 'Features:  Call Pickup'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create the call pickup for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the call pickup for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: South Alaska-Group
+              notificationType: AUDIO_ONLY
+              notificationDelayTimerSeconds: 20
+              agents:
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YTc2ZmVmNC1mZjlmLTExZWItYWYwZC00M2YwZjY1NTdjYWI
+              - Y2lzY29zcGFyazovL3VzL1BMQUNFLzU1YjUyZThhLWZmOWYtMTFlYi05ZjRhLTAzZDY1NzdhYzg1Yg
+              - Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS85ODFlNTQ0Yy0xOGI0LTQ2MzItYmFkZi1iYWMwZjFkOGJkYWY=
+            schema:
+              $ref: '#/components/schemas/PostCallPickupObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Call Pickup
+  /telephony/config/locations/{locationId}/callPickups/{callPickupId}:
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Call Pickup
+      operationId: DeleteACallPickup
+      description: 'Delete the designated Call Pickup.
+
+
+        Call Pickup enables a user (agent) to answer any ringing line within their pickup group.
+
+
+        Deleting a call pickup requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Pickup ID will change upon modification of the Call Pickup name.'
+      tags:
+      - 'Features:  Call Pickup'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete a call pickup.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: callPickupId
+        in: path
+        description: Delete the call pickup with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNEST0
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the call pickup from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Call Pickup
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallPickupObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNEST0
+                name: South Alaska-Group
+                notificationType: AUDIO_ONLY
+                notificationDelayTimerSeconds: 20
+                agents:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+                  firstName: John
+                  lastName: Brown
+                  displayName: johnBrown
+                  type: PEOPLE
+                  email: john.brown@example.com
+                  numbers:
+                  - external: '+19075552859'
+                    extension: '8080'
+                    routingPrefix: '1234'
+                    esn: '12348080'
+                    primary: 'true'
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc1MWQ
+                  firstName: Christian
+                  lastName: Smith
+                  displayName: ChristianS
+                  type: PEOPLE
+                  email: christians@example.com
+                  numbers:
+                  - external: '+19075553859'
+                    extension: '8081'
+                    routingPrefix: '1234'
+                    esn: '12348080'
+                    primary: 'true'
+                - id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+                  firstName: Alice
+                  lastName: Smith
+                  displayName: AliceSmith
+                  type: VIRTUAL_LINE
+                  numbers:
+                  - external: '+19075552859'
+                    extension: '8083'
+                    routingPrefix: '1234'
+                    esn: '12348080'
+                    primary: 'true'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for a Call Pickup
+      operationId: GetDetailsForACallPickup
+      description: 'Retrieve the designated Call Pickup details.
+
+
+        Call Pickup enables a user (agent) to answer any ringing line within their pickup group.
+
+
+        Retrieving call pickup details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.
+
+
+        **NOTE**: The Call Pickup ID will change upon modification of the Call Pickup name.'
+      tags:
+      - 'Features:  Call Pickup'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve settings for a call pickup in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: callPickupId
+        in: path
+        description: Retrieve settings for a call pickup with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNEST0
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve call pickup settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for a Call Pickup
+    put:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the target call pickup.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNEST0
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Call Pickup
+      operationId: UpdateACallPickup
+      description: 'Update the designated Call Pickup.
+
+
+        Call Pickup enables a user (agent) to answer any ringing line within their pickup group.
+
+
+        Updating a call pickup requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Pickup ID will change upon modification of the Call Pickup name.'
+      tags:
+      - 'Features:  Call Pickup'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this call pickup exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: callPickupId
+        in: path
+        description: Update settings for a call pickup with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNEST0
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update call pickup settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: South Alaska-Group
+              notificationType: AUDIO_ONLY
+              notificationDelayTimerSeconds: 20
+              agents:
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS82YTUwMDk1YS1mZjlmLTExZWItODA2NS04ZjhkOWIxNmIzOTQ
+              - Y2lzY29zcGFyazovL3VzL1BMQUNFLzg0YjQ1OTIyLWZmOWYtMTFlYi1hNGI4LTMzNjI3YmVkNjdiNQ
+              - Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS85ODFlNTQ0Yy0xOGI0LTQ2MzItYmFkZi1iYWMwZjFkOGJkYWY=
+            schema:
+              $ref: '#/components/schemas/ModifyCallPickupObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Call Pickup
+  /telephony/config/locations/{locationId}/callPickups/availableUsers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - agents
+                properties:
+                  agents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GetPersonPlaceVirtualLineCallPickupObject'
+                    description: Array of agents.
+              example:
+                agents:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc1MWQ
+                  lastName: Ronnie
+                  firstName: Coleman
+                  displayName: RColeman
+                  type: PEOPLE
+                  email: r.coleman@mailinator.com
+                  numbers:
+                  - external: '+19075552334'
+                    extension: '8083'
+                    routingPrefix: '1234'
+                    esn: '12348083'
+                    primary: 'true'
+                - id: Y2lzY29zcGFyazovL3VzL1BMQUNFLzg0YjQ1OTIyLWZmOWYtMTFlYi1hNGI4LTMzNjI3YmVkNjdiNQ
+                  lastName: Owen
+                  firstName: Wilson
+                  displayName: OWilson
+                  type: PEOPLE
+                  email: o.wilson@mailinator.com
+                  numbers:
+                  - external: '+19075555859'
+                    extension: '8084'
+                    routingPrefix: '1234'
+                    esn: '12348084'
+                    primary: 'true'
+                - id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+                  firstName: Alice
+                  lastName: Smith
+                  displayName: AliceSmith
+                  type: VIRTUAL_LINE
+                  numbers:
+                  - external: '+19075552859'
+                    extension: '8086'
+                    routingPrefix: '1234'
+                    esn: '12348086'
+                    primary: 'true'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get available agents from Call Pickups
+      operationId: GetAvailableAgentsFromCallPickups
+      description: 'Retrieve available agents from call pickups for a given location.
+
+
+        Call Pickup enables a user (agent) to answer any ringing line within their pickup group.
+
+
+        Retrieving available agents from call pickups requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Call Pickup'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the available agents for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Return the available agents for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: callPickupName
+        in: query
+        description: Only return available agents from call pickups with the matching name.
+        example: North Alaska-Pickup
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of available agents returned to this maximum count.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching available agents.
+        example: '0'
+        schema:
+          type: number
+      - name: name
+        in: query
+        description: Only return available agents with the matching name.
+        example: John
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: Only return available agents with the matching primary number.
+        example: '9075552334'
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: 'Order the available agents according to the designated fields. Up to three vertical bar (|) separated sort order fields may be specified. Available sort fields: `fname`, `lname`, `extension`, `number`.'
+        example: lname|fname|number
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get available agents from Call Pickups
+components:
+  schemas:
+    GetCallPickupObject:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNERT0
+          description: A unique identifier for the call pickup.
+        name:
+          type: string
+          example: North Alaska-Group
+          description: Unique name for the call pickup. The maximum length is 80.
+        notificationType:
+          type: string
+          enum:
+          - NONE
+          - AUDIO_ONLY
+          - VISUAL_ONLY
+          - AUDIO_AND_VISUAL
+          description: "Type of the notification when an incoming call is unanswered. The call pickup group notifies all of its members. Default: NONE.\n * `NONE` - Notification is not sent to any member of the call pickup group.\n * `AUDIO_ONLY` - When the `notificationDelayTimerSeconds` number of seconds has elapsed, play an audio notification for each call pickup group member.\n * `VISUAL_ONLY` - When the `notificationDelayTimerSeconds` number of seconds has elapsed, provide a visual notification to every call pickup group member.\n * `AUDIO_AND_VISUAL` - When the `notificationDelayTimerSeconds` number of seconds has elapsed, provide an audio and visual notification to every call pickup group member.\n"
+        notificationDelayTimerSeconds:
+          type: number
+          example: 6
+          description: 'After the number of seconds given by the `notificationDelayTimerSeconds` has elapsed, notify every member of the call pickup group when an incoming call goes unanswered. The `notificationType` field specifies the notification method. Default: 6.'
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetPersonPlaceVirtualLineCallPickupObject'
+          description: People, workspaces and virtual lines that are eligible to receive calls.
+    GetPersonPlaceVirtualLineCallPickupObject:
+      type: object
+      required:
+      - id
+      - type
+      - email
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE1NmE
+          description: ID of a person, workspace or virtual line.
+        firstName:
+          type: string
+          example: John
+          description: First name of a person, workspace or virtual line.
+        lastName:
+          type: string
+          example: Brown
+          description: Last name of a person, workspace or virtual line.
+        displayName:
+          type: string
+          example: johnBrown
+          description: Display name of a person, workspace or virtual line.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - VIRTUAL_LINE
+          description: "Type of the person, workspace or virtual line.\n * `PEOPLE` - Indicates that this object is a user.\n * `PLACE` - Indicates that this object is a place.\n * `VIRTUAL_LINE` - Indicates that this object is a virtual line.\n"
+        email:
+          type: string
+          example: john.brown@example.com
+          description: Email of a person, workspace or virtual line.
+        phoneNumber:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetUserNumberItemObject'
+          description: List of phone numbers of a person, workspace or virtual line.
+    ListCallPickupObject:
+      type: object
+      required:
+      - name
+      - id
+      - locationName
+      - locationId
+      properties:
+        name:
+          type: string
+          example: North Alaska-Group
+          description: Unique name for the call pickup. The maximum length is 80.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUElDS1VQL1kyRnNiRkJwWTJ0MWNERT0
+          description: A unique identifier for the call pickup.
+        locationName:
+          type: string
+          example: Alaska
+          description: Name of the location for call pickup.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: ID of the location for call pickup.
+    ModifyCallPickupObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: North Alaska-Group
+          description: Unique name for the call pickup. The maximum length is 80.
+        notificationType:
+          type: string
+          enum:
+          - NONE
+          - AUDIO_ONLY
+          - VISUAL_ONLY
+          - AUDIO_AND_VISUAL
+          description: "Type of the notification when an incoming call is unanswered. The call pickup group notifies all of its members. Default: NONE.\n * `NONE` - Notification is not sent to any member of the call pickup group.\n * `AUDIO_ONLY` - When the notificationDelayTimerSeconds number of seconds has elapsed, play an audio notification for each call pickup group member.\n * `VISUAL_ONLY` - When the notificationDelayTimerSeconds number of seconds has elapsed, provide a visual notification to every call pickup group member.\n * `AUDIO_AND_VISUAL` - When the `notificationDelayTimerSeconds` number of seconds has elapsed, provide an audio and visual notification to every call pickup group member.\n"
+        notificationDelayTimerSeconds:
+          type: number
+          example: 6
+          description: 'After the number of seconds given by the `notificationDelayTimerSeconds` has elapsed, notify every member of the call pickup group when an incoming call goes unanswered. The `notificationType` field specifies the notification method. Default: 6.'
+        agents:
+          type: array
+          items:
+            type: string
+          description: An array of people, workspace, and virtual lines IDs, that are added to call pickup.
+    GetUserNumberItemObject:
+      type: object
+      properties:
+        external:
+          type: string
+          example: '+12143456103'
+          description: Phone number of a person.
+        extension:
+          type: string
+          example: '23234'
+          description: Extension of a person.
+    PostCallPickupObject:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: North Alaska-Group
+          description: Unique name for the call pickup. The maximum length is 80.
+        notificationType:
+          type: string
+          enum:
+          - NONE
+          - AUDIO_ONLY
+          - VISUAL_ONLY
+          - AUDIO_AND_VISUAL
+          description: "Type of the notification when an incoming call is unanswered. The call pickup group notifies all of its members. Default: NONE.\n * `NONE` - Notification is not sent to any member of the call pickup group.\n * `AUDIO_ONLY` - When the notificationDelayTimerSeconds number of seconds has elapsed, play an audio notification for each call pickup group member.\n * `VISUAL_ONLY` - When the notificationDelayTimerSeconds number of seconds has elapsed, provide a visual notification to every call pickup group member.\n * `AUDIO_AND_VISUAL` - When the `notificationDelayTimerSeconds` number of seconds has elapsed, provide an audio and visual notification to every call pickup group member.\n"
+        notificationDelayTimerSeconds:
+          type: number
+          example: 6
+          description: 'After the number of seconds given by the `notificationDelayTimerSeconds` has elapsed, notify every member of the call pickup group when an incoming call goes unanswered. The `notificationType` field specifies the notification method. Default: 6.'
+        agents:
+          type: array
+          items:
+            type: string
+          description: An Array of ID strings of people, workspaces and virtual lines that are added to call pickup.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

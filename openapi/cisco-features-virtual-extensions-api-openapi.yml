@@ -1,0 +1,1506 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Virtual Extensions API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features: Virtual Extensions'
+paths:
+  /telephony/config/virtualExtensions:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created virtual extension.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzk0OThkMTE0LWMwMGMtNGZkNC1iMTk5LWU4ODQ2N2UwNzVkNw
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Virtual Extension
+      operationId: CreateAVirtualExtension
+      description: 'Create new Virtual Extension for the given organization or location.
+
+
+        You can set up virtual extensions at the organization or location level. The organization level enables everyone across your organization to dial the same extension number to reach someone.
+
+        You can use the location level virtual extension like any other extension assigned to the specific location.
+
+        Users at the specific location can dial the extension. However, users at other locations can reach the virtual extension by dialing the ESN.
+
+
+        Creating a virtual extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write` and `identity:contacts_rw`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              firstName: John
+              lastName: Smith
+              displayName: JohnSmith
+              phoneNumber: '+17011558169'
+              extension: '9133'
+              locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+            schema:
+              $ref: '#/components/schemas/PostVirtualExtensionObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Virtual Extension
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVirtualExtensionListObject'
+              example:
+                virtualExtensions:
+                - id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+                  extension: '5001'
+                  routingPrefix: '4321'
+                  esn: '43215001'
+                  phoneNumber: '+16692515287'
+                  firstName: Bob
+                  level: LOCATION
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2QzYjA4MGMwLWU1MjctNDQ1Zi04NTk5LTU5OWJmNzQ2MjViNg
+                  locationName: TestLocation
+                  displayName: Bob Smith
+                - id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OL2JhNTE0MGExLWM0MjItNDRhMC05MmUyLTRkNDQ0ZTg1NDc5NQ
+                  extension: '5001'
+                  esn: '5001'
+                  phoneNumber: '+12135536387'
+                  firstName: John
+                  lastName: Smith
+                  level: ORGANIZATION
+                  displayName: John Smith
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Virtual Extensions
+      operationId: ReadTheListOfVirtualExtensions
+      description: 'Retrieve virtual extensions associated with a specific customer.
+
+
+        The GET Virtual Extensions API allows administrators to retrieve a list of virtual extensions configured within their organization. Virtual extensions enable users to dial extension numbers that route to external phone numbers, such as those of remote workers or frequently contacted clients.
+
+        This API returns key information including the extension, associated phone number (in E.164 format), display name, and the location to which the virtual extension belongs
+
+        The API supports filtering by various parameters, such as extension number, phone number, and location name. The results can be paginated using the `max` and `start` parameters, and the order of the results can be specified using the `order` parameter.
+
+
+        Retrieving a Virtual Extension requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of virtual extensions returned to this maximum count. Default is 10.
+        example: '10'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching virtual extensions. Default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: order
+        in: query
+        description: Order the list of virtual extensions in ascending or descending order. Default is ascending.
+        example: ASC
+        schema:
+          type: string
+      - name: extension
+        in: query
+        description: Filter the list of virtual extensions by extension number.
+        example: '5001'
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: Filter the list of virtual extensions by phone number.
+        example: '+17011558169'
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Filter the list of virtual extensions by name. This can be either first name or last name.
+        example: John
+        schema:
+          type: string
+      - name: locationName
+        in: query
+        description: Filter the list of virtual extensions by location name.(Only one of the locationName, locationId, and OrgLevelOnly query parameters is allowed at the same time.)
+        example: Test1
+        schema:
+          type: string
+      - name: locationId
+        in: query
+        description: Filter the list of virtual extensions by location ID.
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+        schema:
+          type: string
+      - name: orgLevelOnly
+        in: query
+        description: Filter the list of virtual extensions by organization level. If orgLevelOnly is true, return only the organization level virtual extensions.
+        example: 'true'
+        schema:
+          type: boolean
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Virtual Extensions
+  /telephony/config/virtualExtensions/{extensionId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVirtualExtensionObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+                extension: '5001'
+                routingPrefix: '4321'
+                esn: '43215001'
+                phoneNumber: '+6692515287'
+                firstName: John
+                level: LOCATION
+                locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2QzYjA4MGMwLWU1MjctNDQ1Zi04NTk5LTU5OWJmNzQ2MjViNg
+                locationName: Test1
+                displayName: JohnSmith
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get a Virtual Extension
+      operationId: GetAVirtualExtension
+      description: 'Retrieve Virtual Extension details for the given extension ID.
+
+
+        Virtual extensions integrate remote workers on separate telephony systems into Webex Calling, enabling users to reach them via extension dialing.
+
+        This endpoint allows administrators to retrieve configuration details for a specific virtual extension, ensuring visibility into the mapping between extensions and external phone numbers.
+
+
+        Retrieving a Virtual Extension requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: extensionId
+        in: path
+        description: ID of the virtual extension.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get a Virtual Extension
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Virtual Extension
+      operationId: UpdateAVirtualExtension
+      description: 'Update Virtual Extension details for the given extension ID.
+
+
+        This API updates the configuration of an existing virtual extension identified by its unique extension ID. Administrators can modify fields such as the extension, associated phone number (in E.164 format), display name, and location etc.
+
+
+        Updating a Virtual Extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write` and `identity:contacts_rw`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: extensionId
+        in: path
+        description: ID of the virtual extension.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              firstName: test
+              lastName: abc
+              displayName: abc test
+              phoneNumber: '+1022997098'
+              extension: '1126'
+            schema:
+              $ref: '#/components/schemas/VirtualExtensionPatchRequestObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Virtual Extension
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Virtual Extension
+      operationId: DeleteAVirtualExtension
+      description: 'Delete Virtual Extension using the extension ID.
+
+
+        This API permanently deletes a virtual extension from the organization. Once deleted, the extension will no longer route calls to the external phone number, and users won’t be able to reach it via the assigned extension.
+
+
+        Deleting a Virtual Extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write` and `identity:contacts_rw`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: extensionId
+        in: path
+        description: ID of the virtual extension.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Virtual Extension
+  /telephony/config/virtualExtensions/settings:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVirtualExtensionSettingsObject'
+              example:
+                mode: STANDARD
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Virtual extension settings
+      operationId: GetVirtualExtensionSettings
+      description: 'Retrieve Virtual Extension settings for the given Org.
+
+
+        This API retrieves the virtual extension mode settings configured for a given organization. Virtual extensions can operate in two modes: STANDARD and ENHANCED. The selected mode determines how the system handles routing and signaling for virtual extensions.
+
+        By default, the virtual extensions that you create use the Standard mode. Another mode, enhanced signaling mode, is available to all customers, however, virtual extensions won''t function properly in this mode unless your PSTN provider supports special network signaling extensions and there aren''t many PSTN providers that do.
+
+
+        Retrieving a Virtual Extension settings requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Virtual extension settings
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Virtual Extension Settings
+      operationId: ModifyVirtualExtensionSettings
+      description: 'Update Virtual Extension details for the given extension ID.
+
+
+        This endpoint updates the virtual extension settings for an organization. It is primarily used to configure the operating mode for virtual extensions.
+
+        Modes determine how virtual extensions are assigned or managed within the system.
+
+
+        Updating a Virtual Extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              mode: STANDARD
+            schema:
+              $ref: '#/components/schemas/VirtualExtensionSettingsPatchRequestObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Modify Virtual Extension Settings
+  /telephony/config/virtualExtensions/actions/validateNumbers/invoke:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    description: status of external phone number.
+              example:
+                status: ''
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Validate an external phone number
+      operationId: ValidateAnExternalPhoneNumber
+      description: 'Validate external phone number for the given organization.
+
+
+        This API is designed to validate external phone numbers before they are assigned as virtual extensions for a customer.
+
+        It ensures that the provided numbers are properly formatted, eligible for use, and not already in use within the system.
+
+        This validation is typically part of a pre-check process during provisioning or number assignment workflows, helping administrators or systems prevent conflicts or errors related to number reuse or format issues.
+
+
+        Creating a virtual extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              phoneNumbers:
+              - '+1234567890'
+              - '+1987654321'
+            schema:
+              $ref: '#/components/schemas/PostValidateExternalPhoneNumberObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Validate an external phone number
+  /telephony/config/virtualExtensionRanges:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created virtual extension range.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OX1JBTkdFLzk0OThkMTE0LWMwMGMtNGZkNC1iMTk5LWU4ODQ2N2UwNzVkNw
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Virtual Extension Range
+      operationId: CreateAVirtualExtensionRange
+      description: 'Create a new Virtual Extension Range for the given organization or location.
+
+
+        Virtual extension ranges integrate remote workers on a separate telephony system into Webex Calling and enable extension dialing. Using these ranges, you can define patterns that can be used to route calls at a location level or an organization level. You are allowed to define virtual extensions ranges in addition to individual virtual extensions.
+
+        This works in both Standard and Enhanced modes
+
+
+        Virtual extension range can be set up at the organization or location level.
+
+
+        Creating a virtual extension range requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: SalesVirtualExtensionRange
+              prefix: '+14089'
+              patterns:
+              - 12XXXX
+              locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+            schema:
+              $ref: '#/components/schemas/PostVirtualExtensionRangeObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Virtual Extension Range
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  virtualExtensionRanges:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GetVirtualExtensionRangeListObject'
+                    description: Array of virtual extension ranges.
+              example:
+                virtualExtensionRanges:
+                - id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OX1JBTkdFLzk0OThkMTE0LWMwMGMtNGZkNC1iMTk5LWU4ODQ2N2UwNzVkNw
+                  name: SalesVirtualExtensionRange
+                  prefix: '+12345'
+                  level: LOCATION
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+                  locationName: Sales
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get a list of a Virtual Extension Range
+      operationId: GetAListOfAVirtualExtensionRange
+      description: 'Retrieves the list of Virtual Extension Ranges.
+
+
+        Virtual extension ranges integrate remote workers on a separate telephony system into Webex Calling and enable extension dialing. Using these ranges, you can define patterns that can be used to route calls at a location level or an organization level. You are allowed to define virtual extensions ranges in addition to individual virtual extensions.
+
+        This works in both Standard and Enhanced modes
+
+
+        Retrieving a virtual extension range requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Maximum number of results to return.
+        example: '10'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: The starting index of the results to return.
+        example: '0'
+        schema:
+          type: number
+      - name: order
+        in: query
+        description: Sort the list of virtual extension ranges by name or prefix, either ASC or DSC. Default sort order is ASC.
+        example: name
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Filter the list of virtual extension ranges by name.
+        example: SalesVirtualExtensionRange
+        schema:
+          type: string
+      - name: prefix
+        in: query
+        description: Filter the list of virtual extension ranges by prefix.
+        example: '+1234'
+        schema:
+          type: string
+      - name: locationId
+        in: query
+        description: Filter the list of virtual extension ranges by location ID. Only one of the `locationId` and `OrgLevelOnly` query parameters is allowed at the same time.
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+        schema:
+          type: string
+      - name: orgLevelOnly
+        in: query
+        description: Filter the list of virtual extension ranges by organization level. If `orgLevelOnly` is true, return only the organization level virtual extension ranges.
+        example: 'true'
+        schema:
+          type: boolean
+      x-operation-id-source: normalized
+      x-operation-id-original: Get a list of a Virtual Extension Range
+  /telephony/config/virtualExtensionRanges/{extensionRangeId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVirtualExtensionRangeDetailsObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OX1JBTkdFLzk0OThkMTE0LWMwMGMtNGZkNC1iMTk5LWU4ODQ2N2UwNzVkNw
+                name: SalesVirtualExtensionRange
+                prefix: '+14089'
+                patterns:
+                - 12XXXX
+                locationName: Sales
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get details of a Virtual Extension Range
+      operationId: GetDetailsOfAVirtualExtensionRange
+      description: 'Retrieve virtual extension range details for the given extension range ID.
+
+
+        Virtual extension ranges integrate remote workers on a separate telephony system into Webex Calling and enable extension dialing. Using these ranges, you can define patterns that can be used to route calls at a location level or an organization level. You are allowed to define virtual extensions ranges in addition to individual virtual extensions.
+
+        This works in both Standard and Enhanced modes
+
+
+        Retrieving a virtual extension range requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: extensionRangeId
+        in: path
+        description: ID of the virtual extension range.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get details of a Virtual Extension Range
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Virtual Extension Range
+      operationId: DeleteAVirtualExtensionRange
+      description: 'Delete a virtual extension range for the given extension range ID.
+
+
+        Virtual extension ranges integrate remote workers on a separate telephony system into Webex Calling and enable extension dialing. Using these ranges, you can define patterns that can be used to route calls at a location level or an organization level. You are allowed to define virtual extensions ranges in addition to individual virtual extensions.
+
+        This works in both Standard and Enhanced modes
+
+
+        Deleting a virtual extension range requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: extensionRangeId
+        in: path
+        description: ID of the virtual extension range.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA`
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Virtual Extension Range
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Virtual Extension Range
+      operationId: ModifyVirtualExtensionRange
+      description: 'Modify virtual extension range for the given extension range ID.
+
+
+        Virtual extension ranges integrate remote workers on a separate telephony system into Webex Calling and enable extension dialing. Using these ranges, you can define patterns that can be used to route calls at a location level or an organization level. You are allowed to define virtual extensions ranges in addition to individual virtual extensions.
+
+        This works in both Standard and Enhanced modes
+
+
+        Modifying a virtual extension range requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: extensionRangeId
+        in: path
+        description: ID of the virtual extension range.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA`
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: SalesVirtualExtensionRange
+              prefix: '+14089'
+              patterns:
+              - 12XXXX
+              action: ADD
+            schema:
+              $ref: '#/components/schemas/PutVirtualExtensionRangeObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Modify Virtual Extension Range
+  /telephony/config/virtualExtensionRanges/actions/validate/invoke:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateVirtualExtensionRangeResponseObject'
+              example:
+                status: OK
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Validate the prefix and extension pattern for a Virtual Extension Range
+      operationId: ValidateThePrefixAndExtensionPatternForAVirtualExtensionRange
+      description: 'Validate the prefix and extension pattern for a Virtual Extension Range.
+
+
+        Virtual extension ranges integrate remote workers on a separate telephony system into Webex Calling and enable extension dialing. Using these ranges, you can define patterns that can be used to route calls at a location level or an organization level. You are allowed to define virtual extensions ranges in addition to individual virtual extensions.
+
+        This works in both Standard and Enhanced modes
+
+
+        Validating a prefix and extension pattern for a Virtual Extension Range requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Virtual Extensions'
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+              name: SalesVirtualExtensionRange
+              prefix: '+14089'
+              patterns:
+              - 12XXXX
+              rangeId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+            schema:
+              $ref: '#/components/schemas/ValidateVirtualExtensionRangeRequestObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Validate the prefix and extension pattern for a Virtual Extension Range
+components:
+  schemas:
+    PostVirtualExtensionRangeObject:
+      type: object
+      required:
+      - name
+      - prefix
+      properties:
+        name:
+          type: string
+          example: SalesVirtualExtensionRange
+          description: Name of the virtual extension range. This is a unique name for the virtual extension range.
+        prefix:
+          type: string
+          example: '+1234'
+          description: Prefix used for a virtual extension range. Prefix works in Standard and Enhanced modes. In Standard mode, it must be E.164 and unique. In Enhanced mode, it can be E.164 or non-E.164.
+        patterns:
+          type: array
+          items:
+            type: string
+          description: List of virtual extension patterns. You can add up to 100 patterns at a time. Extension patterns can include one or more right-justified wildcards “X” matching any digit.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+          description: ID of the location to which the virtual extension range is assigned. The location ID is a unique identifier for the location in Webex Calling. This is set only when location level virtual extension range is added.
+    GetVirtualExtensionSettingsObject:
+      type: object
+      required:
+      - mode
+      properties:
+        mode:
+          type: string
+          enum:
+          - STANDARD
+          description: "Mode of the virtual extension. It can be either `STANDARD` or `ENHANCED`.\n\n    + `STANDARD` -  Standard virtual extension mode in which virtual extensions must be associated with a valid E.164 number, but this requires no enhanced signaling support from the PSTN provider.\n    + `ENHANCED` - Enhanced signaling mode: only a few PSTN providers support this special network signaling extension."
+    VirtualExtensionPatchRequestObject:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+          description: First name of the person at the virtual extension.
+        lastName:
+          type: string
+          example: Smith
+          description: Last name of the person at the virtual extension.
+        displayName:
+          type: string
+          example: John Smith
+          description: Display name of the person at the virtual extension.
+        phoneNumber:
+          type: string
+          example: '+17011558169'
+          description: Directory number of the virtual extension.
+        extension:
+          type: string
+          example: '9133'
+          description: Extension of the virtual extension.
+    GetVirtualExtensionRangeDetailsObject:
+      type: object
+      required:
+      - id
+      - name
+      - prefix
+      - patterns
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OX1JBTkdFLzk0OThkMTE0LWMwMGMtNGZkNC1iMTk5LWU4ODQ2N2UwNzVkNw
+          description: ID of the virtual extension range.
+        name:
+          type: string
+          example: SalesVirtualExtensionRange
+          description: Name of the virtual extension range. This is a unique name for the virtual extension range.
+        prefix:
+          type: string
+          example: '+1234'
+          description: Prefix used for a virtual extension range. Prefix works in Standard and Enhanced modes. In Standard mode, it must be E.164 and it must be unique. In Enhanced mode, it can be E.164 or non-E.164.
+        patterns:
+          type: array
+          items:
+            type: string
+          description: List of virtual extension patterns. The maximum number of patterns supported at a time is 100. Extension patterns can include one or more right-justified wildcards “X” matching any digit.
+        locationName:
+          type: string
+          example: Sales
+          description: Name of the location to which the virtual extension range is assigned. This is set only for virtual extension ranges at the location level.
+    PutVirtualExtensionRangeObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: SalesVirtualExtensionRange
+          description: Name of the virtual extension range. This is a unique name for the virtual extension range.
+        prefix:
+          type: string
+          example: '+1234'
+          description: Prefix used for a virtual extension range.
+        patterns:
+          type: array
+          items:
+            type: string
+          description: The pattern to be added, replaced, or removed from a virtual extension range. The maximum number of patterns supported at a time is 100.
+        action:
+          type: string
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          description: "Action to be performed on the virtual extension range. It can be either `ADD`, `REMOVE` or `REPLACE`. This is mandatory when `patterns` are provided.\n * `ADD` - Add new patterns to the existing virtual extension range.\n * `REMOVE` - Remove existing patterns from the virtual extension range.\n * `REPLACE` - Replace existing patterns with new patterns in the virtual extension range.\n"
+    PostVirtualExtensionObject:
+      type: object
+      required:
+      - displayName
+      - phoneNumber
+      - extension
+      properties:
+        firstName:
+          type: string
+          example: John
+          description: First name of the person at the virtual extension.
+        lastName:
+          type: string
+          example: Smith
+          description: Last name of the person at the virtual extension.
+        displayName:
+          type: string
+          example: John Smith
+          description: Display name of the person at the virtual extension.
+        phoneNumber:
+          type: string
+          example: '+17011558169'
+          description: Directory number of the virtual extension.
+        extension:
+          type: string
+          example: '9133'
+          description: Extension of the virtual extension.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+          description: ID of the location to which the virtual extension is assigned. The location ID is a unique identifier for the location in Webex Calling.
+    ValidateVirtualExtensionRangeResponseObject:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          enum:
+          - OK
+          - ERRORS
+          description: "Virtual extension range validation status.\n * `OK` - Validation is successful.\n * `ERRORS` - Validation failed.\n"
+        virtualExtensionRangeValidationStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/virtualExtensionRangeValidationStatusObject'
+          description: Array of virtual extension range validation status. This is set only when the `status` is `ERRORS`.
+    virtualExtensionRangeValidationStatusObject:
+      type: object
+      required:
+      - errorCode
+      - message
+      - status
+      properties:
+        name:
+          type: string
+          example: SalesVirtualExtensionRange
+          description: Name used for virtual extension range validation.
+        prefix:
+          type: string
+          example: '+1234'
+          description: Prefix used for a virtual extension range validation.
+        pattern:
+          type: string
+          description: Pattern used for a virtual extension range validation.
+        errorCode:
+          type: string
+          example: '27850'
+          description: Error code for the virtual extension range validation.
+        message:
+          type: string
+          example: '[Error 27850] Virtual Extension Range already exists with name: SalesVirtualExtensionRange'
+          description: Error message for the virtual extension range validation.
+        status:
+          $ref: '#/components/schemas/VirtualExtensionRangeValidationStatusEnum'
+          description: Virtual extension range validation status.
+    GetVirtualExtensionRangeListObject:
+      type: object
+      required:
+      - id
+      - name
+      - prefix
+      - level
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OX1JBTkdFLzk0OThkMTE0LWMwMGMtNGZkNC1iMTk5LWU4ODQ2N2UwNzVkNw
+          description: ID of the virtual extension range.
+        name:
+          type: string
+          example: SalesVirtualExtensionRange
+          description: Name of the virtual extension range. This is a unique name for the virtual extension range.
+        prefix:
+          type: string
+          example: '+1234'
+          description: Prefix used for a virtual extension range. Prefix works in Standard and Enhanced modes. In Standard mode, it must be E.164 and it must be unique. In Enhanced mode, it can be E.164 or non-E.164.
+        level:
+          type: string
+          enum:
+          - ORGANIZATION
+          - LOCATION
+          description: "Level of the virtual extension range. It can be either `ORGANIZATION` or `LOCATION`.\n * `ORGANIZATION` - Organization level.\n * `LOCATION` - Location level.\n"
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+          description: ID of the location to which the virtual extension range is assigned. This is set only for virtual extension ranges at the location level.
+        locationName:
+          type: string
+          example: Sales
+          description: Name of the location to which the virtual extension range is assigned. This is set only for virtual extension ranges at the location level
+    PostValidateExternalPhoneNumberObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+          description: List of external phone numbers to be validated.
+    VirtualExtensionRangeValidationStatusEnum:
+      type: string
+      enum:
+      - VALID
+      - DUPLICATE
+      - DUPLICATE_IN_LIST
+      - INVALID
+      - LIMIT_EXCEEDED
+      description: " * `VALID` - Validation is successful.\n * `DUPLICATE` - Duplicate patterns for virtual extension range.\n * `DUPLICATE_IN_LIST` - Duplicate routing number in the pattern list.\n * `INVALID` - Invalid prefix length.\n * `LIMIT_EXCEEDED` - Exceeding pattern limit of 100 in the request.\n"
+    ValidateVirtualExtensionRangeRequestObject:
+      type: object
+      properties:
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+          description: ID of the location to which the virtual extension range is assigned. The location ID is a unique identifier for the location in Webex Calling.
+        name:
+          type: string
+          example: SalesVirtualExtensionRange
+          description: Name of the virtual extension range. This is a unique name for the virtual extension range.
+        prefix:
+          type: string
+          example: '+1234'
+          description: Prefix used for a virtual extension range.
+        patterns:
+          type: array
+          items:
+            type: string
+          description: List of virtual extension patterns. The maximum number of patterns supported at a time is 100.
+        rangeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+          description: ID of the virtual extension range. This is mandatory when validating for an existing virtual extension range, not present when validating a new virtual extension range before adding it.
+    VirtualExtensionSettingsPatchRequestObject:
+      type: object
+      required:
+      - mode
+      properties:
+        mode:
+          type: string
+          enum:
+          - STANDARD
+          description: "Mode of the virtual extension. It can be either `STANDARD` or `ENHANCED`.\n\n    + `STANDARD` -  Standard Virtual extension mode in which virtual extensions must be associated with a valid E.164 number, but this requires no enhanced signaling support from the PSTN provider.\n    + `ENHANCED` - Enhanced signaling mode: only a few PSTN providers support this special network signaling extension."
+    GetVirtualExtensionObject:
+      type: object
+      required:
+      - id
+      - extension
+      - esn
+      - phoneNumber
+      - level
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfRVhURU5TSU9OLzZkNmYwNmVlLTdkNDEtNDQ4Yy05MjgwLWZkM2ZiMDhmOGUyMA
+          description: ID of the virtual extension.
+        extension:
+          type: string
+          example: '5001'
+          description: Extension of the virtual extension.
+        routingPrefix:
+          type: string
+          example: '4321'
+          description: Routing prefix of the virtual extension's location.
+        esn:
+          type: string
+          example: '43215001'
+          description: ESN of the virtual extension.
+        phoneNumber:
+          type: string
+          example: '+6692515287'
+          description: Directory number of the virtual extension.
+        firstName:
+          type: string
+          example: John
+          description: First name of the person at the virtual extension.
+        lastName:
+          type: string
+          example: John
+          description: Last name of the person at the virtual extension.
+        level:
+          type: string
+          enum:
+          - ORGANIZATION
+          - LOCATION
+          description: "Level of the virtual extension. It can be either `ORGANIZATION` or `LOCATION`.\n * `ORGANIZATION` - Organization level.\n * `LOCATION` - Location level.\n"
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2QzYjA4MGMwLWU1MjctNDQ1Zi04NTk5LTU5OWJmNzQ2MjViNg
+          description: ID of the location to which the virtual extension is assigned. The location ID is a unique identifier for the location in Webex Calling.
+        locationName:
+          type: string
+          example: Test1
+          description: Name of the location to which the virtual extension is assigned.
+        displayName:
+          type: string
+          example: John Smith
+          description: Display name of the person at the virtual extension.
+    GetVirtualExtensionListObject:
+      type: object
+      required:
+      - virtualExtensions
+      properties:
+        virtualExtensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetVirtualExtensionObject'
+          description: List of virtual extensions.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

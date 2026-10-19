@@ -1,0 +1,1548 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Converged Recordings API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Converged Recordings
+paths:
+  /convergedRecordings:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+              example: https://webexpis.com/v1/convergedRecordings
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecordingObject'
+                    description: An array of recording objects.
+              example:
+                items:
+                - id: ea0efc7c-f83a-4972-b0eb-c0f30cff5e61
+                  topic: Call with TestUser6 WebexCRP-20241004 1624
+                  createTime: '2024-10-04T16:24:25Z'
+                  timeRecorded: '2024-10-04T16:20:20Z'
+                  ownerId: a6aad220-e520-4529-a191-e84a72c0c9c2
+                  ownerType: user
+                  ownerEmail: nshtestwebex+testuser7@gmail.com
+                  format: MP3
+                  durationSeconds: 23
+                  sizeBytes: 74222
+                  serviceType: calling
+                  storageRegion: US
+                  status: available
+                  serviceData:
+                    locationId: 02a43ee9-17ae-4e0c-9e79-720e3a6503fd
+                    callSessionId: b51c62ea-bbf6-4828-8959-1e41d8752022
+                - id: 518cdca4-61c7-47dc-840b-29827d0cb62d
+                  topic: call with title
+                  createTime: '2024-10-30T22:30:53Z'
+                  timeRecorded: '2024-10-30T22:17:19Z'
+                  ownerId: d7468402-e95f-42a9-92c8-dd65f45d40ba
+                  ownerType: user
+                  ownerEmail: nshtestwebex+testuser7@gmail.com
+                  format: MP3
+                  durationSeconds: 60
+                  sizeBytes: 244326
+                  serviceType: calling
+                  storageRegion: US
+                  status: available
+                  serviceData:
+                    locationId: 02a43ee9-17ae-4e0c-9e79-720e3a6503fd
+                    callSessionId: 7ba29675-3016-4bf0-af19-66cf2854b000
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Recordings
+      operationId: list_recordings
+      description: 'List recordings. You can specify a date range, and the maximum number of recordings to return.
+
+
+        The list returned is sorted in descending order by the date and time that the recordings were created.
+
+
+        Long result sets are split into pages.
+
+
+        List recordings requires the `spark:recordings_read` scope.
+
+
+        Please use `List Recordings for Admin or Compliance Officer` API to list all recordings for a user with the role Compliance officer or Admin
+
+
+        Request Header
+
+
+        * `timezone`: *Time zone in conformance with the IANA time zone database. The default is UTC if `timezone` is not defined.*'
+      tags:
+      - Converged Recordings
+      parameters:
+      - name: max
+        in: query
+        description: Maximum number of recordings to return in a single page. `max` must be equal to or greater than `1` and equal to or less than `100`.
+        schema:
+          type: number
+          default: 10
+      - name: from
+        in: query
+        description: Starting date and time (inclusive) for recordings to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `from` cannot be after `to`.
+        example: '2020-07-12T09:30:00+08:00'
+        schema:
+          type: string
+          default: If only `to` is specified, the default `from` value is 7 days before `to`; if no `to` or `from` is specified, the default `from` value is 7 days before the current date and time.
+      - name: to
+        in: query
+        description: Ending date and time (exclusive) for List recordings to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `to` cannot be before `from`.
+        example: '2020-07-31T09:30:00+08:00'
+        schema:
+          type: string
+          default: If `from` is specified, the default value is 7 days after `from`; if `from` is not specified, the default value is the current date and time.
+      - name: status
+        in: query
+        description: Recording's status. If not specified or `available`, retrieves recordings that are available. Otherwise, if specified as `deleted`, retrieves recordings that have been moved into the recycle bin.
+        example: available
+        schema:
+          type: string
+          default: available
+          enum:
+          - available
+          - deleted
+      - name: serviceType
+        in: query
+        description: Recording's service-type. If specified, the API filters recordings by service-type. Valid values are `calling` and `customerAssist`.
+        example: calling
+        schema:
+          type: string
+          enum:
+          - calling
+          - customerAssist
+      - name: format
+        in: query
+        description: Recording's file format. If specified, the API filters recordings by format. Valid values are `MP3`.
+        example: MP3
+        schema:
+          type: string
+          enum:
+          - MP3
+      - name: ownerType
+        in: query
+        description: Recording based on type of user.
+        example: user
+        schema:
+          type: string
+          enum:
+          - user
+          - place
+          - virtualLine
+          - callQueue
+      - name: storageRegion
+        in: query
+        description: Recording stored in certain Webex locations.
+        example: US
+        schema:
+          type: string
+          enum:
+          - US
+          - SG
+          - GB
+          - JP
+          - DE
+          - AU
+          - IN
+          - CA
+      - name: locationId
+        in: query
+        description: Fetch recordings for users in a particular Webex Calling location (as configured in Control Hub).
+        example: 02a43ee9-17ae-4e0c-9e79-720e3a6503fd
+        schema:
+          type: string
+      - name: topic
+        in: query
+        description: Recording's topic. If specified, the API filters recordings by topic in a case-insensitive manner.
+        example: Call with User7
+        schema:
+          type: string
+      - name: timezone
+        in: header
+        description: e.g. UTC
+        required: false
+        schema:
+          type: string
+        example: UTC
+  /admin/convergedRecordings:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+              example: https://webexpis.com/v1/admin/convergedRecordings
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecordingObject'
+                    description: An array of recording objects.
+              example:
+                items:
+                - id: baa93e55c62e4663ae24f13fbfdb247f
+                  topic: call with title
+                  createTime: '2023-10-31T16:24:12+08:00'
+                  timeRecorded: '2023-10-31T10:41:28+08:00'
+                  ownerId: d7468402-e95f-42a9-92c8-dd65f45d40ba
+                  ownerType: virtualLine
+                  ownerEmail: Rbs_TA_Admin@wbxlab.us
+                  format: MP3
+                  durationSeconds: 60
+                  sizeBytes: 244333
+                  serviceType: calling
+                  storageRegion: US
+                  status: available
+                  serviceData:
+                    locationId: US
+                    callSessionId: 7ba2967530164bf0af1966cf2854b000
+                - id: 518cdca461c747dc840b29827d0cb62d
+                  topic: call with title
+                  createTime: '2023-10-30T22:30:53+08:00'
+                  timeRecorded: '2023-10-30T22:17:19+08:00'
+                  ownerId: d7468402-e95f-42a9-92c8-dd65f45d40ba
+                  ownerType: virtualLine
+                  ownerEmail: Rbs_TA_Admin@wbxlab.us
+                  format: MP3
+                  durationSeconds: 60
+                  sizeBytes: 244326
+                  serviceType: calling
+                  storageRegion: US
+                  status: available
+                  serviceData:
+                    locationId: US
+                    callSessionId: 7ba2967530164bf0af1966cf2854b000
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Recordings for Admin or Compliance officer
+      operationId: list_recordings_for_admin_or_compliance_officer
+      description: 'List recordings for an admin or compliance officer. You can specify a date range, and the maximum number of recordings to return.
+
+
+        The list returned is sorted in descending order by the date and time that the recordings were created.
+
+
+        Long result sets are split into pages.
+
+
+        List recordings requires the `spark-compliance:recordings_read` scope for compliance officer and `spark-admin:recordings_read` scope for admin.
+
+
+        #### Request Header
+
+
+        * `timezone`: *Time zone in conformance with the IANA time zone database. The default is UTC if `timezone` is not defined.*'
+      tags:
+      - Converged Recordings
+      parameters:
+      - name: max
+        in: query
+        description: Maximum number of recordings to return in a single page. `max` must be equal to or greater than `1` and equal to or less than `100`.
+        schema:
+          type: number
+          default: 10
+      - name: from
+        in: query
+        description: Starting date and time (inclusive) for recordings to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `from` cannot be after `to`. The interval between `from` and `to` must be within 30 days.
+        example: '2020-07-12T09:30:00+08:00'
+        schema:
+          type: string
+          default: If only `to` is specified, the default `from` value is 7 days before `to`; if no `to` or `from` is specified, the default `from` value is 7 days before the current date and time.
+      - name: to
+        in: query
+        description: Ending date and time (exclusive) for List recordings to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `to` cannot be before `from`. The interval between `from` and `to` must be within 30 days.
+        example: '2020-07-31T09:30:00+08:00'
+        schema:
+          type: string
+          default: If `from` is specified, the default value is 7 days after `from`; if `from` is not specified, the default value is the current date and time.
+      - name: status
+        in: query
+        description: Recording's status. If not specified or `available`, retrieves recordings that are available. if specified as `purged`, retrieves recordings those are deleted but available to a compliance officer. Otherwise, if specified as `deleted`, retrieves recordings that have been moved into the recycle bin.
+        example: available
+        schema:
+          type: string
+          default: available
+          enum:
+          - available
+          - deleted
+          - purged
+      - name: serviceType
+        in: query
+        description: Recording's service-type. If specified, the API filters recordings by service-type. Valid values are `calling` and `customerAssist`.
+        example: calling
+        schema:
+          type: string
+          enum:
+          - calling
+          - customerAssist
+      - name: format
+        in: query
+        description: Recording's file format. If specified, the API filters recordings by format. Valid values are `MP3`.
+        example: MP3
+        schema:
+          type: string
+          enum:
+          - MP3
+      - name: ownerId
+        in: query
+        description: Webex user Id to fetch recordings for a particular user.
+        example: 24683d6c-5529-4b60-a6c7-91e8b293bbab
+        schema:
+          type: string
+      - name: ownerEmail
+        in: query
+        description: Webex email address to fetch recordings for a particular user.
+        example: john.andersen@example.com
+        schema:
+          type: string
+      - name: ownerType
+        in: query
+        description: Recording based on type of user.
+        example: user
+        schema:
+          type: string
+          enum:
+          - user
+          - place
+          - virtualLine
+          - callQueue
+      - name: storageRegion
+        in: query
+        description: Recording stored in certain Webex locations.
+        example: US
+        schema:
+          type: string
+          enum:
+          - US
+          - SG
+          - GB
+          - JP
+          - DE
+          - AU
+          - IN
+          - CA
+      - name: locationId
+        in: query
+        description: Fetch recordings for users in a particular Webex Calling location (as configured in Control Hub).
+        example: 02a43ee9-17ae-4e0c-9e79-720e3a6503fd
+        schema:
+          type: string
+      - name: topic
+        in: query
+        description: Recording's topic. If specified, the API filters recordings by topic in a case-insensitive manner.
+        example: Call with User7
+        schema:
+          type: string
+      - name: timezone
+        in: header
+        description: e.g. UTC
+        required: false
+        schema:
+          type: string
+        example: UTC
+  /convergedRecordings/{recordingId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/RecordingObjectWithDirectDownloadLinks'
+              example:
+                id: 62807eaf-0c89-492e-a3c3-c4751812603b
+                topic: call with default
+                createTime: '2023-11-01T23:09:05+08:00'
+                timeRecorded: '2023-11-01T15:27:29+08:00'
+                temporaryDirectDownloadLinks:
+                  audioDownloadLink: https://nsq1wss.dmz.webex.com/nbr/MultiThreadDownloadServlet?type=calling&orgId=59e67527-4651-4c90-b2f0-4f86c3bb6608&recordUUID=62807eaf-0c89-492e-a3c3-c4751812603b&ticket=SDJTSwAAAIV9%2BooFzh%2FkPd1Edek7wtCLYrVcjsJ2RTHGbhwYHpWOEQ%3D%3D&timestamp=1699495025258
+                  suggestedNotesDownloadLink: https://aibridge-sa1.dmz.webex.com/wbxaibridge/api/v2/notes/e823b9ee-4c4d-4e91-9379-502a9c8c9e6d?contentType=html&resourceType=CallingRecording&resourceId=e31feef9-38bf-456b-898b-be59d310a490&token=QUhTSwAAAIU2M4Tf2_V07LJZ9K5v3S4stc0ETlKC2vkbmDtqQ89fkTw_GfhGHqnMY4U-T8wfjdHsOmAER_fa2AJrAQ6ZLs3u8IiqJxhb26YY9jXTj1QZ-ITGrC4OJACXqxgxFx43o3XTQ_ORJm2_x7A4SBhrWKYFJFIy9TcT6vOE8c45lAvteEsRcfSP49dJ5y7klaWUI1s1
+                  actionItemsDownloadLink: https://aibridge-sa1.dmz.webex.com/wbxaibridge/api/v2/actionItems/0715435b-c6f9-49f5-be66-e3cbd9f65c0d?contentType=html&resourceType=CallingRecording&resourceId=e31feef9-38bf-456b-898b-be59d310a490&token=QUhTSwAAAIU2M4Tf2_V07LJZ9K5v3S4stc0ETlKC2vkbmDtqQ89fkTw_GfhGHqnMY4U-T8wfjdHsOmAER_fa2AJrAQ6ZLs3u8IiqJxhb26YY9jXTj1QZ-ITGrC4OJACXqxgxFx43o3XTQ_ORJm2_x7A4SBhrWKYFJFIy9TcT6vOE8c45lAvteEsRcfSP49dJ5y7klaWUI1s1
+                  shortNotesDownloadLink: https://aibridge-sa1.dmz.webex.com/wbxaibridge/api/v2/shortNotes/e823b9ee-4c4d-4e91-9379-502a9c8c9e6d?contentType=html&resourceType=CallingRecording&resourceId=e31feef9-38bf-456b-898b-be59d310a490&token=QUhTSwAAAIU2M4Tf2_V07LJZ9K5v3S4stc0ETlKC2vkbmDtqQ89fkTw_GfhGHqnMY4U-T8wfjdHsOmAER_fa2AJrAQ6ZLs3u8IiqJxhb26YY9jXTj1QZ-ITGrC4OJACXqxgxFx43o3XTQ_ORJm2_x7A4SBhrWKYFJFIy9TcT6vOE8c45lAvteEsRcfSP49dJ5y7klaWUI1s1
+                  expiration: '2023-11-09T12:57:05Z'
+                ownerId: 24683d6c-5529-4b60-a6c7-91e8b293bbab
+                ownerType: user
+                ownerEmail: nshtestwebex+crctestuser1@gmail.com
+                format: MP3
+                durationSeconds: 298
+                sizeBytes: 299918
+                serviceType: calling
+                storageRegion: US
+                status: available
+                transcriptLanguage: en
+                serviceData:
+                  locationId: 02a43ee9-17ae-4e0c-9e79-720e3a6503fd
+                  callSessionId: c61b357e-8f53-4d97-9cd2-ae3202796fb0
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Recording Details
+      operationId: get_recording_details
+      description: 'Retrieves details for a recording with a specified recording ID.
+
+
+        Only recordings of owner with the authenticated user may be retrieved.
+
+
+        Get Recording Details requires the `spark-compliance:recordings_read` scope for compliance officer, `spark-admin:recordings_read` scope for admin and `spark:recordings_read` scope for user.
+
+
+        #### Request Header
+
+
+        * `timezone`: *Time zone in conformance with the IANA time zone database. The default is UTC if `timezone` is not defined.*'
+      tags:
+      - Converged Recordings
+      parameters:
+      - name: recordingId
+        in: path
+        description: A unique identifier for the recording.
+        required: true
+        example: 62807eaf-0c89-492e-a3c3-c4751812603b
+        schema:
+          type: string
+      - name: timezone
+        in: header
+        description: e.g. UTC
+        required: false
+        schema:
+          type: string
+        example: UTC
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+          headers: {}
+          content: {}
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Recording
+      operationId: delete_a_recording
+      description: 'Removes a recording with a specified recording ID. The deleted recording cannot be recovered.
+
+
+        If a Compliance Officer deletes another user''s recording, the recording will be inaccessible to regular users (host, attendees and shared), and to the Compliance officer as well. This action purges the recordings from Webex.
+
+
+        Delete a Recording requires the `spark-compliance:recordings_write` scope.'
+      tags:
+      - Converged Recordings
+      parameters:
+      - name: recordingId
+        in: path
+        description: A unique identifier for the recording.
+        required: true
+        example: 4f914b1dfe3c4d11a61730f18c0f5387
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              reason: audit
+              comment: Compliance Officer's optional explanation for deleting a recording
+            schema:
+              $ref: '#/components/schemas/DeleteRecordingObject'
+  /convergedRecordings/{recordingId}/metadata:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  orgId:
+                    type: string
+                  ownerId:
+                    type: string
+                  ownerType:
+                    type: string
+                  ownerName:
+                    type: string
+                  ownerEmail:
+                    type: string
+                  storageRegion:
+                    type: string
+                  serviceType:
+                    type: string
+                  version:
+                    type: string
+                  serviceData:
+                    type: object
+                    properties:
+                      callRecordingId:
+                        type: string
+                      locationId:
+                        type: string
+                      callSessionId:
+                        type: string
+                      personality:
+                        type: string
+                      callingParty:
+                        type: object
+                        properties:
+                          actor:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              id:
+                                type: string
+                          number:
+                            type: string
+                      calledParty:
+                        type: object
+                        properties:
+                          actor:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              id:
+                                type: string
+                          number:
+                            type: string
+                      callId:
+                        type: string
+                      session:
+                        type: object
+                        properties:
+                          startTime:
+                            type: string
+                          stopTime:
+                            type: string
+                      recordingType:
+                        type: string
+                      answererInfo:
+                        type: object
+                        properties:
+                          actor:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              id:
+                                type: string
+                          number:
+                            type: string
+                      recordingActions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            action:
+                              type: string
+                            time:
+                              type: string
+                      callActivity:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            timeStamp:
+                              type: string
+                            mediaStreams:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  streamId:
+                                    type: string
+                                  mode:
+                                    type: string
+                                  mLineIndex:
+                                    type: string
+                            participants:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  actor:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                      id:
+                                        type: string
+                                  aor:
+                                    type: string
+                                  send:
+                                    type: string
+                                required:
+                                - actor
+                                - aor
+                                - send
+                            announcementData:
+                              type: object
+                              properties:
+                                announcementFilename:
+                                  type: string
+                                announcementTimestamp:
+                                  type: string
+                                announcementParticipants:
+                                  type: array
+                                  items:
+                                    type: string
+                                announcementType:
+                                  type: string
+                      managedBy:
+                        type: object
+                        properties:
+                          actor:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              id:
+                                type: string
+                          number:
+                            type: string
+                      connectedParty:
+                        type: object
+                        properties:
+                          actor:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              id:
+                                type: string
+                          number:
+                            type: string
+              example:
+                id: 81bb582c-e93e-40aa-abf6-962b620f6db4
+                orgId: ee8ebeb0-f077-4384-bb50-9de6141c7bac
+                ownerId: '************************************'
+                ownerType: USER
+                ownerName: PRS TestUser1
+                ownerEmail: nshtestwebex+prstestuser1@gmail.com
+                storageRegion: US
+                serviceType: calling
+                version: '1.2'
+                serviceData:
+                  callRecordingId: 81bb582c-e93e-40aa-abf6-962b620f6db4
+                  locationId: '************************************'
+                  callSessionId: fe2f5688-91a8-4799-a867-a396bb2b024a
+                  personality: originator
+                  callingParty:
+                    actor:
+                      type: USER
+                      id: c2335e53-c41b-423d-a41e-da0bf56e2038
+                    number: sip:####PII-EXPOSURE####@X.X.X.X
+                  calledParty:
+                    actor:
+                      type: USER
+                      id: ac7913cd-d943-4e34-81a8-f66ad1a5e376
+                    number: sip:4060@X.X.X.X;user=phone
+                  callId: callhalf-581329:0
+                  session:
+                    startTime: '2023-11-07T08:50:21Z'
+                    stopTime: '2023-11-07T08:55:19Z'
+                  recordingType: alwaysON
+                  answererInfo:
+                    actor:
+                      type: USER
+                      id: ac7913cd-d943-4e34-81a8-f66ad1a5e376
+                    number: sip:4060@X.X.X.X;user=phone
+                  recordingActions:
+                  - action: PAUSE
+                    time: '2023-11-07T08:50:23Z'
+                  callActivity:
+                  - timeStamp: '2023-11-07T08:50:25Z'
+                    mediaStreams:
+                    - streamId: 2915a7bf-fc51-428f-b3f8-bfe4d10b0681
+                      mode: mixed
+                      mLineIndex: '0'
+                    participants:
+                    - actor:
+                        type: USER
+                        id: c2335e53-c41b-423d-a41e-da0bf56e2038
+                      aor: sip:vqfedfdrpl@
+                      send: 2915a7bf-fc51-428f-b3f8-bfe4d10b0681
+                    - actor:
+                        type: USER
+                        id: ac7913cd-d943-4e34-81a8-f66ad1a5e376
+                      aor: sip:4060@X.X.X.X;user=phone
+                      send: 2915a7bf-fc51-428f-b3f8-bfe4d10b0681
+                    announcementData:
+                      announcementFilename: http:///media/en_US/TrtCallRecordingStarted.wav
+                      announcementTimestamp: '2023-11-07T08:50:23Z'
+                      announcementParticipants:
+                      - sip:vqfedfdrpl@
+                      - sip:4060@X.X.X.X;user=phone
+                      announcementType: USER_LEVEL
+                  managedBy:
+                    actor:
+                      type: USER
+                      id: ac7913cd-d943-4e34-81a8-f66ad1a5e376
+                    number: sip:4060@X.X.X.X;user=phone
+                  connectedParty:
+                    actor:
+                      type: USER
+                      id: ac7913cd-d943-4e34-81a8-f66ad1a5e376
+                    number: sip:4060@X.X.X.X;user=phone
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+          headers: {}
+          content: {}
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Recording metadata
+      operationId: get_recording_metadata
+      description: 'Retrieves metadata details for a recording with a specified recording ID. The recording must be owned by the authenticated user.
+
+
+        For information on the metadata fields, refer to Metadata Guide
+
+
+        Get Recording metadata requires the `spark-compliance:recordings_read` scope for compliance officer, `spark-admin:recordings_read` for admin and `spark:recordings_read` for user.'
+      tags:
+      - Converged Recordings
+      parameters:
+      - name: recordingId
+        in: path
+        description: A unique identifier for the recording.
+        required: true
+        example: 4f914b1dfe3c4d11a61730f18c0f5387
+        schema:
+          type: string
+      - name: showAllTypes
+        in: query
+        description: "If `showAllTypes` is `true`, all attributes will be shown. If it's `false` or not specified, the following attributes of the metadata will be hidden.\n                                          serviceData.callActivity.mediaStreams\n                                          serviceData.callActivity.participants\n                                          serviceData.callActivity.redirectInfo\n                                          serviceData.callActivity.redirectedCall\n"
+        example: false
+        schema:
+          type: boolean
+          default: false
+  /convergedRecordings/reassign:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+          headers: {}
+          content: {}
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Reassign Recordings
+      operationId: reassign_recordings
+      description: 'Reassigns recordings to a new user. As an administrator, you can reassign a list of recordings or all recordings of a particular user to a new user.
+
+        The recordings can belong to an org user, a virtual line, or a workspace, but the destination user should only be a valid org user.
+
+
+        * For a org user either `ownerEmail` or `recordingIds` or both must be provided.
+
+
+        * For a virtual line or a workspace, `ownerID` or `recordingIds` or both must be provided.
+
+
+        * If `recordingIds` and `ownerID` is empty but `ownerEmail` is provided, all recordings owned by the `ownerEmail` are reassigned to `reassignOwnerEmail`.
+
+
+        * If `recordingIds` is provided and `ownerEmail` or `ownerID` is also provided, only the recordings specified by `recordingIds` that are owned by `ownerEmail` or `ownerID` are reassigned to `reassignOwnerEmail`.
+
+
+        * If `ownerEmail` and `ownerID` is empty but `recordingIds` is provided, the recordings specified by `recordingIds` are reassigned to `reassignOwnerEmail` regardless of the current owner.
+
+
+        * If both `ownerId` and `ownerEmail` are passed along with `recordingIds`, only the recordings specified by `recordingIds` that are owned by `ownerEmail` are reassigned to `reassignOwnerEmail`.
+
+
+        * If `recordingIds` is empty but both `ownerId` and `ownerEmail` is provided, all recordings owned by the `ownerEmail` are reassigned to `reassignOwnerEmail`.
+
+
+        The `spark-admin:recordings_write` scope is required to reassign recordings.'
+      tags:
+      - Converged Recordings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              ownerEmail: john.andersen@example.com
+              recordingIds:
+              - 4f914b1dfe3c4d11a61730f18c0f5387
+              - 4f914b1dfe3c4d11a61730f18c0f5388
+              reassignOwnerEmail: brenda.song@example.com
+            schema:
+              $ref: '#/components/schemas/ReassignRecordingObject'
+  /convergedRecordings/softDelete:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+          headers: {}
+          content: {}
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+          headers: {}
+          content: {}
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Move Recordings into the Recycle Bin
+      operationId: move_recordings_into_the_recycle_bin
+      description: 'Move recordings into the recycle bin with recording IDs or move all the recordings to the recycle bin.
+
+
+        Only the following two entities can use this API
+
+
+        * Administrator: A user or an application with the scope `spark-admin:recordings_write`.
+
+
+        * User: An authenticated user who does not have the scope `spark-admin:recordings_write` but has `spark:recordings_write`.
+
+
+        As an `administrator`, you can move a list of recordings or all recordings of a particular user within the org you manage to the recycle bin.
+
+
+        As a `user`, you can move a list of your own recordings or all your recordings to the recycle bin.
+
+
+        Recordings in the recycle bin can be recovered by Restore Recordings from Recycle Bin API. If you''d like to empty recordings from the recycle bin, you can use Purge Recordings from Recycle Bin API to purge all or some of them.
+
+
+        * If `trashAll` is `true`:
+
+        * `recordingIds` should be empty.
+
+        * If the caller of this API is an `administrator`, `ownerEmail` should not be empty and all recordings owned by the `ownerEmail` will be moved to the recycle bin.
+
+        * If the caller of this API is a `user`, `ownerEmail` should be empty and all recordings owned by the caller will be moved to the recycle bin.
+
+
+        * If `trashAll` is `false`:
+
+        * `ownerEmail` should be empty.
+
+        * `recordingIds` should not be empty and its maximum size is `100`.'
+      tags:
+      - Converged Recordings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              trashAll: false
+              recordingIds:
+              - 81bb582c-e93e-40aa-abf6-962b620f6db4
+            schema:
+              $ref: '#/components/schemas/BulkSoftDeleteRecordingObject'
+  /convergedRecordings/restore:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+          headers: {}
+          content: {}
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+          headers: {}
+          content: {}
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Restore Recordings from Recycle Bin
+      operationId: restore_recordings_from_recycle_bin
+      description: 'Restore recordings from the recycle bin with recording IDs or restore all the recordings that are in the recycle bin.
+
+
+        Only the following two entities can use this API
+
+
+        * Administrator: A user or an application with the scope `spark-admin:recordings_write`.
+
+
+        * User: An authenticated user who does not have the scope `spark-admin:recordings_write` but has `spark:recordings_write`.
+
+
+        As an `administrator`, you can restore a list of recordings or all recordings of a particular user within the org you manage from the recycle bin.
+
+
+        As a `user`, you can restore a list of your own recordings or all your recordings from the recycle bin.
+
+
+        * If `restoreAll` is `true`:
+
+        * `recordingIds` should be empty.
+
+        * If the caller of this API is an `administrator`, `ownerEmail` should not be empty and all recordings owned by the `ownerEmail` will be restored from the recycle bin.
+
+        * If the caller of this API is a `user`, `ownerEmail` should be empty and all recordings owned by the caller will be restored from the recycle bin.
+
+
+        * If `restoreAll` is `false`:
+
+        * `ownerEmail` should be empty.
+
+        * `recordingIds` should not be empty and its maximum size is `100`.'
+      tags:
+      - Converged Recordings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              restoreAll: false
+              recordingIds:
+              - 81bb582c-e93e-40aa-abf6-962b620f6db4
+            schema:
+              $ref: '#/components/schemas/BulkRestoreRecordingObject'
+  /convergedRecordings/purge:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+          headers: {}
+          content: {}
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+          headers: {}
+          content: {}
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Purge Recordings from Recycle Bin
+      operationId: purge_recordings_from_recycle_bin
+      description: 'Purge recordings from the recycle bin matching the supplied recording IDs, or purge all the recordings that are in the recycle bin. A recording, once purged, cannot be restored.
+
+
+        Only the following two entities can use this API
+
+
+        * Administrator: A user or an application with the scope `spark-admin:recordings_write`.
+
+
+        * User: An authenticated user who does not have the scope `spark-admin:recordings_write` but has `spark:recordings_write`.
+
+
+        As an `administrator`, you can purge a list of recordings or all recordings of a particular user within the org you manage from the recycle bin.
+
+
+        As a `user`, you can purge a list of your own recordings or all your recordings from the recycle bin.
+
+
+        * If `purgeAll` is `true`:
+
+        * `recordingIds` should be empty.
+
+        * If the caller of this API is an `administrator`, `ownerEmail` should not be empty and all recordings owned the `ownerEmail` will be purged from the recycle bin.
+
+        * If the caller of this API is a `user`, `ownerEmail` should be empty and all recordings owned by the caller will be purged from the recycle bin.
+
+
+        * If `purgeAll` is `false`:
+
+        * `ownerEmail` should be empty.
+
+        * `recordingIds` should not be empty and its maximum size is `100`.'
+      tags:
+      - Converged Recordings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              purgeAll: false
+              recordingIds:
+              - 81bb582c-e93e-40aa-abf6-962b620f6db4
+            schema:
+              $ref: '#/components/schemas/BulkPurgeRecordingObject'
+components:
+  schemas:
+    RecordingObject:
+      type: object
+      description: Recording details
+      required:
+      - id
+      - topic
+      - createTime
+      - timeRecorded
+      - format
+      - serviceType
+      - durationSeconds
+      - sizeBytes
+      - status
+      - ownerId
+      - ownerEmail
+      - ownerType
+      - storageRegion
+      properties:
+        id:
+          type: string
+          example: 4f914b1dfe3c4d11a61730f18c0f5387
+          description: A unique identifier for the recording.
+        topic:
+          type: string
+          example: John's Meeting
+          description: The recording's topic.
+        createTime:
+          type: string
+          example: '2019-01-27T17:43:24Z'
+          description: The date and time recording was created in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. Please note that it's not the time the record button was clicked in meeting but the time the recording file was generated offline.
+        timeRecorded:
+          type: string
+          example: '2019-01-27T17:40:20Z'
+          description: The date and time recording started in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. It indicates when the record button was clicked in the meeting.
+        format:
+          type: string
+          enum:
+          - MP3
+          description: ' * `MP3` - Recording file format is MP3.
+
+            '
+        serviceType:
+          type: string
+          enum:
+          - calling
+          - customerAssist
+          description: " * `calling` - Recording service type is Webex Call.\n * `customerAssist` - Call Recordings of a Customer Assist Queue.\n"
+        durationSeconds:
+          type: number
+          example: 4472
+          description: The duration of the recording, in seconds.
+        sizeBytes:
+          type: number
+          example: 248023188
+          description: The size of the recording file, in bytes.
+        status:
+          type: string
+          enum:
+          - available
+          - deleted
+          description: " * `available` - Recording is available.\n * `deleted` - Recording has been moved into recycle bin.\n"
+        ownerId:
+          type: string
+          example: 24683d6c-5529-4b60-a6c7-91e8b293bbab
+          description: Webex UUID for recording owner/host.
+        ownerEmail:
+          type: string
+          example: nshtestwebex+crctestuser1@gmail.com
+          description: Webex email for recording owner/host.
+        ownerType:
+          type: string
+          enum:
+          - user
+          - place
+          - virtualLine
+          - callQueue
+          description: " * `user` - Recording belongs to a user.\n * `place` - Recording belongs to a workspace device.\n * `virtualLine` - Recording belongs to a workspace device.\n"
+        storageRegion:
+          type: string
+          example: United States
+          description: Storage location for recording within Webex datacenters.
+        serviceData:
+          type: object
+          properties:
+            locationId:
+              type: string
+              description: Webex calling location for recording user.
+            callSessionId:
+              type: string
+              description: Call ID for which recording was done.
+          description: Fields relevant to each service Type.
+    RecordingObjectWithDirectDownloadLinks:
+      type: object
+      description: Recording details by ID
+      required:
+      - id
+      - topic
+      - createTime
+      - timeRecorded
+      - format
+      - serviceType
+      - durationSeconds
+      - sizeBytes
+      - status
+      - ownerId
+      - ownerEmail
+      - ownerType
+      - storageRegion
+      properties:
+        id:
+          type: string
+          example: 7ee40776779243b4b3da448d941b34dc
+          description: A unique identifier for recording.
+        topic:
+          type: string
+          example: John's Meeting
+          description: The recording's topic.
+        createTime:
+          type: string
+          example: '2019-01-27T17:43:24Z'
+          description: The date and time recording was created in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. Please note that it's not the time the record button was clicked in meeting but the time the recording file was generated offline.
+        timeRecorded:
+          type: string
+          example: '2019-01-27T17:40:20Z'
+          description: The date and time recording started in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. It indicates when the record button was clicked in the meeting.
+        format:
+          type: string
+          enum:
+          - MP3
+          description: ' * `MP3` - Recording file format is MP3.
+
+            '
+        serviceType:
+          type: string
+          enum:
+          - calling
+          - customerAssist
+          description: " * `calling` - Recording service-type is calling.\n * `customerAssist` - Call Recordings of a Customer Assist Queue.\n"
+        durationSeconds:
+          type: number
+          example: 4472
+          description: The duration of the recording in seconds.
+        sizeBytes:
+          type: number
+          example: 248023188
+          description: The size of the recording file in bytes.
+        temporaryDirectDownloadLinks:
+          type: object
+          properties:
+            audioDownloadLink:
+              type: string
+              description: The download link for recording audio file without HTML page rendering in browser or HTTP redirect.  Expires 3 hours after the API request.
+            transcriptDownloadLink:
+              type: string
+              description: The download link for recording transcript file without HTML page rendering in browser or HTTP redirect.  Expires 3 hours after the API request.
+            suggestedNotesDownloadLink:
+              type: string
+              description: The download API for recording notes. The user access token is required to download the recording notes. Expires 3 hours after the API request.
+            shortNotesDownloadLink:
+              type: string
+              description: The download API for recording short notes. The user access token is required to download the recording short notes. Expires 3 hours after the API request.
+            actionItemsDownloadLink:
+              type: string
+              description: The download API for recording action items. The user access token is required to download the recording action items. Expires 3 hours after the API request.
+            expiration:
+              type: string
+              description: The date and time when `recordingDownloadLink`, `audioDownloadLink`, `transcriptDownloadLink`, `suggestedNotesDownloadLink`, `shortNotesDownloadLink` and `actionItemsDownloadLink` expire in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+          description: The download links for the MP3 audio of the recordings without rendering an HTML page in a browser or an HTTP redirect. This attribute is available only for authorized users or a [Compliance Officer](/docs/compliance#compliance). This attribute is not available if the user is an admin with scope `spark-admin:recordings_read` or if **Prevent Downloading** has been turned on for the recording being requested.
+        status:
+          type: string
+          enum:
+          - available
+          - deleted
+          - purged
+          description: " * `available` - Recording is available.\n * `deleted` - Recording has been moved to the recycle bin.\n * `purged` - Recording has been purged from the recycle bin. Please note that only a compliance officer can access recordings with a `purged` status.\n"
+        ownerId:
+          type: string
+          example: 24683d6c-5529-4b60-a6c7-91e8b293bbab
+          description: Webex UUID for recording owner/host.
+        ownerEmail:
+          type: string
+          example: nshtestwebex+crctestuser1@gmail.com
+          description: Webex email for recording owner/host.
+        ownerType:
+          type: string
+          enum:
+          - user
+          - place
+          - virtualLine
+          - callQueue
+          description: " * `user` - Recording belongs to a user.\n * `place` - Recording belongs to a workspace device.\n * `virtualLine` - Recording belongs to a workspace device.\n"
+        storageRegion:
+          type: string
+          example: United States
+          description: Storage location for recording within Webex datacenters.
+        transcriptLanguage:
+          type: string
+          example: en
+          description: The language of the recording's transcript. This attribute is only present when a transcript is available for the recording.
+        serviceData:
+          type: object
+          properties:
+            locationId:
+              type: string
+              description: Webex calling location for recording user.
+            callSessionId:
+              type: string
+              description: Call ID for which recording was done.
+          description: Fields relevant to each service Type.
+    BulkSoftDeleteRecordingObject:
+      description: Bulk Soft Delete Recording details
+      type: object
+      properties:
+        trashAll:
+          type: boolean
+          description: If not specified or `false`, moves the recordings specified by `recordingIds` to the recycle bin. If `true`, moves all recordings owned by the caller in case of `user`, and all recordings owned by `ownerEmail` in case of `administrator` to the recycle bin.
+        ownerEmail:
+          type: string
+          example: john.andersen@example.com
+          description: Email address for the recording owner. This parameter is only used if `trashAll` is set to `true` and the user or application calling the API has the required administrator scope `spark-admin:recordings_write`. The administrator may specify the email of a user from an org they manage and the API will move all the recordings of that user into the recycle bin.
+        recordingIds:
+          type: array
+          items:
+            type: string
+            example: 81bb582c-e93e-40aa-abf6-962b620f6db4, 81bb582c-e93e-40aa-abf6-962b620f6db5
+          description: Recording IDs for moving recordings to the recycle bin in batch.
+    DeleteRecordingObject:
+      type: object
+      description: Delete Recording details
+      properties:
+        reason:
+          type: string
+          example: audit
+          description: Reason for deleting a recording. Only required when a Compliance Officer is operating on another user's recording.
+        comment:
+          type: string
+          example: Maintain data privacy
+          description: Compliance Officer's explanation for deleting a recording. The comment can be a maximum of 255 characters long.
+    BulkRestoreRecordingObject:
+      type: object
+      description: Bulk Restore Recording details
+      properties:
+        restoreAll:
+          type: boolean
+          example: false
+          description: If not specified or `false`, restores the recordings specified by `recordingIds` from the recycle bin. If `true`, restores all recordings owned by the caller in case of `user`, and all recordings owned by `ownerEmail` in case of `administrator` from the recycle bin.
+        ownerEmail:
+          type: string
+          example: john.andersen@example.com
+          description: Email address for the recording owner. This parameter is only used if `restoreAll` is set to `true` and the user or application calling the API has the required administrator scope `spark-admin:recordings_write`. The administrator may specify the email of a user from an org they manage and the API will restore all the recordings of that user from the recycle bin.
+        recordingIds:
+          type: array
+          items:
+            type: string
+            example: 81bb582c-e93e-40aa-abf6-962b620f6db4, 81bb582c-e93e-40aa-abf6-962b620f6db5
+          description: Recording IDs for restoring recordings from the recycle bin in batch.
+    BulkPurgeRecordingObject:
+      type: object
+      description: Bulk Purge Recording details
+      properties:
+        purgeAll:
+          type: boolean
+          example: false
+          description: If not specified or `false`, purges the recordings specified by `recordingIds` from the recycle bin. If `true`, purges all recordings owned by the caller in case of `user`, and all recordings owned by `ownerEmail` in case of `administrator` from the recycle bin.
+        ownerEmail:
+          type: string
+          example: john.andersen@example.com
+          description: Email address for the recording owner. This parameter is only used if `purgeAll` is set to `true` and the user or application calling the API has the required administrator scope `spark-admin:recordings_write`. The administrator may specify the email of a user from an org they manage and the API will purge all the recordings of that user from the recycle bin.
+        recordingIds:
+          type: array
+          items:
+            type: string
+            example: 81bb582c-e93e-40aa-abf6-962b620f6db4, 81bb582c-e93e-40aa-abf6-962b620f6db5
+          description: Recording IDs for purging recordings from the recycle bin in batch.
+    ReassignRecordingObject:
+      type: object
+      description: Reassign Recording details
+      required:
+      - reassignOwnerEmail
+      properties:
+        ownerEmail:
+          type: string
+          example: john.andersen@example.com
+          description: Recording owner email.
+        ownerID:
+          type: string
+          example: 3c6aa94c-e1f9-4f10-579f-e5582de5374f
+          description: Recording owner ID. Can be a user, a virtual line, or a workspace.
+        recordingIds:
+          type: array
+          items:
+            type: string
+            example: 81bb582c-e93e-40aa-abf6-962b620f6db4,81bb582c-e93e-40aa-abf6-962b620f6db5
+          description: List of recording identifiers to be reassigned.
+        reassignOwnerEmail:
+          type: string
+          example: brenda.song@example.com
+          description: New owner of the recordings.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

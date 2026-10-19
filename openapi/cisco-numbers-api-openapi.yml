@@ -1,0 +1,2176 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Numbers API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Numbers
+paths:
+  /telephony/config/locations/{locationId}/numbers:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Add Phone Numbers to a Location
+      operationId: AddPhoneNumbersToALocation
+      description: 'Adds a specified set of phone numbers to a location for an organization. Phone numbers must follow the E.164 format.
+
+
+        Each location has a set of phone numbers that can be assigned to people, workspaces, or features. Active phone numbers are in service.
+
+
+        Adding a phone number to a location requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        Phone numbers included in the request that already exist in the location will simply be ignored.
+
+
+        This API is only supported for adding DID and Toll-free numbers to non-integrated PSTN connection types such as Local Gateway (LGW) and Non-integrated CPP. It should never be used for locations with integrated PSTN connection types like Cisco Calling Plans or Integrated CCP because backend data issues may occur.
+
+
+        Mobile numbers can be added to any location that has PSTN connection setup. Only 20 mobile numbers can be added per request.'
+      tags:
+      - Numbers
+      parameters:
+      - name: locationId
+        in: path
+        description: LocationId to which numbers should be added.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzM2ZTFlM2Y1LWJhODEtNDRiNC05ZGQ1LWIyMmVlNGY1MDIyZA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Organization of the Route Group.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              phoneNumbers:
+              - '+19136748203'
+              - '+19136748204'
+              - '+19136748205'
+              numberType: TOLLFREE
+              numberUsageType: NONE
+              state: INACTIVE
+              carrierId: 123e4567-e89b-12d3-a456-426614174000
+            schema:
+              $ref: '#/components/schemas/NumbersPost'
+      x-operation-id-source: normalized
+      x-operation-id-original: Add Phone Numbers to a location
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Manage Number State in a Location
+      operationId: ManageNumberStateInALocation
+      description: 'Activate or deactivate the specified set of phone numbers in a location for an organization.
+
+
+        Each location has a set of phone numbers that can be assigned to people, workspaces, or features. Phone numbers must follow the E.164 format.
+
+
+        Active phone numbers are in service. A mobile number is activated when assigned to a user. This API will not activate or deactivate mobile numbers.
+
+
+        Managing phone number state in a location requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        This API is only supported for non-integrated PSTN connection types of Local Gateway (LGW) and Non-integrated CCP.'
+      tags:
+      - Numbers
+      parameters:
+      - name: locationId
+        in: path
+        description: '`LocationId` to which numbers should be added.'
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzM2ZTFlM2Y1LWJhODEtNDRiNC05ZGQ1LWIyMmVlNGY1MDIyZA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Organization of the Route Group.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              phoneNumbers:
+              - '+12145557861'
+              - '+12145551321'
+              action: DEACTIVATE
+            schema:
+              $ref: '#/components/schemas/NumbersRequest'
+      x-operation-id-source: normalized
+      x-operation-id-original: Manage Number State in a location
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Remove Phone Numbers from a Location
+      operationId: RemovePhoneNumbersFromALocation
+      description: 'Remove the specified set of phone numbers from a location for an organization.
+
+
+        Phone numbers must follow the E.164 format.
+
+
+        Removing a mobile number may require more time depending on mobile carrier capabilities.
+
+
+        Removing a phone number from a location requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        A location''s main number cannot be removed.
+
+
+        This API is only supported for non-integrated PSTN connection types of Local Gateway (LGW) and Non-integrated CPP. It should never be used for locations with integrated PSTN connection types like Cisco Calling Plans or Integrated CCP because backend data issues may occur.'
+      tags:
+      - Numbers
+      parameters:
+      - name: locationId
+        in: path
+        description: '`LocationId` to which numbers should be added.'
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzM2ZTFlM2Y1LWJhODEtNDRiNC05ZGQ1LWIyMmVlNGY1MDIyZA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Organization of the Route Group.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              phoneNumbers:
+              - '+12145557861'
+              - '+12145551321'
+            schema:
+              $ref: '#/components/schemas/NumbersDelete'
+      x-operation-id-source: normalized
+      x-operation-id-original: Remove phone numbers from a location
+  /telephony/config/actions/validateNumbers/invoke:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateNumbersResponse'
+              examples:
+                example1:
+                  value:
+                    status: OK
+                    numbers:
+                    - number: '+12145557861'
+                      state: Available
+                      tollFreeNumber: false
+                example2:
+                  value:
+                    status: ERRORS
+                    numbers:
+                    - number: '+12145559000'
+                      state: Unavailable
+                      tollFreeNumber: false
+                      detail:
+                      - '[Error 8361] DN is unavailable : +12145559000'
+                    - number: '+12145553567'
+                      state: Available
+                      tollFreeNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Validate Phone Numbers
+      operationId: ValidatePhoneNumbers
+      description: 'Validate the list of phone numbers in an organization. Each phone number''s availability is indicated in the response.
+
+
+        Each location has a set of phone numbers that can be assigned to people, workspaces, or features. Phone numbers must follow the E.164 format for all countries, except for the United States, which can also follow the National format. Active phone numbers are in service.
+
+
+        Validating a phone number in an organization requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: orgId
+        in: query
+        description: Organization of the Route Group.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              example1:
+                value:
+                  phoneNumbers:
+                  - '+12145557861'
+              example2:
+                value:
+                  phoneNumbers:
+                  - '+12145559000'
+                  - '+12145553567'
+            schema:
+              $ref: '#/components/schemas/ValidateNumbersPostRequest'
+      x-operation-id-source: normalized
+      x-operation-id-original: Validate phone numbers
+  /telephony/config/numbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NumberListGetObject'
+              example:
+                count:
+                  assigned: 33
+                  unAssigned: 114
+                  inActive: 12
+                  extensionOnly: 692
+                  tollFreeNumbers: 1
+                  total: 839
+                  mobileNumber: 6
+                  serviceNumber: 1
+                  reservedNumber: 1
+                  elin: 1
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  extension: '11'
+                  routingPrefix: '1234'
+                  esn: '123411'
+                  state: ACTIVE
+                  phoneNumberType: FAX
+                  mainNumber: false
+                  includedTelephonyTypes: MOBILE_NUMBER
+                  mobileNetwork: mobileNetwork
+                  routingProfile: AttRtPf
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                  elinEnabled: true
+                  location:
+                    id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+                    name: Banglore
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODhiZGIwNC1jZjU5LTRjMjMtODQ4OC00NTNhOTE3ZDFlMjk
+                    type: PEOPLE
+                    firstName: sadiqhussain96
+                    lastName: sadiqhussain96
+                    elinExpiryTime: '2023-12-31T23:59:59.000Z'
+                  isReservedNumber: false
+                - phoneNumber: ''
+                  state: ACTIVE
+                  phoneNumberType: ALTERNATE
+                  extension: '568'
+                  routingPrefix: '1234'
+                  esn: '1234568'
+                  mainNumber: false
+                  includedTelephonyTypes: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                  elinEnabled: false
+                  location:
+                    id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M2MDliOGE1LTAxNmQtNDAwNy1hN2E0LTJhMThiZmZjY2FmNg
+                    name: Richardson
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNzVkMjI4Mi0yZjk1LTQ2MmMtYjFiNC1kYjRlZjU1OTk3MWE
+                    type: PEOPLE
+                    firstName: chandru_2
+                    lastName: test_2
+                  isReservedNumber: true
+                - phoneNumber: '+12026282002'
+                  state: ACTIVE
+                  phoneNumberType: PRIMARY
+                  mainNumber: true
+                  includedTelephonyTypes: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                  elinEnabled: false
+                  location:
+                    id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEwN2EzNTkwLWY3OWMtNGM0OS1iM2I2LWQ1MzhjYTA0YWU1MA
+                    name: Washington
+                  isReservedNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Phone Numbers for an Organization with Given Criteria
+      operationId: GetPhoneNumbersForAnOrganizationWithGivenCriteria
+      description: 'List all the phone numbers for the given organization along with the status and owner (if any).
+
+
+        Numbers can be standard, service, or mobile. Both standard and service numbers are PSTN numbers.
+
+        Service numbers are considered high-utilization or high-concurrency phone numbers and can be assigned to features like auto-attendants, call queues, and hunt groups.
+
+        Phone numbers can be linked to a specific location, be active or inactive, and be assigned or unassigned.
+
+        The owner of a number is the person, workspace, or feature to which the number is assigned.
+
+        Only a person can own a mobile number.
+
+
+        Retrieving this list requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: locationId
+        in: query
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: 5
+        schema:
+          type: integer
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: 0
+        schema:
+          type: integer
+      - name: phoneNumber
+        in: query
+        description: Search for this `phoneNumber`.
+        example: '+12056852221'
+        schema:
+          type: string
+      - name: available
+        in: query
+        description: Search among the available phone numbers. This parameter cannot be used along with the `numberType` parameter when set to `EXTENSION`.
+        example: true
+        schema:
+          type: boolean
+      - name: assigned
+        in: query
+        description: Return the list of phone numbers that are assigned to an owner when set to `true`. When set to `false`, returns the list of phone numbers that are unassigned. This parameter cannot be used along with the `numberType` parameter when set to `EXTENSION`.
+        example: true
+        schema:
+          type: boolean
+      - name: order
+        in: query
+        description: Sort the list of phone numbers based on the following:`lastName`,`dn`,`extension`. Sorted by number and extension in ascending order.
+        example: lastName-asc
+        schema:
+          type: string
+      - name: ownerName
+        in: query
+        description: Return the list of phone numbers that are owned by the given `ownerName`. Maximum length is 255.
+        example: Mark
+        schema:
+          type: string
+      - name: ownerId
+        in: query
+        description: Returns only the matched number/extension entries assigned to the feature with the specified UUID or `broadsoftId`.
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80M2QzYjY4ZC04MjkwLTRmMzctOTM2NS03MmNhMTcxMzRiODM
+        schema:
+          type: string
+      - name: ownerType
+        in: query
+        description: 'Returns the list of phone numbers of the given `ownerType`. Possible input values:'
+        example: PEOPLE
+        schema:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - AUTO_ATTENDANT
+          - CALL_QUEUE
+          - PAGING_GROUP
+          - HUNT_GROUP
+          - VOICE_MESSAGING
+          - BROADWORKS_ANYWHERE
+          - CONTACT_CENTER_LINK
+          - ROUTE_LIST
+          - VOICEMAIL_GROUP
+          - VIRTUAL_LINE
+      - name: extension
+        in: query
+        description: Returns the list of phone numbers with the given extension.
+        example: '000'
+        schema:
+          type: string
+      - name: numberType
+        in: query
+        description: 'Returns the filtered list of phone numbers that contain a given type of number. `numberType` set to `EXTENSION` cannot be used along with the `available`, `assigned`, or `state` query parameters. Possible input values:'
+        example: NUMBER
+        schema:
+          type: string
+          enum:
+          - NUMBER
+          - EXTENSION
+      - name: phoneNumberType
+        in: query
+        description: 'Returns the filtered list of phone numbers of the given `phoneNumberType`. Response excludes any extensions without numbers. Possible input values:'
+        example: PRIMARY
+        schema:
+          type: string
+          enum:
+          - PRIMARY
+          - ALTERNATE
+          - FAX
+          - DNIS
+          - Default
+      - name: state
+        in: query
+        description: 'Returns the list of phone numbers with the matching state. Response excludes any extensions without numbers. Possible input values:'
+        example: ACTIVE
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - Default
+      - name: details
+        in: query
+        description: Returns the overall count of the phone numbers along with other details for a given organization.
+        example: true
+        schema:
+          type: boolean
+      - name: tollFreeNumbers
+        in: query
+        description: Returns the list of toll-free phone numbers.
+        example: true
+        schema:
+          type: boolean
+      - name: restrictedNonGeoNumbers
+        in: query
+        description: Returns the list of restricted non-geographical numbers.
+        example: true
+        schema:
+          type: boolean
+      - name: includedTelephonyTypes
+        in: query
+        description: Returns the list of phone numbers that are of given `includedTelephonyTypes`. By default, if this query parameter is not provided, it will list both PSTN and Mobile Numbers. Possible input values are PSTN_NUMBER or MOBILE_NUMBER.
+        example: PSTN_NUMBER
+        schema:
+          type: string
+      - name: serviceNumber
+        in: query
+        description: Returns the list of service phone numbers.
+        example: true
+        schema:
+          type: boolean
+      - name: reservedNumber
+        in: query
+        description: Filters reserved phone numbers. When set to `true`, returns only reserved phone numbers. When set to `false`, returns only non-reserved phone numbers. When omitted, no reserved-number filter is applied. Reserved numbers cannot be assigned to people, features, or services. This parameter cannot be used along with the `available` filter, whether `available` is set to `true` for available numbers or `false` for assigned numbers; using both returns a `400` error. This parameter also cannot be used along with the `assigned` filter; using both returns a `400` error.
+        example: true
+        schema:
+          type: boolean
+      - name: elinEnabled
+        in: query
+        description: When true, returns the list of phone numbers that are used as an Emergency Location Identification Number (ELIN) in an emergency call scenario. When `false`, returns the list of phone numbers that are not used as an ELIN.
+        example: true
+        schema:
+          type: boolean
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Phone Numbers for an Organization with Given Criteria
+  /telephony/config/jobs/numbers/manageNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobListResponse'
+              example:
+                items:
+                - id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC84YTI0ZjM5NC1lMTdjLTRiMTYtOTU3Ni0zNzA3YjY5YmU3Mzc
+                  jobType: managenumbers
+                  trackingId: ROUTER_6332CCCB-E492-01BB-0165-48A3DC0A0165
+                  sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wNTUyZjY3Yi01OWE5LTQxYmItODczNi0xYjA0MWQxZGRkNWU
+                  sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                  targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                  instanceId: 251110
+                  jobExecutionStatus:
+                  - id: 252158
+                    startTime: '2022-09-27T10:13:43.130Z'
+                    endTime: '2022-09-27T10:13:47.191Z'
+                    lastUpdated: '2022-09-27T10:13:47.595Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    createdTime: '2022-09-27T10:13:43.106Z'
+                    stepExecutionStatuses:
+                    - id: 1224428
+                      startTime: '2022-09-27T10:13:43.404Z'
+                      endTime: '2022-09-27T10:13:44.664Z'
+                      lastUpdated: '2022-09-27T10:13:44.664Z'
+                      statusMessage: COMPLETED
+                      exitCode: COMPLETED
+                      name: manageNumbersDeciderStep
+                      timeElapsed: PT1.26S
+                    - id: 1224429
+                      startTime: '2022-09-27T10:13:44.684Z'
+                      endTime: '2022-09-27T10:13:47.182Z'
+                      lastUpdated: '2022-09-27T10:13:47.183Z'
+                      statusMessage: COMPLETED
+                      exitCode: COMPLETED_WITH_ERRORS
+                      name: managenumbersMoveNumbers
+                      timeElapsed: PT2.498S
+                    timeElapsed: PT3.758S
+                  latestExecutionStatus: COMPLETED
+                  latestExecutionExitCode: COMPLETED
+                  operationType: MOVE
+                  sourceLocationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyMjNiYmVkLTQyYzktNDU0ZC1hMWYzLTdmYWQ1Y2M3ZTZlMw
+                  targetLocationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzgxYjUzYzk3LTQxNGQtNDhjYy1hZThiLWNhZmM0MDc4NDAwNw
+                  counts:
+                    totalNumbers: 1
+                    numbersDeleted: 0
+                    numbersMoved: 0
+                    numbersFailed: 1
+                    numbersUsageChanged: 0
+                - id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+                  jobType: managenumbers
+                  trackingId: ATLAS_06a92f81-244d-4fd2-b8db-121bc1eeb6c8_11
+                  sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wNTUyZjY3Yi01OWE5LTQxYmItODczNi0xYjA0MWQxZGRkNWU
+                  sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                  targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                  instanceId: 238972
+                  jobExecutionStatus:
+                  - id: 239746
+                    startTime: '2022-08-24T06:18:31.092Z'
+                    endTime: '2022-08-24T06:18:38.448Z'
+                    lastUpdated: '2022-08-24T06:18:38.825Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    createdTime: '2022-08-24T06:18:31.070Z'
+                    stepExecutionStatuses:
+                    - id: 1172935
+                      startTime: '2022-08-24T06:18:31.203Z'
+                      endTime: '2022-08-24T06:18:32.823Z'
+                      lastUpdated: '2022-08-24T06:18:32.823Z'
+                      statusMessage: COMPLETED
+                      exitCode: COMPLETED
+                      name: manageNumbersDeciderStep
+                      timeElapsed: PT1.62S
+                    - id: 1172936
+                      startTime: '2022-08-24T06:18:32.839Z'
+                      endTime: '2022-08-24T06:18:38.439Z'
+                      lastUpdated: '2022-08-24T06:18:38.439Z'
+                      statusMessage: COMPLETED
+                      exitCode: COMPLETED
+                      name: managenumbersMoveNumbers
+                      timeElapsed: PT5.6S
+                    timeElapsed: PT7.22S
+                  latestExecutionStatus: COMPLETED
+                  latestExecutionExitCode: COMPLETED
+                  operationType: MOVE
+                  sourceLocationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E2MmRlOWRkLWRmODEtNDg3My04MGY5LTY2MmYyZmM3ZTI2NQ
+                  targetLocationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyMjNiYmVkLTQyYzktNDU0ZC1hMWYzLTdmYWQ1Y2M3ZTZlMw
+                  counts:
+                    totalNumbers: 1
+                    numbersDeleted: 0
+                    numbersMoved: 1
+                    numbersFailed: 0
+                    numbersUsageChanged: 0
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Manage Numbers Jobs
+      operationId: ListManageNumbersJobs
+      description: 'Lists all Manage Numbers jobs for the given organization in order of most recent one to oldest one irrespective of its status.
+
+
+        The public API only supports initiating jobs which move numbers between locations.
+
+
+        Via Control Hub they can initiate both the move and delete, so this listing can show both.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve list of Manage Number jobs for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi80YTViYjVhOC1hZDAwLTQ0ZGEtODg2NC0wYjExNTE0NDQyYzk
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of jobs. Default is 0.
+        example: 0
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Limit the number of jobs returned to this maximum count. Default is 2000.
+        example: 2000
+        schema:
+          type: integer
+      x-operation-id-source: normalized
+      x-operation-id-original: List Manage Numbers Jobs
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartJobResponse'
+              example:
+                name: managenumbers
+                id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC84M2U1MjNlYy02NjY2LTRlZjAtODcwYi0xZjViZGI1NDNhZDU
+                jobType: managenumbers
+                trackingId: NA_c989fd47-391e-47c0-8fe4-b45711871a42
+                sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wNTUyZjY3Yi01OWE5LTQxYmItODczNi0xYjA0MWQxZGRkNWU
+                sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                instanceId: 0
+                jobExecutionStatus:
+                - id: 0
+                  startTime: '2022-09-13T10:56:41.241Z'
+                  lastUpdated: '2022-09-13T10:56:41.242Z'
+                  statusMessage: STARTED
+                  exitCode: UNKNOWN
+                  createdTime: '2022-09-13T10:56:41.054Z'
+                  timeElapsed: PT0S
+                latestExecutionStatus: STARTED
+                latestExecutionExitCode: UNKNOWN
+                operationType: MOVE
+                sourceLocationId: 5223bbed-42c9-454d-a1f3-7fad5cc7e6e3
+                targetLocationId: 81b53c97-414d-48cc-ae8b-cafc40784007
+                counts:
+                  totalNumbers: 0
+                  numbersDeleted: 0
+                  numbersMoved: 0
+                  numbersFailed: 0
+                  numbersUsageChanged: 0
+        '400':
+          description: Bad Request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveNumberValidationError'
+              example:
+                error:
+                  key: '400'
+                  message:
+                  - description: Invalid phone number.
+                    code: BATCH-1017017
+                    location: null
+                trackingId: ROUTER_6364F0A9-D48A-01BB-0128-0AFDEB7B0128
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Initiate Number Jobs
+      operationId: InitiateNumberJobs
+      description: 'Starts the execution of an operation on a set of numbers. Supported operations are: `MOVE`, `NUMBER_USAGE_CHANGE`.
+
+
+        Up to 1000 numbers can be given in `MOVE` operation type and `NUMBER_USAGE_CHANGE` operation type per request.
+
+        If another move number job request is initiated while a move job is in progress, the API call will receive a `409` HTTP status code.
+
+
+        In order to move a number the following is required:
+
+
+        * The number must be unassigned.
+
+
+        * Both locations must have the same PSTN Connection Type.
+
+
+        * Both locations must have the same PSTN Provider.
+
+
+        * Both locations have to be in the same country.
+
+
+        For example, you can move from Cisco Calling Plan to Cisco Calling Plan, but you cannot move from Cisco Calling Plan to a location with Cloud Connected PSTN.
+
+
+        In order to change the number usage the following is required:
+
+
+        * The number must be unassigned.
+
+
+        * Number Usage Type can be set to `NONE` if carrier has the PSTN service `GEOGRAPHIC_NUMBERS`.
+
+
+        * Number Usage Type can be set to `SERVICE` if carrier has the PSTN service `SERVICE_NUMBERS`.
+
+
+        For example, you can initiate a `NUMBER_USAGE_CHANGE` job to change the number type from Standard number to Service number, or the other way around.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: orgId
+        in: query
+        description: Initiate a Manage Numbers job for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi80YTViYjVhOC1hZDAwLTQ0ZGEtODg2NC0wYjExNTE0NDQyYzk
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminBatchStartJobObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Initiate Number Jobs
+  /telephony/config/jobs/numbers/manageNumbers/{jobId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/jobIdResponseObject'
+              example:
+                name: managenumbers
+                id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+                jobType: managenumbers
+                trackingId: ATLAS_06a92f81-244d-4fd2-b8db-121bc1eeb6c8_11
+                sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wNTUyZjY3Yi01OWE5LTQxYmItODczNi0xYjA0MWQxZGRkNWU
+                sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+                instanceId: 238972
+                jobExecutionStatus:
+                - id: 239746
+                  startTime: '2022-08-24T06:18:31.092Z'
+                  endTime: '2022-08-24T06:18:38.448Z'
+                  lastUpdated: '2022-08-24T06:18:38.825Z'
+                  statusMessage: COMPLETED
+                  exitCode: COMPLETED
+                  createdTime: '2022-08-24T06:18:31.070Z'
+                  stepExecutionStatuses:
+                  - id: 1172935
+                    startTime: '2022-08-24T06:18:31.203Z'
+                    endTime: '2022-08-24T06:18:32.823Z'
+                    lastUpdated: '2022-08-24T06:18:32.823Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    name: manageNumbersDeciderStep
+                    timeElapsed: PT1.62S
+                  - id: 1172936
+                    startTime: '2022-08-24T06:18:32.839Z'
+                    endTime: '2022-08-24T06:18:38.439Z'
+                    lastUpdated: '2022-08-24T06:18:38.439Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    name: managenumbersMoveNumbers
+                    timeElapsed: PT5.6S
+                  timeElapsed: PT7.22S
+                latestExecutionStatus: COMPLETED
+                latestExecutionExitCode: COMPLETED
+                operationType: MOVE
+                sourceLocationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E2MmRlOWRkLWRmODEtNDg3My04MGY5LTY2MmYyZmM3ZTI2NQ
+                targetLocationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyMjNiYmVkLTQyYzktNDU0ZC1hMWYzLTdmYWQ1Y2M3ZTZlMw
+                counts:
+                  totalNumbers: 1
+                  numbersDeleted: 0
+                  numbersMoved: 1
+                  numbersFailed: 0
+                  numbersUsageChanged: 0
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Manage Numbers Job Status
+      operationId: GetManageNumbersJobStatus
+      description: 'Returns the status and other details of the job.
+
+
+        Use this API to monitor a Manage Numbers job after it has been initiated.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: jobId
+        in: path
+        description: Retrieve job details for this `jobId`.
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve job details for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi80YTViYjVhOC1hZDAwLTQ0ZGEtODg2NC0wYjExNTE0NDQyYzk
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Manage Numbers Job Status
+  /telephony/config/jobs/numbers/manageNumbers/{jobId}/actions/pause/invoke:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Pause the Manage Numbers Job
+      operationId: PauseTheManageNumbersJob
+      description: 'Pause the running Manage Numbers Job. A paused job can be resumed.
+
+
+        Use this API when a Manage Numbers job must be temporarily stopped before completion.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: jobId
+        in: path
+        description: Pause the Manage Numbers job for this `jobId`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Pause the Manage Numbers job for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi80YTViYjVhOC1hZDAwLTQ0ZGEtODg2NC0wYjExNTE0NDQyYzk
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Pause the Manage Numbers Job
+  /telephony/config/jobs/numbers/manageNumbers/{jobId}/actions/resume/invoke:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Resume the Manage Numbers Job
+      operationId: ResumeTheManageNumbersJob
+      description: 'Resume the paused Manage Numbers Job. A paused job can be resumed.
+
+
+        Use this API to continue processing a Manage Numbers job that was previously paused.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: jobId
+        in: path
+        description: Resume the Manage Numbers job for this `jobId`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Resume the Manage Numbers job for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi80YTViYjVhOC1hZDAwLTQ0ZGEtODg2NC0wYjExNTE0NDQyYzk
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Resume the Manage Numbers Job
+  /telephony/config/jobs/numbers/manageNumbers/{jobId}/errors:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseObject'
+              example:
+                items:
+                - itemNumber: 1
+                  item: '+12025558374'
+                  error:
+                    key: '400'
+                    message:
+                    - description: Failed because it is not an unassigned number.
+                      code: BATCH-1017023
+                      locationid: 5223bbed-42c9-454d-a1f3-7fad5cc7e6e3
+                  trackingId: ROUTER_6332cccb-e492-01bb-0165-48a3dc0a0165_0
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Manage Numbers Job Errors
+      operationId: ListManageNumbersJobErrors
+      description: 'Lists all error details of Manage Numbers job. This will not list any errors if `exitCode` is `COMPLETED`. If the status is `COMPLETED_WITH_ERRORS` then this lists the cause of failures.
+
+
+        List of possible Errors:
+
+
+        + BATCH-1017021 - Failed to move because it is an inactive number.
+
+
+        + BATCH-1017022 - Failed to move because the source location and target location have different CCP providers.
+
+
+        + BATCH-1017023 - Failed because it is not an unassigned number.
+
+
+        + BATCH-1017024 - Failed because it is a main number.
+
+
+        + BATCH-1017027 - Manage Numbers Move Operation is not supported.
+
+
+        + BATCH-1017031 - Hydra request is supported only for single number move job.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Numbers
+      parameters:
+      - name: jobId
+        in: path
+        description: Retrieve the error details for this `jobId`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC84YTI0ZjM5NC1lMTdjLTRiMTYtOTU3Ni0zNzA3YjY5YmU3Mzc
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve list of jobs for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Specifies the error offset from the first result that you want to fetch.
+        example: 0
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Specifies the maximum number of records that you want to fetch.
+        example: 100
+        schema:
+          type: integer
+          default: 2000
+      x-operation-id-source: normalized
+      x-operation-id-original: List Manage Numbers Job errors
+components:
+  schemas:
+    NumberStateOptions:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      description: " * `ACTIVE` - The number is activated and has calling capability.\n * `INACTIVE` - A number is not yet activated and has no calling capability.\n"
+    stepExecutionStatusesObject:
+      type: object
+      required:
+      - id
+      - lastUpdated
+      - statusMessage
+      - name
+      - timeElapsed
+      properties:
+        id:
+          type: number
+          example: 3624681
+          description: Unique identifier that identifies each step in a job.
+        startTime:
+          type: string
+          example: '2023-05-30T13:04:00.469Z'
+          description: The date and time with seconds, the step execution has started in UTC format.
+        endTime:
+          type: string
+          example: '2023-05-30T13:04:03.245Z'
+          description: The date and time with seconds, the step execution has ended in UTC format.
+        lastUpdated:
+          type: string
+          example: '2023-05-30T13:04:03.574Z'
+          description: The date and time with seconds, the step has last updated in UTC format.
+        statusMessage:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Displays status for a step.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        exitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Exit Code for a step.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        name:
+          type: string
+          example: moveusersvalidateAndMove
+          description: Step name.
+        timeElapsed:
+          type: string
+          example: PT2.752S
+          description: Time lapsed in seconds since the job execution started.
+    NumberOwnerType:
+      type: string
+      enum:
+      - PLACE
+      - PEOPLE
+      - VIRTUAL_LINE
+      - AUTO_ATTENDANT
+      - CALL_QUEUE
+      - GROUP_PAGING
+      - HUNT_GROUP
+      - VOICE_MESSAGING
+      - OFFICE_ANYWHERE
+      - CONTACT_CENTER_LINK
+      - CONTACT_CENTER_ADAPTER
+      - ROUTE_LIST
+      - VOICEMAIL_GROUP
+      - COLLABORATE_BRIDGE
+      description: " * `PLACE` - PSTN phone number's owner is a workspace.\n * `PEOPLE` - PSTN phone number's owner is a person.\n * `VIRTUAL_LINE` - PSTN phone number's owner is a Virtual Profile.\n * `AUTO_ATTENDANT` - PSTN phone number's owner is an auto-attendant.\n * `CALL_QUEUE` - PSTN phone number's owner is a call queue.\n * `GROUP_PAGING` - PSTN phone number's owner is a group paging.\n * `HUNT_GROUP` - PSTN phone number's owner is a hunt group.\n * `VOICE_MESSAGING` - PSTN phone number's owner is a voice messaging.\n * `OFFICE_ANYWHERE` - PSTN phone number's owner is a Single Number Reach.\n * `CONTACT_CENTER_LINK` - PSTN phone number's owner is a Contact Center link.\n * `CONTACT_CENTER_ADAPTER` - PSTN phone number's owner is a Contact Center adapter.\n * `ROUTE_LIST` - PSTN phone number's owner is a route list.\n * `VOICEMAIL_GROUP` - PSTN phone number's owner is a voicemail group.\n * `COLLABORATE_BRIDGE` - PSTN phone number's owner is a collaborate bridge.\n"
+    MoveNumberValidationError:
+      type: object
+      properties:
+        trackingId:
+          type: string
+          description: Unique identifier to track the HTTP requests.
+        error:
+          $ref: '#/components/schemas/ErrorObject'
+    ErrorObject:
+      type: object
+      properties:
+        key:
+          type: string
+          description: HTTP error code.
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorMessageObject'
+          description: Message string with further error information.
+    NumbersPost:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+          description: List of phone numbers that need to be added.
+        numberType:
+          $ref: '#/components/schemas/NumberTypeOptions'
+          description: The type of the number. Required for `MOBILE` number type.
+        numberUsageType:
+          $ref: '#/components/schemas/NumberUsageTypeOptions'
+          description: The type of usage expected for the number.
+        state:
+          $ref: '#/components/schemas/NumberStateOptions'
+          description: The state of the number. By default, the state of a number is set to `ACTIVE` for DID and toll-free numbers only. Mobile numbers will be activated upon assignment to a user.
+        subscriptionId:
+          type: string
+          description: The `subscriptionId` to be used for the mobile number order.
+        carrierId:
+          type: string
+          format: uuid
+          description: The `carrierId` to be used for the mobile number order.
+    JobDetailsResponse:
+      type: object
+      required:
+      - id
+      - trackingId
+      - sourceUserId
+      - sourceCustomerId
+      - targetCustomerId
+      - instanceId
+      - latestExecutionStatus
+      - counts
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC9mZjBlN2Q2Ni05MDRlLTRkZGItYjJlNS05ZGM0ODk0ZDY5OTk
+          description: Unique identifier of the job.
+        trackingId:
+          type: string
+          example: ROUTER_ebb52b5b-d060-4164-9757-48b383423d73
+          description: Unique identifier to track the flow of HTTP requests.
+        sourceUserId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85YzJhMDUxMC0wOTUwLTQ1MmYtODFmZi05YTVkMjM2OTJkZTY
+          description: Unique identifier to identify which user has run the job.
+        sourceCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMjEyNGVlZi04YWY3LTQ4OWMtODA1Yi0zNjNjYzY0MDE4OTM
+          description: Unique identifier to identify the customer who has run the job.
+        targetCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMjEyNGVlZi04YWY3LTQ4OWMtODA1Yi0zNjNjYzY0MDE4OTM
+          description: Unique identifier to identify the customer for which the job was run.
+        instanceId:
+          type: number
+          example: 10
+          description: Unique identifier to identify the instance of the job.
+        jobExecutionStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobExecutionStatusObject'
+          description: Displays the most recent step's execution status. Contains execution statuses of all the steps involved in the execution of the job.
+        latestExecutionStatus:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Most recent status of the job at the time of invocation.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        latestExecutionExitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Most recent exit code of the job at the time of invocation.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        counts:
+          $ref: '#/components/schemas/CountObject'
+          description: Job statistics.
+        csvFile:
+          type: string
+          example: 02124eef-7be6-489c-805b-363cc6401893/cbf865e9-d069-4004-bb57-2a39f5bfb5fe_d1fde6bf944c40ed8ffbab14e6ca6a12
+          description: Reference ID for the file that holds the errors and impacts.
+        csvFileExpiryTime:
+          type: string
+          example: '2023-07-12T12:20:33.503Z'
+          description: Date and time with seconds, the file expires in UTC format.
+        fileFormat:
+          type: string
+          example: text/csv
+          description: Format of the file generated.
+    ValidateNumbersPostRequest:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+          description: List of phone numbers that need to be added.
+    NumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/NumberObject'
+          description: Array of phone numbers.
+        count:
+          $ref: '#/components/schemas/NumberCount'
+          description: Count of phone numbers categorized by type or their states, such as assigned or unassigned.
+    NumberTypeOptions:
+      type: string
+      enum:
+      - TOLLFREE
+      - DID
+      - MOBILE
+      description: " * `TOLLFREE` - A toll-free PSTN number.\n * `DID` - A normal Direct Inward Dial (DID) PSTN number.\n * `MOBILE` - A mobile number.\n"
+    ErrorResponseObject:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemObject'
+    ItemObject:
+      type: object
+      properties:
+        item:
+          type: string
+          description: Phone number
+        itemNumber:
+          type: number
+          description: Index of error number.
+        trackingId:
+          type: string
+          description: Unique identifier to track the HTTP requests.
+        error:
+          $ref: '#/components/schemas/ErrorObject'
+    NumberObject:
+      type: object
+      required:
+      - state
+      - phoneNumberType
+      - mainNumber
+      - includedTelephonyTypes
+      - tollFreeNumber
+      - isServiceNumber
+      - elinEnabled
+      - isReservedNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the phone number.
+        extension:
+          type: string
+          example: '000'
+          description: Extension for a phone number.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '1234000'
+          description: Routing prefix + extension of a person or workspace.
+        state:
+          type: string
+          example: ACTIVE
+          description: Phone number's state.
+        phoneNumberType:
+          type: string
+          enum:
+          - PRIMARY
+          - ALTERNATE
+          - FAX
+          - DNIS
+          - Default
+          description: "Returns the filtered list of phone numbers of the given `phoneNumberType`. Response excludes any extensions without numbers. Possible input values:\n * `PRIMARY` - Filter the results to include only primary phone numbers.\n * `ALTERNATE` - Filter the results to include only alternate phone numbers.\n * `FAX` - Filter the results to include only FAX phone numbers.\n * `DNIS` - Filter the results to include only Dialed Number Identification Service (DNIS) phone numbers.\n * `Default` - Filter the results to include all numbers.\n"
+        mainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as location CLID.
+        includedTelephonyTypes:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        mobileNetwork:
+          type: string
+          example: mobileNetwork
+          description: Mobile Network for the number if the number is MOBILE_NUMBER.
+        routingProfile:
+          type: string
+          example: AttRtPf
+          description: Routing Profile for the number if the number is MOBILE_NUMBER.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number.
+        elinEnabled:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as an Emergency Location Identification Number (ELIN) for callback purposes when an emergency call is made.
+        isReservedNumber:
+          type: boolean
+          example: true
+          description: Flag to indicate if the number is a reserved number. Reserved numbers cannot be assigned to people, features, or services.
+        location:
+          type: object
+          required:
+          - id
+          - name
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+              description: ID of location in which phone number exists.
+            name:
+              type: string
+              example: Banglore
+              description: Name of the location for phone number.
+        owner:
+          type: object
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODhiZGIwNC1jZjU5LTRjMjMtODQ4OC00NTNhOTE3ZDFlMjk
+              description: ID of the owner to which phone number is assigned.
+            type:
+              $ref: '#/components/schemas/NumberOwnerType'
+              description: Type of the phone number's owner.
+            firstName:
+              type: string
+              example: Mark
+              description: First name of the phone number's owner.
+            lastName:
+              type: string
+              example: Zand
+              description: Last name of the phone number's owner.
+            elinExpiryTime:
+              type: string
+              example: '2025-12-31T23:59:59.000Z'
+              description: UTC Timestamp indicating the date and time of expiration of the temporary Emergency Location Identification Number (ELIN) assignment set to this owner when an emergency call is made.
+    JobListResponse:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobDetailsResponse'
+          description: Lists all jobs for the customer in order of most recent one to oldest one irrespective of its status.
+    JobExecutionStatusObject:
+      type: object
+      required:
+      - id
+      - lastUpdated
+      - statusMessage
+      - createdTime
+      - timeElapsed
+      properties:
+        id:
+          type: number
+          example: 735206
+          description: Unique identifier that identifies each instance of the job.
+        startTime:
+          type: string
+          example: '2023-05-30T13:04:00.469Z'
+          description: The date and time with seconds, the job has started in UTC format.
+        endTime:
+          type: string
+          example: '2023-05-30T13:04:03.245Z'
+          description: The date and time with seconds, the job has ended in UTC format.
+        lastUpdated:
+          type: string
+          example: '2023-05-30T13:04:03.574Z'
+          description: The date and time with seconds, the job has last updated in UTC format post one of the step execution completion.
+        statusMessage:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Displays status for overall steps that are part of the job.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        exitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Exit Code for a job.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        createdTime:
+          type: string
+          example: '2023-05-30T13:04:00.457Z'
+          description: The date and time with seconds, the job has created in UTC format.
+        timeElapsed:
+          type: string
+          example: PT2.752S
+          description: Time lapsed in seconds since the job execution started.
+        stepExecutionStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/stepExecutionStatusesObject'
+          description: Status of each step within a job.
+    NumberCount:
+      type: object
+      properties:
+        assigned:
+          type: integer
+          example: 33
+          description: Count of phone numbers that are in the assigned state.
+        unAssigned:
+          type: integer
+          example: 114
+          description: Count of phone numbers which are in the un-assigned state.
+        inActive:
+          type: integer
+          example: 12
+          description: Count of phone numbers which are inactive.
+        extensionOnly:
+          type: integer
+          example: 692
+          description: Count of extensions only without phone number.
+        tollFreeNumbers:
+          type: integer
+          example: 1
+          description: Count of the toll free numbers.
+        total:
+          type: integer
+          example: 839
+          description: Total phone numbers and extensions available.
+        mobileNumber:
+          type: integer
+          example: 6
+          description: Count of phone numbers of type `MOBILE_NUMBER` only without `PSTN_NUMBER` and extension.
+        serviceNumber:
+          type: integer
+          example: 1
+          description: Count of phone numbers with `includedTelephonyTypes` as `PSTN_NUMBER` and `isServiceNumber` value as `true`.
+        elin:
+          type: integer
+          example: 5
+          description: Count of phone numbers that are used as Emergency Location Identification Number (ELIN). ELINs are used for callback purposes when an emergency call is made.
+        reservedNumber:
+          type: integer
+          example: 1
+          description: Count of reserved phone numbers.
+    Number:
+      type: object
+      required:
+      - number
+      - state
+      - tollFreeNumber
+      properties:
+        number:
+          type: string
+          example: '+2145557901'
+          description: Phone numbers that need to be validated.
+        state:
+          $ref: '#/components/schemas/NumberState'
+          description: The state of the number.
+        tollFreeNumber:
+          type: boolean
+          description: If `true`, it's a toll-free number.
+        detail:
+          type: array
+          items:
+            type: string
+          description: Error details if the number is unavailable.
+    NumbersRequest:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+          description: List of phone numbers whose activation state will be modified according to the specified action.
+        action:
+          type: string
+          enum:
+          - ACTIVATE
+          - DEACTIVATE
+          description: 'Specifies the action to execute on the provided phone numbers. If no action is specified, the default is set to ACTIVATE.
+
+            For DEACTIVATE action here are few limitations: 1) a maximum of 500 phone numbers can be processed, 2) the numbers must be unassigned, 3) the numbers cannot serve as ECBN (Emergency Callback Number), 4) the numbers must not be mobile numbers, and 5) this action is only applicable to non-integrated PSTN connection types, specifically Local Gateway (LGW) and Non-integrated CCP'
+          example: DEACTIVATE
+    jobIdResponseObject:
+      type: object
+      required:
+      - name
+      - id
+      - jobType
+      - trackingId
+      - sourceUserId
+      - sourceCustomerId
+      - targetCustomerId
+      - instanceId
+      - latestExecutionStatus
+      - operationType
+      - sourceLocationId
+      - targetLocationId
+      - counts
+      properties:
+        name:
+          type: string
+          example: managenumbers
+          description: Job name.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+          description: Unique identifier of the job.
+        jobType:
+          type: string
+          example: managenumbers
+          description: Job type.
+        trackingId:
+          type: string
+          example: ATLAS_06a92f81-244d-4fd2-b8db-121bc1eeb6c8_11
+          description: Unique identifier to track the flow of HTTP requests.
+        sourceUserId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wNTUyZjY3Yi01OWE5LTQxYmItODczNi0xYjA0MWQxZGRkNWU
+          description: Unique identifier to identify which user has run the job.
+        sourceCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+          description: Unique identifier of the organization that initiated the job.
+        targetCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+          description: Unique identifier of the organization for which the job was run.
+        instanceId:
+          type: integer
+          example: 238972
+          description: Unique identifier to identify the instance of the job.
+        jobExecutionStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobExecutionStatusObject'
+          description: Displays the most recent step's execution status. Contains execution statuses of all the steps involved in the execution of the job.
+        latestExecutionStatus:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Most recent status of the job at the time of invocation.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        latestExecutionExitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Most recent exit code of the job at the time of invocation.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        operationType:
+          type: string
+          example: MOVE
+          description: The operation type that was carried out.
+        sourceLocationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E2MmRlOWRkLWRmODEtNDg3My04MGY5LTY2MmYyZmM3ZTI2NQ
+          description: Unique location identifier for which the job was run.
+        targetLocationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyMjNiYmVkLTQyYzktNDU0ZC1hMWYzLTdmYWQ1Y2M3ZTZlMw
+          description: Unique location identifier for which the numbers have been moved.
+        counts:
+          $ref: '#/components/schemas/CountObject'
+          description: Job statistics.
+    JobExecutionStatusObject1:
+      type: object
+      required:
+      - id
+      - lastUpdated
+      - statusMessage
+      - createdTime
+      - timeElapsed
+      properties:
+        id:
+          type: integer
+          example: 239748
+          description: Unique identifier that identifies each instance of the job.
+        lastUpdated:
+          type: string
+          example: '2022-08-24T06:18:38.825Z'
+          description: Last updated time (in UTC format) post one of the step execution completion.
+        statusMessage:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Displays status for overall steps that are part of the job.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        exitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Exit Code for a job.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        createdTime:
+          type: string
+          example: '2022-08-24T06:18:31.070Z'
+          description: Job creation time in UTC format.
+        timeElapsed:
+          type: string
+          example: PT7.22S
+          description: Time lapsed since the job execution started.
+    NumberState:
+      type: string
+      enum:
+      - Available
+      - Duplicate
+      - Duplicate In List
+      - Invalid
+      - Unavailable
+      description: " * `Available` - The phone number is available.\n * `Duplicate` - Duplicate phone number.\n * `Duplicate In List` - Duplicate phone number in the list.\n * `Invalid` - The phone number is invalid.\n * `Unavailable` - The phone number is unavailable and cannot be used.\n"
+    TelephonyType:
+      type: string
+      enum:
+      - PSTN_NUMBER
+      description: ' * `PSTN_NUMBER` - The object is a PSTN number.
+
+        '
+    NumberUsageTypeOptions:
+      type: string
+      enum:
+      - NONE
+      - SERVICE
+      description: " * `NONE` - Standard/user number usage (default).\n * `SERVICE` - The number will be used in high-volume service, for example, Contact Center.\n"
+    ValidateNumbersResponse:
+      type: object
+      required:
+      - status
+      - numbers
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+          description: The status of the numbers.
+        numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Number'
+          description: An array of number objects with number details.
+    StartJobResponse:
+      type: object
+      required:
+      - name
+      - id
+      - jobType
+      - trackingId
+      - sourceUserId
+      - sourceCustomerId
+      - targetCustomerId
+      - instanceId
+      - latestExecutionStatus
+      - operationType
+      - sourceLocationId
+      - targetLocationId
+      - counts
+      properties:
+        name:
+          type: string
+          example: managenumbers
+          description: Job name.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+          description: Unique identifier of the job.
+        jobType:
+          type: string
+          example: managenumbers
+          description: Job type.
+        trackingId:
+          type: string
+          example: ATLAS_06a92f81-244d-4fd2-b8db-121bc1eeb6c8_11
+          description: Unique identifier to track the flow of HTTP requests.
+        sourceUserId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wNTUyZjY3Yi01OWE5LTQxYmItODczNi0xYjA0MWQxZGRkNWU
+          description: Unique identifier to identify which user has run the job.
+        sourceCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+          description: Unique identifier of the organization that initiated the job.
+        targetCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85MTE1NDM1Ny1iZWQxLTQ1ZDUtYWE4Zi00ZTUwYzBkZWNmMzM
+          description: Unique identifier of the organization for which the job was run.
+        instanceId:
+          type: integer
+          example: 238972
+          description: Unique identifier to identify the instance of the job.
+        jobExecutionStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobExecutionStatusObject1'
+          description: Displays the most recent step's execution status. Contains execution statuses of all the steps involved in the execution of the job.
+        latestExecutionStatus:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Most recent status of the job at the time of invocation.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        latestExecutionExitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Most recent exit code of the job at the time of invocation.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        operationType:
+          type: string
+          example: MOVE
+          description: The operation type that was carried out.
+        sourceLocationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E2MmRlOWRkLWRmODEtNDg3My04MGY5LTY2MmYyZmM3ZTI2NQ
+          description: Unique location identifier for which the job was run.
+        targetLocationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyMjNiYmVkLTQyYzktNDU0ZC1hMWYzLTdmYWQ1Y2M3ZTZlMw
+          description: Unique location identifier for which the numbers have been moved.
+        counts:
+          $ref: '#/components/schemas/CountObject'
+          description: Job statistics.
+    AdminBatchStartJobObject:
+      type: object
+      required:
+      - operation
+      - numberList
+      properties:
+        operation:
+          type: string
+          example: MOVE|NUMBER_USAGE_CHANGE
+          description: The kind of operation to be carried out.
+        targetLocationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+          description: Mandatory for a `MOVE` operation. The target location within organization where the unassigned numbers will be moved from the source location.
+        numberUsageType:
+          type: string
+          example: NONE|SERVICE
+          description: The number usage type. Mandatory for `NUMBER_USAGE_CHANGE` operation.
+        numberList:
+          type: array
+          items:
+            $ref: '#/components/schemas/numberItem'
+          description: Numbers on which to execute the operation.
+    ErrorMessageObject:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Internal error code.
+        locationId:
+          type: string
+          description: Error messages describing the location ID in which the error occurs. For a move operation, this is the target location ID.
+    CountObject:
+      type: object
+      required:
+      - totalMoves
+      - moved
+      - failed
+      - pending
+      - skipped
+      properties:
+        totalMoves:
+          type: number
+          example: 100
+          description: Total number of user moves requested.
+        moved:
+          type: number
+          example: 50
+          description: Total number of user moves completed successfully.
+        failed:
+          type: number
+          example: 50
+          description: Total number of user moves that were completed with failures.
+        pending:
+          type: number
+          example: 50
+          description: Total number of user moves that were pending with number orders.
+        skipped:
+          type: number
+          example: 50
+          description: Total number of user moves that were skipped.
+    numberItem:
+      type: object
+      required:
+      - locationId
+      - numbers
+      properties:
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyMjNiYmVkLTQyYzktNDU0ZC1hMWYzLTdmYWQ1Y2M3ZTZlMw
+          description: The source location of the numbers on which to execute the operation.
+        numbers:
+          type: array
+          items:
+            type: string
+          description: The numbers on which to execute the operation.
+    Status:
+      type: string
+      enum:
+      - OK
+      - ERRORS
+      description: " * `OK` - Everything is good.\n * `ERRORS` - Validation has failed with errors.\n"
+    NumbersDelete:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+          description: List of phone numbers that need to be deleted. The maximum limit is 5.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

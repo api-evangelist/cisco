@@ -1,0 +1,996 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Paging Group API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features:  Paging Group'
+paths:
+  /telephony/config/paging:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - locationPaging
+                properties:
+                  locationPaging:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListPagingGroupObject'
+                    description: Array of paging groups.
+              example:
+                locationPaging:
+                - id: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+                  name: PagingGroup-1
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+                  phoneNumber: '+15558675309'
+                  extension: '7781'
+                  routingPrefix: '567'
+                  esn: '5677781'
+                  tollFreeNumber: false
+                - id: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFp6WkdaelpHWXliMEEyTkRJME1qTTBNamszTG1sdWRERXdMbUpqYkdRdWQyVmlaWGd1WTI5dA
+                  name: PagingGroup-2
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+                  phoneNumber: '+15558675310'
+                  extension: '7781'
+                  routingPrefix: '567'
+                  esn: '5677781'
+                  tollFreeNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Paging Groups
+      operationId: ReadTheListOfPagingGroups
+      description: 'List all Paging Groups for the organization.
+
+
+        Group Paging allows a person to place a one-way call or group page to up to 75 people and/or workspaces by
+
+        dialing a number or extension assigned to a specific paging group. The Group Paging service makes a simultaneous call to all the assigned targets.
+
+
+        Retrieving this list requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Paging Group'
+      parameters:
+      - name: orgId
+        in: query
+        description: List paging groups for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of objects returned to this maximum count. Default is 2000
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects. Default is 0
+        example: '0'
+        schema:
+          type: number
+      - name: locationId
+        in: query
+        description: Return only paging groups with matching location ID. Default is all locations
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Return only paging groups with the matching name.
+        example: PagingGroup
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: Return only paging groups with matching primary phone number or extension.
+        example: '+15558675309'
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Paging Groups
+  /telephony/config/locations/{locationId}/paging:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created paging group.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a new Paging Group
+      operationId: CreateANewPagingGroup
+      description: 'Create a new Paging Group for the given location.
+
+
+        Group Paging allows a one-way call or group page to up to 75 people, workspaces and virtual lines by
+
+        dialing a number or extension assigned to a specific paging group. The Group Paging service makes a simultaneous call to all the assigned targets.
+
+
+        Creating a paging group requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Paging Group'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create the paging group for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the paging group for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: PagingGroup-1
+              phoneNumber: '+15558675309'
+              extension: '7781'
+              languageCode: en_us
+              firstName: John
+              lastName: Doe
+              originatorCallerIdEnabled: false
+              originators:
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YTc2ZmVmNC1mZjlmLTExZWItYWYwZC00M2YwZjY1NTdjYWI
+              - Y2lzY29zcGFyazovL3VzL1BMQUNFLzU1YjUyZThhLWZmOWYtMTFlYi05ZjRhLTAzZDY1NzdhYzg1Yg
+              - Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+              targets:
+              - Y2lzY29zcGFyazovL3VzL1BMQUNFLzg0YjQ1OTIyLWZmOWYtMTFlYi1hNGI4LTMzNjI3YmVkNjdiNQ
+              - Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+              directLineCallerIdName:
+                selection: CUSTOM_NAME
+                customName: Hakim Smith
+              dialByName: Hakim Smith
+            schema:
+              $ref: '#/components/schemas/PostPagingGroupObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a new Paging Group
+  /telephony/config/locations/{locationId}/paging/{pagingId}:
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Paging Group
+      operationId: DeleteAPagingGroup
+      description: 'Delete the designated Paging Group.
+
+
+        Group Paging allows a person to place a one-way call or group page to up to 75 people and/or workspaces by
+
+        dialing a number or extension assigned to a specific paging group. The Group Paging service makes a simultaneous call to all the assigned targets.
+
+
+        Deleting a paging group requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Paging Group'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete a paging group.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: pagingId
+        in: path
+        description: Delete the paging group with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the paging group from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Paging Group
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPagingGroupObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+                enabled: true
+                name: PagingGroup-1
+                phoneNumber: '+15558675309'
+                extension: '7781'
+                language: English
+                languageCode: en_us
+                firstName: John
+                lastName: Doe
+                originatorCallerIdEnabled: true
+                originators:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YTc2ZmVmNC1mZjlmLTExZWItYWYwZC00M2YwZjY1NTdjYWI
+                  firstName: John
+                  lastName: Doe
+                  type: PEOPLE
+                  phoneNumber: '+15558675310'
+                  extension: '7781'
+                  routingPrefix: '567'
+                  esn: '5677781'
+                - id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+                  firstName: Alice
+                  lastName: Smith
+                  type: VIRTUAL_LINE
+                  phoneNumber: '+15558675311'
+                  extension: '7782'
+                  routingPrefix: '567'
+                  esn: '5677781'
+                targets:
+                - id: Y2lzY29zcGFyazovL3VzL1BMQUNFLzg0YjQ1OTIyLWZmOWYtMTFlYi1hNGI4LTMzNjI3YmVkNjdiNQ
+                  firstName: Alaska Office
+                  lastName: Second Floor
+                  type: PLACE
+                  phoneNumber: '+15558675311'
+                  extension: '7781'
+                  routingPrefix: '567'
+                  esn: '5677781'
+                - id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+                  firstName: Alice
+                  lastName: Smith
+                  type: VIRTUAL_LINE
+                  phoneNumber: '+15558675311'
+                  extension: '7782'
+                  routingPrefix: '567'
+                  esn: '5677781'
+                directLineCallerIdName:
+                  selection: CUSTOM_NAME
+                  customName: Hakim Smith
+                dialByName: Hakim Smith
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for a Paging Group
+      operationId: GetDetailsForAPagingGroup
+      description: 'Retrieve Paging Group details.
+
+
+        Group Paging allows a person, place or virtual line a one-way call or group page to up to 75 people and/or workspaces and/or virtual line by
+
+        dialing a number or extension assigned to a specific paging group. The Group Paging service makes a simultaneous call to all the assigned targets.
+
+
+        Retrieving paging group details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Paging Group'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve settings for a paging group in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: pagingId
+        in: path
+        description: Retrieve settings for the paging group with this identifier.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve paging group settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for a Paging Group
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Paging Group
+      operationId: UpdateAPagingGroup
+      description: 'Update the designated Paging Group.
+
+
+        Group Paging allows a person to place a one-way call or group page to up to 75 people, workspaces and virtual lines by
+
+        dialing a number or extension assigned to a specific paging group. The Group Paging service makes a simultaneous call to all the assigned targets.
+
+
+        Updating a paging group requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Paging Group'
+      parameters:
+      - name: locationId
+        in: path
+        description: Update settings for a paging group in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: pagingId
+        in: path
+        description: Update settings for the paging group with this identifier.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update paging group settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: PagingGroup-1
+              phoneNumber: '+15558675309'
+              extension: '7781'
+              languageCode: en_us
+              firstName: John
+              lastName: Doe
+              originatorCallerIdEnabled: false
+              originators:
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YTc2ZmVmNC1mZjlmLTExZWItYWYwZC00M2YwZjY1NTdjYWI
+              - Y2lzY29zcGFyazovL3VzL1BMQUNFLzU1YjUyZThhLWZmOWYtMTFlYi05ZjRhLTAzZDY1NzdhYzg1Yg
+              - Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+              targets:
+              - Y2lzY29zcGFyazovL3VzL1BMQUNFLzg0YjQ1OTIyLWZmOWYtMTFlYi1hNGI4LTMzNjI3YmVkNjdiNQ
+              - Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+              directLineCallerIdName:
+                selection: CUSTOM_NAME
+                customName: Hakim Smith
+              dialByName: Hakim Smith
+            schema:
+              $ref: '#/components/schemas/UpdatePagingGroupObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Paging Group
+  /telephony/config/locations/{locationId}/paging/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagingGroupPrimaryAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                - phoneNumber: '+12056350002'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                - phoneNumber: '+12056350003'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Paging Group Primary Available Phone Numbers
+      operationId: GetPagingGroupPrimaryAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as the paging group''s primary phone number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are unassigned.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Paging Group'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Paging Group Primary Available Phone Numbers
+components:
+  schemas:
+    PagingGroupPrimaryAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PagingGroupPrimaryAvailableNumberObject'
+          description: Array of phone numbers.
+    GetPagingGroupAgentObject:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YTc2ZmVmNC1mZjlmLTExZWItYWYwZC00M2YwZjY1NTdjYWI
+          description: Agents ID.
+        firstName:
+          type: string
+          example: John
+          description: Agent's first name. Minimum length is 1. Maximum length is 64.
+        lastName:
+          type: string
+          example: Doe
+          description: Agent's last name. Minimum length is 1. Maximum length is 64.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - VIRTUAL_LINE
+          description: "Type of the person, workspace or virtual line.\n * `PEOPLE` - Indicates that this object is a person.\n * `PLACE` - Indicates that this object is a workspace, formerly known as a place.\n * `VIRTUAL_LINE` - Indicates that this object is a virtual line.\n"
+        phoneNumber:
+          type: string
+          example: '+15558675309'
+          description: Agent's phone number. Minimum length is 1. Maximum length is 23. Either phoneNumber or extension is mandatory.
+        extension:
+          type: string
+          example: '7781'
+          description: Agent's extension. Minimum length is 2. Maximum length is 10. Either phoneNumber or extension is mandatory.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12347781'
+          description: Routing prefix + extension of a person or workspace.
+    DirectLineCallerIdNameObject:
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/SelectionObject'
+          description: The selection of the direct line caller ID name. Defaults to `DISPLAY_NAME`.
+        customName:
+          type: string
+          example: Hakim Smith
+          description: The custom direct line caller ID name. Required if `selection` is set to `CUSTOM_NAME`.
+      description: Settings for the direct line caller ID name to be shown for this workspace.
+    PagingGroupPrimaryAvailableNumberObject:
+      type: object
+      required:
+      - phoneNumber
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+    ListPagingGroupObject:
+      type: object
+      required:
+      - id
+      - name
+      - locationName
+      - locationId
+      - tollFreeNumber
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+          description: A unique identifier for the paging group.
+        name:
+          type: string
+          example: PagingGroup-1
+          description: Unique name for the paging group. Minimum length is 1. Maximum length is 30.
+        phoneNumber:
+          type: string
+          example: '+15558675309'
+          description: Paging group phone number. Minimum length is 1. Maximum length is 23. Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '7781'
+          description: Paging group extension. Minimum length is 2. Maximum length is 10. Either `phoneNumber` or `extension` is mandatory.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12347781'
+          description: Routing prefix + extension of a person or workspace.
+        locationName:
+          type: string
+          example: Alaska
+          description: Name of location for paging group.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: Id of location for paging group.
+        tollFreeNumber:
+          type: boolean
+          description: Flag to indicate toll free number.
+    TelephonyType:
+      type: string
+      enum:
+      - PSTN_NUMBER
+      description: ' * `PSTN_NUMBER` - The object is a PSTN number.
+
+        '
+    UpdatePagingGroupObject:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Whether or not the paging group is enabled.
+        name:
+          type: string
+          example: CallQueue-1
+          description: Unique name for the paging group. Minimum length is 1. Maximum length is 30.
+        phoneNumber:
+          type: string
+          example: '+15558675309'
+          description: Paging group phone number. Minimum length is 1. Maximum length is 23.  Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '7781'
+          description: Paging group extension. Minimum length is 2. Maximum length is 10.  Either `phoneNumber` or `extension` is mandatory.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code.
+        firstName:
+          type: string
+          example: Hakim
+          description: First name to be shown when calls are forwarded out of this paging group. Defaults to ".". This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Smith
+          description: Last name to be shown when calls are forwarded out of this paging group. Defaults to the phone number if set, otherwise defaults to call group name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        originatorCallerIdEnabled:
+          type: boolean
+          example: true
+          description: Determines what is shown on target users caller ID when a group page is performed. If true shows page originator ID.
+        originators:
+          type: array
+          items:
+            type: string
+          description: An array of people and/or workspaces, who may originate pages to this paging group.
+        targets:
+          type: array
+          items:
+            type: string
+          description: People, including workspaces, that are added to paging group as paging call targets.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObjectForPut'
+          description: Settings for the direct line caller ID name to be shown for this paging group.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: Sets or clears the name to be used for dial by name functions. To clear the `dialByName`, the attribute must be set to null or empty string. Characters of `%`,  `+`, `\`, `"` and Unicode characters are not allowed.
+    GetPagingGroupObject:
+      type: object
+      required:
+      - id
+      - enabled
+      - name
+      - language
+      - languageCode
+      - originatorCallerIdEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BBR0lOR19HUk9VUC9hSFpoWlROMk1HOHliMEEyTkRrME1USTVOeTVwYm5ReE1DNWlZMnhrTG5kbFltVjRMbU52YlE
+          description: A unique identifier for the paging group.
+        enabled:
+          type: boolean
+          example: true
+          description: Whether or not the paging group is enabled.
+        name:
+          type: string
+          example: PagingGroup-1
+          description: Unique name for the paging group. Minimum length is 1. Maximum length is 30.
+        phoneNumber:
+          type: string
+          example: '+15558675309'
+          description: Paging group phone number. Minimum length is 1. Maximum length is 23. Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '7781'
+          description: Paging group extension. Minimum length is 2. Maximum length is 10. Either `phoneNumber` or `extension` is mandatory.
+        tollFreeNumber:
+          type: boolean
+          description: Flag to indicate toll free number.
+        language:
+          type: string
+          example: English
+          description: Paging language. Minimum length is 1. Maximum length is 40.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code.
+        firstName:
+          type: string
+          example: Paging
+          description: First name that displays when a group page is performed. Minimum length is 1. Maximum length is 64. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Group
+          description: Last name that displays when a group page is performed. Minimum length is 1. Maximum length is 64. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        originatorCallerIdEnabled:
+          type: boolean
+          example: true
+          description: Determines what is shown on target users caller ID when a group page is performed. If true shows page originator ID.
+        originators:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetPagingGroupAgentObject'
+          description: An array of people, workspaces and virtual lines ID's who may originate pages to this paging group.
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetPagingGroupAgentObject'
+          description: An array of people, workspaces and virtual lines ID's that are added to paging group as paging call targets.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObject'
+          description: Settings for the direct line caller ID name to be shown for this Group Paging.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: The name to be used for dial by name functions.
+    PostPagingGroupObject:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: PagingGroup-1
+          description: Unique name for the paging group. Minimum length is 1. Maximum length is 30.
+        phoneNumber:
+          type: string
+          example: '+15558675309'
+          description: Paging group phone number. Minimum length is 1. Maximum length is 23.  Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '7781'
+          description: Paging group extension. Minimum length is 2. Maximum length is 10.  Either `phoneNumber` or `extension` is mandatory.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code.
+        firstName:
+          type: string
+          example: Paging
+          description: First name that displays when a group page is performed. Minimum length is 1. Maximum length is 64. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Group
+          description: Last name that displays when a group page is performed. Minimum length is 1. Maximum length is 64. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        originatorCallerIdEnabled:
+          type: boolean
+          example: true
+          description: Determines what is shown on target users caller ID when a group page is performed. If true shows page originator ID.
+        originators:
+          type: array
+          items:
+            type: string
+          description: An array of people, workspace, and virtual lines IDs who can originate pages to this paging group.
+        targets:
+          type: array
+          items:
+            type: string
+          description: An array of people, workspaces and virtual lines IDs will add to a paging group as paging call targets.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObject'
+          description: Settings for the direct line caller ID name to be shown for this paging group.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: The name to be used for dial by name functions.  Characters of `%`,  `+`, `\`, `"` and Unicode characters are not allowed.
+    SelectionObject:
+      type: string
+      enum:
+      - CUSTOM_NAME
+      - DISPLAY_NAME
+      description: " * `DISPLAY_NAME` - When this option is selected, `displayName` is to be shown for this workspace.\n * `CUSTOM_NAME` - When this option is selected, `customName` is to be shown for this workspace."
+    DirectLineCallerIdNameObjectForPut:
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/SelectionObject'
+          description: The selection of the direct line caller ID name.
+        customName:
+          type: string
+          example: Hakim Smith
+          description: Sets or clears the custom direct line caller ID name.  To clear the `customName`, the attribute must be set to null or empty string. Required if `selection` is set to `CUSTOM_NAME`.
+      description: Settings for the direct line caller ID name to be shown for this workspace.
+    STATE:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      description: " * `ACTIVE` - Phone number is in the active state.\n * `INACTIVE` - Phone number is in the inactive state.\n"
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

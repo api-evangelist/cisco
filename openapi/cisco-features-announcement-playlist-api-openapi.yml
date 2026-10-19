@@ -1,0 +1,675 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Announcement Playlist API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features: Announcement Playlist'
+paths:
+  /telephony/config/announcements/playlists:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - playlists
+                properties:
+                  playlists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PlaylistObject'
+                    description: Array of playlists.
+              example:
+                playlists:
+                - id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iYzZjOTYwYi01ZDJjLTRiM2QtYjRlZC0wNWY1ZmFhMTJjZjA
+                  name: testingAnnouncementPlaylist
+                  fileCount: 1
+                  isInUse: true
+                  lastUpdated: '2024-03-06 07:06:36'
+                  level: ORGANIZATION
+                  locationCount: 2
+                - id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80MzA1ZTYyZS1hMmIxLTRlNzktODQxMy1lYWQwZDVlYjcwNjM
+                  name: testingAnnouncementPlaylistDuplicateFiles
+                  fileCount: 1
+                  isInUse: true
+                  lastUpdated: '2024-03-08 10:21:37'
+                  level: ORGANIZATION
+                  locationCount: 1
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Announcement Playlists
+      operationId: listAnnouncementPlaylists
+      description: 'Fetch a list of announcement playlist at an organization.
+
+
+        This API requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Announcement Playlist'
+      parameters:
+      - name: orgId
+        in: query
+        description: Get announcements playlist in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnouncementPlaylistResponseWithId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jNzAwNmI4ZC1kYmQ3LTQ3YjctOWQ0Ny05ZDJkMWEzYmY1Yzc
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create Announcement Playlist
+      operationId: createAnnouncementPlaylist
+      description: 'Create announcement Playlist at an organization level. A maximum of 25 announcement files can be included in a single playlist.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Announcement Playlist'
+      parameters:
+      - name: orgId
+        in: query
+        description: Create an announcement playlist in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: testingHydraAnnouncementPlaylistWithTwoFiles
+              announcementIds:
+              - Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8yMTkxMDhmNC1iMGVjLTRkNTMtODMzYy1kNTE1NWE4OWQzZTk
+              - Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zY2I2Y2Q1MS02Zjk3LTRiMmYtYTA0Yy04MjRmOGQ2NjQyYTU
+            schema:
+              $ref: '#/components/schemas/PostAnnouncementPlaylistObject'
+  /telephony/config/announcements/playlists/{playlistId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnouncementPlaylistGetResponse'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iYzZjOTYwYi01ZDJjLTRiM2QtYjRlZC0wNWY1ZmFhMTJjZjA
+                name: testingAnnouncementPlaylist
+                lastUpdated: '2024-03-06T07:06:36.396Z'
+                fileSize: '4279'
+                fileCount: 1
+                announcements:
+                - id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC83ODNmNjNhZi1jNDU1LTRhZWItODg0OS1jZThjNDQ4ZmNjNTg
+                  name: TestAnnouncement1TT
+                  mediaFileType: WAV
+                  fileName: 12Soft Piano Music_16000_mon1 copy.wav
+                  fileSize: '4279'
+                  lastUpdated: '2023-06-06 13:51:02'
+                  level: ORGANIZATION
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Announcement Playlist
+      operationId: getAnnouncementPlaylist
+      description: 'Fetch details of announcement playlist by its ID at an organization level.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Announcement Playlist'
+      parameters:
+      - name: playlistId
+        in: path
+        description: Unique identifier of an announcement playlist.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jNzAwNmI4ZC1kYmQ3LTQ3YjctOWQ0Ny05ZDJkMWEzYmY1Yzc
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Get an announcement playlist in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Announcement Playlist
+      operationId: updateAnnouncementPlaylist
+      description: 'Modify an existing announcement playlist at an organization level.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Announcement Playlist'
+      parameters:
+      - name: playlistId
+        in: path
+        description: Unique identifier of an announcement playlist.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zMjAxNjRmNC1lNWEzLTQxZmYtYTMyNi02N2MwOThlNDFkMWQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Modify an announcement playlist in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: testingHydraAnnouncementPlaylistWithTwoFiles
+              announcementIds:
+              - Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8yMTkxMDhmNC1iMGVjLTRkNTMtODMzYy1kNTE1NWE4OWQzZTk
+              - Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zY2I2Y2Q1MS02Zjk3LTRiMmYtYTA0Yy04MjRmOGQ2NjQyYTU
+            schema:
+              $ref: '#/components/schemas/PutAnnouncementPlaylistObject'
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete Announcement Playlist
+      operationId: deleteAnnouncementPlaylist
+      description: 'Delete an announcement playlist for an organization.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Announcement Playlist'
+      parameters:
+      - name: playlistId
+        in: path
+        description: Unique identifier of an announcement playlist.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jNzAwNmI4ZC1kYmQ3LTQ3YjctOWQ0Ny05ZDJkMWEzYmY1Yzc
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete an announcement playlist in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/announcements/playlists/{playlistId}/locations:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistAssignedLocationResponse'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iYzZjOTYwYi01ZDJjLTRiM2QtYjRlZC0wNWY1ZmFhMTJjZjA
+                locations:
+                - name: Atlas_Test_Location_Trunk_Limit
+                  id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M3YWEzNjQzLTYyNmYtNGQ0Yy1hNzNmLTk0MTA3NDgzMjMxMg
+                - name: Cy_location_full_page_Test02_DND
+                  id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzg4NzhlNzE4LTczMGItNGY2OC1iZTc3LTViMjNiNWUwOGUwZg
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Playlist Locations
+      operationId: listPlaylistLocations
+      description: 'Fetch list of locations which are assigned to the given announcement playlist
+
+
+        This API requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Announcement Playlist'
+      parameters:
+      - name: playlistId
+        in: path
+        description: Unique identifier of playlist.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zMjAxNjRmNC1lNWEzLTQxZmYtYTMyNi02N2MwOThlNDFkMWQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Get location associated to a playlist in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Playlist Locations
+      operationId: updatePlaylistLocations
+      description: 'Modify list of assigned locations or add new locations to the announcement playlist. This will assing the playlist to the location''s music on hold.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Announcement Playlist'
+      parameters:
+      - name: playlistId
+        in: path
+        description: Unique identifier of an announcement playlist.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zMjAxNjRmNC1lNWEzLTQxZmYtYTMyNi02N2MwOThlNDFkMWQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Modify an assign location for announcement playlist for organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              locationIds:
+              - Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M3YWEzNjQzLTYyNmYtNGQ0Yy1hNzNmLTk0MTA3NDgzMjMxMg
+              - Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzg4NzhlNzE4LTczMGItNGY2OC1iZTc3LTViMjNiNWUwOGUwZg
+            schema:
+              $ref: '#/components/schemas/PutPlaylistAssignedLocation'
+components:
+  schemas:
+    LocationObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4OTAxMjM0NTY3ODkw
+          description: The ID of the location.
+        name:
+          type: string
+          example: San Jose
+          description: The name of the location.
+    PutPlaylistAssignedLocation:
+      type: object
+      required:
+      - locationIds
+      properties:
+        locationIds:
+          type: array
+          items:
+            type: string
+            example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi81ZTk3MzFlNy1iOWQ0LTRmMWQtYjYyMi05NDgwMDhhMjkzMzM, Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi81ZTk3MzFlNy1iOWQ0LTRmMWQtYjYyMi05NDgwMDhhMjkzMzM
+          description: Array of location IDs with which the playlist is associated.
+    PlaylistObject:
+      type: object
+      description: Basic playlist metadata available for announcement selection.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iYzZjOTYwYi01ZDJjLTRiM2QtYjRlZC0wNWY1ZmFhMTJjZjA
+          description: A unique identifier for the playlist.
+        name:
+          type: string
+          example: testingAnnouncementPlaylist
+          description: Unique name for the playlist.
+    PlaylistAssignedLocationResponse:
+      type: object
+      required:
+      - id
+      - locations
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iYzZjOTYwYi01ZDJjLTRiM2QtYjRlZC0wNWY1ZmFhMTJjZjA
+          description: Unique identifier of the playlist.
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationObject'
+          description: Array of locations with which the playlist is associated.
+    PutAnnouncementPlaylistObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: testingHydraAnnouncementPlaylistWithTwoFiles
+          description: Unique name for the announcement playlist.
+        announcementIds:
+          type: array
+          items:
+            type: string
+            example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8yMTkxMDhmNC1iMGVjLTRkNTMtODMzYy1kNTE1NWE4OWQzZTk,Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zY2I2Y2Q1MS02Zjk3LTRiMmYtYTA0Yy04MjRmOGQ2NjQyYTU
+          description: Array of `announcementIds` associated with the playlist.
+    PostAnnouncementPlaylistObject:
+      type: object
+      required:
+      - name
+      - announcementIds
+      properties:
+        name:
+          type: string
+          example: testingHydraAnnouncementPlaylistWithTwoFiles
+          description: Unique name for the announcement playlist.
+        announcementIds:
+          type: array
+          items:
+            type: string
+            example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8yMTkxMDhmNC1iMGVjLTRkNTMtODMzYy1kNTE1NWE4OWQzZTk,Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zY2I2Y2Q1MS02Zjk3LTRiMmYtYTA0Yy04MjRmOGQ2NjQyYTU
+          description: Array of `announcementIds` associated with the playlist.
+    AnnouncementPlaylistGetResponse:
+      type: object
+      required:
+      - id
+      - name
+      - lastUpdated
+      - fileSize
+      - fileCount
+      - announcements
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iYzZjOTYwYi01ZDJjLTRiM2QtYjRlZC0wNWY1ZmFhMTJjZjA
+          description: Unique identifier of the playlist.
+        name:
+          type: string
+          example: testingAnnouncementPlaylist
+          description: Unique name of the playlist.
+        lastUpdated:
+          type: string
+          example: '2024-03-06T07:06:36.396Z'
+          description: Last updated timestamp (in UTC format) of the playlist.
+        fileSize:
+          type: string
+          example: '356'
+          description: Size of the files in kilobytes.
+        fileCount:
+          type: string
+          example: '3'
+          description: Number of files in the playlist.
+        announcements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnouncementObject'
+          description: List of announcement details associated with playlist.
+    AnnouncementPlaylistResponseWithId:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jNzAwNmI4ZC1kYmQ3LTQ3YjctOWQ0Ny05ZDJkMWEzYmY1Yzc
+          description: Unique identifier of the announcement playlist.
+    AnnouncementObject:
+      type: object
+      required:
+      - id
+      - name
+      - fileSize
+      - mediaFileType
+      - lastUpdated
+      - level
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zMjAxNjRmNC1lNWEzLTQxZmYtYTMyNi02N2MwOThlNDFkMWQ
+          description: Unique identifier of the announcement.
+        name:
+          type: string
+          example: Public_Announcement
+          description: Name of the announcement.
+        fileName:
+          type: string
+          example: Sample_Greetings_file.wav
+          description: File name of the uploaded binary announcement greeting.
+        fileSize:
+          type: string
+          example: '356'
+          description: Size of the file in kilobytes.
+        mediaFileType:
+          type: string
+          example: WAV
+          description: Media file type of the announcement file.
+        lastUpdated:
+          type: string
+          example: '2023-06-13T18:39:53.651Z'
+          description: Last updated timestamp (in UTC format) of the announcement.
+        level:
+          type: string
+          enum:
+          - ORGANIZATION
+          description: The level at which this playlist exists.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

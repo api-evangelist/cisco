@@ -1,0 +1,996 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Calling Service Settings API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Calling Service Settings
+paths:
+  /telephony/config/announcementLanguages:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - languages
+                properties:
+                  languages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Language'
+                    description: Array of Languages.
+              example:
+                languages:
+                - name: English
+                  code: en_us
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Announcement Languages
+      operationId: ReadTheListOfAnnouncementLanguages
+      description: 'List all languages supported by Webex Calling for announcements and voice prompts.
+
+
+        Retrieving announcement languages requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: ttsLanguage
+        in: query
+        description: Filter languages by TTS support.
+        required: false
+        schema:
+          type: boolean
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Announcement Languages
+  /telephony/config/voicemail/settings:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoicemailSettingsObject'
+              example:
+                messageExpiryEnabled: false
+                numberOfDaysForMessageExpiry: 10
+                strictDeletionEnabled: false
+                voiceMessageForwardingEnabled: true
+                voicePortalAccessVMDepositEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Voicemail Settings
+      operationId: GetVoicemailSettings
+      description: 'Retrieve the organization''s voicemail settings.
+
+
+        Organizational voicemail settings determines what voicemail features a person can configure and automatic message expiration.
+
+
+        Retrieving organization''s voicemail settings requires a full, user or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve voicemail settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Voicemail Settings
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Voicemail Settings
+      operationId: UpdateVoicemailSettings
+      description: 'Update the organization''s voicemail settings.
+
+
+        Organizational voicemail settings determines what voicemail features a person can configure and automatic message expiration.
+
+
+        Updating an organization''s voicemail settings requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Update voicemail settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              messageExpiryEnabled: false
+              numberOfDaysForMessageExpiry: 10
+              strictDeletionEnabled: false
+              voiceMessageForwardingEnabled: true
+              voicePortalAccessVMDepositEnabled: true
+            schema:
+              $ref: '#/components/schemas/PutVoicemailSettingsObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Voicemail Settings
+  /telephony/config/voicemail/rules:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoicemailRulesObject'
+              example:
+                defaultVoicemailPinRules:
+                  blockRepeatedPatternsEnabled: true
+                  blockRepeatedDigits:
+                    enabled: true
+                    max: 3
+                  blockContiguousSequences:
+                    enabled: true
+                    numberOfAscendingDigits: 3
+                    numberOfDescendingDigits: 3
+                  length:
+                    min: 6
+                    max: 30
+                  defaultVoicemailPinEnabled: true
+                expirePasscode:
+                  enabled: true
+                  numberOfDays: 100
+                changePasscode:
+                  enabled: true
+                  numberOfDays: 1
+                blockPreviousPasscodes:
+                  enabled: false
+                  numberOfPasscodes: 10
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Voicemail Rules
+      operationId: GetVoicemailRules
+      description: 'Retrieve the organization''s voicemail rules.
+
+
+        Organizational voicemail rules specify the default passcode requirements. They are provided for informational purposes only and cannot be modified.
+
+
+        Retrieving the organization''s voicemail rules requires a full, user or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve voicemail rules for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Voicemail Rules
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Voicemail Rules
+      operationId: UpdateVoicemailRules
+      description: 'Update the organization''s default voicemail passcode and/or rules.
+
+
+        Organizational voicemail rules specify the default passcode requirements.
+
+
+        If you choose to set a default passcode for new people added to your organization, communicate to your people what that passcode is, and that it must be reset before they can access their voicemail. If this feature is not turned on, each new person must initially set their own passcode.
+
+
+        Updating an organization''s voicemail passcode and/or rules requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Update voicemail rules for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              defaultVoicemailPinEnabled: true
+              defaultVoicemailPin: '123544'
+              expirePasscode:
+                enabled: true
+                numberOfDays: 100
+              changePasscode:
+                enabled: true
+                numberOfDays: 1
+              blockPreviousPasscodes:
+                enabled: false
+                numberOfPasscodes: 10
+            schema:
+              $ref: '#/components/schemas/PutVoicemailRulesObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Voicemail Rules
+  /telephony/config/moh/settings:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMusicOnHoldObject'
+              example:
+                defaultOrgMoh: OPUS
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get the organization Music on Hold configuration
+      operationId: GetTheOrganizationMusicOnHoldConfiguration
+      description: Retrieve the organization's Music on Hold settings.
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve Music on Hold settings for this organization.
+        example: 631e6768-c7fa-4179-acb3-c98f248a6d4b
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get the organization Music on Hold configuration
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update the organization Music on Hold configuration
+      operationId: UpdateTheOrganizationMusicOnHoldConfiguration
+      description: Update the organization's Music on Hold settings.
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Patch Music on Hold for this organization.
+        example: 631e6768-c7fa-4179-acb3-c98f248a6d4b
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              defaultOrgMoh: OPUS
+            schema:
+              $ref: '#/components/schemas/UpdateMusicOnHoldObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update the organization Music on Hold configuration
+  /telephony/config/largeOrgStatus:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStatusGetObject'
+              example:
+                isLargeOrg: true
+                largeOrgThresholdPercentage: 90
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Large Organization Status
+      operationId: getLargeOrganizationStatus
+      description: 'Get the large organization status for a customer.
+
+
+        Large organization status indicates whether an organization is categorized as a large organization based on the threshold percentage.
+
+
+        This API requires a full or read-only administrator auth token with the `spark-admin:telephony_config_read` scope.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieves large organization status for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/callCaptions:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallCaptionsObject'
+              example:
+                orgClosedCaptionsEnabled: true
+                orgTranscriptsEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get the organization call captions settings
+      operationId: GetTheOrganizationCallCaptionsSettings
+      description: 'Retrieve the organization''s call captions settings.
+
+
+        The call caption feature allows the customer to enable and manage closed captions and transcript functionality (rolling caption panel) in Webex Calling, without requiring the user to escalate the call to a meeting.
+
+
+        This API requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get the organization call captions settings
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update the organization call captions settings
+      operationId: UpdateTheOrganizationCallCaptionsSettings
+      description: 'Update the organization''s call captions settings.
+
+
+        The call caption feature allows the customer to enable and manage closed captions and transcript functionality (rolling caption panel) in Webex Calling, without requiring the user to escalate the call to a meeting.
+
+
+        This API requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Calling Service Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              orgClosedCaptionsEnabled: true
+              orgTranscriptsEnabled: true
+            schema:
+              $ref: '#/components/schemas/UpdateCallCaptionsObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update the organization call captions settings
+components:
+  schemas:
+    GetCallCaptionsObject:
+      type: object
+      required:
+      - orgClosedCaptionsEnabled
+      - orgTranscriptsEnabled
+      properties:
+        orgClosedCaptionsEnabled:
+          type: boolean
+          example: true
+          description: Organization-level closed captions are enabled or disabled.
+        orgTranscriptsEnabled:
+          type: boolean
+          example: true
+          description: Organization-level transcripts are enabled or disabled.
+    UpdateCallCaptionsObject:
+      type: object
+      properties:
+        orgClosedCaptionsEnabled:
+          type: boolean
+          example: true
+          description: Enable or disable organization-level closed captions.
+        orgTranscriptsEnabled:
+          type: boolean
+          example: true
+          description: Enable or disable organization-level transcripts.
+    OrganizationStatusGetObject:
+      type: object
+      required:
+      - isLargeOrg
+      - largeOrgThresholdPercentage
+      properties:
+        isLargeOrg:
+          type: boolean
+          example: true
+          description: '`true` if the organization is categorized as large organization.'
+        largeOrgThresholdPercentage:
+          type: integer
+          example: 90
+          description: The threshold percentage represents the percentage of the threshold reached to categorize an organization as a large organization.
+    AudioAnnouncementFileGetObject:
+      type: object
+      required:
+      - id
+      - fileName
+      - mediaFileType
+      - level
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+          description: A unique identifier for the announcement.
+        fileName:
+          type: string
+          example: AUDIO_FILE.wav
+          description: Audio announcement file name.
+        mediaFileType:
+          type: string
+          enum:
+          - WAV
+          description: "Audio announcement file type.\n * `WAV` - WAV File Extension.\n"
+        level:
+          type: string
+          enum:
+          - ORGANIZATION
+          - LOCATION
+          description: "Audio announcement file type location.\n * `ORGANIZATION` - Specifies this audio file is configured across the organization.\n * `LOCATION` - Specifies this audio file is configured across the location.\n"
+    GetVoicemailSettingsObject:
+      type: object
+      example:
+        messageExpiryEnabled: false
+        numberOfDaysForMessageExpiry: 10
+        strictDeletionEnabled: false
+        voiceMessageForwardingEnabled: true
+        voicePortalAccessVMDepositEnabled: true
+      required:
+      - messageExpiryEnabled
+      - numberOfDaysForMessageExpiry
+      - strictDeletionEnabled
+      - voiceMessageForwardingEnabled
+      properties:
+        messageExpiryEnabled:
+          type: boolean
+          example: false
+          description: When enabled, you can set the deletion conditions for expired messages.
+        numberOfDaysForMessageExpiry:
+          type: number
+          example: 10
+          description: Number of days after which messages expire.
+        strictDeletionEnabled:
+          type: boolean
+          example: false
+          description: When enabled, all read and unread voicemail messages will be deleted based on the time frame you set. When disabled, all unread voicemail messages will be kept.
+        voiceMessageForwardingEnabled:
+          type: boolean
+          example: true
+          description: When enabled, people in the organization can configure the email forwarding of voicemails.
+        voicePortalAccessVMDepositEnabled:
+          type: boolean
+          example: true
+          description: This field allows the callers to access the voice portal by pressing the * key during the voicemail deposit or after sending a message.
+    GetVoicemailRulesObject:
+      type: object
+      properties:
+        defaultVoicemailPinRules:
+          type: object
+          properties:
+            blockRepeatedPatternsEnabled:
+              type: boolean
+              example: true
+              description: If enabled, the passcode cannot contain repeated patterns. For example, 121212 and 123123.
+            blockRepeatedDigits:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  example: true
+                  description: If enabled, checks for sequence of the same digit being repeated.
+                max:
+                  type: number
+                  example: 3
+                  description: Maximum number of repeated digit sequence allowed. The minimum value is 1. The maximum value is 6.
+              description: Settings to prevent single digits from being repeated in the passcode. For example, with a maximum value of 3, 111222 is allowed but 112222 is not allowed since it contains a repeated digit sequence longer than 3.
+            blockContiguousSequences:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  example: true
+                  description: If enabled, passcode should not contain a numerical sequence.
+                numberOfAscendingDigits:
+                  type: number
+                  example: 3
+                  description: 'Specifies the maximum length of an ascending numerical sequence allowed. The minimum value is 2. The maximum value is 5. Example: If this value is set to 3, then 123856 is allowed, but 123485 is not allowed (since the ascending sequence 1234 exceeds 3 digits).'
+                numberOfDescendingDigits:
+                  type: number
+                  example: 3
+                  description: 'Specifies the maximum length of a descending numerical sequence allowed. The minimum value is 2. The maximum value is 5. Example: If this value is set to 3, then 321856 is allowed, but 432185 is not allowed (since the descending sequence 4321 exceeds 3 digits).'
+              description: Settings for not allowing numerical sequence in passcode (for example, 012345 or 987654).
+            length:
+              type: object
+              properties:
+                min:
+                  type: number
+                  example: 6
+                  description: The minimum value is 2. The maximum value is 15.
+                max:
+                  type: number
+                  example: 30
+                  description: The minimum value is 3. The maximum value is 30.
+              description: Length of the passcode.
+            defaultVoicemailPinEnabled:
+              type: boolean
+              example: true
+              description: If enabled, the default voicemail passcode can be set.
+          description: Default voicemail passcode requirements.
+        expirePasscode:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, passcode expires after the number of days specified.
+            numberOfDays:
+              type: number
+              example: 180
+              description: Number of days for password expiry. The minimum value is 15. The maximum value is 180.
+          description: Settings for passcode expiry.
+        changePasscode:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, set minimum number of days between passcode changes.
+            numberOfDays:
+              type: number
+              example: 180
+              description: Number of days between passcode changes. The minimum value is 1. The maximum value is 7.
+          description: Settings for passcode changes.
+        blockPreviousPasscodes:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, set how many of the previous passcodes are not allowed to be re-used.
+            numberOfPasscodes:
+              type: number
+              example: 10
+              description: Number of previous passcodes. The minimum value is 1. The maximum value is 10.
+          description: Settings for previous passcode usage.
+    Language:
+      type: object
+      required:
+      - name
+      - code
+      properties:
+        name:
+          type: string
+          example: English
+          description: Language name.
+        code:
+          type: string
+          example: en_us
+          description: Language code.
+    GetMusicOnHoldObject:
+      type: object
+      required:
+      - mohEnabled
+      - mohLocationEnabled
+      - greeting
+      properties:
+        mohEnabled:
+          type: boolean
+          example: true
+          description: Music on hold enabled or disabled for the workspace.
+        mohLocationEnabled:
+          type: boolean
+          example: true
+          description: Music on hold enabled or disabled for the location. The music on hold setting returned in the response is used only when music on hold is enabled at the location level. When `mohLocationEnabled` is false and `mohEnabled` is true, music on hold is disabled for the workspace. When `mohLocationEnabled` is true and `mohEnabled` is false, music on hold is turned off for the workspace. In both cases, music on hold will not be played.
+        greeting:
+          type: string
+          enum:
+          - DEFAULT
+          - CUSTOM
+          description: "Greeting type for the workspace.\n * `DEFAULT` - Play music configured at location level.\n * `CUSTOM` - Play previously uploaded custom music when call is placed on hold or parked.\n"
+        audioAnnouncementFile:
+          $ref: '#/components/schemas/AudioAnnouncementFileGetObject'
+          description: Announcement Audio File details when greeting is selected to be `CUSTOM`.
+    UpdateMusicOnHoldObject:
+      type: object
+      properties:
+        defaultOrgMoh:
+          type: string
+          example: '''OPUS'' or ''LEGACY'''
+          description: 'Default org level Music on Hold option, can be one of two options: Choose between Opus Number 1 (Music On Hold used in other Cisco products like UCM) and existing legacy Music On Hold.'
+    PutVoicemailSettingsObject:
+      type: object
+      required:
+      - messageExpiryEnabled
+      - numberOfDaysForMessageExpiry
+      properties:
+        messageExpiryEnabled:
+          type: boolean
+          description: Set to `true` to enable voicemail deletion and set the deletion conditions for expired messages.
+        numberOfDaysForMessageExpiry:
+          type: number
+          example: 10
+          description: Number of days after which messages expire.
+        strictDeletionEnabled:
+          type: boolean
+          description: Set to `true` to delete all read and unread voicemail messages based on the time frame you set. Set to `false` to keep all the unread voicemail messages.
+        voiceMessageForwardingEnabled:
+          type: boolean
+          example: true
+          description: Set to `true` to allow people to configure the email forwarding of voicemails.
+        voicePortalAccessVMDepositEnabled:
+          type: boolean
+          example: true
+          description: This field allows the callers to access the voice portal by pressing the * key during the voicemail deposit or after sending a message.
+    PutVoicemailRulesObject:
+      type: object
+      properties:
+        defaultVoicemailPinEnabled:
+          type: boolean
+          description: Set to `true` to enable the default voicemail passcode.
+        defaultVoicemailPin:
+          type: string
+          example: '147852'
+          description: Default voicemail passcode.
+        expirePasscode:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to expire passcode after the number of days specified.
+            numberOfDays:
+              type: number
+              example: 180
+              description: Number of days for password expiry. The minimum value is 15. The maximum value is 100.
+          description: Settings for passcode expiry.
+        changePasscode:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to change the minimum number of days between passcode changes.
+            numberOfDays:
+              type: number
+              example: 180
+              description: Number of days between passcode changes. The minimum value is 1. The maximum value is 7.
+          description: Settings for passcode changes.
+        blockPreviousPasscodes:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to specify how many of the previous passcode are not allowed to be re-used.
+            numberOfPasscodes:
+              type: number
+              example: 10
+              description: Number of previous passcodes. The minimum value is 1. The maximum value is 10.
+          description: Settings for previous passcode usage.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

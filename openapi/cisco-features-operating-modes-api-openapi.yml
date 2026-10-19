@@ -1,0 +1,1595 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Operating Modes API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features: Operating Modes'
+paths:
+  /telephony/config/operatingModes:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - operatingModes
+                properties:
+                  operatingModes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OperatingModeListGetObject'
+                    description: Array of `operating modes`.
+              example:
+                operatingModes:
+                - id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+                  name: Day Operating Mode
+                  type: SAME_HOURS_DAILY
+                  level: LOCATION
+                  location:
+                    id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+                    name: Cisco-HQ
+                  callForwarding:
+                    enabled: true
+                    destination: '+19705550006'
+                    destinationVoicemailEnabled: false
+                - id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzcxYzNjYjA2LWE5YjMtNDc1MS1hZGI1LTdiZDc2MWY5MTAwYg
+                  name: Outage Operating Mode
+                  type: NONE
+                  level: ORGANIZATION
+                  callForwarding:
+                    enabled: true
+                    destination: '+19705550007'
+                    destinationVoicemailEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Operating Modes
+      operationId: ReadTheListOfOperatingModes
+      description: 'Retrieve `Operating Modes` list defined at location, or organization level. Use query parameters to filter the result set by location or level. The list returned is sorted in ascending order by operating mode name. Long result sets are split into pages.
+
+
+        `Operating modes` help manage calls more efficiently by routing them based on predefined settings.
+
+
+        Retrieving this list requires a full, read-only, or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: name
+        in: query
+        description: List `operating modes` whose name contains this string.
+        example: Day
+        schema:
+          type: string
+      - name: limitToLocationId
+        in: query
+        description: Location query parameter to filter the `operating modes` from that location only.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+        schema:
+          type: string
+      - name: limitToOrgLevelEnabled
+        in: query
+        description: If true, only return `operating modes` defined at the organization level.
+        example: 'true'
+        schema:
+          type: boolean
+      - name: max
+        in: query
+        description: Maximum number of `operating modes` to return in a single page. `max` must be equal to, or greater than `1`, and equal to or less than `100`.
+        schema:
+          type: number
+          default: 10
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects.
+        example: '0'
+        schema:
+          type: number
+      - name: order
+        in: query
+        description: Sort the list of `operating modes` based on `name`, either asc, or desc.
+        example: name-asc
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve `operating modes` list from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Operating Modes
+  /telephony/config/operatingModes/{modeId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperatingModeGetObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+                name: Day Operating Mode
+                type: HOLIDAY
+                level: LOCATION
+                location:
+                  id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+                  name: Cisco-HQ
+                callForwarding:
+                  enabled: true
+                  destination: '+19705550006'
+                  destinationVoicemailEnabled: false
+                holidays:
+                - id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTIwOQ
+                  name: Christmas
+                  allDayEnabled: true
+                  startDate: '2024-12-25'
+                  endDate: '2024-12-26'
+                  recurrence:
+                    recurYearlyByDate:
+                      dayOfMonth: 1
+                      month: JANUARY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for an Operating Mode
+      operationId: GetDetailsForAnOperatingMode
+      description: 'Retrieve an `Operating Mode` by `Operating Mode ID`.
+
+
+        `Operating modes` can be used to define call routing rules for different scenarios like business hours, after hours, holidays, etc.
+
+
+        Retrieving an `operating mode` requires a full, read-only, or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: modeId
+        in: path
+        description: Get the `operating mode` with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Get the `operating mode` from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for an Operating Mode
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify an Operating Mode
+      operationId: ModifyAnOperatingMode
+      description: 'Modify the designated `Operating Mode''s` configuration.
+
+
+        `Operating modes` can be used to define call routing rules for different scenarios like business hours, after hours, holidays, etc.
+
+
+        Modifying an `Operating Mode` requires a full, or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: modeId
+        in: path
+        description: Modify the `operating mode` with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Modify the `operating mode` from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Day Operating Mode Updated
+              sameHoursDaily:
+                mondayToFriday:
+                  enabled: true
+                  allDayEnabled: true
+                saturdayToSunday:
+                  enabled: true
+                  allDayEnabled: false
+                  startTime: 09:00
+                  endTime: '17:00'
+              callForwarding:
+                enabled: true
+                destination: '+19705550008'
+                destinationVoicemailEnabled: true
+            schema:
+              $ref: '#/components/schemas/OperatingModePatchObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Modify an Operating Mode
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete an Operating Mode
+      operationId: DeleteAnOperatingMode
+      description: 'Delete the designated `Operating Mode`.
+
+
+        Deleting an `Operating Mode` requires a full, or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: modeId
+        in: path
+        description: Delete the `operating mode` with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the `operating mode` from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete an Operating Mode
+  /telephony/config/operatingModes/:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created `operating mode`.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create an Operating Mode
+      operationId: CreateAnOperatingMode
+      description: 'Create an `Operating Mode` at an organization, or a location level.
+
+
+        `Operating modes` can be used to define call routing rules for different scenarios like business hours, after hours, holidays, etc.
+
+
+        Creating an `Operating Mode` requires a full, or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: orgId
+        in: query
+        description: Create the `operating mode` for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Day Operating Mode
+              type: SAME_HOURS_DAILY
+              level: LOCATION
+              locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+              sameHoursDaily:
+                mondayToFriday:
+                  enabled: true
+                  allDayEnabled: false
+                  startTime: 09:00
+                  endTime: '17:00'
+                saturdayToSunday:
+                  enabled: true
+                  allDayEnabled: true
+              callForwarding:
+                enabled: true
+                destination: '+19705550006'
+                destinationVoicemailEnabled: false
+            schema:
+              $ref: '#/components/schemas/OperatingModePostObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create an Operating Mode
+  /telephony/config/operatingModes/{modeId}/holidays/{holidayId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperatingModeHolidayGetObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTIwOQ
+                name: Christmas
+                allDayEnabled: true
+                startDate: '2024-12-25'
+                endDate: '2024-12-26'
+                startTime: 09:00
+                endTime: '17:00'
+                recurrence:
+                  recurYearlyByDay:
+                    day: TUESDAY
+                    week: FIRST
+                    month: JANUARY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get details for an Operating Mode Holiday
+      operationId: GetDetailsForAnOperatingModeHoliday
+      description: 'Retrieve an `Operating Mode Holiday` by ID.
+
+
+        Holidays define a recurring schedule for the `Operating Modes`.
+
+
+        Retrieving an `Operating Mode Holiday` requires a full, read-only, or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: modeId
+        in: path
+        description: Get the holiday from this `operating mode` matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        schema:
+          type: string
+      - name: holidayId
+        in: path
+        required: true
+        description: Get the `operating mode Holiday` with the matching ID.
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTIwOQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Get the `operating mode` from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get details for an Operating Mode Holiday
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify an Operating Mode Holiday
+      operationId: ModifyAnOperatingModeHoliday
+      description: 'Modify the designated `Operating Mode Holiday''s` configuration.
+
+
+        Modifying an `Operating Mode Holiday` requires a full, or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: modeId
+        in: path
+        description: Modify the holiday from this `operating mode` matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        schema:
+          type: string
+      - name: holidayId
+        in: path
+        required: true
+        description: Modify the `Holiday` with the matching ID.
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTIwOQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Modify the `operating mode` from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Christmas
+              allDayEnabled: true
+              startDate: '2024-12-25'
+              endDate: '2024-12-26'
+              startTime: 09:00
+              endTime: '17:00'
+              recurrence:
+                recurYearlyByDay:
+                  day: TUESDAY
+                  week: FIRST
+                  month: JANUARY
+            schema:
+              $ref: '#/components/schemas/OperatingModeHolidayPatchObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Modify an Operating Mode Holiday
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete an Operating Mode Holiday
+      operationId: DeleteAnOperatingModeHoliday
+      description: 'Delete the designated `Operating Mode Holiday`.
+
+
+        Deleting an `Operating Mode Holiday` requires a full, or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: modeId
+        in: path
+        description: Delete the holiday from this `operating mode` matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        schema:
+          type: string
+      - name: holidayId
+        in: path
+        required: true
+        description: Delete the holiday with the matching ID.
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTIwOQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the `operating mode` from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete an Operating Mode Holiday
+  /telephony/config/operatingModes/{modeId}/holidays:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created holiday.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTIwOQ
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create an Operating Mode Holiday
+      operationId: CreateAnOperatingModeHoliday
+      description: 'Create a holiday schedule event for the designated `Operating Mode`.
+
+
+        Holidays define a recurring schedule for the `Operating Modes`. An `Operating Mode` can have a max of 150 holidays.
+
+
+        Creating an `Operating Mode Holiday` requires a full, or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: modeId
+        in: path
+        description: Create the holiday for this `operating mode`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the `operating mode holiday` for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Christmas
+              allDayEnabled: true
+              startDate: '2024-12-25'
+              endDate: '2024-12-26'
+              startTime: 09:00
+              endTime: '17:00'
+              recurrence:
+                recurYearlyByDay:
+                  day: TUESDAY
+                  week: FIRST
+                  month: JANUARY
+            schema:
+              $ref: '#/components/schemas/OperatingModeHolidayPostRequestObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create an Operating Mode Holiday
+  /telephony/config/locations/{locationId}/operatingModes/availableOperatingModes:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operatingModes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AvailableOperatingModesObject'
+                    description: Array of `operating modes`.
+              example:
+                operatingModes:
+                - id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+                  name: Day Operating Mode
+                - id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzcxYzNjYjA2LWE5YjMtNDc1MS1hZGI1LTdiZDc2MWY5MTAwYg
+                  name: Outage Operating Mode
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Retrieve the List of Available Operating Modes in a Location
+      operationId: RetrieveTheListOfAvailableOperatingModesInALocation
+      description: 'Retrieve list of `Operating Modes` which are available to be assigned to a location level feature (`Auto Attendant`, `Call Queue`, or `Hunt Group`). Since each location and an org can have a max of 100 `Operating Modes` defined. The max number of `operating modes` that can be returned is 200.
+
+
+        `Operating modes` can be used to define call routing rules for different scenarios like business hours, after hours, holidays, etc. for the `Auto Attendant`, `Call Queue`, and `Hunt Group` features.
+
+
+        Retrieving this list requires a full, read-only, or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve `operating modes` list from this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve `operating modes` list from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve the List of Available Operating Modes in a Location
+  /telephony/config/locations/{locationId}/operatingModes/callForwarding/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperatingModeCallForwardAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODhiZGIwNC1jZjU5LTRjMjMtODQ4OC00NTNhOTE3ZDFlMjk
+                    type: PEOPLE
+                    firstName: Test
+                    lastName: Person
+                    displayName: Test Person
+                - phoneNumber: '+12056350002'
+                  extension: '1235'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS9lZjJkMjg3Ny1hYTY0LTRkMjQtYTFjNi02OWExMmNhMWI2YTA=
+                    type: PLACE
+                    displayName: TestWorkSpace
+                - phoneNumber: '+12056350003'
+                  extension: '1236'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYm1kMmVIcHNabTgwWVVBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+                    type: CALL_QUEUE
+                    displayName: Test call queue
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Operating Mode Call Forward Available Phone Numbers
+      operationId: GetOperatingModeCallForwardAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as a operating mode''s call forward number.
+
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are assigned to an owning entity.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Operating Modes'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+      - name: ownerName
+        in: query
+        description: Return the list of phone numbers that are owned by the given `ownerName`. Maximum length is 255.
+        example: Test
+        schema:
+          type: string
+      - name: extension
+        in: query
+        description: Returns the list of PSTN phone numbers with the given `extension`.
+        example: '1234'
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Operating Mode Call Forward Available Phone Numbers
+components:
+  schemas:
+    OperatingModeHolidayPostRequestObject:
+      type: object
+      required:
+      - name
+      - allDayEnabled
+      - startDate
+      - endDate
+      properties:
+        name:
+          type: string
+          example: Christmas
+          description: Name of the holiday.
+        allDayEnabled:
+          type: boolean
+          example: true
+          description: Specifies if the `operating mode holiday` schedule event is enabled for the entire day. `False` if the flag is not set.
+        startDate:
+          type: string
+          example: '2024-12-25'
+          description: Start date of the `operating mode holiday`.
+        endDate:
+          type: string
+          example: '2024-12-26'
+          description: End date of the `operating mode holiday`.
+        startTime:
+          type: string
+          example: 09:00
+          description: Start time for the `operating mode holiday`. Mandatory if `allDayEnabled` is false.
+        endTime:
+          type: string
+          example: '17:00'
+          description: End time for the `operating mode holiday`. Mandatory if `allDayEnabled` is false.
+        recurrence:
+          $ref: '#/components/schemas/OperatingModeRecurrenceObject'
+          description: Recurrence configuration for the `operating mode holiday`.
+    NumberOwnerType:
+      type: string
+      enum:
+      - PLACE
+      - PEOPLE
+      - VIRTUAL_LINE
+      - AUTO_ATTENDANT
+      - CALL_QUEUE
+      - GROUP_PAGING
+      - HUNT_GROUP
+      - VOICE_MESSAGING
+      - OFFICE_ANYWHERE
+      - CONTACT_CENTER_LINK
+      - CONTACT_CENTER_ADAPTER
+      - ROUTE_LIST
+      - VOICEMAIL_GROUP
+      - COLLABORATE_BRIDGE
+      description: " * `PLACE` - PSTN phone number's owner is a workspace.\n * `PEOPLE` - PSTN phone number's owner is a person.\n * `VIRTUAL_LINE` - PSTN phone number's owner is a Virtual Profile.\n * `AUTO_ATTENDANT` - PSTN phone number's owner is an auto-attendant.\n * `CALL_QUEUE` - PSTN phone number's owner is a call queue.\n * `GROUP_PAGING` - PSTN phone number's owner is a group paging.\n * `HUNT_GROUP` - PSTN phone number's owner is a hunt group.\n * `VOICE_MESSAGING` - PSTN phone number's owner is a voice messaging.\n * `OFFICE_ANYWHERE` - PSTN phone number's owner is a Single Number Reach.\n * `CONTACT_CENTER_LINK` - PSTN phone number's owner is a Contact Center link.\n * `CONTACT_CENTER_ADAPTER` - PSTN phone number's owner is a Contact Center adapter.\n * `ROUTE_LIST` - PSTN phone number's owner is a route list.\n * `VOICEMAIL_GROUP` - PSTN phone number's owner is a voicemail group.\n * `COLLABORATE_BRIDGE` - PSTN phone number's owner is a collaborate bridge.\n"
+    AvailableOperatingModesObject:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+          description: A unique identifier for the `operating mode`.
+        name:
+          type: string
+          example: Day Operating Mode
+          description: Unique name for the `operating mode`.
+    OperatingModeScheduleTypeObject:
+      type: string
+      enum:
+      - SAME_HOURS_DAILY
+      - DIFFERENT_HOURS_DAILY
+      - HOLIDAY
+      - NONE
+      description: " * `SAME_HOURS_DAILY` - Specifies the `operating mode` is active during the same hours daily (i.e., same schedule for Monday to Friday, and Saturday to Sunday).\n * `DIFFERENT_HOURS_DAILY` - Specifies the `operating mode` is active during different hours for different days of the week.\n * `HOLIDAY` - Specifies the `operating mode` is active during holidays with their own days, and recurrence.\n * `NONE` - Specifies the `operating mode` doesn't have any schedules defined.\n"
+    RecurYearlyByDateObject:
+      type: object
+      required:
+      - dayOfMonth
+      - month
+      properties:
+        dayOfMonth:
+          type: number
+          example: 1
+          description: Schedule the event on a specific day of the month.
+        month:
+          type: string
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+          description: Schedule the event on a specific month of the year.
+    OperatingModeHolidayGetObject:
+      type: object
+      required:
+      - id
+      - name
+      - allDayEnabled
+      - startDate
+      - endDate
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTIwOQ
+          description: A unique identifier for the holiday.
+        name:
+          type: string
+          example: Christmas
+          description: Name of the holiday.
+        allDayEnabled:
+          type: boolean
+          example: true
+          description: Specifies if the `operating mode holiday` schedule event is enabled for the entire day. `False` if the flag is not set.
+        startDate:
+          type: string
+          example: '2024-12-25'
+          description: Start date of the `operating mode holiday`.
+        endDate:
+          type: string
+          example: '2024-12-26'
+          description: End date of the `operating mode holiday`.
+        startTime:
+          type: string
+          example: 09:00
+          description: Start time for the `operating mode holiday`. Mandatory if `allDayEnabled` is false.
+        endTime:
+          type: string
+          example: '17:00'
+          description: End time for the `operating mode holiday`. Mandatory if `allDayEnabled` is false.
+        recurrence:
+          $ref: '#/components/schemas/OperatingModeRecurrenceObject'
+          description: Recurrence configuration for the `operating mode holiday`.
+    LocationObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4OTAxMjM0NTY3ODkw
+          description: The ID of the location.
+        name:
+          type: string
+          example: San Jose
+          description: The name of the location.
+    OperatingModeCallForwardAvailableNumberObject:
+      type: object
+      required:
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        extension:
+          type: string
+          example: '1235'
+          description: Extension for a number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+        owner:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODhiZGIwNC1jZjU5LTRjMjMtODQ4OC00NTNhOTE3ZDFlMjk
+              description: Unique identifier of the owner to which the number is assigned.
+            type:
+              $ref: '#/components/schemas/NumberOwnerType'
+              description: Type of the number's owner.
+            firstName:
+              type: string
+              example: Test
+              description: First name of the number's owner. This field will be present only when the owner `type` is `PEOPLE` or `VIRTUAL_LINE`.
+            lastName:
+              type: string
+              example: Person
+              description: Last name of the number's owner. This field will be present only when the owner `type` is `PEOPLE` or `VIRTUAL_LINE`.
+            displayName:
+              type: string
+              example: TestWorkSpace
+              description: Display name of the number's owner.
+    OperatingModeDifferentHoursDailyScheduleObject:
+      type: object
+      required:
+      - sunday
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      properties:
+        sunday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Sunday.'
+        monday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Monday.'
+        tuesday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Tuesday.'
+        wednesday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Wednesday.'
+        thursday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Thursday.'
+        friday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Friday.'
+        saturday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Saturday.'
+    OperatingModeCallForwarding:
+      type: object
+      required:
+      - enabled
+      - destination
+      - destinationVoicemailEnabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Call forwarding is enabled, or disabled. `False` if the flag is not set.
+        destination:
+          type: string
+          example: '+19705550006'
+          description: The destination for forwarding.
+        destinationVoicemailEnabled:
+          type: boolean
+          description: The destination voicemail enabled. `False` if the flag is not set.
+    OperatingModeRecurrenceObject:
+      type: object
+      properties:
+        recurYearlyByDate:
+          $ref: '#/components/schemas/RecurYearlyByDateObject'
+          description: Recurrence definition yearly by date.
+        recurYearlyByDay:
+          $ref: '#/components/schemas/RecurYearlyByDayObject'
+          description: Recurrence definition yearly by day.
+    OperatingModeDayScheduleObject:
+      type: object
+      required:
+      - enabled
+      - allDayEnabled
+      - startTime
+      - endTime
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Specifies if the `operating mode` schedule for the specified weekday(s) is enabled, or not. `False` if the flag is not set.
+        allDayEnabled:
+          type: boolean
+          description: Specifies if the `operating mode` is enabled for the entire day. `False` if the flag is not set.
+        startTime:
+          type: string
+          example: 09:00
+          description: Start time for the `operating mode`.
+        endTime:
+          type: string
+          example: '17:00'
+          description: End time for the `operating mode`.
+    OrgLocLevelObject:
+      type: string
+      enum:
+      - ORGANIZATION
+      - LOCATION
+      description: " * `ORGANIZATION` - Specifies this `operating mode` is configured across the organization.\n * `LOCATION` - Specifies this `operating mode` is configured across a location.\n"
+    OperatingModeGetObject:
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - level
+      - callForwarding
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+          description: A unique identifier for the `operating mode`.
+        name:
+          type: string
+          example: Day Operating Mode
+          description: Unique name for the `operating mode`.
+        type:
+          $ref: '#/components/schemas/OperatingModeScheduleTypeObject'
+          description: Defines the scheduling of the `operating mode`.
+        level:
+          $ref: '#/components/schemas/OrgLocLevelObject'
+          description: Level at which the `operating mode` would be defined.
+        location:
+          $ref: '#/components/schemas/LocationObject'
+          description: Location object having a unique identifier for the location, and its name. Mandatory if level is `LOCATION`.
+        sameHoursDaily:
+          $ref: '#/components/schemas/OperatingModeSameHoursDailyScheduleObject'
+          description: '`Operating mode` schedule for same hours daily. Present if type is `SAME_HOURS_DAILY`.'
+        differentHoursDaily:
+          $ref: '#/components/schemas/OperatingModeDifferentHoursDailyScheduleObject'
+          description: '`Operating mode` schedule for different hours daily. Present if type is `DIFFERENT_HOURS_DAILY`.'
+        holidays:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatingModeHolidayGetObject'
+          description: '`Operating mode` schedule for holidays. Present if type is `HOLIDAY`.'
+        callForwarding:
+          $ref: '#/components/schemas/OperatingModeCallForwarding'
+          description: Call forwarding settings for an `operating mode`.
+    TelephonyType:
+      type: string
+      enum:
+      - PSTN_NUMBER
+      description: ' * `PSTN_NUMBER` - The object is a PSTN number.
+
+        '
+    OperatingModeListGetObject:
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - level
+      - callForwarding
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+          description: A unique identifier for the `operating mode`.
+        name:
+          type: string
+          example: Day Operating Mode
+          description: Unique name for the `operating mode`.
+        type:
+          $ref: '#/components/schemas/OperatingModeScheduleTypeObject'
+          description: Defines the scheduling of the `operating mode`.
+        level:
+          $ref: '#/components/schemas/OrgLocLevelObject'
+          description: Level at which the `operating mode` would be defined.
+        location:
+          $ref: '#/components/schemas/LocationObject'
+          description: Location object having a unique identifier for the location, and its name. Mandatory if level is `LOCATION`.
+        callForwarding:
+          $ref: '#/components/schemas/OperatingModeCallForwarding'
+          description: Call forwarding settings for an `operating mode`.
+    OperatingModeSameHoursDailyScheduleObject:
+      type: object
+      required:
+      - mondayToFriday
+      - saturdayToSunday
+      properties:
+        mondayToFriday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Monday to Friday.'
+        saturdayToSunday:
+          $ref: '#/components/schemas/OperatingModeDayScheduleObject'
+          description: '`Operating mode` schedule for Saturday to Sunday.'
+    STATE:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      description: " * `ACTIVE` - Phone number is in the active state.\n * `INACTIVE` - Phone number is in the inactive state.\n"
+    OperatingModePatchObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Day Operating Mode Updated
+          description: New unique name for the `operating mode`.
+        sameHoursDaily:
+          $ref: '#/components/schemas/OperatingModeSameHoursDailyScheduleObject'
+          description: Updated schedule for same hours daily.
+        differentHoursDaily:
+          $ref: '#/components/schemas/OperatingModeDifferentHoursDailyScheduleObject'
+          description: Updated schedule for different hours daily.
+        holidays:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatingModeHolidayObject'
+          description: Updated holidays. This will replace the existing holidays.
+        callForwarding:
+          $ref: '#/components/schemas/OperatingModeCallForwarding'
+          description: Updated call forwarding settings for an `operating mode`.
+    OperatingModeHolidayPatchObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Christmas
+          description: Name of the holiday.
+        allDayEnabled:
+          type: boolean
+          example: true
+          description: Specifies if the `operating mode holiday` schedule event is enabled for the entire day. If `startTime`, and `endTime` are provided, this field is ignored.
+        startDate:
+          type: string
+          example: '2024-12-25'
+          description: Start date of the `operating mode holiday`.
+        endDate:
+          type: string
+          example: '2024-12-26'
+          description: End date of the `operating mode holiday`.
+        startTime:
+          type: string
+          example: 09:00
+          description: Start time for the `operating mode holiday`. Mandatory if `allDayEnabled` is not set.
+        endTime:
+          type: string
+          example: '17:00'
+          description: End time for the `operating mode holiday`. Mandatory if `allDayEnabled` is not set.
+        recurrence:
+          $ref: '#/components/schemas/OperatingModeRecurrenceObject'
+          description: Recurrence configuration for the `operating mode holiday`.
+    RecurYearlyByDayObject:
+      type: object
+      required:
+      - day
+      - week
+      - month
+      properties:
+        day:
+          type: string
+          enum:
+          - SUNDAY
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          description: Schedule the event on a specific day.
+        week:
+          type: string
+          enum:
+          - FIRST
+          - SECOND
+          - THIRD
+          - FOURTH
+          - LAST
+          description: Schedule the event on a specific week.
+        month:
+          type: string
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+          description: Schedule the event on a specific month.
+    OperatingModePostObject:
+      type: object
+      required:
+      - name
+      - type
+      - level
+      - callForwarding
+      properties:
+        name:
+          type: string
+          example: Day Operating Mode
+          description: Unique name for the `operating mode`.
+        type:
+          $ref: '#/components/schemas/OperatingModeScheduleTypeObject'
+          description: Defines the scheduling of the `operating mode`.
+        level:
+          $ref: '#/components/schemas/OrgLocLevelObject'
+          description: Level at which the `operating mode` would be defined.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+          description: Unique identifier of the location. Mandatory if level is `LOCATION`.
+        sameHoursDaily:
+          $ref: '#/components/schemas/OperatingModeSameHoursDailyScheduleObject'
+          description: '`Operating mode` schedule for same hours daily. Mandatory if type is `SAME_HOURS_DAILY`.'
+        differentHoursDaily:
+          $ref: '#/components/schemas/OperatingModeDifferentHoursDailyScheduleObject'
+          description: '`Operating mode` schedule for different hours daily. Mandatory if type is `DIFFERENT_HOURS_DAILY`.'
+        holidays:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatingModeHolidayObject'
+          description: '`Operating mode` holidays. Mandatory if type is `HOLIDAY`.'
+        callForwarding:
+          $ref: '#/components/schemas/OperatingModeCallForwarding'
+          description: Call forwarding settings for an `operating mode`.
+    OperatingModeHolidayObject:
+      type: object
+      required:
+      - name
+      - allDayEnabled
+      - startDate
+      - endDate
+      properties:
+        name:
+          type: string
+          example: Christmas
+          description: Name of the holiday.
+        allDayEnabled:
+          type: boolean
+          example: true
+          description: Specifies if the `operating mode holiday` schedule event is enabled for the entire day. `False` if the flag is not set.
+        startDate:
+          type: string
+          example: '2024-12-25'
+          description: Start date of the `operating mode holiday`.
+        endDate:
+          type: string
+          example: '2024-12-26'
+          description: End date of the `operating mode holiday`.
+        startTime:
+          type: string
+          example: 09:00
+          description: Start time for the `operating mode holiday`. Mandatory if `allDayEnabled` is false.
+        endTime:
+          type: string
+          example: '17:00'
+          description: End time for the `operating mode holiday`. Mandatory if `allDayEnabled` is false.
+        recurrence:
+          $ref: '#/components/schemas/OperatingModeRecurrenceObject'
+          description: Recurrence configuration for the `operating mode holiday`.
+    OperatingModeCallForwardAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatingModeCallForwardAvailableNumberObject'
+          description: Array of phone numbers.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

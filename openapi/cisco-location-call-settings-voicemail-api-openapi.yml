@@ -1,0 +1,2086 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Location Call Settings: Voicemail API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Location Call Settings:  Voicemail'
+paths:
+  /telephony/config/locations/{locationId}/voicemail:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocationVoicemailObject'
+              example:
+                voicemailTranscriptionEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Location Voicemail
+      operationId: GetLocationVoicemail
+      description: 'Retrieve voicemail settings for a specific location.
+
+
+        Location voicemail settings allows you to enable voicemail transcription for a specific location.
+
+
+        Retrieving a location''s voicemail settings requires a full, user or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve voicemail settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve voicemail settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Location Voicemail
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Location Voicemail
+      operationId: UpdateLocationVoicemail
+      description: 'Update the voicemail settings for a specific location.
+
+
+        Location voicemail settings allows you to enable voicemail transcription for a specific location.
+
+
+        Updating a location''s voicemail settings requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Update voicemail settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4NjczZDIwLWM0M2EtNDQ5Ni1iYWIxLTNiMjhhZGJjMjViYQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update voicemail settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              voicemailTranscriptionEnabled: true
+            schema:
+              $ref: '#/components/schemas/PutLocationVoicemailObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Location Voicemail
+  /telephony/config/locations/{locationId}/voicePortal:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoicePortalObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC8yZmQzZGMwMy0yZWRhLTQ4NmUtODdhYS0xODY1ZDI5YWExZWI
+                name: test voicePortal
+                language: English
+                languageCode: en_us
+                extension: '0007'
+                phoneNumber: '+1345325235'
+                firstName: firstName
+                lastName: lastName
+                directLineCallerIdName:
+                  selection: CUSTOM_NAME
+                  customName: Hakim Smith
+                dialByName: Hakim Smith
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get VoicePortal
+      operationId: GetVoicePortal
+      description: 'Retrieve Voice portal information for the location.
+
+
+        Voice portals provide an interactive voice response (IVR)
+
+        system so administrators can manage auto attendant announcements.
+
+
+        Retrieving voice portal information for an organization requires a full read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location to which the voice portal belongs.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Organization to which the voice portal belongs.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get VoicePortal
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update VoicePortal
+      operationId: UpdateVoicePortal
+      description: 'Update Voice portal information for the location.
+
+
+        Voice portals provide an interactive voice response (IVR)
+
+        system so administrators can manage auto attendant anouncements.
+
+
+        Updating voice portal information for an organization and/or rules requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location to which the voice portal belongs.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update voicemail rules for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Voice Portal Name
+              languageCode: en_us
+              extension: 5678
+              firstName: John
+              lastName: Brown
+              passcode:
+                newPasscode: '135668'
+                confirmPasscode: '135668'
+              directLineCallerIdName:
+                selection: CUSTOM_NAME
+                customName: Hakim Smith
+              dialByName: Hakim Smith
+            schema:
+              $ref: '#/components/schemas/PutVoicePortalObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update VoicePortal
+  /telephony/config/locations/{locationId}/voicePortal/passcodeRules:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoicePortalPasscodeRuleObject'
+              example:
+                expirePasscode:
+                  enabled: true
+                  numberOfDays: 180
+                failedAttempts:
+                  enabled: true
+                  attempts: 3
+                blockPreviousPasscodes:
+                  enabled: true
+                  numberOfPasscodes: 10
+                blockRepeatedDigits:
+                  enabled: true
+                  max: 3
+                blockContiguousSequences:
+                  enabled: true
+                  numberOfAscendingDigits: 3
+                  numberOfDescendingDigits: 3
+                length:
+                  min: 3
+                  max: 3
+                blockRepeatedPatternsEnabled: true
+                blockUserNumberEnabled: true
+                blockReversedUserNumberEnabled: true
+                blockReversedOldPasscodeEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get VoicePortal Passcode Rule
+      operationId: GetVoicePortalPasscodeRule
+      description: 'Retrieve the voice portal passcode rule for a location.
+
+
+        Voice portals provide an interactive voice response (IVR) system so administrators can manage auto attendant anouncements
+
+
+        Retrieving the voice portal passcode rule requires a full read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve voice portal passcode rules for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0fetchcllrjjejgghbruudtlknjbcleukhihhgFUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve voice portal passcode rules for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get VoicePortal Passcode Rule
+  /telephony/config/voicemailGroups:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - voicemailGroups
+                properties:
+                  voicemailGroups:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GetVoicemailGroupObject'
+                    description: Array of VoicemailGroups.
+              example:
+                voicemailGroups:
+                - id: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC9hN2RkNGQzOS00YTc4LTQ1MTYtOTU1Zi03ODEwZGJlMzc5Y2Y
+                  name: RCDN-VM
+                  locationName: Dallas
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzljZmRhNzg5LWUwNjItNDU2MC05MzhiLTFmNDYxNmVmNzNmMg
+                  phoneNumber: '+16066412147'
+                  extension: '5896'
+                  routingPrefix: '123'
+                  esn: '1235896'
+                  enabled: true
+                  tollFreeNumber: false
+                - id: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC8yZmQzZGMwMy0yZWRhLTQ4NmUtODdhYS0xODY1ZDI5YWExZWI
+                  name: VG1
+                  locationName: Boston
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2EwYjk2ZWJhLTdiYjAtNDEwNy05NzVmLTBmMzkwZTBlNzc4OA
+                  phoneNumber: null
+                  extension: '1125'
+                  routingPrefix: '123'
+                  esn: '1235896'
+                  enabled: true
+                - id: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC8yZTY4ZjJmNC1lYTI2LTQyNjgtOWJmMy03YjNlNmJjMjE5YzE
+                  name: VG2
+                  locationName: RCDN
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzZhZjk4ZGViLWVlZGItNGFmYi1hMDAzLTEzNzgyYjdjODAxYw
+                  phoneNumber: null
+                  extension: '4567'
+                  routingPrefix: '123'
+                  esn: '1235896'
+                  enabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List VoicemailGroup
+      operationId: ListVoicemailGroup
+      description: 'List the voicemail group information for the organization.
+
+
+        You can create a shared voicemail box and inbound FAX box to
+
+        assign to users or call routing features like an auto attendant, call queue, or hunt group.
+
+
+        Retrieving a voicemail group for the organization requires a full read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: orgId
+        in: query
+        description: Organization to which the voicemail group belongs.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: locationId
+        in: query
+        description: Location to which the voicemail group belongs.
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Search (Contains) based on voicemail group name
+        example: voicemail
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: Search (Contains) based on number or extension
+        example: '+19828282867'
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the maximum number of events in the response. The maximum value is `200`.
+        example: '100'
+        schema:
+          type: number
+          default: 100
+      - name: start
+        in: query
+        description: Offset from the first result that you want to fetch.
+        example: '0'
+        schema:
+          type: number
+      x-operation-id-source: normalized
+      x-operation-id-original: List VoicemailGroup
+  /telephony/config/locations/{locationId}/voicemailGroups/{voicemailGroupId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocationVoicemailGroupObject'
+              example:
+                id: a7dd4d39-4a78-4516-955f-7810dbe379cf
+                name: Voicemail Group Name
+                phoneNumber: '+16066412147'
+                extension: '1273'
+                routingPrefix: '123'
+                esn: '1231273'
+                tollFreeNumber: 'false'
+                firstName: rcdnfTest
+                lastName: rcdnlTest
+                enabled: true
+                languageCode: en_us
+                greeting: DEFAULT
+                greetingUploaded: true
+                greetingDescription: greetings.wav
+                messageStorage:
+                  storageType: EXTERNAL
+                  externalEmail: user@flex2.cisco.com
+                notifications:
+                  enabled: true
+                  destination: user@flex2.cisco.com
+                faxMessage:
+                  enabled: true
+                  phoneNumber: '+1234234324'
+                  extension: '23455'
+                transferToNumber:
+                  enabled: true
+                  destination: '+12147691003'
+                emailCopyOfMessage:
+                  enabled: true
+                  emailId: <user@flex2.cisco.com
+                voiceMessageForwardingEnabled: true
+                directLineCallerIdName:
+                  selection: CUSTOM_NAME
+                  customName: Hakim Smith
+                dialByName: Hakim Smith
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Location Voicemail Group
+      operationId: GetLocationVoicemailGroup
+      description: 'Retrieve voicemail group details for a location.
+
+
+        Manage your voicemail group settings for a specific location, like when you want your voicemail to be active, message storage settings, and how you would like to be notified of new voicemail messages.
+
+
+        Retrieving voicemail group details requires a full, user or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve voicemail group details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: voicemailGroupId
+        in: path
+        description: Retrieve voicemail group details for this voicemail group ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC9hN2RkNGQzOS00YTc4LTQ1MTYtOTU1Zi03ODEwZGJlMzc5Y2Y
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve voicemail group details for a customer location.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Location Voicemail Group
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Location Voicemail Group
+      operationId: ModifyLocationVoicemailGroup
+      description: 'Modifies the voicemail group location details for a particular location for a customer.
+
+
+        Manage your voicemail settings, like when you want your voicemail to be active, message storage settings, and how you would like to be notified of new voicemail messages.
+
+
+        Modifying the voicemail group location details requires a full, user administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Modifies the voicemail group details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: voicemailGroupId
+        in: path
+        description: Modifies the voicemail group details for this voicemail group ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC9hN2RkNGQzOS00YTc4LTQ1MTYtOTU1Zi03ODEwZGJlMzc5Y2Y
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Modifies the voicemail group details for a customer location.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Voicemail Group Name
+              phoneNumber: '+16066412147'
+              extension: '1273'
+              firstName: rcdnfTest
+              lastName: rcdnlTest
+              passcode: '1234'
+              enabled: true
+              languageCode: en_us
+              greeting: DEFAULT
+              greetingDescription: greetings.wav
+              messageStorage:
+                storageType: EXTERNAL
+                externalEmail: user@flex2.cisco.com
+              notifications:
+                enabled: true
+                destination: user@flex2.cisco.com
+              faxMessage:
+                enabled: true
+                phoneNumber: '+1234234324'
+                extension: '23455'
+              transferToNumber:
+                enabled: true
+                destination: '+12147691003'
+              emailCopyOfMessage:
+                enabled: true
+                emailId: <user@flex2.cisco.com
+              directLineCallerIdName:
+                selection: CUSTOM_NAME
+                customName: Hakim Smith
+              dialByName: Hakim Smith
+            schema:
+              $ref: '#/components/schemas/PutLocationVoicemailGroupObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Modify Location Voicemail Group
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Voicemail Group for a Location
+      operationId: DeleteAVoicemailGroupForALocation
+      description: 'Delete the designated voicemail group.
+
+
+        Deleting a voicemail group requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete a voicemail group.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: voicemailGroupId
+        in: path
+        description: Delete the voicemail group with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvYUhaaFpUTjJNRzh5YjBBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the voicemail group from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Voicemail Group for a Location
+  /telephony/config/locations/{locationId}/voicemailGroups:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: UUID of the newly created voice mail group.
+              example:
+                id: 997e8784-e2e4-4aa3-93d6-679b2b128d8e
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a new Voicemail Group for a Location
+      operationId: CreateANewVoicemailGroupForALocation
+      description: 'Create a new voicemail group for the given location for a customer.
+
+
+        A voicemail group can be created for given location for a customer.
+
+
+        Creating a voicemail group for the given location requires a full or user administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create a new voice mail group for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create a new voice mail group for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Voicemail Group Name
+              phoneNumber: '+16066412147'
+              extension: '1273'
+              firstName: rcdnfTest
+              lastName: rcdnlTest
+              passcode: '1373'
+              languageCode: en_us
+              messageStorage:
+                storageType: EXTERNAL
+                externalEmail: user@flex2.cisco.com
+              notifications:
+                enabled: true
+                destination: user@flex2.cisco.com
+              faxMessage:
+                enabled: true
+                phoneNumber: '+1234234324'
+                extension: '23455'
+              transferToNumber:
+                enabled: true
+                destination: '+12147691003'
+              emailCopyOfMessage:
+                enabled: true
+                emailId: <user@flex2.cisco.com
+              directLineCallerIdName:
+                selection: CUSTOM_NAME
+                customName: Hakim Smith
+              dialByName: Hakim Smith
+            schema:
+              $ref: '#/components/schemas/PostLocationVoicemailGroupObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a new Voicemail Group for a Location
+  /telephony/config/locations/{locationId}/voicemailGroups/faxMessage/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicemailGroupFaxMessageAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                - phoneNumber: '+12056350002'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                - phoneNumber: '+12056350003'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Voicemail Group Fax Message Available Phone Numbers
+      operationId: GetVoicemailGroupFaxMessageAvailablePhoneNumbers
+      description: 'List the standard and service PSTN numbers that are available to be assigned as a voicemail group''s FAX message phone number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are unassigned.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Voicemail Group Fax Message Available Phone Numbers
+  /telephony/config/locations/{locationId}/voicemailGroups/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicemailGroupAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                - phoneNumber: '+12056350002'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                - phoneNumber: '+12056350003'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Voicemail Group Available Phone Numbers
+      operationId: GetVoicemailGroupAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as a voicemail group''s phone number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are unassigned.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Voicemail Group Available Phone Numbers
+  /telephony/config/locations/{locationId}/voicePortal/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicePortalAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                - phoneNumber: '+12056350002'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                - phoneNumber: '+12056350003'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get VoicePortal Available Phone Numbers
+      operationId: GetVoicePortalAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as the location voice portal''s phone number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are unassigned.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings:  Voicemail'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+      x-operation-id-source: normalized
+      x-operation-id-original: Get VoicePortal Available Phone Numbers
+components:
+  schemas:
+    DirectLineCallerIdNameObject:
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/SelectionObject'
+          description: The selection of the direct line caller ID name. Defaults to `DISPLAY_NAME`.
+        customName:
+          type: string
+          example: Hakim Smith
+          description: The custom direct line caller ID name. Required if `selection` is set to `CUSTOM_NAME`.
+      description: Settings for the direct line caller ID name to be shown for this workspace.
+    PutLocationVoicemailObject:
+      type: object
+      required:
+      - voicemailTranscriptionEnabled
+      properties:
+        voicemailTranscriptionEnabled:
+          type: boolean
+          example: true
+          description: Set to `true` to enable voicemail transcription.
+    PostLocationVoicemailGroupObject:
+      type: object
+      required:
+      - name
+      - extension
+      - passcode
+      - languageCode
+      - messageStorage
+      - notifications
+      - faxMessage
+      - transferToNumber
+      - emailCopyOfMessage
+      properties:
+        name:
+          type: string
+          example: VGName
+          description: Set name to create new voicemail group for a particular location for a customer.
+        phoneNumber:
+          type: string
+          example: '+1234234324'
+          description: Set voicemail group phone number for this particular location.
+        extension:
+          type: number
+          example: 23455
+          description: Set unique voicemail group extension number for this particular location.
+        firstName:
+          type: string
+          example: Customer
+          description: Set voicemail group caller ID first name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Support
+          description: Set voicemail group called ID last name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        passcode:
+          type: number
+          example: 1234
+          description: Set passcode to access voicemail group when calling.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code for voicemail group audio announcement.
+        messageStorage:
+          type: object
+          required:
+          - storageType
+          properties:
+            storageType:
+              type: string
+              enum:
+              - INTERNAL
+              - EXTERNAL
+              description: "Message storage type.\n * `INTERNAL` - Set to `INTERNAL` to store messages in internal mailbox.\n * `EXTERNAL` - Set to `EXTERNAL` to send messages to the email address provided.\n"
+            externalEmail:
+              type: string
+              example: user@flex2.cisco.com
+              description: Set external email to forward the messages.
+          description: Message storage information
+        notifications:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable message notification.
+            destination:
+              type: string
+              example: user@flex2.cisco.com
+              description: Set email to SMS gateway to send notifications.
+          description: Message notifications
+        faxMessage:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable fax messaging.
+            phoneNumber:
+              type: string
+              example: '+1234234324'
+              description: Set valid phone number to receive fax message.
+            extension:
+              type: number
+              example: 23455
+              description: Set fax messaging extension number.
+          description: Fax message information
+        transferToNumber:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable to transfer message.
+            destination:
+              type: string
+              example: '+12147691003'
+              description: Set phone number and dial '0' to transfer message to the provided number.
+          description: Transfer message information
+        emailCopyOfMessage:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable email message copy.
+            emailId:
+              type: string
+              example: user@flex2.cisco.com
+              description: Set email to receive message copy to the email address provided.
+          description: Message copy information
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObject'
+          description: Settings for the direct line caller ID name to be shown for this voicemail group.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: The name to be used for dial by name functions.  Characters of `%`,  `+`, `\`, `"` and Unicode characters are not allowed.
+    VoicePortalAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoicePortalAvailableNumberObject'
+          description: Array of phone numbers.
+    GetLocationVoicemailObject:
+      type: object
+      required:
+      - voicemailTranscriptionEnabled
+      properties:
+        voicemailTranscriptionEnabled:
+          type: boolean
+          example: true
+          description: Set to `true` to enable voicemail transcription.
+    VoicemailGroupAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoicemailGroupAvailableNumberObject'
+          description: Array of phone numbers.
+    VoicemailGroupAvailableNumberObject:
+      type: object
+      required:
+      - phoneNumber
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+    GetVoicePortalObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC8yZmQzZGMwMy0yZWRhLTQ4NmUtODdhYS0xODY1ZDI5YWExZWI
+          description: Voice Portal ID
+        name:
+          type: string
+          example: test voicePortal
+          description: Voice Portal Name.
+        language:
+          type: string
+          example: English
+          description: Language for audio announcements.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code for voicemail group audio announcement.
+        extension:
+          type: string
+          example: '0007'
+          description: Extension of incoming call.
+        phoneNumber:
+          type: string
+          example: '+1345325235'
+          description: Phone Number of incoming call.
+        firstName:
+          type: string
+          example: firstName
+          description: Caller ID First Name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: lastName
+          description: Caller ID Last Name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObject'
+          description: Settings for the direct line caller ID name to be shown for this voice portal.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: The name to be used for dial by name functions.
+    VoicemailGroupFaxMessageAvailableNumberObject:
+      type: object
+      required:
+      - phoneNumber
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+    GetVoicePortalPasscodeRuleObject:
+      type: object
+      properties:
+        expirePasscode:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, passcode expires after the number of days specified.
+            numberOfDays:
+              type: number
+              example: 180
+              description: Number of days for passcode expiry. The minimum value is 15. The maximum value is 100.
+          description: Settings for passcode expiry.
+        failedAttempts:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, allows specified number of attempts before locking voice portal access.
+            attempts:
+              type: number
+              example: 3
+              description: Number of failed attempts allowed.
+          description: Number of failed attempts allowed.
+        blockPreviousPasscodes:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, the specified number of passcode changes must occur before a passcode can be re-used.
+            numberOfPasscodes:
+              type: number
+              example: 10
+              description: Number of previous passcodes not allowed to be re-used. The minimum value is 1. The maximum value is 10.
+          description: Settings for previous passcode usage.
+        blockRepeatedDigits:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, checks for sequence of the same digit being repeated.
+            max:
+              type: number
+              example: 3
+              description: Maximum number of repeated digit sequence allowed. The minimum value is 1. The maximum value is 6.
+          description: Settings to prevent single digits from being repeated in the passcode. For example, with a maximum value of 3, 111222 is allowed but 112222 is not allowed since it contains a repeated digit sequence longer than 3.
+        blockContiguousSequences:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: If enabled, do not allow the specified number of ascending or descending digits in a row.
+            numberOfAscendingDigits:
+              type: number
+              example: 3
+              description: 'Specifies the maximum length of an ascending numerical sequence allowed. The minimum value is 2. The maximum value is 5. Example: If this value is set to 3, then 123856 is allowed, but 123485 is not allowed (since the ascending sequence 1234 exceeds 3 digits).'
+            numberOfDescendingDigits:
+              type: number
+              example: 3
+              description: 'Specifies the maximum length of a descending numerical sequence allowed. The minimum value is 2. The maximum value is 5. Example: If this value is set to 3, then 321856 is allowed, but 432185 is not allowed (since the descending sequence 4321 exceeds 3 digits).'
+          description: Settings for not allowing numerical sequence in passcode (for example, 012345 or 987654).
+        length:
+          type: object
+          properties:
+            min:
+              type: number
+              example: 6
+              description: The minimum value is 2. The maximum value is 15.
+            max:
+              type: number
+              example: 30
+              description: The minimum value is 3. The maximum value is 30.
+          description: Allowed length of the passcode.
+        blockRepeatedPatternsEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode cannot contain repeated patterns. For example, 121212 and 123123.
+        blockUserNumberEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode do not allow user phone number or extension.
+        blockReversedUserNumberEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode do not allow revered phone number or extension.
+        blockReversedOldPasscodeEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode do not allow setting reversed old passcode.
+    VoicePortalAvailableNumberObject:
+      type: object
+      required:
+      - phoneNumber
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+    TelephonyType:
+      type: string
+      enum:
+      - PSTN_NUMBER
+      description: ' * `PSTN_NUMBER` - The object is a PSTN number.
+
+        '
+    SelectionObject:
+      type: string
+      enum:
+      - CUSTOM_NAME
+      - DISPLAY_NAME
+      description: " * `DISPLAY_NAME` - When this option is selected, `displayName` is to be shown for this workspace.\n * `CUSTOM_NAME` - When this option is selected, `customName` is to be shown for this workspace."
+    STATE:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      description: " * `ACTIVE` - Phone number is in the active state.\n * `INACTIVE` - Phone number is in the inactive state.\n"
+    PutVoicePortalObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: test voicePortal
+          description: Voice Portal Name.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code for voicemail group audio announcement.
+        extension:
+          type: string
+          example: '0007'
+          description: Extension of incoming call.
+        phoneNumber:
+          type: string
+          example: '+1345325235'
+          description: Phone Number of incoming call.
+        firstName:
+          type: string
+          example: firstName
+          description: Caller ID First Name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: lastName
+          description: Caller ID Last Name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        passcode:
+          type: object
+          properties:
+            newPasscode:
+              type: string
+              example: testPass123
+              description: New passcode.
+            confirmPasscode:
+              type: string
+              example: testPass123
+              description: Confirm new passcode.
+          description: Voice Portal Admin Passcode.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObjectForPut'
+          description: Settings for the direct line caller ID name to be shown for this voice portal.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: Sets or clears the name to be used for dial by name functions. To clear the `dialByName`, the attribute must be set to null or empty string. Characters of `%`,  `+`, `\`, `"` and Unicode characters are not allowed.
+    GetLocationVoicemailGroupObject:
+      type: object
+      required:
+      - id
+      - name
+      - enabled
+      - languageCode
+      - greeting
+      - greetingUploaded
+      - voiceMessageForwardingEnabled
+      properties:
+        id:
+          type: string
+          example: a7dd4d39-4a78-4516-955f-7810dbe379cf
+          description: UUID of voicemail group of a particular location.
+        name:
+          type: string
+          example: VGName
+          description: Name of the voicemail group.
+        phoneNumber:
+          type: string
+          example: '+1234234324'
+          description: Voicemail group phone number.
+        extension:
+          type: number
+          example: 23455
+          description: Voicemail group extension number.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '123423455'
+          description: Routing prefix + extension of a person or workspace.
+        tollFreeNumber:
+          type: boolean
+          description: Voicemail group toll free number.
+        firstName:
+          type: string
+          example: Customer
+          description: Voicemail group caller ID first name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Support
+          description: Voicemail group called ID last name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/disable voicemail group.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language for voicemail group audio announcement.
+        greeting:
+          type: string
+          enum:
+          - DEFAULT
+          - CUSTOM
+          description: "Set voicemail group greeting type.\n * `DEFAULT` - Default voicemail group greeting.\n * `CUSTOM` - Custom voicemail group greeting.\n"
+        greetingUploaded:
+          type: boolean
+          example: true
+          description: Enabled if CUSTOM greeting is previously uploaded.
+        greetingDescription:
+          type: string
+          example: short greeting.wav
+          description: CUSTOM greeting for previously uploaded.
+        messageStorage:
+          type: object
+          required:
+          - storageType
+          properties:
+            storageType:
+              type: string
+              enum:
+              - INTERNAL
+              - EXTERNAL
+              description: "Message storage type\n * `INTERNAL` - Store messages in internal mailbox.\n * `EXTERNAL` - Send messages to the email address provided.\n"
+            externalEmail:
+              type: string
+              example: user@flex2.cisco.com
+              description: External email to forward the message.
+          description: Message storage information
+        notifications:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Enable/disable messages notification
+            destination:
+              type: string
+              example: user@flex2.cisco.com
+              description: Notifications to be sent to the provided email to SMS gateway.
+          description: Message notifications
+        faxMessage:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Enable/disable fax messaging.
+            phoneNumber:
+              type: string
+              example: '+1234234324'
+              description: Phone number to receive fax messages.
+            extension:
+              type: number
+              example: 23455
+              description: Extension to receive fax messages.
+          description: Fax message receive settings
+        transferToNumber:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Enable/disable to transfer message.
+            destination:
+              type: string
+              example: '+12147691003'
+              description: Transfer phone number to be called when '0' is dialed.
+          description: Transfer message information
+        emailCopyOfMessage:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Enable/disable to email message copy.
+            emailId:
+              type: string
+              example: user@flex2.cisco.com
+              description: Email message copy to email address provided.
+          description: Message copy information
+        voiceMessageForwardingEnabled:
+          type: boolean
+          example: true
+          description: Enable/disable to forward voice message.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObject'
+          description: Settings for the direct line caller ID name to be shown for this voicemail group.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: The name to be used for dial by name functions.
+    VoicemailGroupFaxMessageAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoicemailGroupFaxMessageAvailableNumberObject'
+          description: Array of phone numbers.
+    GetVoicemailGroupObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1ZPSUNFTUFJTF9HUk9VUC8yZmQzZGMwMy0yZWRhLTQ4NmUtODdhYS0xODY1ZDI5YWExZWI
+          description: Voicemail Group ID.
+        name:
+          type: string
+          example: test
+          description: Voicemail Group Name.
+        locationName:
+          type: string
+          example: San Jose
+          description: Location Name.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+          description: Location ID.
+        extension:
+          type: string
+          example: '0007'
+          description: Extension of the voicemail group.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12340007'
+          description: Routing prefix + extension of a person or workspace.
+        phoneNumber:
+          type: string
+          example: '+1345325235'
+          description: Phone number of the voicemail group.
+        enabled:
+          type: boolean
+          example: true
+          description: If enabled, incoming calls are sent to voicemail.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: Flag to indicate if the number is toll free.
+    DirectLineCallerIdNameObjectForPut:
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/SelectionObject'
+          description: The selection of the direct line caller ID name.
+        customName:
+          type: string
+          example: Hakim Smith
+          description: Sets or clears the custom direct line caller ID name.  To clear the `customName`, the attribute must be set to null or empty string. Required if `selection` is set to `CUSTOM_NAME`.
+      description: Settings for the direct line caller ID name to be shown for this workspace.
+    PutLocationVoicemailGroupObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: VGName
+          description: Set the name of the voicemail group.
+        phoneNumber:
+          type: string
+          example: '+1234234324'
+          description: Set voicemail group phone number.
+        extension:
+          type: number
+          example: 23455
+          description: Set unique voicemail group extension number.
+        firstName:
+          type: string
+          example: Customer
+          description: Set the voicemail group caller ID first name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Support
+          description: Set the voicemail group called ID last name. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        enabled:
+          type: boolean
+          example: true
+          description: Set to `true` to enable the voicemail group.
+        passcode:
+          type: number
+          example: 1234
+          description: Set passcode to access voicemail group when calling.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code for the voicemail group audio announcement.
+        greeting:
+          type: string
+          enum:
+          - DEFAULT
+          - CUSTOM
+          description: "Voicemail group greeting type.\n * `DEFAULT` - Set to `DEFAULT` to play default voicemail group greeting.\n * `CUSTOM` - Set to `CUSTOM` to play previously uploaded custom voicemail group greeting.\n"
+        greetingDescription:
+          type: string
+          example: short greeting.wav
+          description: CUSTOM greeting for previously uploaded.
+        messageStorage:
+          type: object
+          properties:
+            storageType:
+              type: string
+              enum:
+              - INTERNAL
+              - EXTERNAL
+              description: "Message storage type.\n * `INTERNAL` - Set to `INTERNAL` to store messages in internal mailbox.\n * `EXTERNAL` - Set to `EXTERNAL` to send messages to the email address provided.\n"
+            externalEmail:
+              type: string
+              example: user@flex2.cisco.com
+              description: Set external email to forward the messages.
+          description: Message storage information
+        notifications:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable message notification.
+            destination:
+              type: string
+              example: user@flex2.cisco.com
+              description: Set email to SMS gateway to send notifications.
+          description: Message notifications
+        faxMessage:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable FAX messaging.
+            phoneNumber:
+              type: string
+              example: '+1234234324'
+              description: Set valid phone number to receive FAX messages.
+            extension:
+              type: number
+              example: 23455
+              description: Set FAX messaging extension number.
+          description: Fax message receive settings
+        transferToNumber:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable to transfer message.
+            destination:
+              type: string
+              example: '+12147691003'
+              description: Set phone number and transfer message to the provided number when '0' is dialed.
+          description: Transfer message information
+        emailCopyOfMessage:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Set to `true` to enable email message copy.
+            emailId:
+              type: string
+              example: user@flex2.cisco.com
+              description: Set email to receive message copy to the email address provided.
+          description: Message copy information
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObjectForPut'
+          description: Settings for the direct line caller ID name to be shown for this voicemail group.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: Sets or clears the name to be used for dial by name functions. To clear the `dialByName`, the attribute must be set to null or empty string. Characters of `%`,  `+`, `\`, `"` and Unicode characters are not allowed.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

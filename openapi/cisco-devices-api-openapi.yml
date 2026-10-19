@@ -1,0 +1,1077 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Devices API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Devices
+paths:
+  /devices:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceCollectionResponse'
+              example:
+                items:
+                - id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                  callingDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS81MTAxQjA3Qi00RjhGLTRFRjctQjU2NS1EQjE5QzdCNzIzRjc=
+                  webexDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                  deviceId: Y2lzY29zcGFyazovL29yZ0lkPTk2YWJjMmFhLTNkY2MtMTFlNS1hMTUyLWZlMzQ4MTljZGM5YS9ERVZJQ0VfSUQvNTEwMWIwN2ItNGY4Zi00ZWY3LWI1NjUtZGIxOWM3YjcyM2Y3
+                  displayName: SFO12-3-PanHandle
+                  placeId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                  workspaceId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                  personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                  orgId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                  capabilities:
+                  - xapi
+                  permissions:
+                  - xapi:readonly
+                  connectionStatus: connected
+                  product: Cisco Webex DX80
+                  type: roomdesk
+                  tags:
+                  - First Tag
+                  - Second Tag
+                  ip: 100.110.120.130
+                  activeInterface: wired
+                  mac: 11:22:33:44:AA:FF
+                  primarySipUrl: sample_device@sample_workspacename.orgname.org
+                  sipUrls:
+                  - sample_device@sample_workspacename.orgname.org
+                  - another_device@sample_workspacename.orgname.org
+                  serial: FOC1923NVVN
+                  software: RoomOS 2018-06-01 608dcdbb6e1
+                  upgradeChannel: beta
+                  created: '2016-04-21T17:00:00.000Z'
+                  locationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                  workspaceLocationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                  errorCodes:
+                  - sipprofileregistration
+                  firstSeen: '2021-02-24T09:08:38.822Z'
+                  lastSeen: '2023-08-15T14:04:00.444Z'
+                  managedBy: CISCO
+                  devicePlatform: cisco
+                  plannedMaintenance: 'off'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Devices
+      operationId: ListDevices
+      description: Lists all active Webex devices associated with the authenticated user, such as devices activated in personal mode. This requires the `spark:devices_read` scope. Administrators can list all devices within their organization. This requires an administrator auth token with the `spark-admin:devices_read` scope.
+      tags:
+      - Devices
+      parameters:
+      - name: max
+        in: query
+        description: Limit the maximum number of devices in the response.
+        example: '100'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: '
+
+          Offset. Default is 0.
+
+          '
+        schema:
+          type: number
+      - name: displayName
+        in: query
+        description: '
+
+          List devices with this display name.
+
+          '
+        example: SFO12-3-PanHandle
+        schema:
+          type: string
+      - name: personId
+        in: query
+        description: '
+
+          List devices by person ID.
+
+          '
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+        schema:
+          type: string
+      - name: workspaceId
+        in: query
+        description: '
+
+          List devices by workspace ID.
+
+          '
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS81MTAxQjA3Qi00RjhGLTRFRjctQjU2NS1EQjE5QzdCNzIzRjc=
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: '
+
+          List devices in this organization. Only admin users of another organization (such as partners) may use this parameter.
+
+          '
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: connectionStatus
+        in: query
+        description: '
+
+          List devices with this connection status.
+
+          '
+        schema:
+          type: string
+      - name: product
+        in: query
+        description: '
+
+          List devices with this product name.
+
+          '
+        schema:
+          type: string
+          enum:
+          - DX-80
+          - RoomKit
+          - SX-80
+      - name: type
+        in: query
+        description: '
+
+          List devices with this type.
+
+          '
+        schema:
+          type: string
+          enum:
+          - roomdesk
+          - phone
+          - accessory
+          - webexgo
+          - unknown
+      - name: serial
+        in: query
+        description: '
+
+          List devices with this serial number.
+
+          '
+        schema:
+          type: string
+      - name: tag
+        in: query
+        description: '
+
+          List devices which have a tag. Searching for multiple tags (logical AND) can be done by comma separating the `tag` values or adding several `tag` parameters.
+
+          '
+        schema:
+          type: string
+      - name: software
+        in: query
+        description: '
+
+          List devices with this software version.
+
+          '
+        schema:
+          type: string
+      - name: upgradeChannel
+        in: query
+        description: '
+
+          List devices with this upgrade channel.
+
+          '
+        schema:
+          type: string
+      - name: errorCode
+        in: query
+        description: '
+
+          List devices with this error code.
+
+          '
+        schema:
+          type: string
+      - name: capability
+        in: query
+        description: '
+
+          List devices with this capability.
+
+          '
+        example: xapi
+        schema:
+          type: string
+          enum:
+          - xapi
+      - name: permission
+        in: query
+        description: '
+
+          List devices with this permission.
+
+          '
+        schema:
+          type: string
+      - name: locationId
+        in: query
+        description: '
+
+          List devices by location ID.
+
+          '
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS81MTAxQjA3Qi00RjhGLTRFRjctQjU2NS1EQjE5QzdCNzIzRjc=
+        schema:
+          type: string
+      - name: workspaceLocationId
+        in: query
+        description: '
+
+          List devices by workspace location ID. Deprecated, prefer `locationId`.
+
+          '
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS81MTAxQjA3Qi00RjhGLTRFRjctQjU2NS1EQjE5QzdCNzIzRjc=
+        schema:
+          type: string
+      - name: mac
+        in: query
+        description: '
+
+          List devices with this MAC address.
+
+          '
+        schema:
+          type: string
+      - name: devicePlatform
+        in: query
+        description: '
+
+          List devices with this device platform.
+
+          '
+        example: cisco
+        schema:
+          type: string
+          enum:
+          - cisco
+          - microsoftTeamsRoom
+      - name: plannedMaintenance
+        in: query
+        description: '
+
+          List devices with this planned maintenance.
+
+          '
+        example: 'off'
+        schema:
+          type: string
+          enum:
+          - 'off'
+          - 'on'
+          - upcoming
+      x-operation-id-source: normalized
+      x-operation-id-original: List Devices
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              example:
+                id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                callingDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS81MTAxQjA3Qi00RjhGLTRFRjctQjU2NS1EQjE5QzdCNzIzRjc=
+                webexDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                deviceId: Y2lzY29zcGFyazovL29yZ0lkPTk2YWJjMmFhLTNkY2MtMTFlNS1hMTUyLWZlMzQ4MTljZGM5YS9ERVZJQ0VfSUQvNTEwMWIwN2ItNGY4Zi00ZWY3LWI1NjUtZGIxOWM3YjcyM2Y3
+                displayName: SFO12-3-PanHandle
+                placeId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                workspaceId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                orgId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                capabilities:
+                - xapi
+                permissions:
+                - xapi:readonly
+                connectionStatus: connected
+                product: Cisco Webex DX80
+                type: roomdesk
+                tags:
+                - First Tag
+                - Second Tag
+                ip: 100.110.120.130
+                activeInterface: wired
+                mac: 11:22:33:44:AA:FF
+                primarySipUrl: sample_device@sample_workspacename.orgname.org
+                sipUrls:
+                - sample_device@sample_workspacename.orgname.org
+                - another_device@sample_workspacename.orgname.org
+                serial: FOC1923NVVN
+                software: RoomOS 2018-06-01 608dcdbb6e1
+                upgradeChannel: beta
+                created: '2016-04-21T17:00:00.000Z'
+                locationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                workspaceLocationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                errorCodes:
+                - sipprofileregistration
+                firstSeen: '2021-02-24T09:08:38.822Z'
+                lastSeen: '2023-08-15T14:04:00.444Z'
+                managedBy: CISCO
+                devicePlatform: cisco
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Device by MAC Address
+      operationId: CreateADeviceByMACAddress
+      description: 'Create a phone by its MAC address in a specific workspace or for a person.
+
+
+        Specify the `mac`, `model` and either `workspaceId` or `personId`.
+
+
+        * You can get the `model` from the supported devices API.
+
+
+        * Either `workspaceId` or `personId` should be provided. If both are supplied, the request will be invalid.
+
+
+        * The `password` field is only required for third party devices. You can obtain the required third party phone configuration from here.
+
+
+        Adding a device to a person with a Webex Calling Standard license will disable Webex Calling across their Webex mobile, tablet, desktop, and browser applications.
+
+
+        When adding devices to a Webex Calling Professional licensed person or workspace, wait for each API call to finish before starting the next. This prevents race conditions that can cause errors when assigning primary versus secondary device status.'
+      tags:
+      - Devices
+      parameters:
+      - name: orgId
+        in: query
+        description: The organization associated with the device. If left empty, the organization associated with the caller will be used.
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL09SR0FOSVpBVElPTi9mN2I3MzYwYy1lMDcxLTQwN2EtYTU1Ny04NDI4YmIyMjhlODQ
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              mac: D82E3EEF4E5C
+              model: DMS Cisco 8865
+              workspaceId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+            schema:
+              type: object
+              required:
+              - mac
+              - model
+              properties:
+                mac:
+                  type: string
+                  example: 54A3152300C8
+                  description: The MAC address of the device being created.
+                model:
+                  type: string
+                  example: DMS Cisco 8865
+                  description: The model of the device being created. The corresponding device model display name sometimes called the product name, can also be used to specify the model.
+                workspaceId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                  description: The ID of the workspace where the device will be created.
+                personId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QRU9QTEUvNTAzYmRhODAtOTM4NS00NmQ1LWIzMzAtMGU2NzIyMjQ5MTNh
+                  description: The ID of the person who will own the device once created.
+                password:
+                  type: string
+                  example: TestPassword123&
+                  description: SIP password to be configured for the phone, only required with third party devices.
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Device by MAC Address
+  /devices/{deviceId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              example:
+                id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                callingDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS81MTAxQjA3Qi00RjhGLTRFRjctQjU2NS1EQjE5QzdCNzIzRjc=
+                webexDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                deviceId: Y2lzY29zcGFyazovL29yZ0lkPTk2YWJjMmFhLTNkY2MtMTFlNS1hMTUyLWZlMzQ4MTljZGM5YS9ERVZJQ0VfSUQvNTEwMWIwN2ItNGY4Zi00ZWY3LWI1NjUtZGIxOWM3YjcyM2Y3
+                displayName: SFO12-3-PanHandle
+                placeId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                workspaceId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                orgId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                capabilities:
+                - xapi
+                permissions:
+                - xapi:readonly
+                connectionStatus: connected
+                product: Cisco Webex DX80
+                type: roomdesk
+                tags:
+                - First Tag
+                - Second Tag
+                ip: 100.110.120.130
+                activeInterface: wired
+                mac: 11:22:33:44:AA:FF
+                primarySipUrl: sample_device@sample_workspacename.orgname.org
+                sipUrls:
+                - sample_device@sample_workspacename.orgname.org
+                - another_device@sample_workspacename.orgname.org
+                serial: FOC1923NVVN
+                software: RoomOS 2018-06-01 608dcdbb6e1
+                upgradeChannel: beta
+                created: '2016-04-21T17:00:00.000Z'
+                locationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                workspaceLocationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                errorCodes:
+                - sipprofileregistration
+                firstSeen: '2021-02-24T09:08:38.822Z'
+                lastSeen: '2023-08-15T14:04:00.444Z'
+                managedBy: CISCO
+                devicePlatform: cisco
+                plannedMaintenance: 'off'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Device Details
+      operationId: getDeviceDetails
+      description: 'Shows details for a device, by ID. This requires an auth token with the `spark:devices_read` scope to see your own device, or `spark-admin:devices_read` to see any other device in your organization.
+
+
+        Specify the device ID in the `deviceId` parameter in the URI.'
+      tags:
+      - Devices
+      parameters:
+      - name: deviceId
+        in: path
+        description: '
+
+          A unique identifier for the device.
+
+          '
+        required: true
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: The organization associated with the device. If left empty, the organization associated with the caller will be used.
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL09SR0FOSVpBVElPTi9mN2I3MzYwYy1lMDcxLTQwN2EtYTU1Ny04NDI4YmIyMjhlODQ
+        schema:
+          type: string
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Device
+      operationId: DeleteADevice
+      description: 'Deletes a device, by ID. Deleting your own device requires an auth token with the `spark:devices_write` scope. Deleting any other device in the organization will require an administrator auth token with the `spark-admin:devices_write` scope.
+
+
+        Specify the device ID in the `deviceId` parameter in the URI.
+
+
+        Deleting a device from a person with a Webex Calling Standard license will enable Webex Calling across their Webex mobile, tablet, desktop, and browser applications.'
+      tags:
+      - Devices
+      parameters:
+      - name: deviceId
+        in: path
+        description: A unique identifier for the device.
+        required: true
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: The organization associated with the device. If left empty, the organization associated with the caller will be used.
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL09SR0FOSVpBVElPTi9mN2I3MzYwYy1lMDcxLTQwN2EtYTU1Ny04NDI4YmIyMjhlODQ
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Device
+    patch:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              example:
+                id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                callingDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9DQUxMSU5HX0RFVklDRS81MTAxQjA3Qi00RjhGLTRFRjctQjU2NS1EQjE5QzdCNzIzRjc=
+                webexDeviceId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+                deviceId: Y2lzY29zcGFyazovL29yZ0lkPTk2YWJjMmFhLTNkY2MtMTFlNS1hMTUyLWZlMzQ4MTljZGM5YS9ERVZJQ0VfSUQvNTEwMWIwN2ItNGY4Zi00ZWY3LWI1NjUtZGIxOWM3YjcyM2Y3
+                displayName: SFO12-3-PanHandle
+                placeId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                workspaceId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                orgId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                capabilities:
+                - xapi
+                permissions:
+                - xapi:readonly
+                connectionStatus: connected
+                product: Cisco Webex DX80
+                type: roomdesk
+                tags:
+                - First Tag
+                - Second Tag
+                ip: 100.110.120.130
+                activeInterface: wired
+                mac: 11:22:33:44:AA:FF
+                primarySipUrl: sample_device@sample_workspacename.orgname.org
+                sipUrls:
+                - sample_device@sample_workspacename.orgname.org
+                - another_device@sample_workspacename.orgname.org
+                serial: FOC1923NVVN
+                software: RoomOS 2018-06-01 608dcdbb6e1
+                upgradeChannel: beta
+                created: '2016-04-21T17:00:00.000Z'
+                locationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                workspaceLocationId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                errorCodes:
+                - sipprofileregistration
+                firstSeen: '2021-02-24T09:08:38.822Z'
+                lastSeen: '2023-08-15T14:04:00.444Z'
+                managedBy: CISCO
+                devicePlatform: cisco
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Device Tags
+      operationId: ModifyDeviceTags
+      description: 'Create, delete or update tags on a device. For your own device, this requires an auth token with the `spark:devices_write` scope. An auth token with the `spark-admin:devices_write` scope is required to operate on other devices within the organization.
+
+
+        Specify the device ID in the `deviceId` parameter in the URI.
+
+
+        Include only the tag array in the request body, no other device attributes can be changed. This action will overwrite any previous tags. A common approach is to first GET the devices''s details, make changes to the `tags` array, and then PATCH the new complete array with this endpoint.'
+      tags:
+      - Devices
+      parameters:
+      - name: deviceId
+        in: path
+        description: Unique identifier for the device.
+        required: true
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: The organization associated with the device. If left empty, the organization associated with the caller will be used.
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL09SR0FOSVpBVElPTi9mN2I3MzYwYy1lMDcxLTQwN2EtYTU1Ny04NDI4YmIyMjhlODQ
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+            - op: replace
+              path: tags
+              value:
+              - First Tag
+              - Second Tag
+            schema:
+              type: object
+              properties:
+                op:
+                  type: string
+                  enum:
+                  - add
+                  - remove
+                  - replace
+                  description: " * `add` - Add all specified tags to the existing device tags list.\n * `remove` - Remove all tags that the device currently has.\n * `replace` - Replace the tags currently on the device with the specified list.\n"
+                path:
+                  type: string
+                  example: tags
+                  description: Only the tags path is supported to patch.
+                value:
+                  type: array
+                  items:
+                    type: string
+                    example: First Tag,Second Tag
+      x-operation-id-source: normalized
+      x-operation-id-original: Modify Device Tags
+  /devices/activationCode:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationCode'
+              example:
+                code: '5414011256173816'
+                expiryTime: '2017-11-16T23:38:03.215Z'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Device Activation Code
+      operationId: CreateADeviceActivationCode
+      description: 'Generate an activation code for a device in a specific workspace by `workspaceId` or for a person by `personId`. This requires an auth token with the `spark-admin:devices_write` scope, and either `identity:placeonetimepassword_create` (allows creating activation codes for workspaces only) or `identity:one_time_password` (allows creating activation codes for workspaces or persons).
+
+
+        * Adding a device to a workspace with calling type `none` or `thirdPartySipCalling` will reset the workspace calling type to `freeCalling`.
+
+
+        * Either `workspaceId` or `personId` should be provided. If both are supplied, the request will be invalid.
+
+
+        * If no `model` is supplied, the `code` returned will only be accepted on RoomOS devices.
+
+
+        * If your device is a phone, you must provide the `model` as a field. You can get the `model` from the supported devices API.
+
+
+        Adding a device to a person with a Webex Calling Standard license will disable Webex Calling across their Webex mobile, tablet, desktop, and browser applications.
+
+
+        When adding devices to a Webex Calling Professional licensed person or workspace, wait for each API call to finish before starting the next. This prevents race conditions that can cause errors when assigning primary versus secondary device status.'
+      tags:
+      - Devices
+      parameters:
+      - name: orgId
+        in: query
+        description: The organization associated with the activation code generated. If left empty, the organization associated with the caller will be used.
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL09SR0FOSVpBVElPTi9mN2I3MzYwYy1lMDcxLTQwN2EtYTU1Ny04NDI4YmIyMjhlODQ
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              workspaceId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+              model: DMS Cisco 8865
+            schema:
+              type: object
+              properties:
+                workspaceId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                  description: The ID of the workspace where the device will be activated.
+                personId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+                  description: The ID of the person who will own the device once activated.
+                model:
+                  type: string
+                  example: DMS Cisco 8865
+                  description: The model of the device being created. The corresponding device model display name sometimes called the product name, can also be used to specify the model.
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Device Activation Code
+components:
+  schemas:
+    DeviceCapabilities:
+      type: string
+      enum:
+      - xapi
+    ManagedBy:
+      type: string
+      enum:
+      - CISCO
+      - CUSTOMER
+      - PARTNER
+      description: Entity managing the device configuration.
+      example: CISCO
+    DeviceConnectionStatus:
+      type: string
+      enum:
+      - connected
+      - disconnected
+      - connected_with_issues
+      - offline_expired
+      - activating
+      - pending
+      - unknown
+      - offline_deep_sleep
+      description: The connection status of the device.
+      example: connected
+    DevicePlatform:
+      type: string
+      enum:
+      - cisco
+      - microsoftTeamsRoom
+      description: Device platform
+      example: cisco
+    ActivationCode:
+      type: object
+      properties:
+        code:
+          type: string
+          example: '5414011256173816'
+          description: The activation code.
+        expiryTime:
+          type: string
+          example: '2017-11-16T23:38:03.215Z'
+          description: The date and time the activation code expires.
+    DeviceCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+    DevicePermissions:
+      type: string
+      enum:
+      - xapi:readonly
+      - xapi:all
+    Device:
+      type: object
+      required:
+      - created
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9ERVZJQ0UvNTEwMUIwN0ItNEY4Ri00RUY3LUI1NjUtREIxOUM3QjcyM0Y3
+          description: A unique identifier for the device.
+        displayName:
+          type: string
+          example: SFO12-3-PanHandle
+          description: A friendly name for the device.
+        placeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+          description: The `placeId` field has been deprecated. Please use `workspaceId` instead.
+        workspaceId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+          description: The workspace associated with the device.
+        personId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MTZlOWQxYy1jYTQ0LTRmZWQtOGZjYS05ZGY0YjRmNDE3ZjU
+          description: The person associated with the device.
+        orgId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+          description: The organization associated with the device.
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceCapabilities'
+          description: The capabilities of the device.
+          example:
+          - xapi
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevicePermissions'
+          description: The permissions the user has for this device. For example, `xapi` means this user is entitled to using the `xapi` against this device.
+          example:
+          - xapi:readonly
+          - xapi:all
+        connectionStatus:
+          $ref: '#/components/schemas/DeviceConnectionStatus'
+        product:
+          type: string
+          example: Cisco Webex DX80
+          description: The product name. A display friendly version of the device's `model`.
+        type:
+          type: string
+          example: roomdesk
+          description: The product type.
+        tags:
+          type: array
+          items:
+            type: string
+            example: First Tag, Second Tag
+          description: Tags assigned to the device.
+          example:
+          - First Tag
+          - Second Tag
+        ip:
+          type: string
+          example: 100.110.120.130
+          description: The current IP address of the device.
+        activeInterface:
+          $ref: '#/components/schemas/NetworkConnectivityType'
+        mac:
+          type: string
+          example: 11:22:33:44:AA:FF
+          description: The unique address for the network adapter.
+        primarySipUrl:
+          type: string
+          example: sample_device@sample_workspacename.orgname.org
+          description: The primary SIP address to dial this device.
+        sipUrls:
+          example:
+          - sample_device@sample_workspacename.orgname.org
+          - another_device@sample_workspacename.orgname.org
+          type: array
+          items:
+            type: string
+            example: sample_device@sample_workspacename.orgname.org, another_device@sample_workspacename.orgname.org
+          description: All SIP addresses to dial this device.
+        serial:
+          type: string
+          example: FOC1923NVVN
+          description: Serial number for the device.
+        software:
+          type: string
+          example: RoomOS 2018-06-01 608dcdbb6e1
+          description: The operating system name data and version tag.
+        upgradeChannel:
+          type: string
+          example: beta
+          description: The upgrade channel the device is assigned to.
+        created:
+          type: string
+          example: '2016-04-21T17:00:00.000Z'
+          description: The date and time that the device was registered, in ISO8601 format.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+          description: The location associated with the device.
+        workspaceLocationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+          description: The workspace location associated with the device. Deprecated, prefer `locationId`.
+        errorCodes:
+          example:
+          - sipprofileregistration
+          type: array
+          items:
+            type: string
+            example: sipprofileregistration
+          description: Error codes coming from the device.
+        firstSeen:
+          type: string
+          example: '2021-02-24T09:08:38.822Z'
+          description: Timestamp of the first time device sent a status post.
+        lastSeen:
+          type: string
+          example: '2023-08-15T14:04:00.444Z'
+          description: Timestamp of the last time device sent a status post.
+        managedBy:
+          $ref: '#/components/schemas/ManagedBy'
+        devicePlatform:
+          $ref: '#/components/schemas/DevicePlatform'
+        plannedMaintenance:
+          type: object
+          description: The planned maintenance for the device.
+          properties:
+            mode:
+              type: string
+              enum:
+              - 'off'
+              - 'on'
+              - upcoming
+              description: The planned maintenance mode for the device
+    NetworkConnectivityType:
+      type: string
+      enum:
+      - wired
+      description: The current network connectivity for the device.
+      example: wired
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

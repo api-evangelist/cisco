@@ -1,0 +1,2455 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling External Voicemail API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: External Voicemail
+  description: Operations related to external voicemail Message Waiting Indicator (MWI) status.
+paths:
+  /telephony/calls/dial:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callId
+                - callSessionId
+                properties:
+                  callId:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                    description: A unique identifier for the call which is used in all subsequent commands for the same call.
+                  callSessionId:
+                    type: string
+                    example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                    description: A unique identifier for the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+                example:
+                  callId: string
+                  callSessionId: string
+              example:
+                callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Dial
+      operationId: dial
+      description: Initiate an outbound call to a specified destination. This is also commonly referred to as Click to Call or Click to Dial. Alerts occur on all the devices belonging to a user unless an optional endpointId is specified in which case only the device or application identified by the endpointId is alerted. When a user answers an alerting device, an outbound call is placed from that device to the destination.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              destination: '+12223334444'
+              endpointId: Y2lzY29z...
+              singleNumberReachPhoneNumber: '+12223334444'
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - destination
+              properties:
+                destination:
+                  type: string
+                  example: '+12223334444'
+                  description: 'The destination to be dialed. The destination can be digits or a URI. Some examples for destination include: `1234`, `2223334444`, `+12223334444`, `*73`, `tel:+12223334444`, `user@company.domain`, and `sip:user@company.domain`.'
+                endpointId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of the device or application to use for the call. The `endpointId` must be one of the endpointIds returned by the [Get Preferred Answer Endpoint API](/docs/api/v1/user-call-settings-2-2/get-preferred-answer-endpoint). Mutually exclusive with `singleNumberReachPhoneNumber`.
+                singleNumberReachPhoneNumber:
+                  type: string
+                  example: '+12223334444'
+                  description: The Single Number Reach phone number to use for the call. Mutually exclusive with `endpointId`.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/answer:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Answer
+      operationId: answer
+      description: Answer an incoming call. When no endpointId is specified, the call is answered on the user's primary device. When an endpointId is specified, the call is answered on the device or application identified by the endpointId. The answer API is rejected if the device is not alerting for the call or the device does not support answer via API.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              endpointId: Y2lzY29z...
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to be answered.
+                endpointId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of the device or application to answer the call on. The `endpointId` must be one of the endpointIds returned by the [Get Preferred Answer Endpoint API](/docs/api/v1/user-call-settings-2-2/get-preferred-answer-endpoint).
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/reject:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Reject
+      operationId: reject
+      description: Reject an unanswered incoming call.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              action: busy
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to be rejected.
+                action:
+                  allOf:
+                  - $ref: '#/components/schemas/RejectActionEnum'
+                  description: The rejection action to apply to the call. The busy action is applied if no specific action is provided.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/hangup:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Hangup
+      operationId: hangup
+      description: Hangup a call. If used on an unanswered incoming call, the call is rejected and sent to busy.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to hangup.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/hold:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Hold
+      operationId: hold
+      description: Hold a connected call.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to hold.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/resume:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Resume
+      operationId: resume
+      description: Resume a held call.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to resume.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/mute:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Mute
+      operationId: mute
+      description: Mute a call. This API can only be used for a call that reports itself as mute capable via the muteCapable field in the call details.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to mute.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/unmute:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Unmute
+      operationId: unmute
+      description: Unmute a call. This API can only be used for a call that reports itself as mute capable via the muteCapable field in the call details.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to unmute.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/divert:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Divert
+      operationId: divert
+      description: Divert a call to a destination or a user's voicemail. This is also commonly referred to as a Blind Transfer.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              destination: '+12223334444'
+              toVoicemail: false
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to divert.
+                destination:
+                  type: string
+                  example: '+12223334444'
+                  description: 'The destination to divert the call to. If toVoicemail is false, destination is required. The destination can be digits or a URI. Some examples for destination include: `1234`, `2223334444`, `+12223334444`, `*73`, `tel:+12223334444`, `user@company.domain`, `sip:user@company.domain`'
+                toVoicemail:
+                  type: boolean
+                  description: If set to true, the call is diverted to voicemail. If no destination is specified, the call is diverted to the user's own voicemail. If a destination is specified, the call is diverted to the specified user's voicemail.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/transfer:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callId
+                - callSessionId
+                properties:
+                  callId:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                    description: A unique identifier for the call to the destination which is used in all subsequent commands for this call.
+                  callSessionId:
+                    type: string
+                    example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                    description: A unique identifier for the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+                example:
+                  callId: string
+                  callSessionId: string
+              example:
+                callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Transfer
+      operationId: transfer
+      description: 'Transfer two calls together.
+
+
+        Unanswered incoming calls cannot be transferred but can be diverted using the divert API.
+
+
+        If the user has only two calls and wants to transfer them together, the `callId1` and `callId2` parameters are optional and when not provided the calls are automatically selected and transferred.
+
+
+        If the user has more than two calls and wants to transfer two of them together, the `callId1` and `callId2` parameters are mandatory to specify which calls are being transferred. Those are also commonly referred to as Attended Transfer, Consultative Transfer, or Supervised Transfer and will return a `204` response.
+
+
+        If the user wants to transfer one call to a new destination but only when the destination responds, the `callId1` and destination parameters are mandatory to specify the call being transferred and the destination.
+
+
+        This is referred to as a Mute Transfer and is similar to the divert API with the difference of waiting for the destination to respond prior to transferring the call. If the destination does not respond, the call is not transferred. This will return a `201` response.'
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId1: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              callId2: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MB
+              destination: '+12223334444'
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              properties:
+                callId1:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the first call to transfer. This parameter is mandatory if either `callId2` or `destination` is provided.
+                callId2:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MB
+                  description: The call identifier of the second call to transfer. This parameter is mandatory if `callId1` is provided and `destination` is not provided.
+                destination:
+                  type: string
+                  example: '+12223334444'
+                  description: 'The destination to be transferred to. The destination can be digits or a URI. Some examples for destination include: `1234`, `2223334444`, `+12223334444`, `tel:+12223334444`, `user@company.domain`, `sip:user@company.domain`. This parameter is mandatory if `callId1` is provided and `callId2` is not provided.'
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/park:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - parkedAgainst
+                properties:
+                  parkedAgainst:
+                    allOf:
+                    - $ref: '#/components/schemas/PartyInformation'
+                    description: The details of where the call has been parked.
+                example:
+                  parkedAgainst:
+                    privacyEnabled: false
+                    callType: location
+              example:
+                parkedAgainst:
+                  name: John Smith
+                  number: '+12223334444'
+                  personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                  placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+                  privacyEnabled: false
+                  callType: location
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Park
+      operationId: park
+      description: Park a connected call. The number field in the response can be used as the destination for the retrieve command to retrieve the parked call.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              destination: '1000'
+              isGroupPark: false
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              required:
+              - callId
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to park.
+                destination:
+                  type: string
+                  example: '1000'
+                  description: 'Identifes where the call is to be parked. If not provided, the call is parked against the parking user. The destination can be digits or a URI. Some examples for destination include: `1234`, `2223334444`, `+12223334444`, `*73`, `tel:+12223334444`, `user@company.domain`, `sip:user@company.domain`'
+                isGroupPark:
+                  type: boolean
+                  description: If set to`true`, the call is parked against an automatically selected member of the user's call park group and the destination parameter is ignored.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/retrieve:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callId
+                - callSessionId
+                properties:
+                  callId:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                    description: A unique identifier for the call which is used in all subsequent commands for this call.
+                  callSessionId:
+                    type: string
+                    example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                    description: A unique identifier for the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+                example:
+                  callId: string
+                  callSessionId: string
+              example:
+                callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Retrieve
+      operationId: retrieve
+      description: Retrieve a parked call. A new call is initiated to perform the retrieval in a similar manner to the dial command. The number field from the park command response can be used as the destination for the retrieve command.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              destination: '1000'
+              endpointId: Y2lzY29z...
+              singleNumberReachPhoneNumber: '+12223334444'
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                  example: '1000'
+                  description: 'Identifies where the call is parked. The number field from the park command response can be used as the destination for the retrieve command. If not provided, the call parked against the retrieving user is retrieved. The destination can be digits or a URI. Some examples for destination include: `1234`, `2223334444`, `+12223334444`, `*73`, `tel:+12223334444`, `user@company.domain`, `sip:user@company.domain`'
+                endpointId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of the device or application to use for the retrieval. The `endpointId` must be one of the endpointIds returned by the [Get Preferred Answer Endpoint API](/docs/api/v1/user-call-settings-2-2/get-preferred-answer-endpoint). Mutually exclusive with `singleNumberReachPhoneNumber`.
+                singleNumberReachPhoneNumber:
+                  type: string
+                  example: '+12223334444'
+                  description: The Single Number Reach phone number to use for the retrieval. Mutually exclusive with `endpointId`.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...Y
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/startRecording:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Start Recording
+      operationId: startrecording
+      description: Start recording a call. Use of this API is only valid when the user's call recording mode is set to "On Demand".
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to start recording.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/stopRecording:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Stop Recording
+      operationId: stoprecording
+      description: Stop recording a call. Use of this API is only valid when a call is being recorded and the user's call recording mode is set to "On Demand".
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to stop recording.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/pauseRecording:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Pause Recording
+      operationId: pauserecording
+      description: Pause recording on a call. Use of this API is only valid when a call is being recorded and the user's call recording mode is set to "On Demand" or "Always with Pause/Resume".
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to pause recording.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/resumeRecording:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Resume Recording
+      operationId: resumerecording
+      description: Resume recording a call. Use of this API is only valid when a call's recording is paused and the user's call recording mode is set to "On Demand" or "Always with Pause/Resume".
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to resume recording.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/transmitDtmf:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Transmit DTMF
+      operationId: transmitdtmf
+      description: Transmit DTMF digits to a call.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              dtmf: 1,234
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to transmit DTMF digits for.
+                dtmf:
+                  type: string
+                  example: 1,234
+                  description: 'The DTMF digits to transmit. Each digit must be part of the following set: `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, *, #, A, B, C, D]`. A comma "," may be included to indicate a pause between digits. For the value ''1,234'' the DTMF 1 digit is initially sent. After a pause, the DTMF 2, 3, and 4 digits are sent successively.'
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/push:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Push
+      operationId: push
+      description: Pushes a call from the assistant to the executive the call is associated with. Use of this API is only valid when the assistant's call is associated with an executive.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+            schema:
+              type: object
+              properties:
+                callId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  description: The call identifier of the call to push.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS8wMDAwODg4OC04ZGU1LTRiMTItOGUyYi0wMDAwMDAxMjM0NTY
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/pickup:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callId
+                - callSessionId
+                properties:
+                  callId:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                    description: A unique identifier for the call which is used in all subsequent commands for this call.
+                  callSessionId:
+                    type: string
+                    example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                    description: A unique identifier for the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+                example:
+                  callId: string
+                  callSessionId: string
+              example:
+                callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Pickup
+      operationId: pickup
+      description: Picks up an incoming call to another user. A new call is initiated to perform the pickup in a similar manner to the dial command. When target is not present, the API pickups up a call from the user's call pickup group. When target is present, the API pickups an incoming call from the specified target user.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              target: '1000'
+              endpointId: Y2lzY29z...
+              singleNumberReachPhoneNumber: '+12223334444'
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              properties:
+                target:
+                  type: string
+                  example: '1000'
+                  description: 'Identifies the user to pickup an incoming call from. If not provided, an incoming call to the user''s call pickup group is picked up. The target can be digits or a URI. Some examples for target include: `1234`, `2223334444`, `+12223334444`, `tel:+12223334444`, `user@company.domain`, `sip:user@company.domain`'
+                endpointId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of the device or application to use for the pickup. The `endpointId` must be one of the endpointIds returned by the [Get Preferred Answer Endpoint API](/docs/api/v1/user-call-settings-2-2/get-preferred-answer-endpoint). Mutually exclusive with `singleNumberReachPhoneNumber`.
+                singleNumberReachPhoneNumber:
+                  type: string
+                  example: '+12223334444'
+                  description: The Single Number Reach phone number to use for the pickup. Mutually exclusive with `endpointId`.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls/bargeIn:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callId
+                - callSessionId
+                properties:
+                  callId:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                    description: A unique identifier for the call which is used in all subsequent commands for this call.
+                  callSessionId:
+                    type: string
+                    example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                    description: A unique identifier for the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+                example:
+                  callId: string
+                  callSessionId: string
+              example:
+                callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Barge In
+      operationId: bargein
+      description: Barge-in on another user's answered call. A new call is initiated to perform the barge-in in a similar manner to the dial command.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              target: '1000'
+              endpointId: Y2lzY29z...
+              singleNumberReachPhoneNumber: '+12223334444'
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              required:
+              - target
+              properties:
+                target:
+                  type: string
+                  example: '1000'
+                  description: 'Identifies the user to barge-in on. The target can be digits or a URI. Some examples for target include: `1234`, `2223334444`, `+12223334444`, `tel:+12223334444`, `user@company.domain`, `sip:user@company.domain`'
+                endpointId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of the device or application to use for the barge-in. The `endpointId` must be one of the endpointIds returned by the [Get Preferred Answer Endpoint API](/docs/api/v1/user-call-settings-2-2/get-preferred-answer-endpoint). Mutually exclusive with `singleNumberReachPhoneNumber`.
+                singleNumberReachPhoneNumber:
+                  type: string
+                  example: '+12223334444'
+                  description: The Single Number Reach phone number to use for the barge-in. Mutually exclusive with `endpointId`.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...Y
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/calls:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Call'
+                example:
+                  items:
+                  - id: string
+                    callSessionId: string
+                    personality: originator
+                    state: alerting
+                    remoteParty:
+                      privacyEnabled: false
+                      callType: external
+                    appearance: 1.23
+                    created: string
+                    answered: string
+                    redirections:
+                    - reason: busy
+                      redirectingParty:
+                        status: ok
+                        privacyEnabled: false
+                        callType: location
+                    recall:
+                      type: park
+                    recordingState: pending
+                    muteCapable: true
+                    muted: true
+              example:
+                items:
+                - id: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                  callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                  personality: originator
+                  state: connecting
+                  remoteParty:
+                    name: John Smith
+                    number: '+12223334444'
+                    personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                    placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+                    privacyEnabled: false
+                    callType: location
+                  appearance: 1
+                  created: '2016-04-21T17:00:00.000Z'
+                  answered: '2016-04-21T17:00:00.000Z'
+                  redirections:
+                  - reason: busy
+                    redirectingParty:
+                      name: John Smith
+                      number: '+12223334444'
+                      personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                      placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+                      privacyEnabled: false
+                      callType: location
+                  recall:
+                    type: park
+                    party:
+                      name: John Smith
+                      number: '+12223334444'
+                      personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                      placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+                      privacyEnabled: false
+                      callType: location
+                  recordingState: pending
+                  muteCapable: false
+                  muted: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Calls
+      operationId: listcalls
+      description: Get the list of details for all active calls associated with the user.
+      tags:
+      - External Voicemail
+      parameters:
+      - name: lineOwnerId
+        in: query
+        description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+        example: Y2lzY29z...
+        schema:
+          type: string
+  /telephony/calls/{callId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Call'
+                example:
+                  id: string
+                  callSessionId: string
+                  personality: string
+                  state: string
+                  remoteParty: string
+                  appearance: 1.23
+                  created: string
+                  answered: string
+                  redirections:
+                  - reason: string
+                    redirectingParty: string
+                  recall: string
+                  recordingState: string
+                  muteCapable: true
+                  muted: true
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                personality: originator
+                state: connecting
+                remoteParty:
+                  name: John Smith
+                  number: '+12223334444'
+                  personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                  placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+                  privacyEnabled: false
+                  callType: location
+                appearance: 1
+                created: '2016-04-21T17:00:00.000Z'
+                answered: '2016-04-21T17:00:00.000Z'
+                redirections:
+                - reason: busy
+                  redirectingParty:
+                    name: John Smith
+                    number: '+12223334444'
+                    personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                    placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+                    privacyEnabled: false
+                    callType: location
+                recall:
+                  type: park
+                  party:
+                    name: John Smith
+                    number: '+12223334444'
+                    personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                    placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+                    privacyEnabled: false
+                    callType: location
+                recordingState: pending
+                muteCapable: false
+                muted: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Details
+      operationId: getcalldetails
+      description: Get the details of the specified active call for the user.
+      tags:
+      - External Voicemail
+      parameters:
+      - name: callId
+        in: path
+        description: The call identifier of the call.
+        required: true
+        schema:
+          type: string
+        example: string
+      - name: lineOwnerId
+        in: query
+        description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+        example: Y2lzY29z...
+        schema:
+          type: string
+  /telephony/calls/history:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CallHistoryRecord'
+                example:
+                  items:
+                  - type: placed
+                    name: string
+                    number: string
+                    privacyEnabled: true
+                    time: string
+              example:
+                items:
+                - type: placed
+                  name: John Smith
+                  number: '+12225554444'
+                  privacyEnabled: false
+                  time: '2016-04-21T17:00:00.000Z'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Call History
+      operationId: listcallhistory
+      description: Get the list of call history records for the user. A maximum of 20 call history records per type (`placed`, `missed`, `received`) are returned.
+      tags:
+      - External Voicemail
+      parameters:
+      - name: type
+        in: query
+        description: The type of call history records to retrieve. If not specified, then all call history records are retrieved.
+        schema:
+          type: string
+          enum:
+          - placed
+          - missed
+          - received
+        example: placed
+  /telephony/externalVoicemail/mwi:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Set or Clear Message Waiting Indicator (MWI) Status
+      operationId: postExternalVoicemailMwi
+      description: 'Enables an external voicemail service to SET or CLEAR the Message Waiting Indicator (MWI) for a person or workspace.
+
+
+        Invoke the API using a bearer token from a Service App in the target organization, created by a full admin with the scope `spark-admin:calls_write`.
+
+
+        Specify the target user or workspace with the required `id` query parameter.
+
+
+        Optionally, use the orgId parameter to indicate the organization; if omitted, the Service App’s organization is used.
+
+
+        If `orgId` is provided, it must match the Service App’s organization or be a managed organization.
+
+
+        Set the desired action (SET or CLEAR) in the message body’s action field.
+
+
+        Learn more about using Webex Service Apps.'
+      tags:
+      - External Voicemail
+      parameters:
+      - name: id
+        in: query
+        description: Unique identifier for the user or workspace.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS8xNzdmNTNlZC1hNzY2LTRkYTAtOGQ3OC03MjE0MjhjMmFjZTQ=
+      - name: orgId
+        in: query
+        description: Id of the organization to which the user or workspace belongs. If not provided, the orgId of the Service App is used. If provided, the organization must be the same as or managed by the Service App's organization.
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE=
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              action: SET
+            schema:
+              $ref: '#/components/schemas/ExternalVoicemailMwiRequest'
+  /telephony/calls/pull:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callId
+                - callSessionId
+                properties:
+                  callId:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                    description: A unique identifier for the call which is used in all subsequent commands for this call.
+                  callSessionId:
+                    type: string
+                    example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                    description: A unique identifier for the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+                example:
+                  callId: string
+                  callSessionId: string
+              example:
+                callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Pull
+      operationId: pull
+      description: Pull a call from one device to another. A temporary new call is initiated to perform the call pull in a similar manner to the dial command. When a user answers an alerting device, the device is connected to the pulled call and the new call created for the call pull is released.
+      tags:
+      - External Voicemail
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              endpointId: Y2lzY29z...
+              lineOwnerId: Y2lzY29z...
+            schema:
+              type: object
+              properties:
+                endpointId:
+                  type: string
+                  example: Y2lzY29z...
+                  description: The ID of the device or application to use for the retrieval. The `endpointId` must be one of the endpointIds returned by the [Get Preferred Answer Endpoint API](/docs/api/v1/user-call-settings-2-2/get-preferred-answer-endpoint).
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29z...Y
+                  description: The ID of a user, workspace, or virtual line for which there is a secondary line on a device owned by the user invoking the API.
+  /telephony/queues/{queueId}/calls:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CallQueueCall'
+                example:
+                  items:
+                  - callId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+                    origCallId: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MQ
+                    callSessionId: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+                    remoteParty:
+                      name: John Smith
+                      number: '+12223334444'
+                      privacyEnabled: false
+                      callType: organization
+                    addTime: '2016-04-21T17:00:00.000Z'
+                    queueNumber: '+15559998888'
+                    queueName: Support Queue
+                    priority: medium
+                    bounced: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Call Queue Calls
+      operationId: listcallqueuecalls
+      description: List the calls currently in the specified Call Queue. The returned calls follow the same format as the Call Queue events emitted by Webex Calling and include the caller details, position information (priority), and queue timing for each call currently waiting in the queue.
+      tags:
+      - External Voicemail
+      parameters:
+      - name: queueId
+        in: path
+        description: The unique identifier of the Call Queue whose calls are to be listed.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29z...
+  /telephony/externalVoicemail/members/{memberId}/mwi:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Set or Clear Message Waiting Indicator (MWI) Status by Member ID
+      operationId: postExternalVoicemailMwiByMemberId
+      description: 'Enables an external voicemail service to SET or CLEAR the Message Waiting Indicator (MWI) for a person or workspace.
+
+
+        Invoke the API using a bearer token from a Service App in the target organization, created by a full admin with the scope `spark-admin:calls_write`.
+
+
+        Specify the target user or workspace with the required `id` query parameter.
+
+
+        Optionally, use the orgId parameter to indicate the organization; if omitted, the Service App''s organization is used.
+
+
+        If `orgId` is provided, it must match the Service App''s organization or be a managed organization.
+
+
+        Set the desired action (SET or CLEAR) in the message body''s action field.
+
+
+        Learn more about using Webex Service Apps.'
+      tags:
+      - External Voicemail
+      parameters:
+      - name: memberId
+        in: path
+        description: 'Unique identifier for the member. Member ID can be one of the following: person, workspace, or virtual line'
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+      - name: orgId
+        in: query
+        description: Id of the organization to which the member belongs. If not provided, the orgId of the Service App is used. If provided, the organization must be the same as or managed by the Service App's organization.
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE=
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              action: SET
+            schema:
+              $ref: '#/components/schemas/ExternalVoicemailMwiRequest'
+components:
+  schemas:
+    CallHistoryRecordTypeEnum:
+      type: string
+      enum:
+      - placed
+      - missed
+      - received
+      description: " * `placed` - A call history record for an outgoing call placed by the user.\n * `missed` - A call history record for an incoming call to the user that was not answered.\n * `received` - A call history record for an incoming call to the user that was answered.\n"
+    CallPersonalityEnum:
+      type: string
+      enum:
+      - originator
+      - terminator
+      - clickToDial
+      description: " * `originator` - An outgoing call originated by the user.\n * `terminator` - An incoming call received by the user.\n * `clickToDial` - A call that is alerting the user's devices for a Click to Dial action. When the user answers on one of these alerting devices, the call's personality is updated to originator.\n"
+    CallTypeEnum:
+      type: string
+      enum:
+      - location
+      - organization
+      - external
+      - emergency
+      - repair
+      - other
+      description: " * `location` - The party is within the same location.\n * `organization` - The party is within the same organization but not within the same location.\n * `external` - The party is outside the organization.\n * `emergency` - The party is an emergency call destination.\n * `repair` - The party is a repair call destination.\n * `other` - The party does not belong to one of the defined call types. For example, a call to a Call Forwarding Always feature activation code.\n"
+    RedirectionReasonEnum:
+      type: string
+      enum:
+      - busy
+      - noAnswer
+      - unavailable
+      - unconditional
+      - timeOfDay
+      - divert
+      - followMe
+      - huntGroup
+      - callQueue
+      - unknown
+      description: " * `busy` - The call was redirected on a busy condition. For example, the call was forwarded by Call Forwarding Busy.\n * `noAnswer` - The call was redirected on a no answer condition. For example, the call was forwarded by Call Forwarding No Answer.\n * `unavailable` - The call was redirected on an unavailable condition. For example, the call was forwarded by Business Continuity.\n * `unconditional` - The call was redirected unconditionally. For example, the call was forwarded by Call Forwarding Always.\n * `timeOfDay` - The call was redirected by a service schedule. For example, the call was forwarded by Selective Call Forwarding.\n * `divert` - The call was redirected by divert action.\n * `followMe` - The call was redirected by a follow me service. For example, the call was redirected by Simultaneous Ring.\n * `huntGroup` - The call was redirected by Hunt Group routing.\n * `callQueue` - The call was redirected by Call Queue routing.\n * `unknown` - The call was redirected on an unknown condition.\n"
+    Call:
+      type: object
+      required:
+      - id
+      - callSessionId
+      - personality
+      - state
+      - remoteParty
+      - created
+      - muteCapable
+      - muted
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+          description: The call identifier of the call.
+        callSessionId:
+          type: string
+          example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+          description: The call session identifier of the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+        personality:
+          allOf:
+          - $ref: '#/components/schemas/CallPersonalityEnum'
+          description: ' The personality of the call.'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/CallStateEnum'
+          description: The current state of the call.
+        remoteParty:
+          allOf:
+          - $ref: '#/components/schemas/PartyInformation'
+          description: The remote party's details. For example, if user A calls user B then B is the remote party in A's outgoing call details and A is the remote party in B's incoming call details.
+        appearance:
+          type: number
+          example: 1
+          description: The appearance value for the call. The appearance value can be used to display the user's calls in an order consistent with the user's devices. Only present when the call has an appearance value assigned.
+        created:
+          type: string
+          example: '2016-04-21T17:00:00.000Z'
+          description: The date and time the call was created.
+        answered:
+          type: string
+          example: '2016-04-21T17:00:00.000Z'
+          description: The date and time the call was answered. Only present when the call has been answered.
+        redirections:
+          type: array
+          items:
+            $ref: '#/components/schemas/RedirectionInformation'
+          description: The list of details for previous redirections of the incoming call ordered from most recent to least recent. For example, if user B forwards an incoming call to user C, then a redirection entry is present for B's forwarding in C's incoming call details. Only present when there were previous redirections and the incoming call's state is alerting.
+        recall:
+          allOf:
+          - $ref: '#/components/schemas/RecallInformation'
+          description: The recall details for the incoming call. Only present when the incoming call is for a recall.
+        recordingState:
+          allOf:
+          - $ref: '#/components/schemas/RecordingStateEnum'
+          description: The call's current recording state. Only present when the user's call recording has been invoked during the life of the call.
+        muteCapable:
+          type: boolean
+          description: Indicates whether the call is capable of using the [mute](/docs/api/v1/call-controls/mute) and [unmute](/docs/api/v1/call-controls/unmute) APIs.
+        muted:
+          type: boolean
+          description: Indicates whether the call is currently muted.
+      example:
+        id: string
+        callSessionId: string
+        personality: originator
+        state: connecting
+        remoteParty:
+          name: string
+          number: string
+          personId: string
+          placeId: string
+          privacyEnabled: true
+          callType: location
+        appearance: 1.23
+        created: string
+        answered: string
+        redirections:
+        - reason: busy
+          redirectingParty:
+            status: ok
+            privacyEnabled: false
+            callType: external
+        recall:
+          type: park
+          party:
+            status: ok
+            privacyEnabled: false
+            callType: external
+        recordingState: pending
+        muteCapable: true
+        muted: true
+    CallQueueCall:
+      type: object
+      required:
+      - callId
+      - callSessionId
+      - remoteParty
+      properties:
+        callId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MA
+          description: The call identifier of the call currently in the queue.
+        origCallId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6MQ
+          description: The call identifier of the original call that entered the queue. This differs from `callId` when the call currently in the queue is a new call leg derived from the original call - for example, a Call Queue callback, where `callId` is the new callback call and `origCallId` is the original call that entered the queue. Only present when it differs from the call's `callId`.
+        callSessionId:
+          type: string
+          example: MmFmNThiZjktYWE3Ny00NWE5LThiMDEtYzI4NDMxZWYwNzRm
+          description: A unique identifier for the call session the call belongs to. This can be used to correlate multiple calls that are part of the same call session.
+        remoteParty:
+          allOf:
+          - $ref: '#/components/schemas/PartyInformation'
+          description: The remote party's details for the call waiting in the queue.
+        addTime:
+          type: string
+          example: '2016-04-21T17:00:00.000Z'
+          description: The date and time the call was added to the queue.
+        removeTime:
+          type: string
+          example: '2016-04-21T17:00:00.000Z'
+          description: The date and time the call was removed from the queue. Only present when the call has been removed from the queue.
+        mandatoryEntrance:
+          type: boolean
+          description: Indicates whether the call entered the queue as a mandatory entrance.
+        bounced:
+          type: boolean
+          description: Indicates whether the call has been bounced from an agent back to the queue.
+        reordered:
+          type: boolean
+          description: Indicates whether the call has been reordered within the queue.
+        preservedWaitTime:
+          type: integer
+          example: 12000
+          description: The wait time, in milliseconds, preserved for the call when it was moved between queues.
+        queueNumber:
+          type: string
+          example: '+15559998888'
+          description: The phone number of the Call Queue the call is waiting in.
+        queueName:
+          type: string
+          example: Support Queue
+          description: The name of the Call Queue the call is waiting in.
+        priority:
+          type: string
+          enum:
+          - highest
+          - high
+          - medium
+          - low
+          example: medium
+          description: The priority of the call within the queue. Only present for premium Call Queues that assign a priority.
+        answeringAgentId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+          description: The identifier of the agent (person, workspace, or virtual line) who is answering, or has answered, the call. The resource type of this identifier is indicated by `answeringAgentType`. Only present when the call is being answered.
+        answeringAgentType:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - VIRTUAL_LINE
+          example: PEOPLE
+          description: 'The type of agent identified by `answeringAgentId`: `PEOPLE` for a user, `PLACE` for a workspace, and `VIRTUAL_LINE` for a virtual line. Only present when the call is being answered.'
+        answeringCallId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTEwvQkNMRC9jYWxsaGFsZi00ODg6Mg
+          description: The call identifier of the answering agent's terminating call. Use this value to correlate the queue call with other call events associated with the agent. Only present when the call is being answered.
+        answeringNetworkCallId:
+          type: string
+          example: BW125602794300726-545022669@10.70.16.166
+          description: The SIP Call-ID of the answering call. Only present when the call is being answered.
+    CallStateEnum:
+      type: string
+      enum:
+      - connecting
+      - alerting
+      - connected
+      - held
+      - remoteHeld
+      - disconnected
+      description: " * `connecting` - The remote party is being alerted.\n * `alerting` - The user's devices are alerting for the incoming or Click to Dial call.\n * `connected` - The call is connected.\n * `held` - The user has placed the call on hold.\n * `remoteHeld` - The remote party within the same organization has placed the call on hold.\n * `disconnected` - The call has been disconnected.\n"
+    PartyInformation:
+      type: object
+      required:
+      - privacyEnabled
+      - callType
+      properties:
+        name:
+          type: string
+          example: John Smith
+          description: The party's name. Only present when the name is available and privacy is not enabled.
+        number:
+          type: string
+          example: '+12223334444'
+          description: 'The party''s number. Only present when the number is available and privacy is not enabled. The number can be digits or a URI. Some examples for number include: `1234`, `2223334444`, `+12223334444`, `*73`, `user@company.domain`'
+        personId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+          description: The party's person ID. Only present when the person ID is available and privacy is not enabled.
+        placeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ4MmEyLTRlNjktNTlhYS05ZjJmLWJjYTYzMTAxM2E2OA==
+          description: The party's place ID. Only present when the place ID is available and privacy is not enabled.
+        privacyEnabled:
+          type: boolean
+          description: Indicates whether privacy is enabled for the name, number and personId/placeId.
+        callType:
+          allOf:
+          - $ref: '#/components/schemas/CallTypeEnum'
+          description: The call type for the party.
+    RecordingStateEnum:
+      type: string
+      enum:
+      - pending
+      - started
+      - paused
+      - stopped
+      - failed
+      description: " * `pending` - Recording has been requested for the call but has not yet started.\n * `started` - Recording is active for the call.\n * `paused` - Recording has been paused for the call.\n * `stopped` - Recording has been stopped for the call.\n * `failed` - Recording failed for the call.\n"
+    RecallInformation:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/RecallTypeEnum'
+          description: The type of recall the incoming call is for. Park is the only type of recall currently supported but additional values may be added in the future.
+        party:
+          allOf:
+          - $ref: '#/components/schemas/PartyInformation'
+          description: If the type is park, contains the details of where the call was parked. For example, if user A parks a call against user B and A is recalled for the park, then this field contains B's information in A's incoming call details. Only present when the type is park.
+    RedirectionInformation:
+      type: object
+      required:
+      - reason
+      - redirectingParty
+      properties:
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/RedirectionReasonEnum'
+          description: The reason the incoming call was redirected.
+        redirectingParty:
+          allOf:
+          - $ref: '#/components/schemas/PartyInformation'
+          description: The details of a party who redirected the incoming call.
+    RecallTypeEnum:
+      type: string
+      enum:
+      - park
+      description: ' * `park` - The user is being recalled for a call park they initiated.
+
+        '
+    RejectActionEnum:
+      type: string
+      enum:
+      - busy
+      - temporarilyUnavailable
+      - ignore
+      description: " * `busy` - Send the call to busy.\n * `temporarilyUnavailable` - Send the call to temporarily unavailable.\n * `ignore` - Ignore the call by continuing ringback to the caller while no longer alerting the called user's devices.\n"
+    CallHistoryRecord:
+      type: object
+      required:
+      - type
+      - privacyEnabled
+      - time
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CallHistoryRecordTypeEnum'
+          description: The type of call history record.
+        name:
+          type: string
+          example: John Smith
+          description: The name of the called/calling party. Only present when the name is available and privacy is not enabled.
+        number:
+          type: string
+          example: '+12225554444'
+          description: 'The number of the called/calling party. Only present when the number is available and privacy is not enabled. The number can be digits or a URI. Some examples for number include: `1234`, `2223334444`, `+12223334444`, `*73`, `user@company.domain`'
+        privacyEnabled:
+          type: boolean
+          description: Indicates whether privacy is enabled for the name and number.
+        time:
+          type: string
+          example: '2016-04-21T17:00:00.000Z'
+          description: The date and time the call history record was created. For a placed call history record, this is when the call was placed. For a missed call history record, this is when the call was disconnected. For a received call history record, this is when the call was answered.
+    ExternalVoicemailMwiRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - SET
+          - CLEAR
+          description: Indicates whether to SET or CLEAR the MWI status.
+          example: SET
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

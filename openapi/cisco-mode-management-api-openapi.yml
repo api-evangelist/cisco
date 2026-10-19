@@ -1,0 +1,1836 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Mode Management API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Mode Management
+paths:
+  /telephony/config/people/me/settings/modeManagement/features:
+    get:
+      tags:
+      - Mode Management
+      summary: Get Mode Management Features
+      description: 'Retrieves a list of all mode management features (Auto Attendants, Call Queues, and Hunt Groups) for which the authenticated user has been designated as a mode manager. This API returns basic information about each feature including its ID, name, and type.
+
+
+        Mode Management allows designated managers to switch features between different operational configurations based on time schedules or manual triggers. This is useful for managing business hours, holidays, and emergency scenarios.
+
+
+        This API requires a user auth token with the `spark:telephony_config_read` scope. The authenticated user must be configured as a mode manager for at least one feature to receive results.'
+      operationId: getModeManagementFeatures
+      responses:
+        '200':
+          description: Mode management features retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModeManagementFeaturesResponse'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/commonModes:
+    get:
+      tags:
+      - Mode Management
+      summary: Get Common Modes
+      description: 'Retrieves a list of common operating mode names that are shared across multiple specified features. This API accepts a list of feature IDs and returns only the mode names that exist in all of the specified features, allowing managers to switch multiple features to the same mode simultaneously.
+
+
+        Common modes are useful when you need to coordinate operational changes across multiple features. For example, switching an entire office to "Holiday" mode across all Auto Attendants and Call Queues at once.
+
+
+        This API requires a user auth token with the `spark:telephony_config_read` scope. The authenticated user must be a mode manager for the specified features.'
+      operationId: getCommonModes
+      parameters:
+      - name: featureIds
+        in: query
+        description: List of feature IDs (comma-separated) for auto attendants, call queues, or hunt groups
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 50
+        style: form
+        explode: false
+        example:
+        - Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+      responses:
+        '200':
+          description: Common modes retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonModesResponse'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/actions/switchMode/invoke:
+    post:
+      tags:
+      - Mode Management
+      summary: Switch Mode for Multiple Features
+      description: 'Switches the operating mode for multiple features simultaneously by specifying a common mode name. This API accepts a list of feature IDs and sets all of them to the specified operating mode, provided that mode exists for all features.
+
+
+        This bulk operation is particularly useful for coordinating operational changes across an organization, such as activating holiday modes, emergency procedures, or after-hours configurations across multiple Auto Attendants, Call Queues, and Hunt Groups at once.
+
+
+        This API requires a user auth token with the `spark:telephony_config_write` scope. The authenticated user must be a mode manager for all specified features.'
+      operationId: switchModeMultipleFeatures
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwitchModeMultipleFeaturesRequest'
+      responses:
+        '204':
+          description: Mode switched successfully for multiple features
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/{featureId}:
+    get:
+      tags:
+      - Mode Management
+      summary: Get Mode Management Feature
+      description: 'Retrieves detailed information about a specific mode management feature including its current operating mode and exception status. This API provides the feature''s ID, name, type, current operating mode ID, and whether it is currently in an exception mode.
+
+
+        Exception mode indicates that the feature has been manually switched to a different mode than what its schedule dictates. This information is critical for mode managers to understand the current state of their features.
+
+
+        This API requires a user auth token with the `spark:telephony_config_read` scope. The authenticated user must be a mode manager for the specified feature.'
+      operationId: getModeManagementFeature
+      parameters:
+      - name: featureId
+        in: path
+        description: Unique identifier for the feature.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+      responses:
+        '200':
+          description: Mode management feature retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModeManagementFeatureResponse'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/{featureId}/normalOperationMode:
+    get:
+      tags:
+      - Mode Management
+      summary: Get Normal Operation Mode
+      description: 'Retrieves the current normal operating mode that the feature is scheduled to be in based on its time schedules. This represents the mode the feature would be in if no manual exceptions or overrides were active.
+
+
+        The normal operation mode is determined by the feature''s configured schedules and may differ from the actual current operating mode if a manual exception has been applied. This API helps managers understand what the scheduled behavior is versus the actual current state.
+
+
+        This API requires a user auth token with the `spark:telephony_config_read` scope. The authenticated user must be a mode manager for the specified feature.'
+      operationId: getNormalOperationMode
+      parameters:
+      - name: featureId
+        in: path
+        description: Unique identifier for the feature.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+      responses:
+        '200':
+          description: Normal operation mode retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NormalOperationModeResponse'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/{featureId}/modes/{modeId}:
+    get:
+      tags:
+      - Mode Management
+      summary: Get Operating Mode
+      description: 'Retrieves detailed information about a specific operating mode for a feature, including the mode''s ID and name. This API allows managers to get the details of any operating mode configured for a feature.
+
+
+        Operating modes define different configurations for how a feature behaves (e.g., business hours routing vs. after-hours routing). Each mode has a unique ID and a descriptive name that helps managers identify its purpose.
+
+
+        This API requires a user auth token with the `spark:telephony_config_read` scope. The authenticated user must be a mode manager for the specified feature.'
+      operationId: getOperatingMode
+      parameters:
+      - name: featureId
+        in: path
+        description: Unique identifier for the feature.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+      - name: modeId
+        in: path
+        description: Unique identifier for the operating mode.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+      responses:
+        '200':
+          description: Operating mode retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperatingModeResponse'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/{featureId}/actions/switchToNormalOperation/invoke:
+    post:
+      tags:
+      - Mode Management
+      summary: Switch to Normal Operation
+      description: 'Switches the feature back to its normal scheduled operation mode, removing any manual exceptions or overrides that may be active. This returns the feature to operating according to its configured time schedules.
+
+
+        This operation is useful when a temporary manual mode change (exception) is no longer needed and you want to restore automatic schedule-based operation. It effectively cancels any active manual mode switches.
+
+
+        This API requires a user auth token with the `spark:telephony_config_write` scope. The authenticated user must be a mode manager for the specified feature.'
+      operationId: switchToNormalOperation
+      parameters:
+      - name: featureId
+        in: path
+        description: Unique identifier for the feature.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+      responses:
+        '204':
+          description: Switched to normal operation successfully
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/{featureId}/actions/switchMode/invoke:
+    post:
+      tags:
+      - Mode Management
+      summary: Switch Mode for Single Feature
+      description: 'Switches the operating mode for a single feature to a specified mode, either temporarily or with manual switchback. This API creates an exception to the feature''s normal scheduled operation, allowing managers to manually control the feature''s behavior.
+
+
+        You can configure whether the mode switch is temporary (automatically reverts based on schedule) or requires manual switchback. This is useful for handling unexpected situations like emergency closures, special events, or unscheduled breaks.
+
+
+        This API requires a user auth token with the `spark:telephony_config_write` scope. The authenticated user must be a mode manager for the specified feature.'
+      operationId: switchModeForFeature
+      parameters:
+      - name: featureId
+        in: path
+        description: Unique identifier for the feature.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwitchModeRequest'
+      responses:
+        '204':
+          description: Mode switched successfully
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+  /telephony/config/people/me/settings/modeManagement/features/{featureId}/actions/extendMode/invoke:
+    post:
+      tags:
+      - Mode Management
+      summary: Extend Current Operating Mode Duration
+      description: 'Extends the duration of the current operating mode by adding additional time before it expires or reverts to scheduled operation. This API allows managers to prolong a temporary mode change without having to switch modes again.
+
+
+        Extension time can be specified in 30-minute increments up to 720 minutes (12 hours). If no extension time is provided, the mode is extended with a manual switchback exception, meaning it will remain active until manually changed.
+
+
+        This API requires a user auth token with the `spark:telephony_config_write` scope. The authenticated user must be a mode manager for the specified feature.'
+      operationId: extendMode
+      parameters:
+      - name: featureId
+        in: path
+        description: Unique identifier for the feature.
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtendModeRequest'
+      responses:
+        '204':
+          description: Mode extended successfully
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '428':
+          description: Precondition Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - bearer-key: []
+components:
+  schemas:
+    CommonModesResponse:
+      type: object
+      required:
+      - commonModeNames
+      properties:
+        commonModeNames:
+          type: array
+          description: Array of operating mode names
+          items:
+            type: string
+          example:
+          - Day1
+          - Holiday1
+          - Operating Mode Outage
+      example:
+        commonModeNames:
+        - Day1
+        - Holiday1
+        - Operating Mode Outage
+    ModeManagementFeatureResponse:
+      type: object
+      required:
+      - modeBasedForwardingEnabled
+      - currentOperatingModeId
+      - timezone
+      - modes
+      properties:
+        modeBasedForwardingEnabled:
+          type: boolean
+          example: true
+          description: Whether mode based forwarding is enabled for the feature
+        timezone:
+          type: string
+          example: America/Los_Angeles
+          description: Timezone for the feature
+        phoneNumber:
+          type: string
+          example: '+14085551234'
+          description: Phone number of the feature
+        extension:
+          type: string
+          example: '1234'
+          description: Extension of the feature
+        currentOperatingModeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+          description: Unique identifier for the current operating mode.
+        currentOperatingModeEndTime:
+          type: string
+          example: 06:00 AM
+          description: "The current operating mode's end time in 12-hour format showing hour and minute only (no date information). This field's presence and meaning depends on the operational state:\n * Present during normal operation with the time at which the next mode change will occur.\n * Not present for Manual Switch Back exceptions.\n * For Automatic Switch Back (Early Start) exceptions it is when the exception ends and the feature automatically reverts to normal operation which is the mode's configured start time.\n * For Automatic Switch Back (Extension) exceptions it is when the exception ends and the feature automatically reverts to normal operation which is the mode's configured end time when the exception started plus the extension time.\n * For Automatic Switch Back (Standard) exceptions it is when the exception ends and the feature automatically reverts to normal operation which is the mode's configured end time."
+        currentOperatingModeForwardDestination:
+          type: string
+          example: '+14085555678'
+          description: Forward destination for current operating mode
+        exceptionType:
+          type: string
+          enum:
+          - AUTOMATIC_SWITCH_BACK_EARLY_START
+          - AUTOMATIC_SWITCH_BACK_EXTENSION
+          - MANUAL_SWITCH_BACK
+          - AUTOMATIC_SWITCH_BACK_STANDARD
+          example: MANUAL_SWITCH_BACK
+          description: "Type of exception indicating how the feature will switch back from the current mode. This field is not present when the feature is in normal operation.\n\n * `AUTOMATIC_SWITCH_BACK_EARLY_START` - Automatic switchback with early start.\n * `AUTOMATIC_SWITCH_BACK_EXTENSION` - Automatic switchback with extension.\n * `MANUAL_SWITCH_BACK` - Manual switchback required.\n * `AUTOMATIC_SWITCH_BACK_STANDARD` - Standard automatic switchback.\n"
+        modes:
+          type: array
+          description: Array of operating modes configured for this feature
+          example:
+          - id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+            name: Business Hours
+            normalOperationEnabled: true
+          items:
+            type: object
+            required:
+            - id
+            - name
+            - normalOperationEnabled
+            properties:
+              id:
+                type: string
+                example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+                description: Unique identifier for the operating mode.
+              name:
+                type: string
+                example: Business Hours
+                description: Display name of the operating mode.
+              type:
+                type: string
+                enum:
+                - NONE
+                - SAME_HOURS_DAILY
+                - DIFFERENT_HOURS_DAILY
+                - HOLIDAY
+                example: SAME_HOURS_DAILY
+                description: " * `NONE` - No schedule defined.\n * `SAME_HOURS_DAILY` - Same hours for weekdays and weekends.\n * `DIFFERENT_HOURS_DAILY` - Different hours for each day.\n * `HOLIDAY` - Holiday-based schedule.\n"
+              level:
+                type: string
+                enum:
+                - ORGANIZATION
+                - LOCATION
+                example: LOCATION
+                description: " * `ORGANIZATION` - Organization level mode.\n * `LOCATION` - Location level mode.\n"
+              normalOperationEnabled:
+                type: boolean
+                example: true
+                description: Whether this mode is enabled for normal operation.
+              forwardTo:
+                type: object
+                description: Forwarding configuration for this mode
+                required:
+                - sendToVoicemailEnabled
+                - defaultSendToVoicemailEnabled
+                properties:
+                  selection:
+                    type: string
+                    enum:
+                    - DO_NOT_FORWARD
+                    - FORWARD_TO_SPECIFIED_NUMBER
+                    - FORWARD_TO_DEFAULT_NUMBER
+                    example: FORWARD_TO_SPECIFIED_NUMBER
+                    description: " * `DO_NOT_FORWARD` - Do not forward calls.\n * `FORWARD_TO_SPECIFIED_NUMBER` - Forward to a specified number.\n * `FORWARD_TO_DEFAULT_NUMBER` - Use the mode's default forwarding setting (which may be to forward or not forward).\n"
+                  phoneNumber:
+                    type: string
+                    example: '+14085551234'
+                    description: Phone number to forward to when selection is FORWARD_TO_SPECIFIED_NUMBER.
+                  sendToVoicemailEnabled:
+                    type: boolean
+                    example: false
+                    description: Whether to send to voicemail when selection is FORWARD_TO_SPECIFIED_NUMBER.
+                  defaultPhoneNumber:
+                    type: string
+                    example: '+14085555678'
+                    description: Default phone number when selection is FORWARD_TO_DEFAULT_NUMBER. This field is not present if the mode's default is to not forward.
+                  defaultSendToVoicemailEnabled:
+                    type: boolean
+                    example: true
+                    description: Whether default is to send to voicemail
+      example:
+        modeBasedForwardingEnabled: true
+        timezone: America/Los_Angeles
+        phoneNumber: '+14085551234'
+        extension: '1234'
+        currentOperatingModeId: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+        currentOperatingModeEndTime: 06:00 AM
+        currentOperatingModeForwardDestination: '+14085555678'
+        exceptionType: MANUAL_SWITCH_BACK
+        modes:
+        - id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+          name: Business Hours
+          type: SAME_HOURS_DAILY
+          level: LOCATION
+          normalOperationEnabled: true
+          forwardTo:
+            selection: FORWARD_TO_SPECIFIED_NUMBER
+            phoneNumber: '+14085551234'
+            sendToVoicemailEnabled: false
+            defaultPhoneNumber: '+14085555678'
+            defaultSendToVoicemailEnabled: true
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Array of error details
+          example:
+          - description: Error processing request
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                description: Error description
+        trackingId:
+          type: string
+          description: Tracking ID for the request
+          example: NA_7b1234567-1234-1234-1234-123456789abc_1234
+      example:
+        errors:
+        - description: Error processing request
+        trackingId: NA_7b1234567-1234-1234-1234-123456789abc_1234
+    OperatingModeResponse:
+      type: object
+      required:
+      - operatingModeId
+      - name
+      - type
+      - level
+      properties:
+        operatingModeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+          description: Unique identifier for the operating mode.
+        name:
+          type: string
+          example: Business Hours Mode
+          description: Display name of the operating mode.
+        type:
+          type: string
+          enum:
+          - NONE
+          - SAME_HOURS_DAILY
+          - DIFFERENT_HOURS_DAILY
+          - HOLIDAY
+          example: SAME_HOURS_DAILY
+          description: " * `NONE` - No schedule defined.\n * `SAME_HOURS_DAILY` - Same hours apply for weekdays (Monday-Friday) and weekends (Saturday-Sunday).\n * `DIFFERENT_HOURS_DAILY` - Different hours for each day of the week.\n * `HOLIDAY` - Holiday-based schedule.\n"
+        level:
+          type: string
+          enum:
+          - LOCATION
+          - ORGANIZATION
+          example: LOCATION
+          description: " * `LOCATION` - Operating mode is defined at the location level.\n * `ORGANIZATION` - Operating mode is defined at the organization level.\n"
+        locationName:
+          type: string
+          example: San Jose
+          description: Location name
+        sameHoursDaily:
+          type: object
+          description: Schedule configuration when same hours apply for weekdays and weekends
+          example:
+            mondayToFriday:
+              enabled: true
+              allDayEnabled: false
+              startTime: 09:00
+              endTime: '17:00'
+            saturdayToSunday:
+              enabled: false
+              allDayEnabled: false
+          properties:
+            mondayToFriday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Monday to Friday
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+            saturdayToSunday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Saturday to Sunday
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled
+                startTime:
+                  type: string
+                  example: '10:00'
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '14:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+        differentHoursDaily:
+          type: object
+          description: Schedule configuration when different hours apply for each day
+          example:
+            monday:
+              enabled: true
+              allDayEnabled: false
+              startTime: 09:00
+              endTime: '17:00'
+            tuesday:
+              enabled: true
+              allDayEnabled: false
+              startTime: 09:00
+              endTime: '17:00'
+          properties:
+            sunday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Sunday.
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled.
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+            monday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Monday.
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled.
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+            tuesday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Tuesday.
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled.
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+            wednesday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Wednesday.
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled.
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+            thursday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Thursday.
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled.
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+            friday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Friday.
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled.
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+            saturday:
+              type: object
+              required:
+              - enabled
+              - allDayEnabled
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether schedule is enabled for Saturday.
+                allDayEnabled:
+                  type: boolean
+                  description: Whether all day is enabled.
+                startTime:
+                  type: string
+                  example: 09:00
+                  description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+                endTime:
+                  type: string
+                  example: '17:00'
+                  description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+        holidays:
+          type: array
+          description: Array of holiday schedule events
+          example:
+          - id: holiday-1
+            name: New Year's Day
+            allDayEnabled: true
+            startDate: '2024-01-01'
+            endDate: '2024-01-01'
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the holiday schedule event.
+              name:
+                type: string
+                example: New Year's Day
+                description: Holiday event name
+              allDayEnabled:
+                type: boolean
+                description: Whether holiday is all day
+              startDate:
+                type: string
+                example: '2024-01-01'
+                description: Start date in YYYY-MM-DD format.
+              endDate:
+                type: string
+                example: '2024-01-01'
+                description: End date in YYYY-MM-DD format.
+              startTime:
+                type: string
+                example: 00:00
+                description: Start time in HH:mm format. This field is not present when allDayEnabled is true.
+              endTime:
+                type: string
+                example: '23:59'
+                description: End time in HH:mm format. This field is not present when allDayEnabled is true.
+              recurrence:
+                type: object
+                description: Recurrence pattern for the holiday. This field is only present for recurring holidays.
+                properties:
+                  recurYearlyByDay:
+                    type: object
+                    description: Recur yearly by day of week in month
+                    properties:
+                      day:
+                        type: string
+                        enum:
+                        - SUNDAY
+                        - MONDAY
+                        - TUESDAY
+                        - WEDNESDAY
+                        - THURSDAY
+                        - FRIDAY
+                        - SATURDAY
+                        description: " * `SUNDAY` - Sunday.\n * `MONDAY` - Monday.\n * `TUESDAY` - Tuesday.\n * `WEDNESDAY` - Wednesday.\n * `THURSDAY` - Thursday.\n * `FRIDAY` - Friday.\n * `SATURDAY` - Saturday.\n"
+                      week:
+                        type: string
+                        enum:
+                        - FIRST
+                        - SECOND
+                        - THIRD
+                        - FOURTH
+                        - LAST
+                        description: " * `FIRST` - First week of the month.\n * `SECOND` - Second week of the month.\n * `THIRD` - Third week of the month.\n * `FOURTH` - Fourth week of the month.\n * `LAST` - Last week of the month.\n"
+                      month:
+                        type: string
+                        enum:
+                        - JANUARY
+                        - FEBRUARY
+                        - MARCH
+                        - APRIL
+                        - MAY
+                        - JUNE
+                        - JULY
+                        - AUGUST
+                        - SEPTEMBER
+                        - OCTOBER
+                        - NOVEMBER
+                        - DECEMBER
+                        description: " * `JANUARY` - January.\n * `FEBRUARY` - February.\n * `MARCH` - March.\n * `APRIL` - April.\n * `MAY` - May.\n * `JUNE` - June.\n * `JULY` - July.\n * `AUGUST` - August.\n * `SEPTEMBER` - September.\n * `OCTOBER` - October.\n * `NOVEMBER` - November.\n * `DECEMBER` - December.\n"
+                  recurYearlyByDate:
+                    type: object
+                    description: Recur yearly by specific date
+                    properties:
+                      dayOfMonth:
+                        type: integer
+                        minimum: 1
+                        maximum: 31
+                        description: Day of the month (1-31)
+                      month:
+                        type: string
+                        enum:
+                        - JANUARY
+                        - FEBRUARY
+                        - MARCH
+                        - APRIL
+                        - MAY
+                        - JUNE
+                        - JULY
+                        - AUGUST
+                        - SEPTEMBER
+                        - OCTOBER
+                        - NOVEMBER
+                        - DECEMBER
+                        description: " * `JANUARY` - January.\n * `FEBRUARY` - February.\n * `MARCH` - March.\n * `APRIL` - April.\n * `MAY` - May.\n * `JUNE` - June.\n * `JULY` - July.\n * `AUGUST` - August.\n * `SEPTEMBER` - September.\n * `OCTOBER` - October.\n * `NOVEMBER` - November.\n * `DECEMBER` - December.\n"
+        forwardTo:
+          type: object
+          description: Call forwarding configuration for this operating mode
+          example:
+            enabled: true
+            destination: '+14085551234'
+            sendToVoicemailEnabled: false
+          properties:
+            enabled:
+              type: boolean
+              description: Whether call forwarding is enabled
+            destination:
+              type: string
+              example: '+14085551234'
+              description: Forwarding destination phone number
+            sendToVoicemailEnabled:
+              type: boolean
+              description: Whether to send to voicemail
+      example:
+        operatingModeId: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+        name: Business Hours Mode
+        type: SAME_HOURS_DAILY
+        level: LOCATION
+        locationName: San Jose
+        sameHoursDaily:
+          mondayToFriday:
+            enabled: true
+            allDayEnabled: false
+            startTime: 09:00
+            endTime: '17:00'
+          saturdayToSunday:
+            enabled: false
+            allDayEnabled: false
+            startTime: '10:00'
+            endTime: '14:00'
+        forwardTo:
+          enabled: true
+          destination: '+14085551234'
+          sendToVoicemailEnabled: false
+    NormalOperationModeResponse:
+      type: object
+      required:
+      - operatingModeId
+      properties:
+        operatingModeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+          description: Unique identifier for the scheduled operating mode.
+      example:
+        operatingModeId: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+    SwitchModeMultipleFeaturesRequest:
+      type: object
+      required:
+      - featureIds
+      - operatingModeName
+      properties:
+        featureIds:
+          type: array
+          example:
+          - Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+          description: List of feature IDs to switch mode
+          items:
+            type: string
+          minItems: 1
+          maxItems: 50
+        operatingModeName:
+          type: string
+          example: Night
+          description: Name of the common operating mode to be set as current operating mode
+    ModeManagementFeaturesResponse:
+      type: object
+      required:
+      - features
+      properties:
+        features:
+          type: array
+          description: List of mode management features. Returns all items in a single response.
+          example:
+          - id: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+            name: Main Reception
+            type: AUTO_ATTENDANT
+            modeBasedForwardingEnabled: true
+          items:
+            type: object
+            required:
+            - id
+            - name
+            - type
+            - modeBasedForwardingEnabled
+            properties:
+              id:
+                type: string
+                example: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+                description: Unique identifier for the auto attendant, call queue, or hunt group.
+              name:
+                type: string
+                example: Main Reception
+                description: Display name of the auto attendant, call queue, or hunt group.
+              type:
+                type: string
+                enum:
+                - AUTO_ATTENDANT
+                - CALL_QUEUE
+                - HUNT_GROUP
+                example: AUTO_ATTENDANT
+                description: " * `AUTO_ATTENDANT` - Auto Attendant feature.\n * `CALL_QUEUE` - Call Queue feature (includes customer assist queues).\n * `HUNT_GROUP` - Hunt Group feature.\n"
+              phoneNumber:
+                type: string
+                example: '+14085551234'
+                description: Phone number of the feature
+              extension:
+                type: string
+                example: '1234'
+                description: Extension of the feature
+              modeBasedForwardingEnabled:
+                type: boolean
+                example: true
+                description: Whether mode based forwarding is enabled for the feature
+              location:
+                type: object
+                description: Location information for the feature
+                required:
+                - id
+                - name
+                properties:
+                  id:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4LTkwYWItY2RlZi0xMjM0LTU2Nzg5MGFiY2RlZg==
+                    description: Unique identifier for the location.
+                  name:
+                    type: string
+                    example: San Jose Office
+                    description: Display name of the location.
+              forwardDestination:
+                type: string
+                example: '+14085555678'
+                description: Current forward destination
+              currentOperatingModeName:
+                type: string
+                example: Business Hours
+                description: Name of the current operating mode
+              currentOperatingModeId:
+                type: string
+                example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+                description: ID of the current operating mode
+              exceptionType:
+                type: string
+                enum:
+                - AUTOMATIC_SWITCH_BACK_EARLY_START
+                - AUTOMATIC_SWITCH_BACK_EXTENSION
+                - MANUAL_SWITCH_BACK
+                - AUTOMATIC_SWITCH_BACK_STANDARD
+                example: MANUAL_SWITCH_BACK
+                description: "Type of exception indicating how the feature will switch back from the current mode. This field is not present when the feature is in normal operation.\n\n * `AUTOMATIC_SWITCH_BACK_EARLY_START` - Automatic switchback with early start.\n * `AUTOMATIC_SWITCH_BACK_EXTENSION` - Automatic switchback with extension.\n * `MANUAL_SWITCH_BACK` - Manual switchback required.\n * `AUTOMATIC_SWITCH_BACK_STANDARD` - Standard automatic switchback.\n"
+      example:
+        features:
+        - id: Y2lzY29zcGFyazovL3VzL0ZFQVRVUkUvYjQzMmI2NmQtM2VkYy00ZGNkLTg4ODctNDZlOGU2NWQwYzIw
+          name: Main Reception
+          type: AUTO_ATTENDANT
+          phoneNumber: '+14085551234'
+          extension: '1234'
+          modeBasedForwardingEnabled: true
+          location:
+            id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4LTkwYWItY2RlZi0xMjM0LTU2Nzg5MGFiY2RlZg==
+            name: San Jose Office
+          forwardDestination: '+14085555678'
+          currentOperatingModeName: Business Hours
+          currentOperatingModeId: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+          exceptionType: MANUAL_SWITCH_BACK
+    ExtendModeRequest:
+      type: object
+      required:
+      - operatingModeId
+      properties:
+        operatingModeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZMg==
+          description: Unique identifier for the operating mode for which the extension is being configured.
+        extensionTime:
+          type: integer
+          minimum: 30
+          maximum: 720
+          example: 30
+          description: Extension time in minutes (must be multiple of 30). If not sent, mode is extended with manual switch back exception
+    SwitchModeRequest:
+      type: object
+      required:
+      - operatingModeId
+      properties:
+        operatingModeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFLzAyZjZlMmI4LTFjZDktNWI3ZS1jOTVjLTczYzZkYzk1MTZjMg==
+          description: Operating mode ID to switch to
+        isManualSwitchbackEnabled:
+          type: boolean
+          example: true
+          description: Determines if switch back will be manual (if true) or automatic (if false or omitted from request)
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

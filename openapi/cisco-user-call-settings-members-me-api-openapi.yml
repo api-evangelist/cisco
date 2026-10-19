@@ -1,0 +1,544 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling User Call Settings Members Me API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: User Call Settings Members Me
+paths:
+  /telephony/voiceMessages/members/me/summary:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  newMessages:
+                    type: number
+                    minimum: 0
+                    example: 2
+                    description: The number of new (unread) voicemail messages.
+                  oldMessages:
+                    type: number
+                    minimum: 0
+                    example: 5
+                    description: The number of old (read) voicemail messages.
+                  newUrgentMessages:
+                    type: number
+                    minimum: 0
+                    description: The number of new (unread) urgent voicemail messages.
+                  oldUrgentMessages:
+                    type: number
+                    minimum: 0
+                    example: 1
+                    description: The number of old (read) urgent voicemail messages.
+              example:
+                newMessages: 2
+                oldMessages: 5
+                newUrgentMessages: 0
+                oldUrgentMessages: 1
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Message Summary
+      operationId: getMessageSummary
+      description: Get a summary of the voicemail messages for the user.
+      tags:
+      - User Call Settings Members Me
+      parameters:
+      - name: lineOwnerId
+        in: query
+        description: The ID of a user, workspace, virtual line, auto attendant, hunt group, or call queue for which there is a secondary line on a device owned by the authenticated user, or that was shared with the authenticated user.
+        required: false
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+        schema:
+          type: string
+  /telephony/voiceMessages/members/me/voiceMessages:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VoiceMessageDetails'
+              example:
+                items:
+                - id: Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNmQ0MTgyMTItZjUwNi00Yzk4LTk5MTItNmI1MmE1ZmU2ODgx
+                  duration: 38
+                  callingParty:
+                    name: John Smith
+                    number: '+12223334444'
+                    personId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+                    placeId: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ3MWEyLTRlOTItOTFhYi05ZjJmLWJjYTEzNTAxM2ExNA==
+                    privacyEnabled: false
+                  urgent: false
+                  confidential: false
+                  read: true
+                  faxPageCount: 2
+                  created: '2021-11-14T17:00:00.000Z'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Messages
+      operationId: listMessages
+      description: Get the list of all voicemail messages for the user.
+      tags:
+      - User Call Settings Members Me
+      parameters:
+      - name: lineOwnerId
+        in: query
+        description: The ID of a user, workspace, virtual line, auto attendant, hunt group, or call queue for which there is a secondary line on a device owned by the authenticated user, or that was shared with the authenticated user.
+        required: false
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+        schema:
+          type: string
+  /telephony/voiceMessages/members/me/voiceMessages/{messageId}:
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete Message
+      operationId: deleteMessage
+      description: Delete a specfic voicemail message for the user.
+      tags:
+      - User Call Settings Members Me
+      parameters:
+      - name: messageId
+        in: path
+        description: The message identifer of the voicemail message to delete
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+      - name: lineOwnerId
+        in: query
+        description: The ID of a user, workspace, virtual line, auto attendant, hunt group, or call queue for which there is a secondary line on a device owned by the authenticated user, or that was shared with the authenticated user.
+        required: false
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+        schema:
+          type: string
+  /telephony/voiceMessages/members/me/markAsRead:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Mark As Read
+      operationId: markAsRead
+      description: 'Update the voicemail message(s) as read for the user.
+
+
+        If the `messageId` is provided, then only mark that message as read. Otherwise, all messages for the user are marked as read.'
+      tags:
+      - User Call Settings Members Me
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              messageId: Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNmQ0MTgyMTItZjUwNi00Yzk4LTk5MTItNmI1MmE1ZmU2ODgx
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+            schema:
+              type: object
+              properties:
+                messageId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNmQ0MTgyMTItZjUwNi00Yzk4LTk5MTItNmI1MmE1ZmU2ODgx
+                  description: The voicemail message identifier of the message to mark as read.  If the `messageId` is not provided, then all voicemail messages for the user are marked as read.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+                  description: The ID of a user, workspace, virtual line, auto attendant, hunt group, or call queue for which there is a secondary line on a device owned by the authenticated user, or that was shared with the authenticated user.
+  /telephony/voiceMessages/members/me/markAsUnread:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Mark As Unread
+      operationId: markAsUnread
+      description: 'Update the voicemail message(s) as unread for the user.
+
+
+        If the `messageId` is provided, then only mark that message as unread. Otherwise, all messages for the user are marked as unread.'
+      tags:
+      - User Call Settings Members Me
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              messageId: Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNmQ0MTgyMTItZjUwNi00Yzk4LTk5MTItNmI1MmE1ZmU2ODgx
+              lineOwnerId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+            schema:
+              type: object
+              properties:
+                messageId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNmQ0MTgyMTItZjUwNi00Yzk4LTk5MTItNmI1MmE1ZmU2ODgx
+                  description: The voicemail message identifier of the message to mark as unread.  If the `messageId` is not provided, then all voicemail messages for the user are marked as unread.
+                lineOwnerId:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY
+                  description: The ID of a user, workspace, virtual line, auto attendant, hunt group, or call queue for which there is a secondary line on a device owned by the authenticated user, or that was shared with the authenticated user.
+  /telephony/voiceMessages/members/me/memberships:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - memberOf
+                properties:
+                  memberOf:
+                    type: array
+                    description: Array of shared voicemail membership entries.
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      properties:
+                        id:
+                          type: string
+                          example: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvNmU1NTVjZDAtNjM0MS00MmI4LWEyMWMtZTc1ZjIxNDQ4Mjc1
+                          description: Unique identifier for the membership.
+                        type:
+                          type: string
+                          enum:
+                          - CALL_QUEUE
+                          - HUNT_GROUP
+                          - AUTO_ATTENDANT
+                          example: CALL_QUEUE
+                          description: Type of the membership. One of CALL_QUEUE, HUNT_GROUP, or AUTO_ATTENDANT.
+                        name:
+                          type: string
+                          example: Engineering Call Center
+                          description: Display name of the call queue, hunt group, or auto attendant.
+                        phoneNumber:
+                          type: string
+                          example: '+14085550101'
+                          description: Phone number in E.164 format. Omitted when the service has no phone number.
+                        extension:
+                          type: string
+                          example: '1001'
+                          description: Extension number. Omitted when the service has no extension.
+                        routingPrefix:
+                          type: string
+                          example: '8888'
+                          description: Location dialing code (routing prefix). Omitted when not set.
+                        esn:
+                          type: string
+                          example: '88881001'
+                          description: Enterprise Significant Number, the concatenation of routingPrefix and extension. Omitted when not set.
+              example:
+                memberOf:
+                - id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYm1kMmVIcHNabTgwWVVBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+                  type: CALL_QUEUE
+                  name: Engineering Call Center
+                  phoneNumber: '+14085550101'
+                  extension: '1001'
+                  routingPrefix: '8888'
+                  esn: '88881001'
+                - id: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvNmU1NTVjZDAtNjM0MS00MmI4LWEyMWMtZTc1ZjIxNDQ4Mjc1
+                  type: HUNT_GROUP
+                  name: Sales Hunt Group
+                  phoneNumber: '+14085550102'
+                - id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5ULzA1NTJmNjdiLTU5YTktNDFiYi04NzM2LTFiMDQxZDFkZGQ1ZQ
+                  type: AUTO_ATTENDANT
+                  name: Support Auto Attendant
+                  extension: '3003'
+                  routingPrefix: '9999'
+                  esn: '99993003'
+        '204':
+          description: No Content - Returned when there are no memberships.
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Voice Message Memberships
+      operationId: listVoiceMessageMemberships
+      description: 'Retrieves the list of shared voicemail memberships for the authenticated user. Each membership represents a group calling feature (Call Queue, Hunt Group, or Auto Attendant) whose shared voicemail box the user has access to.
+
+
+        A service may have a phoneNumber, an extension, both, or neither, so any of these optional fields may be absent from a given entry. These can be used as values for the `lineOwnerId` parameter in other voicemail APIs.
+
+
+        This API requires the `spark:calls_read` or `spark:calls_write` scope.'
+      tags:
+      - User Call Settings Members Me
+      parameters: []
+components:
+  schemas:
+    VoiceMailPartyInformation:
+      type: object
+      required:
+      - privacyEnabled
+      properties:
+        name:
+          type: string
+          example: John Smith
+          description: The party's name. Only present when the name is available and privacy is not enabled.
+        number:
+          type: string
+          example: '+12223334444'
+          description: 'The party''s number. Only present when the number is available and privacy is not enabled. The number can be digits or a URI. Some examples for number include: `1234`, `2223334444`, `+12223334444`, `*73`, and `user@company.domain`.'
+        personId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hMTlkODJhMi00ZTY5LTU5YWEtOWYyZi1iY2E2MzEwMTNhNjg=
+          description: The party's person ID. Only present when the person ID is available and privacy is not enabled.
+        placeId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BMQUNFL2ExOWQ3MWEyLTRlOTItOTFhYi05ZjJmLWJjYTEzNTAxM2ExNA==
+          description: The party's place ID. Only present when the place ID is available and privacy is not enabled.
+        privacyEnabled:
+          type: boolean
+          description: if `true`, denotes privacy is enabled for the name, number and `personId`/`placeId`.
+    VoiceMessageDetails:
+      type: object
+      required:
+      - id
+      - callingParty
+      - created
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNmQ0MTgyMTItZjUwNi00Yzk4LTk5MTItNmI1MmE1ZmU2ODgx
+          description: The message identifier of the voicemail message.
+        duration:
+          type: number
+          example: 38
+          description: ' The duration (in seconds) of the voicemail message.  Duration is not present for a FAX message.'
+        callingParty:
+          $ref: '#/components/schemas/VoiceMailPartyInformation'
+          description: The calling party's details. For example, if user A calls user B and leaves a voicemail message, then A is the calling party.
+        urgent:
+          type: boolean
+          description: '`true` if the voicemail message is urgent.'
+        confidential:
+          type: boolean
+          description: '`true` if the voicemail message is confidential.'
+        read:
+          type: boolean
+          example: true
+          description: '`true` if the voicemail message has been read.'
+        faxPageCount:
+          type: number
+          example: 2
+          description: Number of pages for the FAX.  Only set for a FAX.
+        created:
+          type: string
+          example: '2021-11-14T17:00:00.000Z'
+          description: The date and time the voicemail message was created.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

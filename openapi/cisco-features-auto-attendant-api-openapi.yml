@@ -1,0 +1,3255 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Auto Attendant API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features:  Auto Attendant'
+paths:
+  /telephony/config/autoAttendants:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - autoAttendants
+                properties:
+                  autoAttendants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListAutoAttendantObject'
+                    description: Array of auto attendants.
+              example:
+                autoAttendants:
+                - id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                  name: Main Line AA - Test
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzI0NDY5OA
+                  phoneNumber: '+19705550028'
+                  extension: 0028
+                  routingPrefix: '1234'
+                  esn: '12340028'
+                  tollFreeNumber: false
+                - id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2NXZHVjWGg1WkhCbmFVQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                  name: AUTOATTENDANT-TEST 1
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzI0NDY5OA
+                  phoneNumber: '+19705550030'
+                  extension: '1234'
+                  routingPrefix: '1234'
+                  esn: '12340028'
+                  tollFreeNumber: false
+                - id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                  name: AUTOATTENDANT-TEST 2
+                  locationName: Houston
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzI2NDE1MA
+                  phoneNumber: '+17135551001'
+                  extension: '1001'
+                  routingPrefix: '1234'
+                  esn: '12340028'
+                  tollFreeNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Auto Attendants
+      operationId: listAutoAttendants
+      description: 'List all Auto Attendants for the organization.
+
+
+        Auto attendants play customized prompts and provide callers with menu options for routing their calls through your system.
+
+
+        Retrieving this list requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: orgId
+        in: query
+        description: List auto attendants for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: locationId
+        in: query
+        description: Return the list of auto attendants for this location.
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of objects returned to this maximum count.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects.
+        example: '0'
+        schema:
+          type: number
+      - name: name
+        in: query
+        description: Only return auto attendants with the matching name.
+        example: Main Line AA - Test
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: Only return auto attendants with the matching phone number.
+        example: '9705550028'
+        schema:
+          type: string
+  /telephony/config/locations/{locationId}/autoAttendants/{autoAttendantId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAutoAttendantObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                name: Main Line AA - Test
+                enabled: true
+                phoneNumber: '+19705550026'
+                extension: '200'
+                routingPrefix: '1234'
+                esn: '1234200'
+                tollFreeNumber: false
+                firstName: Main Line AA
+                lastName: Test
+                language: English
+                languageCode: en_us
+                businessSchedule: AUTOATTENDANT-BUSINESS-HOURS
+                holidaySchedule: AUTOATTENDANT-HOLIDAY
+                extensionDialing: ENTERPRISE
+                nameDialing: ENTERPRISE
+                timeZone: America/Los_Angeles
+                businessHoursMenu:
+                  greeting: DEFAULT
+                  extensionEnabled: true
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jZWRkODcwYS1lMTkzLTQxNmQtYmM3OS1mNzkyYmUyMzlhOGI
+                    fileName: announcement.wav
+                    mediaFileType: WAV
+                    level: LOCATION
+                  keyConfigurations:
+                  - key: '0'
+                    action: EXIT
+                  - key: '1'
+                    action: TRANSFER_WITHOUT_PROMPT
+                    value: '+19175551092'
+                  - key: '2'
+                    action: TRANSFER_WITH_PROMPT
+                    value: '+19073569984'
+                  - key: '3'
+                    action: EXTENSION_DIALING
+                  - key: '4'
+                    action: TRANSFER_TO_MAILBOX
+                    value: '+19705550006'
+                  - key: '5'
+                    action: PLAY_ANNOUNCEMENT
+                    audioAnnouncementFile:
+                      id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                      fileName: AUDIO_FILE.wav
+                      mediaFileType: WAV
+                      level: ORGANIZATION
+                  - key: '6'
+                    action: REPEAT_MENU
+                  callTreatment:
+                    retryAttemptForNoInput: THREE_TIMES
+                    noInputTimer: '60'
+                    actionToBePerformed:
+                      action: TRANSFER_TO_OPERATOR
+                      greeting: CUSTOM
+                      audioAnnouncementFile:
+                        id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                        fileName: AUDIO_FILE.wav
+                        mediaFileType: WAV
+                        level: ORGANIZATION
+                      transferCallTo: '9878945608'
+                afterHoursMenu:
+                  greeting: DEFAULT
+                  extensionEnabled: true
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jZWRkODcwYS1lMTkzLTQxNmQtYmM3OS1mNzkyYmUyMzlhOGI
+                    fileName: announcement.wav
+                    mediaFileType: WAV
+                    level: LOCATION
+                  keyConfigurations:
+                  - key: '0'
+                    action: EXIT
+                  - key: '1'
+                    action: PLAY_ANNOUNCEMENT
+                    audioAnnouncementFile:
+                      id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                      fileName: AUDIO_FILE.wav
+                      mediaFileType: WAV
+                      level: ORGANIZATION
+                  callTreatment:
+                    retryAttemptForNoInput: THREE_TIMES
+                    noInputTimer: '60'
+                    actionToBePerformed:
+                      action: TRANSFER_TO_OPERATOR
+                      greeting: CUSTOM
+                      audioAnnouncementFile:
+                        id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                        fileName: AUDIO_FILE.wav
+                        mediaFileType: WAV
+                        level: ORGANIZATION
+                      transferCallTo: '9878945608'
+                directLineCallerIdName:
+                  selection: CUSTOM_NAME
+                  customName: Hakim Smith
+                dialByName: Hakim Smith
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for an Auto Attendant
+      operationId: getAutoAttendant
+      description: 'Retrieve an Auto Attendant details.
+
+
+        Auto attendants play customized prompts and provide callers with menu options for routing their calls through your system.
+
+
+        Retrieving an auto attendant details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve an auto attendant details in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Retrieve the auto attendant with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve the auto attendant details from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update an Auto Attendant
+      operationId: updateAutoAttendant
+      description: 'Update the designated Auto Attendant.
+
+
+        Auto attendants play customized prompts and provide callers with menu options for routing their calls through your system.
+
+
+        Updating an auto attendant requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Update an auto attendant with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update an auto attendant from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Main Line AA - Test New Name
+              phoneNumber: '+19705550026'
+              extension: '200'
+              firstName: Main Line AA
+              lastName: Test
+              languageCode: en_us
+              businessSchedule: TEST-BUSINESS-HOURS-NEW-NAME
+              holidaySchedule: AUTOATTENDANT-HOLIDAY
+              extensionDialing: ENTERPRISE
+              nameDialing: ENTERPRISE
+              timeZone: America/Los_Angeles
+              businessHoursMenu:
+                greeting: DEFAULT
+                extensionEnabled: true
+                audioAnnouncementFile:
+                  id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jZWRkODcwYS1lMTkzLTQxNmQtYmM3OS1mNzkyYmUyMzlhOGI
+                  fileName: AUDIO_FILE.wav
+                  mediaFileType: WAV
+                  level: ORGANIZATION
+                keyConfigurations:
+                - key: '0'
+                  action: EXIT
+                - key: '1'
+                  action: TRANSFER_WITHOUT_PROMPT
+                  value: '+19175551092'
+                - key: '2'
+                  action: TRANSFER_WITH_PROMPT
+                  value: '+19073569984'
+                - key: '3'
+                  action: EXTENSION_DIALING
+                - key: '4'
+                  action: TRANSFER_TO_MAILBOX
+                  value: '+19705550006'
+                - key: '5'
+                  action: PLAY_ANNOUNCEMENT
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                    fileName: AUDIO_FILE.wav
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                - key: '6'
+                  action: REPEAT_MENU
+                callTreatment:
+                  retryAttemptForNoInput: THREE_TIMES
+                  noInputTimer: '60'
+                  actionToBePerformed:
+                    action: TRANSFER_TO_OPERATOR
+                    greeting: CUSTOM
+                    audioAnnouncementFile:
+                      id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                      fileName: AUDIO_FILE.wav
+                      mediaFileType: WAV
+                      level: ORGANIZATION
+                    transferCallTo: '9878945608'
+              afterHoursMenu:
+                greeting: DEFAULT
+                extensionEnabled: true
+                audioAnnouncementFile:
+                  id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9jZWRkODcwYS1lMTkzLTQxNmQtYmM3OS1mNzkyYmUyMzlhOGI
+                  fileName: AUDIO_FILE.wav
+                  mediaFileType: WAV
+                  level: ORGANIZATION
+                keyConfigurations:
+                - key: '0'
+                  action: EXIT
+                - key: '1'
+                  action: PLAY_ANNOUNCEMENT
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                    fileName: AUDIO_FILE.wav
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                callTreatment:
+                  retryAttemptForNoInput: THREE_TIMES
+                  noInputTimer: '60'
+                  actionToBePerformed:
+                    action: TRANSFER_TO_OPERATOR
+                    greeting: CUSTOM
+                    audioAnnouncementFile:
+                      id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                      fileName: AUDIO_FILE.wav
+                      mediaFileType: WAV
+                      level: ORGANIZATION
+                    transferCallTo: '9878945608'
+              directLineCallerIdName:
+                selection: CUSTOM_NAME
+                customName: Hakim Smith
+              dialByName: Hakim Smith
+            schema:
+              $ref: '#/components/schemas/ModifyAutoAttendantObject'
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete an Auto Attendant
+      operationId: deleteAutoAttendant
+      description: 'Delete the designated Auto Attendant.
+
+
+        Auto attendants play customized prompts and provide callers with menu options for routing their calls through your system.
+
+
+        Deleting an auto attendant requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete an auto attendant.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Delete the auto attendant with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the auto attendant from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/locations/{locationId}/autoAttendants:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created auto attendant.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create an Auto Attendant
+      operationId: createAutoAttendant
+      description: 'Create new Auto Attendant for the given location.
+
+
+        Auto attendants play customized prompts and provide callers with menu options for routing their calls through your system.
+
+
+        Creating an auto attendant requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create the auto attendant for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the auto attendant for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Main Line AA - Test
+              phoneNumber: '+19705550026'
+              extension: '200'
+              firstName: Main Line AA
+              lastName: Test
+              languageCode: en_us
+              businessSchedule: AUTOATTENDANT-BUSINESS-HOURS
+              holidaySchedule: AUTOATTENDANT-HOLIDAY
+              extensionDialing: ENTERPRISE
+              nameDialing: ENTERPRISE
+              timeZone: America/Los_Angeles
+              businessHoursMenu:
+                greeting: DEFAULT
+                audioAnnouncementFile:
+                  id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                  fileName: AUDIO_FILE.wav
+                  mediaFileType: WAV
+                  level: ORGANIZATION
+                extensionEnabled: true
+                keyConfigurations:
+                - key: '0'
+                  action: EXIT
+                - key: '1'
+                  action: TRANSFER_WITHOUT_PROMPT
+                  value: '+19175551092'
+                - key: '2'
+                  action: TRANSFER_WITH_PROMPT
+                  value: '+19073569984'
+                - key: '3'
+                  action: EXTENSION_DIALING
+                - key: '4'
+                  action: TRANSFER_TO_MAILBOX
+                  value: '+19705550006'
+                - key: '5'
+                  action: PLAY_ANNOUNCEMENT
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                    fileName: AUDIO_FILE.wav
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                - key: '6'
+                  action: REPEAT_MENU
+                callTreatment:
+                  retryAttemptForNoInput: THREE_TIMES
+                  noInputTimer: '60'
+                  actionToBePerformed:
+                    action: TRANSFER_TO_OPERATOR
+                    greeting: CUSTOM
+                    audioAnnouncementFile:
+                      id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                      fileName: AUDIO_FILE.wav
+                      mediaFileType: WAV
+                      level: ORGANIZATION
+                    transferCallTo: '9878945608'
+              afterHoursMenu:
+                greeting: DEFAULT
+                audioAnnouncementFile:
+                  id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                  fileName: AUDIO_FILE.wav
+                  mediaFileType: WAV
+                  level: ORGANIZATION
+                extensionEnabled: true
+                keyConfigurations:
+                - key: '0'
+                  action: EXIT
+                - key: '1'
+                  action: PLAY_ANNOUNCEMENT
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                    fileName: AUDIO_FILE.wav
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                callTreatment:
+                  retryAttemptForNoInput: THREE_TIMES
+                  noInputTimer: '60'
+                  actionToBePerformed:
+                    action: TRANSFER_TO_OPERATOR
+                    greeting: CUSTOM
+                    audioAnnouncementFile:
+                      id: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+                      fileName: AUDIO_FILE.wav
+                      mediaFileType: WAV
+                      level: ORGANIZATION
+                    transferCallTo: '9878945608'
+              directLineCallerIdName:
+                selection: CUSTOM_NAME
+                customName: Hakim Smith
+              dialByName: Hakim Smith
+            schema:
+              $ref: '#/components/schemas/PostAutoAttendantObject'
+  /telephony/config/locations/{locationId}/autoAttendants/{autoAttendantId}/callForwarding:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAutoAttendantCallForwardSettingsObject'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Forwarding Settings for an Auto Attendant
+      operationId: getAutoAttendantCallForwardingSettings
+      description: 'Retrieve Call Forwarding settings for the designated Auto Attendant including the list of call forwarding rules.
+
+
+        The call forwarding feature allows you to direct all incoming calls based on specific criteria that you define.
+
+        Below are the available options for configuring your call forwarding:
+
+        1. Always forward calls to a designated number.
+
+        2. Forward calls to a designated number based on certain criteria.
+
+        3. Forward calls using different modes.
+
+
+        Retrieving call forwarding settings for an auto attendant requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Retrieve the call forwarding settings for this auto attendant.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve auto attendant forwarding settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Call Forwarding Settings for an Auto Attendant
+      operationId: updateAutoAttendantCallForwardingSettings
+      description: 'Update Call Forwarding settings for the designated Auto Attendant.
+
+
+        The call forwarding feature allows you to direct all incoming calls based on specific criteria that you define.
+
+        Below are the available options for configuring your call forwarding:
+
+        1. Always forward calls to a designated number.
+
+        2. Forward calls to a designated number based on certain criteria.
+
+        3. Forward calls using different modes.
+
+
+        Updating call forwarding settings for an auto attendant requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Update call forwarding settings for this auto attendant.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update auto attendant forwarding settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              callForwarding:
+                always:
+                  enabled: false
+                  destination: '+19705550006'
+                  ringReminderEnabled: false
+                  sendToVoicemailEnabled: false
+                selective:
+                  enabled: true
+                  destination: '+19705550006'
+                  ringReminderEnabled: false
+                  sendToVoicemailEnabled: false
+                rules:
+                - id: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+                  enabled: false
+                operatingModes:
+                  enabled: true
+                  modes:
+                  - normalOperationEnabled: true
+                    id: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+                    forwardTo:
+                      selection: FORWARD_TO_SPECIFIED_NUMBER
+                      destination: '00000'
+                      destinationVoicemailEnabled: false
+            schema:
+              $ref: '#/components/schemas/ModifyAutoAttendantCallForwardSettingsObject'
+  /telephony/config/locations/{locationId}/autoAttendants/{autoAttendantId}/callForwarding/selectiveRules:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created auto attendant call forward selective rule.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Selective Call Forwarding Rule for an Auto Attendant
+      operationId: createAutoAttendantSelectiveCallForwardingRule
+      description: 'Create a Selective Call Forwarding Rule for the designated Auto Attendant.
+
+
+        A selective call forwarding rule for an auto attendant allows calls to be forwarded or not forwarded to the designated number, based on the defined criteria.
+
+
+        Note that the list of existing call forward rules is available in the auto attendant''s call forwarding settings.
+
+
+        Creating a selective call forwarding rule for an auto attendant requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Forwarding Rule ID will change upon modification of the Call Forwarding Rule name.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which the auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Create the rule for this auto attendant.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the auto attendant rule for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Test Rule
+              businessSchedule: AUTOATTENDANT-BUSINESS-HOURS
+              holidaySchedule: AUTOATTENDANT-HOLIDAY
+              callsFrom:
+                selection: CUSTOM
+                customNumbers:
+                  privateNumberEnabled: true
+                  unavailableNumberEnabled: false
+                  numbers:
+                  - '4554'
+              callsTo:
+                numbers:
+                - type: PRIMARY
+                  phoneNumber: '+19705550026'
+              forwardTo:
+                selection: FORWARD_TO_DEFAULT_NUMBER
+              enabled: true
+            schema:
+              $ref: '#/components/schemas/PostAutoAttendantCallForwardSelectiveRuleObject'
+  /telephony/config/locations/{locationId}/autoAttendants/{autoAttendantId}/callForwarding/selectiveRules/{ruleId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAutoAttendantCallForwardSelectiveRuleObject'
+              example:
+                name: Test Rule
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+                enabled: true
+                businessSchedule: AUTOATTENDANT-BUSINESS-HOURS
+                holidaySchedule: AUTOATTENDANT-HOLIDAY
+                forwardTo:
+                  selection: FORWARD_TO_DEFAULT_NUMBER
+                callsFrom:
+                  selection: CUSTOM
+                  customNumbers:
+                    privateNumberEnabled: true
+                    unavailableNumberEnabled: false
+                    numbers:
+                    - '44544'
+                callsTo:
+                  numbers:
+                  - phoneNumber: '+19705550026'
+                    type: PRIMARY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Selective Call Forwarding Rule for an Auto Attendant
+      operationId: getAutoAttendantSelectiveCallForwardingRule
+      description: 'Retrieve a Selective Call Forwarding Rule''s settings for the designated Auto Attendant.
+
+
+        A selective call forwarding rule for an auto attendant allows calls to be forwarded or not forwarded to the designated number, based on the defined criteria.
+
+
+        Note that the list of existing call forward rules is available in the auto attendant''s call forwarding settings.
+
+
+        Retrieving a selective call forwarding rule''s settings for an auto attendant requires a full or read-only administrator or location administrator
+
+
+        **NOTE**: The Call Forwarding Rule ID will change upon modification of the Call Forwarding Rule name.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Retrieve settings for a rule for this auto attendant.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2J6QjJlRGd6Ym1GeU5rQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        description: Auto attendant rule you are retrieving settings for.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve auto attendant rule settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: New ID for the modified rule.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGxJRTVsZHlCT1lXMWw
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Selective Call Forwarding Rule for an Auto Attendant
+      operationId: updateAutoAttendantSelectiveCallForwardingRule
+      description: 'Update a Selective Call Forwarding Rule''s settings for the designated Auto Attendant.
+
+
+        A selective call forwarding rule for an auto attendant allows calls to be forwarded or not forwarded to the designated number, based on the defined criteria.
+
+
+        Note that the list of existing call forward rules is available in the auto attendant''s call forwarding settings.
+
+
+        Updating a selective call forwarding rule''s settings for an auto attendant requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Forwarding Rule ID will change upon modification of the Call Forwarding Rule name.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Update settings for a rule for this auto attendant.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        description: Auto attendant rule you are updating settings for.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update auto attendant rule settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Test Rule New Name
+              businessSchedule: AUTOATTENDANT-BUSINESS-HOURS
+              holidaySchedule: AUTOATTENDANT-HOLIDAY
+              callsFrom:
+                selection: CUSTOM
+                customNumbers:
+                  privateNumberEnabled: true
+                  unavailableNumberEnabled: false
+                  numbers:
+                  - '4554'
+              callsTo:
+                numbers:
+                - type: PRIMARY
+                  phoneNumber: '+19705550026'
+              forwardTo:
+                selection: FORWARD_TO_DEFAULT_NUMBER
+              enabled: true
+            schema:
+              $ref: '#/components/schemas/ModifyAutoAttendantCallForwardSelectiveRuleObject'
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Selective Call Forwarding Rule for an Auto Attendant
+      operationId: deleteAutoAttendantSelectiveCallForwardingRule
+      description: 'Delete a Selective Call Forwarding Rule for the designated Auto Attendant.
+
+
+        A selective call forwarding rule for an auto attendant allows calls to be forwarded or not forwarded to the designated number, based on the defined criteria.
+
+
+        Note that the list of existing call forward rules is available in the auto attendant''s call forwarding settings.
+
+
+        Deleting a selective call forwarding rule for an auto attendant requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Forwarding Rule ID will change upon modification of the Call Forwarding Rule name.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Delete the rule for this auto attendant.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        description: Auto attendant rule you are deleting.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete auto attendant rule from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/locations/{locationId}/autoAttendants/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutoAttendantPrimaryAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                - phoneNumber: '+12056350002'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                - phoneNumber: '+12056350003'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Auto Attendant Primary Available Phone Numbers
+      operationId: getAutoAttendantPrimaryAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as the auto attendant''s primary phone number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are unassigned.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+  /telephony/config/locations/{locationId}/autoAttendants/alternate/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutoAttendantAlternateAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                - phoneNumber: '+12056350002'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                - phoneNumber: '+12056350003'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Auto Attendant Alternate Available Phone Numbers
+      operationId: getAutoAttendantAlternateAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as the auto attendant''s alternate number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are unassigned.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+  /telephony/config/locations/{locationId}/autoAttendants/callForwarding/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutoAttendantCallForwardAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODhiZGIwNC1jZjU5LTRjMjMtODQ4OC00NTNhOTE3ZDFlMjk
+                    type: PEOPLE
+                    firstName: Test
+                    lastName: Person
+                    displayName: Test Person
+                - phoneNumber: '+12056350002'
+                  extension: '1235'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS8zZjc0NzJiMS1iNDNmLTQ3N2QtODNlZi1hNmQzZGYyZGJiMjY=
+                    type: PLACE
+                    displayName: TestWorkSpace
+                - phoneNumber: '+12056350003'
+                  extension: '1236'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+                  owner:
+                    id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYm1kMmVIcHNabTgwWVVBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+                    type: CALL_QUEUE
+                    displayName: Test call queue
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Auto Attendant Call Forward Available Phone Numbers
+      operationId: getAutoAttendantCallForwardAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as the auto attendant''s call forward number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are assigned to an owning entity.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+      - name: ownerName
+        in: query
+        description: Return the list of phone numbers that are owned by the given `ownerName`. Maximum length is 255.
+        example: Test
+        schema:
+          type: string
+      - name: extension
+        in: query
+        description: Returns the list of PSTN phone numbers with the given `extension`.
+        example: '1234'
+        schema:
+          type: string
+  /telephony/config/locations/{locationId}/autoAttendants/{autoAttendantId}/callForwarding/actions/switchMode/invoke:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Switch Mode for Call Forwarding Settings for an Auto Attendant
+      operationId: switchAutoAttendantCallForwardingMode
+      description: 'Switches the current operating mode of the `Auto Attendant` to the mode as per normal operations.
+
+
+        Operating modes allow call forwarding to be configured based on predefined schedules, enabling different routing behaviors during business hours, after hours, or holidays.
+
+
+        Switching operating mode for an `auto attendant` requires a full, or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: '`Location` in which this `auto attendant` exists.'
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Switch operating mode to normal operations for this `auto attendant`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5ULzk3ZjJiODY1LTc3NTUtNGVlOC05NDY0LTFjOGU1NGE1OGVjNQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Switch operating mode as per normal operations for the `auto attendant` from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example: {}
+            schema:
+              type: object
+              properties: {}
+  /telephony/config/locations/{locationId}/autoAttendants/{autoAttendantId}/announcements/{fileName}:
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Auto Attendant Announcement File
+      operationId: deleteAutoAttendantAnnouncementFile
+      description: 'Delete an announcement file for the designated auto attendant.
+
+
+        Auto Attendant announcement files contain messages and music that callers hear while waiting in the queue. A auto attendant can be configured to play whatever subset of these announcement files is desired.
+
+
+        Deleting an announcement file for a auto attendant requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Delete an announcement for a auto attendant in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Delete an announcement for the auto attendant with this identifier.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYUhaaFpUTjJNRzh5YjBBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+        schema:
+          type: string
+      - name: fileName
+        in: path
+        description: ''
+        required: true
+        example: Greeting-2.wav
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete auto attendant announcement from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/locations/{locationId}/autoAttendants/{autoAttendantId}/announcements:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - announcements
+                properties:
+                  announcements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GetAnnouncementFileInfo'
+                    description: Array of announcements for this auto attendant.
+              example:
+                announcements:
+                - id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9kODc5YWZlZC1jNTRhLTQyOTctOGY0Mi02ZmEyMDJjN2E1M2E
+                  fileName: Greeting-1.wav
+                  fileSize: '33456'
+                  mediaFileType: WAV
+                  level: ORGANIZATION
+                - id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zMjAxNjRmNC1lNWEzLTQxZmYtYTMyNi02N2MwOThlNDFrMWY
+                  fileName: Greeting-2.wav
+                  fileSize: '32356'
+                  mediaFileType: WAV
+                  level: LOCATION
+                - id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8zMjAxNjRmNC1lNWEzLTQxZmYtYTMyNi02N2MwOThlNDFoNmc
+                  fileName: Greeting-3.wav
+                  fileSize: '31237'
+                  mediaFileType: WAV
+                  level: ORGANIZATION
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Auto Attendant Announcement Files
+      operationId: listAutoAttendantAnnouncementFiles
+      description: 'List file info for all auto attendant announcement files associated with this auto attendant.
+
+
+        Auto attendant announcement files contain messages and music that callers hear while waiting in the queue. A auto attendant can be configured to play whatever subset of these announcement files is desired.
+
+
+        Retrieving this list of files requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.
+
+
+        Note that uploading of announcement files via API is not currently supported, but is available via Webex Control Hub.'
+      tags:
+      - 'Features:  Auto Attendant'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this auto attendant exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: autoAttendantId
+        in: path
+        description: Retrieve announcement files for the auto attendant with this identifier.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYUhaaFpUTjJNRzh5YjBBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve announcement files for a auto attendant from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+components:
+  schemas:
+    GetAutoAttendantCallForwardSelectiveRuleObject:
+      type: object
+      required:
+      - id
+      - name
+      - enabled
+      - businessSchedule
+      - forwardTo
+      - callsFrom
+      - callsTo
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+          description: Unique ID for the rule.
+        name:
+          type: string
+          example: Test Rule
+          description: Unique name for the selective rule in the auto attendant.
+        enabled:
+          type: boolean
+          example: true
+          description: Reflects if rule is enabled.
+        businessSchedule:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Name of the location's business schedule which determines when this selective call forwarding rule is in effect.
+        holidaySchedule:
+          type: string
+          example: AUTOATTENDANT-HOLIDAY
+          description: Name of the location's holiday schedule which determines when this selective call forwarding rule is in effect.
+        forwardTo:
+          $ref: '#/components/schemas/CallForwardSelectiveForwardToObject'
+          description: Controls what happens when the rule matches including the destination number for the call forwarding.
+        callsFrom:
+          $ref: '#/components/schemas/CallForwardSelectiveCallsFromObject'
+          description: Settings related to the rule matching based on incoming caller ID.
+        callsTo:
+          $ref: '#/components/schemas/CallForwardSelectiveCallsToObject'
+          description: Settings related to the rule matching based on the destination number.
+    DirectLineCallerIdNameObject:
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/SelectionObject'
+          description: The selection of the direct line caller ID name. Defaults to `DISPLAY_NAME`.
+        customName:
+          type: string
+          example: Hakim Smith
+          description: The custom direct line caller ID name. Required if `selection` is set to `CUSTOM_NAME`.
+      description: Settings for the direct line caller ID name to be shown for this workspace.
+    CallForwardSelectiveCallsToObject:
+      type: object
+      properties:
+        numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallForwardSelectiveCallsToNumbersObject'
+          description: Array of numbers to be matched against the calling destination number.
+    AutoAttendantAlternateAvailableNumberObject:
+      type: object
+      required:
+      - phoneNumber
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+    NumberOwnerType:
+      type: string
+      enum:
+      - PLACE
+      - PEOPLE
+      - VIRTUAL_LINE
+      - AUTO_ATTENDANT
+      - CALL_QUEUE
+      - GROUP_PAGING
+      - HUNT_GROUP
+      - VOICE_MESSAGING
+      - OFFICE_ANYWHERE
+      - CONTACT_CENTER_LINK
+      - CONTACT_CENTER_ADAPTER
+      - ROUTE_LIST
+      - VOICEMAIL_GROUP
+      - COLLABORATE_BRIDGE
+      description: " * `PLACE` - PSTN phone number's owner is a workspace.\n * `PEOPLE` - PSTN phone number's owner is a person.\n * `VIRTUAL_LINE` - PSTN phone number's owner is a Virtual Profile.\n * `AUTO_ATTENDANT` - PSTN phone number's owner is an auto-attendant.\n * `CALL_QUEUE` - PSTN phone number's owner is a call queue.\n * `GROUP_PAGING` - PSTN phone number's owner is a group paging.\n * `HUNT_GROUP` - PSTN phone number's owner is a hunt group.\n * `VOICE_MESSAGING` - PSTN phone number's owner is a voice messaging.\n * `OFFICE_ANYWHERE` - PSTN phone number's owner is a Single Number Reach.\n * `CONTACT_CENTER_LINK` - PSTN phone number's owner is a Contact Center link.\n * `CONTACT_CENTER_ADAPTER` - PSTN phone number's owner is a Contact Center adapter.\n * `ROUTE_LIST` - PSTN phone number's owner is a route list.\n * `VOICEMAIL_GROUP` - PSTN phone number's owner is a voicemail group.\n * `COLLABORATE_BRIDGE` - PSTN phone number's owner is a collaborate bridge.\n"
+    AudioAnnouncementFileObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+          description: A unique identifier for the [announcement](/docs/api/v1/features-announcement-repository). `name`, `mediaFileType`, `level` are mandatory if `id` is not provided for uploading an announcement. If all four fields are provided, file with given `id` is used and other fields are ignored.
+        fileName:
+          type: string
+          example: AUDIO_FILE.wav
+          description: Audio announcement file name.
+        mediaFileType:
+          type: string
+          enum:
+          - WAV
+          description: "Audio announcement file type.\n * `WAV` - WAV File Extension.\n"
+        level:
+          type: string
+          enum:
+          - ORGANIZATION
+          - LOCATION
+          description: "Audio announcement file type location.\n * `ORGANIZATION` - Specifies this audio file is configured across the organization.\n * `LOCATION` - Specifies this audio file is configured across the location.\n"
+    GetAutoAttendantCallForwardSettingsObject:
+      type: object
+      required:
+      - callForwarding
+      properties:
+        callForwarding:
+          $ref: '#/components/schemas/AutoAttendantCallForwardSettingsDetailsObject'
+          description: Settings related to `Always`, `Busy`, and `No Answer` call forwarding.
+    CallForwardSelectiveCallsToNumbersObject:
+      type: object
+      required:
+      - type
+      properties:
+        phoneNumber:
+          type: string
+          example: '+19705550028'
+          description: AutoCalls To phone number. Either phone number or extension should be present as mandatory.
+        extension:
+          type: string
+          example: '1001'
+          description: Calls To extension.  Either `phoneNumber` or `extension` is mandatory.
+        type:
+          type: string
+          enum:
+          - PRIMARY
+          - ALTERNATE
+          description: "Calls to type options.\n * `PRIMARY` - Indicates that the given `phoneNumber` or `extension` associated with this rule's containing object is a primary number or extension.\n * `ALTERNATE` - Indicates that the given `phoneNumber` or `extension` associated with this rule's containing object is an alternate number or extension.\n"
+    ListAutoAttendantObject:
+      type: object
+      required:
+      - id
+      - name
+      - locationName
+      - locationId
+      - tollFreeNumber
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+          description: A unique identifier for the auto attendant.
+        name:
+          type: string
+          example: Main Line AA - Test
+          description: Unique name for the auto attendant.
+        locationName:
+          type: string
+          example: Houston
+          description: Name of location for auto attendant.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzI2NDE1MA
+          description: ID of location for auto attendant.
+        phoneNumber:
+          type: string
+          example: '+19705550028'
+          description: Auto attendant phone number.  Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '1001'
+          description: Auto attendant extension.  Either `phoneNumber` or `extension` is mandatory.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12341001'
+          description: Routing prefix + extension of a person or workspace.
+        tollFreeNumber:
+          type: boolean
+          description: Flag to indicate if auto attendant number is toll-free number.
+    KeyConfigurationsObject:
+      type: object
+      required:
+      - key
+      - action
+      properties:
+        key:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '*'
+          - '#'
+          description: Key assigned to specific menu configuration.
+        action:
+          type: string
+          enum:
+          - PLAY_ANNOUNCEMENT
+          - TRANSFER_WITH_PROMPT
+          - TRANSFER_WITHOUT_PROMPT
+          - TRANSFER_TO_OPERATOR
+          - TRANSFER_TO_MAILBOX
+          - NAME_DIALING
+          - EXTENSION_DIALING
+          - REPEAT_MENU
+          - EXIT
+          description: "Action assigned to specific menu key configuration.\n * `PLAY_ANNOUNCEMENT` - Plays a recorded message and then returns to the current Auto Attendant menu.\n * `TRANSFER_WITH_PROMPT` - Transfers the call to the specified number, without playing a transfer prompt.\n * `TRANSFER_WITHOUT_PROMPT` - Plays the message and then transfers the call to the specified number.\n * `TRANSFER_TO_OPERATOR` - Plays the message and then transfers the call to the specified operator number.\n * `TRANSFER_TO_MAILBOX` - Prompts the user for an extension, and transfers the user to voice mailbox of the dialed extension.\n * `NAME_DIALING` - Brings the user into the automated name directory.\n * `EXTENSION_DIALING` - Prompts the user for an extension, and transfers the user.\n * `REPEAT_MENU` - Replays the Auto Attendant greeting.\n * `EXIT` - Terminates the call.\n"
+        description:
+          type: string
+          example: Exit the menu
+          description: The description of each menu key.
+        value:
+          type: string
+          example: '+19705550006'
+          description: Value based on actions.
+        audioAnnouncementFile:
+          $ref: '#/components/schemas/AudioAnnouncementFileObject'
+          description: Pre-configured announcement audio files when PLAY_ANNOUNCEMENT is set.
+    ModifyCallForwardAlwaysSettingObject:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`Always` call forwarding is enabled or disabled.'
+        destination:
+          type: string
+          example: '+19705550006'
+          description: Destination for `Always` call forwarding. Required if field `enabled` is set tu true.
+        ringReminderEnabled:
+          type: boolean
+          description: If `true`, a brief tone will be played on the person's phone when a call has been forwarded.
+        sendToVoicemailEnabled:
+          type: boolean
+          description: Indicates enabled or disabled state of sending incoming calls to voicemail when the destination is an internal phone number and that number has the voicemail service enabled.
+    AutoAttendantCallForwardAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutoAttendantCallForwardAvailableNumberObject'
+          description: Array of phone numbers.
+    ModifyAutoAttendantCallForwardSelectiveRuleObject:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: Test Rule New Name
+          description: Unique name for the selective rule in the auto attendant.
+        enabled:
+          type: boolean
+          example: true
+          description: Reflects if rule is enabled.
+        businessSchedule:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Name of the location's business schedule which determines when this selective call forwarding rule is in effect.
+        holidaySchedule:
+          type: string
+          example: AUTOATTENDANT-HOLIDAY
+          description: Name of the location's holiday schedule which determines when this selective call forwarding rule is in effect.
+        forwardTo:
+          $ref: '#/components/schemas/CallForwardSelectiveForwardToObject'
+          description: Controls what happens when the rule matches including the destination number for the call forwarding.
+        callsFrom:
+          $ref: '#/components/schemas/CallForwardSelectiveCallsFromObject'
+          description: Settings related the rule matching based on incoming caller ID.
+        callsTo:
+          $ref: '#/components/schemas/CallForwardSelectiveCallsToObject'
+          description: Settings related to the rule matching based on the destination number.
+    ModesPatch:
+      type: object
+      required:
+      - normalOperationEnabled
+      - id
+      - forwardTo
+      properties:
+        normalOperationEnabled:
+          type: boolean
+          example: true
+          description: Normal operation is enabled or disabled.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+          description: The ID of the operating mode.
+        forwardTo:
+          type: object
+          required:
+          - selection
+          properties:
+            selection:
+              type: string
+              enum:
+              - FORWARD_TO_DEFAULT_NUMBER
+              - FORWARD_TO_SPECIFIED_NUMBER
+              - DO_NOT_FORWARD
+              description: "The selection for forwarding.\n * `FORWARD_TO_DEFAULT_NUMBER` - When the rule matches, forward to the destination for the hunt group.\n * `FORWARD_TO_SPECIFIED_NUMBER` - When the rule matches, forward to the destination for this rule.\n * `DO_NOT_FORWARD` - When the rule matches, do not forward to another number.\n"
+            destination:
+              type: string
+              example: '+19705550006'
+              description: The destination for forwarding. Required when the selection is set to `FORWARD_TO_SPECIFIED_NUMBER`.
+            destinationVoicemailEnabled:
+              type: boolean
+              description: Sending incoming calls to voicemail is enabled/disabled when the destination is an internal phone number and that number has the voicemail service enabled.
+          description: Forward to settings.
+    CallForwardRulesModifyObject:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+          description: A unique identifier for the auto attendant call forward selective rule.
+        enabled:
+          type: boolean
+          example: true
+          description: Flag to indicate if always call forwarding selective rule criteria is active. If not set, flag will be set to false.
+    ModifyCallForwardSelectiveSettingObject:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`Busy` call forwarding is enable or disabled.'
+        destination:
+          type: string
+          example: '+19705550006'
+          description: Destination for `Busy` call forwarding.
+        ringReminderEnabled:
+          type: boolean
+          description: If `true`, a brief tone will be played on the person's phone when a call has been forwarded.
+        sendToVoicemailEnabled:
+          type: boolean
+          description: Indicates enabled or disabled state of sending incoming calls to voicemail when the destination is an internal phone number and that number has the voicemail service enabled.
+    KeyConfigurationsGetObject:
+      type: object
+      required:
+      - key
+      - action
+      properties:
+        key:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '*'
+          - '#'
+          description: "Key assigned to specific menu configuration.\n * `0` - When the 0 key is pressed, perform the operation specified by the `action` field.\n * `1` - When the 1 key is pressed, perform the operation specified by the `action` field.\n * `2` - When the 2 key is pressed, perform the operation specified by the `action` field.\n * `3` - When the 3 key is pressed, perform the operation specified by the `action` field.\n * `4` - When the 4 key is pressed, perform the operation specified by the `action` field.\n * `5` - When the 5 key is pressed, perform the operation specified by the `action` field.\n * `6` - When the 6 key is pressed, perform the operation specified by the `action` field.\n * `7` - When the 7 key is pressed, perform the operation specified by the `action` field.\n * `8` - When the 8 key is pressed, perform the operation specified by the `action` field.\n * `9` - When the 9 key is pressed, perform the operation specified by the `action` field.\n * `*` - When the * key is pressed, perform the operation specified by the `action` field.\n * `#` - When the # key is pressed, perform the operation specified by the `action` field.\n"
+        action:
+          type: string
+          enum:
+          - PLAY_ANNOUNCEMENT
+          - TRANSFER_WITH_PROMPT
+          - TRANSFER_WITHOUT_PROMPT
+          - TRANSFER_TO_OPERATOR
+          - TRANSFER_TO_MAILBOX
+          - NAME_DIALING
+          - EXTENSION_DIALING
+          - REPEAT_MENU
+          - EXIT
+          description: "Action assigned to specific menu key configuration.\n * `PLAY_ANNOUNCEMENT` - Plays a recorded message and then returns to the current Auto Attendant menu.\n * `TRANSFER_WITH_PROMPT` - Plays the message and then transfers the call to the specified number.\n * `TRANSFER_WITHOUT_PROMPT` - Transfers the call to the specified number, without playing a transfer prompt.\n * `TRANSFER_TO_OPERATOR` - Plays the message and then transfers the call to the specified operator number.\n * `TRANSFER_TO_MAILBOX` - Transfers the call to the configured mailbox, without playing a transfer prompt.\n * `NAME_DIALING` - Brings the user into the automated name directory.\n * `EXTENSION_DIALING` - Prompts the user for an extension, and transfers the user.\n * `REPEAT_MENU` - Replays the Auto Attendant greeting.\n * `EXIT` - Terminates the call.\n"
+        description:
+          type: string
+          example: Exit the menu
+          description: The description of each menu key.
+        value:
+          type: string
+          example: '+19705550006'
+          description: Value based on actions.
+        audioAnnouncementFile:
+          $ref: '#/components/schemas/AudioAnnouncementFileGetObject'
+          description: Pre-configured announcement audio files when PLAY_ANNOUNCEMENT is set.
+    AudioAnnouncementFileGetObject:
+      type: object
+      required:
+      - id
+      - fileName
+      - mediaFileType
+      - level
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+          description: A unique identifier for the announcement.
+        fileName:
+          type: string
+          example: AUDIO_FILE.wav
+          description: Audio announcement file name.
+        mediaFileType:
+          type: string
+          enum:
+          - WAV
+          description: "Audio announcement file type.\n * `WAV` - WAV File Extension.\n"
+        level:
+          type: string
+          enum:
+          - ORGANIZATION
+          - LOCATION
+          description: "Audio announcement file type location.\n * `ORGANIZATION` - Specifies this audio file is configured across the organization.\n * `LOCATION` - Specifies this audio file is configured across the location.\n"
+    CallForwardRulesObject:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfRk9SV0FSRElOR19TRUxFQ1RJVkVfUlVMRS9WR1Z6ZENCU2RXeGw
+          description: Unique ID for the rule.
+        name:
+          type: string
+          example: Test Rule
+          description: Unique name of rule.
+        callsFrom:
+          type: string
+          example: Any private number
+          description: Comma-separated list of incoming call numbers that, when matched, will not be forwarded. A Limit of 12 numbers is allowed. Use `Any private Number` in the comma-separated value to indicate rules that match incoming calls from a private number. Use `Any unavailable number` in the comma-separated value to match incoming calls from an unavailable number.
+        callsTo:
+          type: string
+          example: '+19705550006'
+          description: Comma-separated list of the types of numbers being matched for incoming call destination.
+        forwardTo:
+          type: string
+          example: '+19705550026'
+          description: Number to which calls will be forwarded if the rule is of type "Forward To" and the incoming call is matched.
+        enabled:
+          type: boolean
+          example: true
+          description: Reflects if rule is enabled.
+    CallForwardSelectiveForwardToObject:
+      type: object
+      required:
+      - selection
+      properties:
+        phoneNumber:
+          type: string
+          example: '+19705550028'
+          description: Phone number used if selection is `FORWARD_TO_SPECIFIED_NUMBER`.
+        selection:
+          type: string
+          enum:
+          - FORWARD_TO_DEFAULT_NUMBER
+          - FORWARD_TO_SPECIFIED_NUMBER
+          - DO_NOT_FORWARD
+          description: "Controls what happens when the rule matches.\n * `FORWARD_TO_DEFAULT_NUMBER` - When the rule matches, forward to the destination for the auto attendant.\n * `FORWARD_TO_SPECIFIED_NUMBER` - When the rule matches, forward to the destination for this rule.\n * `DO_NOT_FORWARD` - When the rule matches, do not forward to another number.\n"
+    ModifyAutoAttendantCallForwardSettingsObject:
+      type: object
+      required:
+      - callForwarding
+      properties:
+        callForwarding:
+          $ref: '#/components/schemas/AutoAttendantCallForwardSettingsModifyDetailsObject'
+          description: Settings related to `Always`, `Busy`, and `No Answer` call forwarding.
+    PostAutoAttendantObject:
+      type: object
+      required:
+      - name
+      - businessSchedule
+      - businessHoursMenu
+      - afterHoursMenu
+      properties:
+        name:
+          type: string
+          example: Main Line IA - Test
+          description: Unique name for the auto attendant.
+        phoneNumber:
+          type: string
+          example: '+19705550028'
+          description: Auto attendant phone number.  Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '1001'
+          description: Auto attendant extension.  Either `phoneNumber` or `extension` is mandatory.
+        firstName:
+          type: string
+          example: Main Line AA
+          description: First name defined for an auto attendant. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Test
+          description: Last name defined for an auto attendant. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        alternateNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlternateNumbersObject'
+          description: Alternate numbers defined for the auto attendant.
+        languageCode:
+          type: string
+          example: en_us
+          description: Announcement language code for the auto attendant.
+        businessSchedule:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Business hours defined for the auto attendant.
+        holidaySchedule:
+          type: string
+          example: AUTOATTENDANT-HOLIDAY
+          description: Holiday defined for the auto attendant.
+        extensionDialing:
+          type: string
+          enum:
+          - ENTERPRISE
+          - GROUP
+          description: Extension dialing setting. If the values are not set default will be set as `ENTERPRISE`.
+        nameDialing:
+          type: string
+          enum:
+          - ENTERPRISE
+          - GROUP
+          description: Name dialing setting. If the values are not set default will be set as `ENTERPRISE`.
+        timeZone:
+          type: string
+          example: America/Los_Angeles
+          description: Time zone defined for the auto attendant.
+        businessHoursMenu:
+          $ref: '#/components/schemas/PostHoursMenuObject'
+          description: Business hours menu defined for the auto attendant.
+        afterHoursMenu:
+          $ref: '#/components/schemas/PostHoursMenuObject'
+          description: After hours menu defined for the auto attendant.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObject'
+          description: Settings for the direct line caller ID name to be shown for this auto attendant.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: The name to be used for dial by name functions. Characters of `%`,  `+`, `\`, `"` and Unicode characters are not allowed.
+    PostAutoAttendantCallForwardSelectiveRuleObject:
+      type: object
+      required:
+      - name
+      - forwardTo
+      - callsFrom
+      properties:
+        name:
+          type: string
+          example: Test Rule
+          description: Unique name for the selective rule in the auto attendant.
+        enabled:
+          type: boolean
+          example: true
+          description: Reflects if rule is enabled.
+        businessSchedule:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Name of the location's business schedule which determines when this selective call forwarding rule is in effect.
+        holidaySchedule:
+          type: string
+          example: AUTOATTENDANT-HOLIDAY
+          description: Name of the location's holiday schedule which determines when this selective call forwarding rule is in effect.
+        forwardTo:
+          $ref: '#/components/schemas/CallForwardSelectiveForwardToObject'
+          description: Controls what happens when the rule matches including the destination number for the call forwarding.
+        callsFrom:
+          $ref: '#/components/schemas/CallForwardSelectiveCallsFromObject'
+          description: Settings related to the rule matching based on incoming caller ID.
+        callsTo:
+          $ref: '#/components/schemas/CallForwardSelectiveCallsToObject'
+          description: Settings related to the rule matching based on the destination number.
+    TelephonyType:
+      type: string
+      enum:
+      - PSTN_NUMBER
+      description: ' * `PSTN_NUMBER` - The object is a PSTN number.
+
+        '
+    AutoAttendantPrimaryAvailableNumberObject:
+      type: object
+      required:
+      - phoneNumber
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+    CallForwardSelectiveCallsFromCustomNumbersObject:
+      type: object
+      required:
+      - privateNumberEnabled
+      - unavailableNumberEnabled
+      - numbers
+      properties:
+        privateNumberEnabled:
+          type: boolean
+          example: true
+          description: Match if caller ID indicates the call is from a private number.
+        unavailableNumberEnabled:
+          type: boolean
+          description: Match if callerID is unavailable.
+        numbers:
+          type: array
+          items:
+            type: string
+            example: '["+12147691003", "+12147691004"]'
+          description: Array of number strings to be matched against incoming caller ID.
+    GetAnnouncementFileInfo:
+      type: object
+      required:
+      - id
+      - fileName
+      - fileSize
+      - mediaFileType
+      - level
+      - isTextToSpeech
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9kODc5YWZlZC1jNTRhLTQyOTctOGY0Mi02ZmEyMDJjN2E1M2E
+          description: ID of the announcement.
+        fileName:
+          type: string
+          example: Greeting-1.wav
+          description: Name of greeting file.
+        fileSize:
+          type: string
+          example: '33456'
+          description: Size of greeting file in kilo-bytes.
+        mediaFileType:
+          $ref: '#/components/schemas/mediaType'
+          description: Media file type of the announcement.
+        level:
+          $ref: '#/components/schemas/level'
+          description: Level where the announcement is created.
+        isTextToSpeech:
+          type: boolean
+          description: Indicates whether the announcement is a text-to-speech file.
+    SelectionObject:
+      type: string
+      enum:
+      - CUSTOM_NAME
+      - DISPLAY_NAME
+      description: " * `DISPLAY_NAME` - When this option is selected, `displayName` is to be shown for this workspace.\n * `CUSTOM_NAME` - When this option is selected, `customName` is to be shown for this workspace."
+    AutoAttendantCallForwardAvailableNumberObject:
+      type: object
+      required:
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        extension:
+          type: string
+          example: '1235'
+          description: Extension for a number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+        owner:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODhiZGIwNC1jZjU5LTRjMjMtODQ4OC00NTNhOTE3ZDFlMjk
+              description: Unique identifier of the owner to which the number is assigned.
+            type:
+              $ref: '#/components/schemas/NumberOwnerType'
+              description: Type of the number's owner.
+            firstName:
+              type: string
+              example: Test
+              description: First name of the number's owner. This field will be present only when the owner `type` is `PEOPLE` or `VIRTUAL_LINE`.
+            lastName:
+              type: string
+              example: Person
+              description: Last name of the number's owner. This field will be present only when the owner `type` is `PEOPLE` or `VIRTUAL_LINE`.
+            displayName:
+              type: string
+              example: TestWorkSpace
+              description: Display name of the number's owner.
+    GetCallForwardSelectiveSettingObject:
+      type: object
+      required:
+      - enabled
+      - ringReminderEnabled
+      - sendToVoicemailEnabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`Busy` call forwarding is enabled or disabled.'
+        destination:
+          type: string
+          example: '+19705550006'
+          description: Destination for `Busy` call forwarding.
+        ringReminderEnabled:
+          type: boolean
+          description: If `true`, a brief tone will be played on the person's phone when a call has been forwarded.
+        sendToVoicemailEnabled:
+          type: boolean
+          description: Indicates enabled or disabled state of sending incoming calls to voicemail when the destination is an internal phone number and that number has the voicemail service enabled.
+    ModesGet:
+      type: object
+      required:
+      - normalOperationEnabled
+      - id
+      - name
+      - type
+      - level
+      - forwardTo
+      properties:
+        normalOperationEnabled:
+          type: boolean
+          example: true
+          description: Normal operation is enabled or disabled.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+          description: The ID of the operating mode.
+        name:
+          type: string
+          example: Day
+          description: The name of the operating mode.
+        type:
+          type: string
+          enum:
+          - NONE
+          - SAME_HOURS_DAILY
+          - DIFFERENT_HOURS_DAILY
+          - HOLIDAY
+          description: "The type of the operating mode.\n * `NONE` - The operating mode is not scheduled.\n * `SAME_HOURS_DAILY` - Single time duration for Monday-Friday and single time duration for Saturday-Sunday.\n * `DIFFERENT_HOURS_DAILY` - Individual time durations for every day of the week.\n * `HOLIDAY` - Holidays which have date durations spanning multiple days, as well as an optional yearly recurrence by day or date.\n"
+        level:
+          type: string
+          enum:
+          - LOCATION
+          - ORGANIZATION
+          description: "The level of the operating mode.\n * `LOCATION` - The operating mode is at the location level.\n * `ORGANIZATION` - The operating mode is at the organization level.\n"
+        forwardTo:
+          type: object
+          required:
+          - selection
+          - destination
+          - destinationVoicemailEnabled
+          - defaultDestination
+          - defaultDestinationVoicemailEnabled
+          - defaultForwardToSelection
+          properties:
+            selection:
+              type: string
+              enum:
+              - FORWARD_TO_DEFAULT_NUMBER
+              - FORWARD_TO_SPECIFIED_NUMBER
+              - DO_NOT_FORWARD
+              description: "The selection for forwarding.\n * `FORWARD_TO_DEFAULT_NUMBER` - When the rule matches, the mode's own default forwarding selection is to be applied.\n * `FORWARD_TO_SPECIFIED_NUMBER` - When the rule matches, forward to the destination.\n * `DO_NOT_FORWARD` - When the rule matches, do not forward to another number.\n"
+            destination:
+              type: string
+              example: '+19705550006'
+              description: The destination for forwarding. Required when the selection is set to `FORWARD_TO_SPECIFIED_NUMBER`.
+            destinationVoicemailEnabled:
+              type: boolean
+              description: Sending incoming calls to voicemail is enabled/disabled when the destination is an internal phone number and that number has the voicemail service enabled.
+            defaultDestination:
+              type: string
+              example: '00000'
+              description: The operating mode's destination.
+            defaultDestinationVoicemailEnabled:
+              type: boolean
+              description: The operating mode's destination voicemail enabled.
+            defaultForwardToSelection:
+              type: string
+              enum:
+              - FORWARD_TO_SPECIFIED_NUMBER
+              - DO_NOT_FORWARD
+              description: "The operating mode's forward to selection.\n * `FORWARD_TO_SPECIFIED_NUMBER` - When the rule matches, forward to the destination.\n * `DO_NOT_FORWARD` - When the rule matches, do not forward to another number.\n"
+          description: Forward to settings.
+    level:
+      type: string
+      enum:
+      - ORGANIZATION
+      - LOCATION
+      - ENTITY
+      description: " * `ORGANIZATION` - Organization level.\n * `LOCATION` - Location level.\n * `ENTITY` - Entity level.\n"
+    STATE:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      description: " * `ACTIVE` - Phone number is in the active state.\n * `INACTIVE` - Phone number is in the inactive state.\n"
+    CallTreatmentObject:
+      type: object
+      properties:
+        retryAttemptForNoInput:
+          type: string
+          enum:
+          - NO_REPEAT
+          - ONE_TIME
+          - TWO_TIMES
+          - THREE_TIMES
+          description: "Number of times to repeat the Welcome greeting when the user does not provide an input. By default, NO_REPEAT is set.\n * `NO_REPEAT` - Announcement will not be repeated.\n * `ONE_TIME` - Repeat the announcement once.\n * `TWO_TIMES` - Repeat the announcement twice.\n * `THREE_TIMES` - Repeat the announcement thrice.\n"
+        noInputTimer:
+          type: string
+          example: '10'
+          description: Interval the Auto Attendant service waits before timing out. By default, 10 seconds. Min value is 1, and max value is 60.
+        actionToBePerformed:
+          $ref: '#/components/schemas/ActionToBePerformedObject'
+          description: Action to perform after the retry attempt is reached.
+    HoursMenuObject:
+      type: object
+      required:
+      - greeting
+      - extensionEnabled
+      - keyConfigurations
+      properties:
+        greeting:
+          type: string
+          enum:
+          - DEFAULT
+          - CUSTOM
+          description: Greeting type defined for the auto attendant.
+        extensionEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate if auto attendant extension is enabled or not.
+        audioAnnouncementFile:
+          $ref: '#/components/schemas/AudioAnnouncementFileObject'
+          description: Announcement Audio File details.
+        keyConfigurations:
+          $ref: '#/components/schemas/KeyConfigurationsObject'
+          description: Key configurations defined for the auto attendant.
+        callTreatment:
+          $ref: '#/components/schemas/CallTreatmentObject'
+          description: Call treatment details.
+    DirectLineCallerIdNameObjectForPut:
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/SelectionObject'
+          description: The selection of the direct line caller ID name.
+        customName:
+          type: string
+          example: Hakim Smith
+          description: Sets or clears the custom direct line caller ID name.  To clear the `customName`, the attribute must be set to null or empty string. Required if `selection` is set to `CUSTOM_NAME`.
+      description: Settings for the direct line caller ID name to be shown for this workspace.
+    ActionToBePerformedObject:
+      type: object
+      required:
+      - action
+      - greeting
+      properties:
+        action:
+          type: string
+          enum:
+          - PLAY_MESSAGE_AND_DISCONNECT
+          - TRANSFER_WITHOUT_PROMPT
+          - TRANSFER_WITH_PROMPT
+          - TRANSFER_TO_OPERATOR
+          - TRANSFER_TO_MAILBOX
+          - DISCONNECT
+          description: "Action to perform after the retry attempt is reached.\n * `PLAY_MESSAGE_AND_DISCONNECT` - Plays a recorded message and then disconnects the call.\n * `TRANSFER_WITHOUT_PROMPT` - Transfers the call to the specified number, without playing a transfer prompt.\n * `TRANSFER_WITH_PROMPT` - Plays the message and then transfers the call to the specified number.\n * `TRANSFER_TO_OPERATOR` - Plays the message and then transfers the call to the specified operator number.\n * `TRANSFER_TO_MAILBOX` - Transfers the call to the configured mailbox, without playing a transfer prompt.\n * `DISCONNECT` - Disconnect the call.\n"
+        greeting:
+          type: string
+          enum:
+          - DEFAULT
+          - CUSTOM
+          description: "Greeting type is defined when `action` is set to `PLAY_MESSAGE_AND_DISCONNECT`.\n * `DEFAULT` - Play default greeting.\n * `CUSTOM` - Play custom greeting.\n"
+        audioAnnouncementFile:
+          $ref: '#/components/schemas/AudioAnnouncementFileGetObject'
+          description: Pre-configured announcement audio files when `action` is set to `PLAY_MESSAGE_AND_DISCONNECT` and `greeting` is set to `CUSTOM`.
+        transferCallTo:
+          type: string
+          example: '9878945608'
+          description: Transfer call to the specified number when `action` is set to `TRANSFER_WITH_PROMPT`, `TRANSFER_WITHOUT_PROMPT` and `TRANSFER_TO_OPERATOR` and `TRANSFER_TO_MAILBOX`.
+    HoursMenuGetObject:
+      type: object
+      required:
+      - greeting
+      - extensionEnabled
+      - keyConfigurations
+      properties:
+        greeting:
+          type: string
+          enum:
+          - DEFAULT
+          - CUSTOM
+          description: "Greeting type defined for the auto attendant.\n * `DEFAULT` - Play default greeting.\n * `CUSTOM` - Play custom greeting.\n"
+        extensionEnabled:
+          type: boolean
+          example: true
+          description: If `true`, extension dialing without requiring a menu item is enabled.
+        audioAnnouncementFile:
+          $ref: '#/components/schemas/AudioAnnouncementFileGetObject'
+          description: Announcement Audio File details.
+        keyConfigurations:
+          $ref: '#/components/schemas/KeyConfigurationsGetObject'
+          description: Key configurations defined for the auto attendant.
+        callTreatment:
+          $ref: '#/components/schemas/CallTreatmentObject'
+          description: Call treatment details.
+    AutoAttendantCallForwardSettingsDetailsObject:
+      type: object
+      required:
+      - always
+      - selective
+      - rules
+      properties:
+        always:
+          $ref: '#/components/schemas/GetCallForwardAlwaysSettingObject'
+          description: Settings for forwarding all incoming calls to the destination you choose.
+        selective:
+          $ref: '#/components/schemas/GetCallForwardSelectiveSettingObject'
+          description: Selectively forward calls to a designated number, depending on criteria rules. You'll need to have at least one rule for forwarding applied for call forwarding to be active.
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallForwardRulesObject'
+          description: Rules for selectively forwarding calls.
+        operatingModes:
+          type: object
+          required:
+          - enabled
+          - currentOperatingModeId
+          - exceptionType
+          properties:
+            enabled:
+              type: boolean
+              example: true
+              description: Operating modes are enabled or disabled.
+            currentOperatingModeId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL09QRVJBVElOR19NT0RFL2JiOTc1OTcxLTBjZWYtNDdhNi05Yzc5LTliZWFjY2IwYjg4Mg
+              description: The ID of the current operating mode.
+            exceptionType:
+              type: string
+              enum:
+              - MANUAL_SWITCH_BACK
+              - AUTOMATIC_SWITCH_BACK_EARLY_START
+              - AUTOMATIC_SWITCH_BACK_EXTENSION
+              - AUTOMATIC_SWITCH_BACK_STANDARD
+              description: "The exception type.\n * `MANUAL_SWITCH_BACK` - The mode was switched to or extended by the user for manual switch back and runs as an exception until the user manual switches the feature back to normal operation or a different mode.\n * `AUTOMATIC_SWITCH_BACK_EARLY_START` - The mode was switched to by the user before its start time and runs as an exception until its end time is reached at which point it automatically switches the feature back to normal operation.\n * `AUTOMATIC_SWITCH_BACK_EXTENSION` - The current mode was extended by the user before its end time and runs as an exception until the extension end time (mode's end time + extension of up to 12 hours) is reached at which point it automatically switches the feature back to normal operation.\n * `AUTOMATIC_SWITCH_BACK_STANDARD` - The mode will remain the current operating mode for the feature until its normal end time is reached.\n"
+            modes:
+              type: array
+              items:
+                $ref: '#/components/schemas/ModesGet'
+              description: Operating modes.
+          description: Settings related to operating modes.
+    ModifyAutoAttendantObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Main Line IA - Test
+          description: Unique name for the auto attendant.
+        phoneNumber:
+          type: string
+          example: '+19705550028'
+          description: Auto attendant phone number.  Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '1001'
+          description: Auto attendant extension.  Either `phoneNumber` or `extension` is mandatory.
+        firstName:
+          type: string
+          example: Main Line AA
+          description: First name defined for an auto attendant. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Test
+          description: Last name defined for an auto attendant. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        alternateNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlternateNumbersObject'
+          description: Alternate numbers defined for the auto attendant.
+        languageCode:
+          type: string
+          example: en_us
+          description: Announcement language code for the auto attendant.
+        businessSchedule:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Business hours defined for the auto attendant.
+        holidaySchedule:
+          type: string
+          example: AUTOATTENDANT-HOLIDAY
+          description: Holiday defined for the auto attendant.
+        extensionDialing:
+          type: string
+          enum:
+          - ENTERPRISE
+          - GROUP
+          description: Extension dialing setting. If the values are not set default will be set as `ENTERPRISE`.
+        nameDialing:
+          type: string
+          enum:
+          - ENTERPRISE
+          - GROUP
+          description: Name dialing setting. If the values are not set default will be set as `ENTERPRISE`.
+        timeZone:
+          type: string
+          example: America/Los_Angeles
+          description: Time zone defined for the auto attendant.
+        businessHoursMenu:
+          $ref: '#/components/schemas/HoursMenuObject'
+          description: Business hours menu defined for the auto attendant.
+        afterHoursMenu:
+          $ref: '#/components/schemas/HoursMenuObject'
+          description: After hours menu defined for the auto attendant.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObjectForPut'
+          description: Settings for the direct line caller ID name to be shown for this auto attendant.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: Sets or clears the name to be used for dial by name functions. To clear the `dialByName`, the attribute must be set to null or empty string. Characters of `%`,  `+`, `\`, `"` and Unicode characters are not allowed.
+    AutoAttendantCallForwardSettingsModifyDetailsObject:
+      type: object
+      properties:
+        always:
+          $ref: '#/components/schemas/ModifyCallForwardAlwaysSettingObject'
+          description: Settings for forwarding all incoming calls to the destination you choose.
+        selective:
+          $ref: '#/components/schemas/ModifyCallForwardSelectiveSettingObject'
+          description: Selectively forward calls to a designated number, depending on criteria rules. You'll need to have at least one rule for forwarding applied for call forwarding to be active.
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallForwardRulesModifyObject'
+          description: Rules for selectively forwarding calls. (Rules which are omitted in the list will not be deleted.)
+        operatingModes:
+          type: object
+          description: Configuration for forwarding via Operating modes (Schedule Based Routing).
+          required:
+          - enabled
+          - modes
+          properties:
+            enabled:
+              type: boolean
+              description: Indicates whether operating modes forwarding is enabled.
+            modes:
+              type: array
+              items:
+                $ref: '#/components/schemas/ModesPatch'
+              description: List of operating mode configurations.
+    GetAutoAttendantObject:
+      type: object
+      required:
+      - id
+      - name
+      - enabled
+      - tollFreeNumber
+      - businessSchedule
+      - extensionDialing
+      - nameDialing
+      - businessHoursMenu
+      - afterHoursMenu
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FVVE9fQVRURU5EQU5UL2QzVjBPWFIxWjJkM2FFQm1iR1Y0TWk1amFYTmpieTVqYjIw
+          description: A unique identifier for the auto attendant.
+        name:
+          type: string
+          example: Main Line AA - Test
+          description: Unique name for the auto attendant.
+        enabled:
+          type: boolean
+          example: true
+          description: If `true` auto attendant is enabled.
+        phoneNumber:
+          type: string
+          example: '+19705550028'
+          description: Auto attendant phone number.  Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '1001'
+          description: Auto attendant extension.  Either `phoneNumber` or `extension` is mandatory.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12341001'
+          description: Routing prefix + extension of a person or workspace.
+        tollFreeNumber:
+          type: boolean
+          description: Flag to indicate if auto attendant number is toll-free number.
+        firstName:
+          type: string
+          example: Main Line AA
+          description: First name defined for an auto attendant. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        lastName:
+          type: string
+          example: Test
+          description: Last name defined for an auto attendant. This field has been deprecated. Please use `directLineCallerIdName` and `dialByName` instead.
+        alternateNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlternateNumbersObject'
+          description: Alternate numbers defined for the auto attendant.
+        language:
+          type: string
+          example: English
+          description: Language for the auto attendant.
+        languageCode:
+          type: string
+          example: en_us
+          description: Language code for the auto attendant.
+        businessSchedule:
+          type: string
+          example: AUTOATTENDANT-BUSINESS-HOURS
+          description: Business hours defined for the auto attendant.
+        holidaySchedule:
+          type: string
+          example: AUTOATTENDANT-HOLIDAY
+          description: Holiday defined for the auto attendant.
+        extensionDialing:
+          type: string
+          enum:
+          - ENTERPRISE
+          - GROUP
+          description: "Extension dialing setting. If the values are not set default will be set as `ENTERPRISE`.\n * `ENTERPRISE` - Enterprise (organization) level extension dialing.\n * `GROUP` - Group (location) level extension dialing.\n"
+        nameDialing:
+          type: string
+          enum:
+          - ENTERPRISE
+          - GROUP
+          description: "Name dialing setting. If the values are not set default will be set as `ENTERPRISE`.\n * `ENTERPRISE` - Enterprise (organization) level name dialing.\n * `GROUP` - Group (location) level name dialing.\n"
+        timeZone:
+          type: string
+          example: America/Los_Angeles
+          description: Time zone defined for the auto attendant.
+        businessHoursMenu:
+          $ref: '#/components/schemas/HoursMenuGetObject'
+          description: Business hours menu defined for the auto attendant.
+        afterHoursMenu:
+          $ref: '#/components/schemas/HoursMenuGetObject'
+          description: After hours menu defined for the auto attendant.
+        directLineCallerIdName:
+          $ref: '#/components/schemas/DirectLineCallerIdNameObject'
+          description: Settings for the direct line caller ID name to be shown for this auto attendant.
+        dialByName:
+          type: string
+          example: Hakim Smith
+          description: The name to be used for dial by name functions.
+    AutoAttendantPrimaryAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutoAttendantPrimaryAvailableNumberObject'
+          description: Array of phone numbers.
+    PostHoursMenuObject:
+      type: object
+      required:
+      - greeting
+      - extensionEnabled
+      - keyConfigurations
+      properties:
+        greeting:
+          type: string
+          enum:
+          - DEFAULT
+          - CUSTOM
+          description: Greeting type defined for the auto attendant.
+        extensionEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate if auto attendant extension is enabled or not.
+        audioAnnouncementFile:
+          $ref: '#/components/schemas/AudioAnnouncementFileObject'
+          description: Announcement Audio File details.
+        keyConfigurations:
+          $ref: '#/components/schemas/KeyConfigurationsObject'
+          description: Key configurations defined for the auto attendant.
+        callTreatment:
+          $ref: '#/components/schemas/CallTreatmentObject'
+          description: Call treatment details.
+    GetCallForwardAlwaysSettingObject:
+      type: object
+      required:
+      - enabled
+      - ringReminderEnabled
+      - sendToVoicemailEnabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`Always` call forwarding is enabled or disabled.'
+        destination:
+          type: string
+          example: '+19705550006'
+          description: Destination for `Always` call forwarding. Required if field `enabled` is set to `true`.
+        ringReminderEnabled:
+          type: boolean
+          description: If `true`, a brief tone will be played on the person's phone when a call has been forwarded.
+        sendToVoicemailEnabled:
+          type: boolean
+          description: Indicates enabled or disabled state of sending incoming calls to voicemail when the destination is an internal phone number and that number has the voicemail service enabled.
+    mediaType:
+      type: string
+      enum:
+      - WMA
+      - WAV
+      - GP
+      - MOV
+      description: " * `WMA` - WMA File Extension.\n * `WAV` - WAV File Extension.\n * `GP` - 3GP File Extension.\n * `MOV` - MOV File Extension.\n"
+    AutoAttendantAlternateAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutoAttendantAlternateAvailableNumberObject'
+          description: Array of phone numbers.
+    AlternateNumbersObject:
+      type: object
+      required:
+      - phoneNumber
+      - ringPattern
+      properties:
+        phoneNumber:
+          type: string
+          example: '+19705550028'
+          description: Phone number defined as alternate number.
+        tollFreeNumber:
+          type: boolean
+          description: Flag to indicate if auto attendant number is toll-free number.
+        ringPattern:
+          type: string
+          enum:
+          - NORMAL
+          - LONG_LONG
+          - SHORT_SHORT_LONG
+          - SHORT_LONG_SHORT
+          description: "Ring pattern that will be used for the alternate number.\n * `NORMAL` - Normal incoming ring pattern.\n * `LONG_LONG` - Incoming ring pattern of two long rings.\n * `SHORT_SHORT_LONG` - Incoming ring pattern of two short rings, followed by a short ring.\n * `SHORT_LONG_SHORT` - Incoming ring pattern of a short ring, followed by a long ring, followed by a short ring.\n"
+    CallForwardSelectiveCallsFromObject:
+      type: object
+      required:
+      - selection
+      properties:
+        selection:
+          type: string
+          enum:
+          - ANY
+          - CUSTOM
+          description: "If `CUSTOM`, use `customNumbers` to specify which incoming caller ID values cause this rule to match. `ANY` means any incoming call matches assuming the rule is in effect based on the associated schedules.\n * `ANY` - Rule matches for calls from any number.\n * `CUSTOM` - Rule matches based on the numbers and options in customNumbers.\n"
+        customNumbers:
+          $ref: '#/components/schemas/CallForwardSelectiveCallsFromCustomNumbersObject'
+          description: Custom rules for matching incoming caller ID information. Mandatory if the selection option is set to `CUSTOM`.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

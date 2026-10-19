@@ -1,0 +1,539 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Partner Reports/Templates API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Partner Reports/Templates
+paths:
+  /partner/reports:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportCollectionResponse'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Reports
+      operationId: listReports
+      description: 'Lists all reports previously generated from a given region. Use query parameters to filter the response. The parameters are optional.
+
+
+        To access this endpoint, you must use an administrator token with `spark-admin:reports_read` and `identity:people_read` scopes.
+
+
+        CSV reports for Webex suite services are only supported for organizations based in one region per API request. Organizations based in a different region will require a separate request with region specified.
+
+
+        When no region is specified, the request defaults to Partner organization''s home region.
+
+
+        Reports are usually provided in zip format. A content-header application/zip or application/octet-stream does indicate the zip format. There is usually no .zip file extension.'
+      tags:
+      - Partner Reports/Templates
+      parameters:
+      - name: service
+        in: query
+        description: List reports which use this service.
+        example: Webex
+        schema:
+          type: string
+      - name: templateId
+        in: query
+        description: List reports with this report template ID.
+        example: 5
+        schema:
+          type: number
+      - name: from
+        in: query
+        description: List reports that were created on or after this date.
+        example: '2024-05-01'
+        schema:
+          type: string
+      - name: to
+        in: query
+        description: List reports that were created before this date.
+        example: '2024-05-05'
+        schema:
+          type: string
+      - name: regionId
+        in: query
+        description: Data in the report will be from organizations in this region, for example, US, CA, or EU.
+        example: US
+        schema:
+          type: string
+      - name: onBehalfOfSubPartnerOrgId
+        in: query
+        description: The encoded organization ID for the sub partner.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wZTE4MmUxNS05ZmNhLTQ0NzgtYmEzOC1jNGFiMmUyN2FlZDA=
+        schema:
+          type: string
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reportId:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mYzhjMWFhMS00OTM5LTQ2NjEtODAwMy1hYWE0MzFmZWM0ZmE
+                    description: The unique identifier for the report.
+                  createdTime:
+                    type: string
+                    example: '2024-05-27 17:02:43'
+                    description: The time of report creation.
+              example:
+                reportId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9SRVBPUlQvYWQwZDIwNTc1ZGEwNDVhNDhmYWQ0N2Q5NzRhYjQxZjI
+                createdTime: '2024-05-27 17:02:43'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Report
+      operationId: createAReport
+      description: 'Create a new report. A new report can be created using `templateId` available from the _List Report Templates_ API. For each `templateId`, there are a set of validation rules that need to be followed.
+
+
+        The `templateId` parameter is a number. However, it is a limitation of developer.webex.com platform that it is passed as a string when you try to test the API from here.
+
+
+        To access this endpoint, you must use an administrator token with `spark-admin:reports_write` and `identity:people_read` scopes.
+
+
+        **Notes**:
+
+
+        CSV reports for Webex suite services are only created for organizations in the specified region. Organizations based in a different region will require a separate request with region specified.
+
+
+        When no region is specified, the request defaults to Partner organization''s home region. A request against a region where there are no organizations will return blank CSV files.'
+      tags:
+      - Partner Reports/Templates
+      parameters:
+      - name: onBehalfOfSubPartnerOrgId
+        in: query
+        description: The encoded organization ID for the sub partner.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wZTE4MmUxNS05ZmNhLTQ0NzgtYmEzOC1jNGFiMmUyN2FlZDA=
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              templateId: 5
+              startDate: '2024-05-01'
+              endDate: '2024-05-05'
+              regionId: US
+            schema:
+              type: object
+              required:
+              - templateId
+              - startDate
+              - endDate
+              properties:
+                templateId:
+                  type: number
+                  example: 5
+                  description: Unique ID representing valid report templates.
+                startDate:
+                  type: string
+                  example: '2024-05-01'
+                  description: Data in the report will be from this date onwards.
+                endDate:
+                  type: string
+                  example: '2024-05-05'
+                  description: Data in the report will be until this date.
+                regionId:
+                  type: string
+                  example: US
+                  description: Data in the report will be from organizations in this region, for example, US, CA, or EU.
+  /partner/reports/{reportId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                reportId: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9SRVBPUlQvYWQwZDIwNTc1ZGEwNDVhNDhmYWQ0N2Q5NzRhYjQxZjI
+                templateId: 5
+                title: Calling Usage Reports
+                service: Teams
+                startDate: '2024-02-23'
+                endDate: '2024-03-24'
+                regionId: US
+                createdTime: '2024-03-24 17:13:39'
+                status: done
+                fileName: Calling Usage_12345_Org_2024-05-01_2024-05-05.csv
+                fileSize: 0
+                checksum: '12345'
+                downloadURL: https://downloadservicebts.webex.com/api?reportId=Y2lzY29zcGFyazovL3VzL1JFUE9SVC9hZDBkMjA1NzVkYTA0NWE0OGZhZDQ3ZDk3NGFiNDFmMg
+                downloadUrlExpiryTime: '3600'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Report Details
+      operationId: getReportDetails
+      description: 'Shows details for a report by report ID.
+
+
+        Specify the report ID in the `reportId` parameter in the URI.
+
+
+        To access this endpoint, you must use an administrator token with `spark-admin:reports_read` and `identity:people_read` scopes.
+
+
+        **Notes**:
+
+
+        Reports are usually provided in zip format. A content-header application/zip or application/octet-stream does indicate the zip format. There is usually no .zip file extension.'
+      tags:
+      - Partner Reports/Templates
+      parameters:
+      - name: reportId
+        in: path
+        description: The unique identifier for the report.
+        required: true
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9SRVBPUlQvYWQwZDIwNTc1ZGEwNDVhNDhmYWQ0N2Q5NzRhYjQxZjI
+        schema:
+          type: string
+      - name: onBehalfOfSubPartnerOrgId
+        in: query
+        description: The encoded organization ID for the sub partner.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wZTE4MmUxNS05ZmNhLTQ0NzgtYmEzOC1jNGFiMmUyN2FlZDA=
+        schema:
+          type: string
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Report
+      operationId: deleteAReport
+      description: 'Remove a report from the system.
+
+
+        Specify the report ID in the `reportId` parameter in the URI
+
+
+        To access this endpoint, you must use an administrator token with `spark-admin:reports_write` scope.'
+      tags:
+      - Partner Reports/Templates
+      parameters:
+      - name: reportId
+        in: path
+        description: The unique identifier for the report.
+        required: true
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9SRVBPUlQvYWQwZDIwNTc1ZGEwNDVhNDhmYWQ0N2Q5NzRhYjQxZjI
+        schema:
+          type: string
+      - name: onBehalfOfSubPartnerOrgId
+        in: query
+        description: The encoded organization ID for the sub partner.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wZTE4MmUxNS05ZmNhLTQ0NzgtYmEzOC1jNGFiMmUyN2FlZDA=
+        schema:
+          type: string
+  /partner/reports/templates:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateCollectionResponse'
+              example:
+              - templateId: 130
+                title: Calling Usage
+                service: Teams
+                category: Partner
+                maxDays: 31
+                dataStartDate: '2024-01-01'
+                dataEndDate: '2024-01-31'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Report Templates
+      operationId: listReportTemplates
+      description: 'List report templates. Report templates are available for use with the Partner Reports API.
+
+
+        To access this endpoint, you must use an administrator token with `spark-admin:reports_read` and `identity:people_read` scopes. The authenticated user must be a Partner full administrator or Partner read-only administrator of the organization.'
+      tags:
+      - Partner Reports/Templates
+      parameters:
+      - name: onBehalfOfSubPartnerOrgId
+        in: query
+        description: The encoded organization ID for the sub partner.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wZTE4MmUxNS05ZmNhLTQ0NzgtYmEzOC1jNGFiMmUyN2FlZDA=
+        schema:
+          type: string
+components:
+  schemas:
+    TemplateCollectionResponse:
+      type: object
+      properties:
+        Template Collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+          description: An array of template objects.
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mYzhjMWFhMS00OTM5LTQ2NjEtODAwMy1hYWE0MzFmZWM0ZmE
+          description: Unique identifier for the report.
+        title:
+          type: string
+          example: Bots Activity
+          description: Name of the template to which this report belongs.
+        service:
+          type: string
+          example: Teams
+          description: The service to which the report belongs.
+        startDate:
+          type: string
+          example: '2020-02-23'
+          description: The data in this report belongs to dates greater than or equal to this.
+        endDate:
+          type: string
+          example: '2020-03-24'
+          description: The data in this report belongs to dates smaller than or equal to this.
+        siteList:
+          type: string
+          example: cisco.webex.com
+          description: The site to which this report belongs to. This only exists if the report belongs to service `Webex`.
+        timeZone:
+          type: string
+          example: Asia/Shanghai
+          description: Time zone used for report date and time values. Use an IANA time zone name. The default value is `UTC` when not specified.
+        created:
+          type: string
+          example: '2020-03-24 17:13:39'
+          description: Time of creation for this report.
+        createdBy:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mYzhjMWFhMS00OTM5LTQ2NjEtODAwMy1hYWE0MzFmZWM0ZmE
+          description: The person who created the report.
+        scheduledFrom:
+          type: string
+          example: API
+          description: Whether this report was scheduled from API or Control Hub.
+        status:
+          type: string
+          example: done
+          description: Completion status of this report.
+        downloadURL:
+          type: string
+          example: https://downloadservicebts.webex.com/api?reportId=Y2lzY29zcGFyazovL3VzL1JFUE9SVC9hZDBkMjA1NzVkYTA0NWE0OGZhZDQ3ZDk3NGFiNDFmMg
+          description: The link from which the report can be downloaded.
+    ReportCollectionResponse:
+      type: object
+      properties:
+        Report Attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+          description: An array of report objects.
+    Template:
+      type: object
+      properties:
+        templateId:
+          type: string
+          example: '130'
+          description: Unique identifier representing a report.
+        title:
+          type: string
+          example: Calling Usage
+          description: Name of the template.
+        service:
+          type: string
+          example: Teams
+          description: The service to which the report belongs.
+        category:
+          type: string
+          example: Partner
+          description: Generated reports belong to which category.
+        maxDays:
+          type: number
+          example: 31
+          description: Maximum date range for reports belonging to this template.
+        dataStartDate:
+          type: string
+          example: '2024-01-01'
+          description: Start date of the data in the reports belonging to this template.
+        dataEndDate:
+          type: string
+          example: '2024-01-31'
+          description: End date of the data in the reports belonging to this template.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

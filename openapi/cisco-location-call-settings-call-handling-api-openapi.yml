@@ -1,0 +1,1979 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Location Call Settings: Call Handling…'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Location Call Settings: Call Handling'
+paths:
+  /telephony/config/locations/{locationId}/actions/generatePassword/invoke:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratePasswordPostResponse'
+              example:
+                exampleSipPassword: xyz123!
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Generate example password for Location
+      operationId: GenerateExamplePasswordForLocation
+      description: 'Generates an example password using the effective password settings for the location. If you don''t specify anything in the `generate` field or don''t provide a request body, then you will receive a SIP password by default.
+
+
+        Used while creating a trunk and shouldn''t be used anywhere else.
+
+
+        Generating an example password requires a full or write-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location for which example password has to be generated.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzFkNjAzZTljLWJmM2QtNDA5OS05MGFiLTkyZWFlZWE3MjEzNw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Organization to which the location belongs.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              generate:
+              - sip
+            schema:
+              type: object
+              properties:
+                generate:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PasswordGenerate'
+                  description: password settings array.
+      x-operation-id-source: normalized
+      x-operation-id-original: Generate example password for Location
+  /telephony/config/locations/{locationId}/internalDialing:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalDialingGet'
+              example:
+                enableUnknownExtensionRoutePolicy: true
+                unknownExtensionRouteIdentity:
+                  id: Y2lzY29zcGFyazovL3VzL1JPVVRFX0dST1VQLzA1OWEyNzNlLWJiYjAtMTFlYy04NDIyLTAyNDJhYzEyMDAwMg
+                  name: route_identity_name
+                  type: ROUTE_GROUP
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the Internal Dialing configuration for a location
+      operationId: ReadTheInternalDialingConfigurationForALocation
+      description: 'Get current configuration for routing unknown extensions to the Premises as internal calls
+
+
+        If some users in a location are registered to a PBX, retrieve the setting to route unknown extensions (digits that match the extension length) to the PBX.
+
+
+        Retrieving the internal dialing configuration requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: location for which internal calling configuration is being requested
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyOTA4Mg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List route identities for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the Internal Dialing configuration for a location
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify the Internal Dialing configuration for a location
+      operationId: ModifyTheInternalDialingConfigurationForALocation
+      description: 'Modify current configuration for routing unknown extensions to the premise as internal calls
+
+
+        If some users in a location are registered to a PBX, enable the setting to route unknown extensions (digits that match the extension length) to the PBX.
+
+
+        Editing the internal dialing configuration requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: location for which internal calling configuration is being requested
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzUyOTA4Mg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List route identities for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalDialingPut'
+      x-operation-id-source: normalized
+      x-operation-id-original: Modify the Internal Dialing configuration for a location
+  /telephony/config/locations/{locationId}/intercept:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocationInterceptObject'
+              example:
+                enabled: true
+                incoming:
+                  type: INTERCEPT_ALL
+                  voicemailEnabled: false
+                  announcements:
+                    greeting: DEFAULT
+                    fileName: audiofile.wav
+                    newNumber:
+                      enabled: true
+                      destination: '2147691003'
+                    zeroTransfer:
+                      enabled: true
+                      destination: '2147691005'
+                outgoing:
+                  type: ALLOW_LOCAL_ONLY
+                  transferEnabled: true
+                  destination: '2147691007'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Location Intercept
+      operationId: GetLocationIntercept
+      description: 'Retrieve intercept location details for a customer location.
+
+
+        Intercept incoming or outgoing calls for persons in your organization. If this is enabled, calls are either routed to a designated number the person chooses, or to the person''s voicemail.
+
+
+        Retrieving intercept location details requires a full, user or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve intercept details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve intercept location details for a customer location.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Location Intercept
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Put Location Intercept
+      operationId: PutLocationIntercept
+      description: 'Modifies the intercept location details for a customer location.
+
+
+        Intercept incoming or outgoing calls for users in your organization. If this is enabled, calls are either routed to a designated number the user chooses, or to the user''s voicemail.
+
+
+        Modifying the intercept location details requires a full, user administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Modifies the intercept details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Modifies the intercept location details for a customer location.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: true
+              incoming:
+                type: INTERCEPT_ALL
+                voicemailEnabled: false
+                announcements:
+                  greeting: DEFAULT
+                  fileName: audiofile.wav
+                  newNumber:
+                    enabled: true
+                    destination: '2147691003'
+                  zeroTransfer:
+                    enabled: true
+                    destination: '2147691005'
+              outgoing:
+                type: ALLOW_LOCAL_ONLY
+                transferEnabled: true
+                destination: '2147691007'
+            schema:
+              $ref: '#/components/schemas/PutLocationInterceptObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Put Location Intercept
+  /telephony/config/locations/{locationId}/outgoingPermission:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  callingPermissions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CallingPermissionObject'
+                    description: Array of calling permissions.
+              example:
+                callingPermissions:
+                - callType: INTERNAL_CALL
+                  action: ALLOW
+                  transferEnabled: true
+                  isCallTypeRestrictionEnabled: false
+                - callType: TOLL_FREE
+                  action: ALLOW
+                  transferEnabled: true
+                  isCallTypeRestrictionEnabled: false
+                - callType: INTERNATIONAL
+                  action: BLOCK
+                  transferEnabled: false
+                  isCallTypeRestrictionEnabled: true
+                - callType: OPERATOR_ASSISTED
+                  action: ALLOW
+                  transferEnabled: true
+                  isCallTypeRestrictionEnabled: false
+                - callType: CHARGEABLE_DIRECTORY_ASSISTED
+                  action: BLOCK
+                  transferEnabled: true
+                  isCallTypeRestrictionEnabled: false
+                - callType: SPECIAL_SERVICES_I
+                  action: ALLOW
+                  transferEnabled: true
+                  isCallTypeRestrictionEnabled: false
+                - callType: SPECIAL_SERVICES_II
+                  action: ALLOW
+                  transferEnabled: true
+                  isCallTypeRestrictionEnabled: false
+                - callType: PREMIUM_SERVICES_I
+                  action: BLOCK
+                  transferEnabled: false
+                  isCallTypeRestrictionEnabled: true
+                - callType: PREMIUM_SERVICES_II
+                  action: BLOCK
+                  transferEnabled: false
+                  isCallTypeRestrictionEnabled: true
+                - callType: NATIONAL
+                  action: ALLOW
+                  transferEnabled: true
+                  isCallTypeRestrictionEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Location Outgoing Permission
+      operationId: GetLocationOutgoingPermission
+      description: 'Retrieve the location''s outgoing call settings.
+
+
+        A location''s outgoing call settings allow you to determine the types of calls the people/workspaces at the location are allowed to make, as well as configure the default calling permission for each call type at the location.
+
+
+        Retrieving a location''s outgoing call settings requires a full, user or read-only administrator or location administrator auth token with a scope of spark-admin:telephony_config_read.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve outgoing call settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve outgoing call settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Location Outgoing Permission
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Location Outgoing Permission
+      operationId: UpdateLocationOutgoingPermission
+      description: 'Update the location''s outgoing call settings.
+
+
+        Location''s outgoing call settings allows you to determine the types of calls the people/workspaces at this location are allowed to make and configure the default calling permission for each call type at a location.
+
+
+        Updating a location''s outgoing call settings requires a full administrator or location administrator auth token with a scope of spark-admin:telephony_config_write.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Update outgoing call settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update outgoing call settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              callingPermissions:
+              - callType: INTERNAL_CALL
+                action: ALLOW
+                transferEnabled: true
+              - callType: NATIONAL
+                action: ALLOW
+                transferEnabled: true
+            schema:
+              type: object
+              properties:
+                callingPermissions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CallingPermissionPatchObject'
+                  description: Array specifying the subset of calling permissions to be updated.
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Location Outgoing Permission
+  /telephony/config/locations/{locationId}/outgoingPermission/autoTransferNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAutoTransferNumberObject'
+              example:
+                autoTransferNumber1: '1234456789'
+                autoTransferNumber2: '2234567891'
+                autoTransferNumber3: '3234567891'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Outgoing Permission Auto Transfer Number
+      operationId: GetOutgoingPermissionAutoTransferNumber
+      description: 'Get the transfer numbers for the outbound permission in a location.
+
+
+        Outbound permissions can specify which transfer number an outbound call should transfer to via the `action` field.
+
+
+        Retrieving an auto transfer number requires a full, user or read-only administrator or location administrator auth token with a scope of spark-admin:telephony_config_read.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve auto transfer number for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4NjczZDIwLWM0M2EtNDQ5Ni1iYWIxLTNiMjhhZGJjMjViYQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve auto transfer number for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Outgoing Permission Auto Transfer Number
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Put Outgoing Permission Auto Transfer Number
+      operationId: PutOutgoingPermissionAutoTransferNumber
+      description: 'Modifies the transfer numbers for the outbound permission in a location.
+
+
+        Outbound permissions can specify which transfer number an outbound call should transfer to via the `action` field.
+
+
+        Updating auto transfer number requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Updating auto transfer number for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4NjczZDIwLWM0M2EtNDQ5Ni1iYWIxLTNiMjhhZGJjMjViYQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Updating auto transfer number for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              autoTransferNumber1: '1234456789'
+              autoTransferNumber2: '2234567891'
+              autoTransferNumber3: '3234567891'
+            schema:
+              $ref: '#/components/schemas/PutAutoTransferNumberObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Put Outgoing Permission Auto Transfer Number
+  /telephony/config/locations/{locationId}/outgoingPermission/accessCodes:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocationAccessCodeObject'
+              example:
+                accessCodes:
+                - code: '123'
+                  description: Main Access Code
+                - code: '456'
+                  description: Alternate Access Code
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Outgoing Permission Location Access Code
+      operationId: GetOutgoingPermissionLocationAccessCode
+      description: 'Retrieve access codes details for a customer location.
+
+
+        Use Access Codes to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Retrieving access codes details requires a full, user or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve access codes details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve access codes details for a customer location.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Outgoing Permission Location Access Code
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create Outgoing Permission a new access code for a customer location
+      operationId: CreateOutgoingPermissionANewAccessCodeForACustomerLocation
+      description: 'Add a new access code for the given location for a customer.
+
+
+        Use Access Codes to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Creating an access code for the given location requires a full or user administrator or location administrator auth token with a scope of spark-admin:telephony_config_write.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Add new access code for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Add new access code for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              accessCodes:
+              - code: '1357'
+                description: Main Access Code
+              - code: '2468'
+                description: Alternate Access Code
+            schema:
+              $ref: '#/components/schemas/PostLocationAccessCodeObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Outgoing Permission a new access code for a customer location
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete Outgoing Permission Access Code Location
+      operationId: DeleteOutgoingPermissionAccessCodeLocation
+      description: 'Deletes the access code details for a particular location for a customer.
+
+
+        Use Access Codes to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Modifying the access code location details requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Deletes the access code details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Deletes the access code details for a customer location.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              deleteCodes:
+              - '1234'
+              - '5637'
+            schema:
+              $ref: '#/components/schemas/PutAccessCodeLocationObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete Outgoing Permission Access Code Location
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete all Outgoing Permission Access Code for a Location
+      operationId: DeleteAllOutgoingPermissionAccessCodeForALocation
+      description: 'Deletes all the access codes for a particular location for a customer.
+
+
+        Use Access Codes to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Deleting the access codes requires a full or user administrator or location administrator auth token with the `spark-admin:telephony_config_write` scope.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Deletes all the access codes for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Deletes the access codes for a customer location.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete all Outgoing Permission Access Code for a Location
+  /telephony/config/locations/{locationId}/outgoingPermission/digitPatterns:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationOutgoingPermissionDigitPatternGetListObject'
+              example:
+                digitPatterns:
+                - id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+                  name: DigitPattern1
+                  pattern: 2XXXX
+                  action: ALLOW
+                  transferEnabled: false
+                - id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V5
+                  name: DigitPattern2
+                  pattern: 1XXXX
+                  action: ALLOW
+                  transferEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Outgoing Permission Digit Pattern for a Location
+      operationId: GetOutgoingPermissionDigitPatternForALocation
+      description: 'Get the digit patterns for the outbound permission in a location.
+
+
+        Use Digit Patterns to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Retrieving digit patterns requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve the digit patterns for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzFkNjAzZTljLWJmM2QtNDA5OS05MGFiLTkyZWFlZWE3MjEzNw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve the digit patterns for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Outgoing Permission Digit Pattern for a Location
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created digit pattern.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create Outgoing Permission a new Digit Pattern for a location
+      operationId: CreateOutgoingPermissionANewDigitPatternForALocation
+      description: 'Add a new digit pattern for the given location for a customer.
+
+
+        Use Digit Patterns to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Creating a digit pattern requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Add a new digit pattern for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzFkNjAzZTljLWJmM2QtNDA5OS05MGFiLTkyZWFlZWE3MjEzNw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Add a new digit pattern for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: DigitPattern3
+              pattern: 3XXX
+              action: ALLOW
+              transferEnabled: false
+            schema:
+              $ref: '#/components/schemas/LocationOutgoingPermissionDigitPatternPostObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Outgoing Permission a new Digit Pattern for a location
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete all Outgoing Permission Digit Patterns for a Location
+      operationId: DeleteAllOutgoingPermissionDigitPatternsForALocation
+      description: 'Deletes all the digit patterns for a particular location for a customer.
+
+
+        Use Digit Patterns to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Deleting the digit patterns requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Delete the digit patterns for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzFkNjAzZTljLWJmM2QtNDA5OS05MGFiLTkyZWFlZWE3MjEzNw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the digit patterns for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete all Outgoing Permission Digit Patterns for a Location
+  /telephony/config/locations/{locationId}/outgoingPermission/digitPatterns/{digitPatternId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationDigitPatternObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+                name: DigitPattern2
+                pattern: 1XXXX
+                action: ALLOW
+                transferEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for a Outgoing Permission Digit Pattern for a Location
+      operationId: GetDetailsForAOutgoingPermissionDigitPatternForALocation
+      description: 'Get the digit pattern details.
+
+
+        Use Digit Patterns to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Retrieving digit pattern details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve the digit pattern details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzFkNjAzZTljLWJmM2QtNDA5OS05MGFiLTkyZWFlZWE3MjEzNw
+        schema:
+          type: string
+      - name: digitPatternId
+        in: path
+        description: Retrieve the digit pattern with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve the digit pattern details for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for a Outgoing Permission Digit Pattern for a Location
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Outgoing Permission Digit Pattern for a Location
+      operationId: UpdateAOutgoingPermissionDigitPatternForALocation
+      description: 'Update the designated digit pattern.
+
+
+        Use Digit Patterns to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Updating a digit pattern requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Update the digit pattern for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzFkNjAzZTljLWJmM2QtNDA5OS05MGFiLTkyZWFlZWE3MjEzNw
+        schema:
+          type: string
+      - name: digitPatternId
+        in: path
+        description: Update the digit pattern with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update the digit pattern for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: DigitPattern4
+              pattern: 3XXX2
+            schema:
+              $ref: '#/components/schemas/LocationOutgoingPermissionDigitPatternPatchObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Outgoing Permission Digit Pattern for a Location
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Outgoing Permission Digit Pattern for a Location
+      operationId: DeleteAOutgoingPermissionDigitPatternForALocation
+      description: 'Delete the designated digit pattern.
+
+
+        Use Digit Patterns to bypass the set permissions for all persons/workspaces at this location.
+
+
+        Deleting a digit pattern requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Location Call Settings: Call Handling'
+      parameters:
+      - name: locationId
+        in: path
+        description: Delete the digit pattern for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzFkNjAzZTljLWJmM2QtNDA5OS05MGFiLTkyZWFlZWE3MjEzNw
+        schema:
+          type: string
+      - name: digitPatternId
+        in: path
+        description: Delete the digit pattern with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the digit pattern for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Outgoing Permission Digit Pattern for a Location
+components:
+  schemas:
+    RouteIdentity:
+      type: object
+      required:
+      - id
+      - name
+      - type
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JPVVRFX0dST1VQLzA1OWEyNzNlLWJiYjAtMTFlYy04NDIyLTAyNDJhYzEyMDAwMg
+          description: ID of the route type.
+        name:
+          type: string
+          example: route_identity_name
+          description: A unique name for the route identity.
+        type:
+          $ref: '#/components/schemas/RouteType'
+          description: Type associated with the identity.
+    GetLocationInterceptObject:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/disable location intercept. Enable this feature to override any Location's Call Intercept settings that person configures.
+        incoming:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - INTERCEPT_ALL
+              - ALLOW_ALL
+              description: "Select inbound call options.\n * `INTERCEPT_ALL` - Intercept all inbound calls.\n * `ALLOW_ALL` - Allow all inbound calls.\n"
+            voicemailEnabled:
+              type: boolean
+              example: true
+              description: Enable/disable to route voice mail.
+            announcements:
+              type: object
+              properties:
+                greeting:
+                  type: string
+                  enum:
+                  - DEFAULT
+                  - CUSTOM
+                  description: "Greeting type for location intercept.\n * `DEFAULT` - Play default greeting.\n * `CUSTOM` - Play custom greeting.\n"
+                fileName:
+                  type: string
+                  example: .wav
+                  description: If set to `CUSTOM` for greeting, filename of previously uploaded file.
+                newNumber:
+                  type: object
+                  properties:
+                    enabled:
+                      type: boolean
+                      example: true
+                      description: Enable/disable to play new number announcement.
+                    destination:
+                      type: string
+                      example: '2147691003'
+                      description: Incoming destination phone number to be announced.
+                  description: Settings for new number announcement.
+                zeroTransfer:
+                  type: object
+                  properties:
+                    enabled:
+                      type: boolean
+                      example: true
+                      description: Enable/disable to transfer to phone number.
+                    destination:
+                      type: string
+                      example: '2147691005'
+                      description: Transfer phone number to be called when '0' is dialed.
+                  description: Transfer number details.
+              description: Announcements details.
+          description: Inbound call details.
+        outgoing:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - INTERCEPT_ALL
+              - ALLOW_LOCAL_ONLY
+              description: "Outbound call modes\n * `INTERCEPT_ALL` - Intercept all outbound calls.\n * `ALLOW_LOCAL_ONLY` - Allow local outbound calls.\n"
+            transferEnabled:
+              type: boolean
+              example: true
+              description: If `true`, allows transfer and forwarding for the call type.
+            destination:
+              type: string
+              example: '2147691007'
+              description: If enabled, set outgoing destination phone number.
+          description: Outbound Call details
+    LocationOutgoingPermissionDigitPatternPostObject:
+      type: object
+      required:
+      - name
+      - pattern
+      - action
+      - transferEnabled
+      properties:
+        name:
+          type: string
+          example: DigitPattern1
+          description: A unique name for the digit pattern.
+        pattern:
+          type: string
+          example: 1XXX
+          description: The digit pattern to be matched with the input number.
+        action:
+          type: string
+          enum:
+          - ALLOW
+          - BLOCK
+          - AUTH_CODE
+          - TRANSFER_NUMBER_1
+          - TRANSFER_NUMBER_2
+          - TRANSFER_NUMBER_3
+          description: "Action to be performed on the input number that matches the digit pattern.\n * `ALLOW` - Allow the designated call type.\n * `BLOCK` - Block the designated call type.\n * `AUTH_CODE` - Allow only via Authorization Code.\n * `TRANSFER_NUMBER_1` - Transfer to Auto Transfer Number 1. The answering person can then approve the call and send it through or reject the call.\n * `TRANSFER_NUMBER_2` - Transfer to Auto Transfer Number 2. The answering person can then approve the call and send it through or reject the call.\n * `TRANSFER_NUMBER_3` - Transfer to Auto Transfer Number 3. The answering person can then approve the call and send it through or reject the call.\n"
+        transferEnabled:
+          type: boolean
+          example: true
+          description: If `true`, allows transfer and forwarding for the call type.
+    CallingPermissionObject:
+      type: object
+      required:
+      - callType
+      - action
+      - transferEnabled
+      - isCallTypeRestrictionEnabled
+      properties:
+        callType:
+          type: string
+          enum:
+          - INTERNAL_CALL
+          - TOLL_FREE
+          - INTERNATIONAL
+          - OPERATOR_ASSISTED
+          - CHARGEABLE_DIRECTORY_ASSISTED
+          - SPECIAL_SERVICES_I
+          - SPECIAL_SERVICES_II
+          - PREMIUM_SERVICES_I
+          - PREMIUM_SERVICES_II
+          - NATIONAL
+          description: "Below are the call type values.\n * `INTERNAL_CALL` - Controls calls within your own company.\n * `TOLL_FREE` - Controls calls to a telephone number that is billed for all arriving calls instead of incurring charges to the originating caller, usually free of charge from a landline.\n * `INTERNATIONAL` - Controls calls to locations outside of the Long Distance areas that require an international calling code before the number is dialed.\n * `OPERATOR_ASSISTED` - Controls calls requiring Operator Assistance.\n * `CHARGEABLE_DIRECTORY_ASSISTED` - Controls calls to Directory Assistant companies that require a charge to connect the call.\n * `SPECIAL_SERVICES_I` - Controls calls to carrier-specific number assignments to special services or destinations.\n * `SPECIAL_SERVICES_II` - Controls calls to carrier-specific number assignments to special services or destinations.\n * `PREMIUM_SERVICES_I` - Controls calls used to provide information or entertainment for a fee charged directly to the caller.\n * `PREMIUM_SERVICES_II` - Controls calls used to provide information or entertainment for a fee charged directly to the caller.\n * `NATIONAL` - Controls calls that are National.\n"
+        action:
+          type: string
+          enum:
+          - ALLOW
+          - BLOCK
+          - AUTH_CODE
+          - TRANSFER_NUMBER_1
+          - TRANSFER_NUMBER_2
+          - TRANSFER_NUMBER_3
+          description: "Allows to configure settings for each call type.\n * `ALLOW` - Callers at this location can make these types of calls.\n * `BLOCK` - Callers at this location can't make these types of calls.\n * `AUTH_CODE` - Callers must enter the authorization code that you set before placing an outgoing call.\n * `TRANSFER_NUMBER_1` - Calls are transferred automatically to the configured auto transfer number `autoTransferNumber1`.\n * `TRANSFER_NUMBER_2` - Calls are transferred automatically to the configured auto transfer number. `autoTransferNumber2`.\n * `TRANSFER_NUMBER_3` - Calls are transferred automatically to the configured auto transfer number. `autoTransferNumber3`.\n"
+        transferEnabled:
+          type: boolean
+          example: true
+          description: If `true`, allows transfer and forwarding for the call type.
+        isCallTypeRestrictionEnabled:
+          type: boolean
+          example: true
+          description: Indicates if the restriction is enforced by the system for the corresponding call type and cannot be changed. For example, certain call types (such as `INTERNATIONAL`) may be permanently blocked and this field will be `true` to reflect that the restriction is system-controlled and not editable.
+    RouteType:
+      type: string
+      enum:
+      - ROUTE_GROUP
+      - TRUNK
+      description: " * `ROUTE_GROUP` - Route group must include at least one trunk with a maximum of 10 trunks per route group.\n * `TRUNK` - Connection between Webex Calling and the premises.\n"
+    PutLocationInterceptObject:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/disable location intercept. Enable this feature to override any location's Call Intercept settings that a person configures.
+        incoming:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - INTERCEPT_ALL
+              - ALLOW_ALL
+              description: "Select inbound call options.\n * `INTERCEPT_ALL` - Set to `INTERCEPT_ALL` to intercept all inbound calls.\n * `ALLOW_ALL` - Set to `ALLOW_ALL` to allow all inbound calls.\n"
+            voicemailEnabled:
+              type: boolean
+              example: true
+              description: Set to `true` to route voice mail.
+            announcements:
+              type: object
+              properties:
+                greeting:
+                  type: string
+                  enum:
+                  - DEFAULT
+                  - CUSTOM
+                  description: "Greeting type for location intercept.\n * `DEFAULT` - Set to `DEFAULT` to play default greeting.\n * `CUSTOM` - Set to `CUSTOM` to play custom greeting.\n"
+                fileName:
+                  type: string
+                  example: .wav
+                  description: If set to `CUSTOM` for greeting, filename of previously uploaded file.
+                newNumber:
+                  type: object
+                  properties:
+                    enabled:
+                      type: boolean
+                      example: true
+                      description: Set to `true` to play new number announcement.
+                    destination:
+                      type: string
+                      example: '2147691003'
+                      description: If enabled, set destination phone number.
+                  description: Details for new number.
+                zeroTransfer:
+                  type: object
+                  properties:
+                    enabled:
+                      type: boolean
+                      example: true
+                      description: Set to `true` to transfer to phone number.
+                    destination:
+                      type: string
+                      example: '2147691005'
+                      description: Transfer phone number to be called when '0' is dialed.
+                  description: Transfer number details.
+              description: Announcements details.
+          description: Inbound call details.
+        outgoing:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - INTERCEPT_ALL
+              - ALLOW_LOCAL_ONLY
+              description: "Outbound call options.\n * `INTERCEPT_ALL` - Set to `INTERCEPT_ALL` to intercept all outbound calls.\n * `ALLOW_LOCAL_ONLY` - Set to `ALLOW_LOCAL_ONLY` to allow local outbound calls.\n"
+            transferEnabled:
+              type: boolean
+              example: true
+              description: If `true`, allows transfer and forwarding for the call type.
+            destination:
+              type: string
+              example: '2147691007'
+              description: If enabled, set valid outgoing destination phone number.
+          description: Outbound Call details
+    GeneratePasswordPostResponse:
+      type: object
+      properties:
+        exampleSipPassword:
+          type: string
+          example: xyz123!
+          description: Example password.
+    PutAccessCodeLocationObject:
+      type: object
+      required:
+      - deleteCodes
+      properties:
+        deleteCodes:
+          type: array
+          items:
+            type: string
+          description: Array of string to delete access codes. For example, ["1234","2345"]
+    PasswordGenerate:
+      type: string
+      enum:
+      - sip
+      description: ' * `sip` - SIP password setting
+
+        '
+    LocationOutgoingPermissionDigitPatternPatchObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: DigitPattern1
+          description: A unique name for the digit pattern.
+        pattern:
+          type: string
+          example: 1XXX
+          description: The digit pattern to be matched with the input number.
+        action:
+          type: string
+          enum:
+          - ALLOW
+          - BLOCK
+          - AUTH_CODE
+          - TRANSFER_NUMBER_1
+          - TRANSFER_NUMBER_2
+          - TRANSFER_NUMBER_3
+          description: "Action to be performed on the input number that matches the digit pattern.\n * `ALLOW` - Allow the designated call type.\n * `BLOCK` - Block the designated call type.\n * `AUTH_CODE` - Allow only via Authorization Code.\n * `TRANSFER_NUMBER_1` - Transfer to Auto Transfer Number 1. The answering person can then approve the call and send it through or reject the call.\n * `TRANSFER_NUMBER_2` - Transfer to Auto Transfer Number 2. The answering person can then approve the call and send it through or reject the call.\n * `TRANSFER_NUMBER_3` - Transfer to Auto Transfer Number 3. The answering person can then approve the call and send it through or reject the call.\n"
+        transferEnabled:
+          type: boolean
+          example: true
+          description: If `true`, allows transfer and forwarding for the call type.
+    CallingPermissionPatchObject:
+      type: object
+      required:
+      - callType
+      - action
+      - transferEnabled
+      properties:
+        callType:
+          type: string
+          enum:
+          - INTERNAL_CALL
+          - TOLL_FREE
+          - INTERNATIONAL
+          - OPERATOR_ASSISTED
+          - CHARGEABLE_DIRECTORY_ASSISTED
+          - SPECIAL_SERVICES_I
+          - SPECIAL_SERVICES_II
+          - PREMIUM_SERVICES_I
+          - PREMIUM_SERVICES_II
+          - NATIONAL
+          description: "Below are the call type values.\n * `INTERNAL_CALL` - Controls calls within your own company.\n * `TOLL_FREE` - Controls calls to a telephone number that is billed for all arriving calls instead of incurring charges to the originating caller, usually free of charge from a landline.\n * `INTERNATIONAL` - Controls calls to locations outside of the Long Distance areas that require an international calling code before the number is dialed.\n * `OPERATOR_ASSISTED` - Controls calls requiring Operator Assistance.\n * `CHARGEABLE_DIRECTORY_ASSISTED` - Controls calls to Directory Assistant companies that require a charge to connect the call.\n * `SPECIAL_SERVICES_I` - Controls calls to carrier-specific number assignments to special services or destinations.\n * `SPECIAL_SERVICES_II` - Controls calls to carrier-specific number assignments to special services or destinations.\n * `PREMIUM_SERVICES_I` - Controls calls used to provide information or entertainment for a fee charged directly to the caller.\n * `PREMIUM_SERVICES_II` - Controls calls used to provide information or entertainment for a fee charged directly to the caller.\n * `NATIONAL` - Controls calls that are National.\n"
+        action:
+          type: string
+          enum:
+          - ALLOW
+          - BLOCK
+          - AUTH_CODE
+          - TRANSFER_NUMBER_1
+          - TRANSFER_NUMBER_2
+          - TRANSFER_NUMBER_3
+          description: "Allows to configure settings for each call type.\n * `ALLOW` - Callers at this location can make these types of calls.\n * `BLOCK` - Callers at this location can't make these types of calls.\n * `AUTH_CODE` - Callers must enter the authorization code that you set before placing an outgoing call.\n * `TRANSFER_NUMBER_1` - Calls are transferred automatically to the configured auto transfer number `autoTransferNumber1`.\n * `TRANSFER_NUMBER_2` - Calls are transferred automatically to the configured auto transfer number. `autoTransferNumber2`.\n * `TRANSFER_NUMBER_3` - Calls are transferred automatically to the configured auto transfer number. `autoTransferNumber3`.\n"
+        transferEnabled:
+          type: boolean
+          example: true
+          description: If `true`, allows transfer and forwarding for the call type.
+    UnknownExtensionRouteIdentity:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JPVVRFX0dST1VQLzA1OWEyNzNlLWJiYjAtMTFlYy04NDIyLTAyNDJhYzEyMDAwMg
+          description: ID of the route type.
+        type:
+          $ref: '#/components/schemas/RouteType'
+          description: Type associated with the identity.
+    GetAutoTransferNumberObject:
+      type: object
+      properties:
+        autoTransferNumber1:
+          type: string
+          example: '1234456789'
+          description: Calls placed meeting the criteria in an outbound rule whose `action` is `TRANSFER_NUMBER_1` will be transferred to this number.
+        autoTransferNumber2:
+          type: string
+          example: '2234567891'
+          description: Calls placed meeting the criteria in an outbound rule whose `action` is `TRANSFER_NUMBER_2` will be transferred to this number.
+        autoTransferNumber3:
+          type: string
+          example: '3234567891'
+          description: Calls placed meeting the criteria in an outbound rule whose `action` is `TRANSFER_NUMBER_3` will be transferred to this number.
+    PostLocationAccessCodeObject:
+      type: object
+      properties:
+        accessCodes:
+          type: object
+          required:
+          - code
+          - description
+          properties:
+            code:
+              type: string
+              example: '123'
+              description: Create new access code number.
+            description:
+              type: string
+              example: Main Access Code
+              description: Set access code description.
+          description: Access code details
+    LocationDigitPatternObject:
+      type: object
+      required:
+      - id
+      - name
+      - pattern
+      - action
+      - transferEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFL1FWVlVUMEZVVkVWT1JFRk9WQzFDVlZOSlRrVlRVeTFJVDFWU1V3
+          description: A unique identifier for the digit pattern.
+        name:
+          type: string
+          example: DigitPattern1
+          description: A unique name for the digit pattern.
+        pattern:
+          type: string
+          example: 1XXX
+          description: The digit pattern to be matched with the input number.
+        action:
+          type: string
+          enum:
+          - ALLOW
+          - BLOCK
+          - AUTH_CODE
+          - TRANSFER_NUMBER_1
+          - TRANSFER_NUMBER_2
+          - TRANSFER_NUMBER_3
+          description: "Action to be performed on the input number that matches the digit pattern.\n * `ALLOW` - Allow the designated call type.\n * `BLOCK` - Block the designated call type.\n * `AUTH_CODE` - Allow only via Authorization Code.\n * `TRANSFER_NUMBER_1` - Transfer to Auto Transfer Number 1. The answering person can then approve the call and send it through or reject the call.\n * `TRANSFER_NUMBER_2` - Transfer to Auto Transfer Number 2. The answering person can then approve the call and send it through or reject the call.\n * `TRANSFER_NUMBER_3` - Transfer to Auto Transfer Number 3. The answering person can then approve the call and send it through or reject the call.\n"
+        transferEnabled:
+          type: boolean
+          example: true
+          description: If `true`, allows transfer and forwarding for the call type.
+    GetLocationAccessCodeObject:
+      type: object
+      properties:
+        accessCodes:
+          type: object
+          required:
+          - code
+          - description
+          properties:
+            code:
+              type: string
+              example: '123'
+              description: Access code number.
+            description:
+              type: string
+              example: Main Access Code
+              description: Access code description.
+          description: Access code details
+    InternalDialingGet:
+      type: object
+      properties:
+        enableUnknownExtensionRoutePolicy:
+          type: boolean
+          example: true
+          description: When enabled, calls made by users at the location to an unknown extension (between 2-6 digits) are routed to the selected route group/trunk as premises calls.
+        unknownExtensionRouteIdentity:
+          $ref: '#/components/schemas/RouteIdentity'
+          description: The selected route group/trunk as premises calls.
+    PutAutoTransferNumberObject:
+      type: object
+      properties:
+        autoTransferNumber1:
+          type: string
+          example: '1234456789'
+          description: Calls placed meeting the criteria in an outbound rule whose `action` is `TRANSFER_NUMBER_1` will be transferred to this number.
+        autoTransferNumber2:
+          type: string
+          example: '2234567891'
+          description: Calls placed meeting the criteria in an outbound rule whose `action` is `TRANSFER_NUMBER_2` will be transferred to this number.
+        autoTransferNumber3:
+          type: string
+          example: '3234567891'
+          description: Calls placed meeting the criteria in an outbound rule whose `action` is `TRANSFER_NUMBER_3` will be transferred to this number.
+    InternalDialingPut:
+      type: object
+      properties:
+        enableUnknownExtensionRoutePolicy:
+          type: boolean
+          example: true
+          description: When enabled, calls made by users at the location to an unknown extension (between 2-6 digits) are routed to the selected route group/trunk as premises calls.
+        unknownExtensionRouteIdentity:
+          $ref: '#/components/schemas/UnknownExtensionRouteIdentity'
+          description: Type associated with the identity.
+    LocationOutgoingPermissionDigitPatternGetListObject:
+      type: object
+      required:
+      - digitPatterns
+      properties:
+        digitPatterns:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationDigitPatternObject'
+          description: List of digit pattern information.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

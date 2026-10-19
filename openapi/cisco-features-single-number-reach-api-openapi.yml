@@ -1,0 +1,673 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Single Number Reach API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features: Single Number Reach'
+paths:
+  /telephony/config/locations/{locationId}/singleNumberReach/availableNumbers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleNumberReachPrimaryAvailableNumberListGetObject'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+12056350001'
+                  state: ACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: false
+                - phoneNumber: '+12056350002'
+                  state: ACTIVE
+                  isMainNumber: true
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: false
+                  isServiceNumber: true
+                - phoneNumber: '+12056350003'
+                  state: INACTIVE
+                  isMainNumber: false
+                  telephonyType: PSTN_NUMBER
+                  tollFreeNumber: true
+                  isServiceNumber: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Single Number Reach Primary Available Phone Numbers
+      operationId: GetSingleNumberReachPrimaryAvailablePhoneNumbers
+      description: 'List the service and standard PSTN numbers that are available to be assigned as the single number reach''s primary phone number.
+
+        These numbers are associated with the location specified in the request URL, can be active or inactive, and are unassigned.
+
+
+        The available numbers APIs help identify candidate numbers and their owning entities to simplify the assignment or association of these numbers to members or features.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Single Number Reach'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of phone numbers for this location within the given organization. The maximum length is 36.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2YwYzRhOTcyLWIxNjQtMTFlZS05MWVhLWZiYjliMTkwMjI2Yg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List numbers for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of phone numbers returned to this maximum count. The default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching phone numbers. The default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: phoneNumber
+        in: query
+        description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+        example: +12056852221,+12056852222
+        schema:
+          type: array
+          items:
+            type: string
+            example: +12056852221,+12056852222
+          description: Filter phone numbers based on the comma-separated list provided in the `phoneNumber` array.
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Single Number Reach Primary Available Phone Numbers
+  /telephony/config/people/{personId}/singleNumberReach/numbers:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created single number reach.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NJTkdMRV9OVU1CRVJfUkVBQ0gvT1RnNU56WTNPRGMyTlE9PQ
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create Single Number Reach For a Person
+      operationId: CreateSingleNumberReachForAPerson
+      description: 'Create a single number reach for a person in an organization.
+
+
+        Single number reach allows you to setup your work calls ring any phone number. This means that your office phone, mobile phone, or any other designated devices can ring at the same time, ensuring you don''t miss important calls.
+
+
+        Creating a single number reach for a person requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Single Number Reach'
+      parameters:
+      - name: personId
+        in: path
+        description: Unique identifier for the person.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BFUlNPTi8wMDAwNWUwMC01M2I0LTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              phoneNumber: '+17011558169'
+              enabled: true
+              name: myNumber
+              doNotForwardCallsEnabled: false
+              answerConfirmationEnabled: false
+            schema:
+              $ref: '#/components/schemas/PostSingleNumberReachObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Single Number Reach For a Person
+  /telephony/config/people/{personId}/singleNumberReach:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSingleNumberReachObject'
+              example:
+                enabled: true
+                alertAllNumbersForClickToDialCallsEnabled: false
+                numbers:
+                - id: Y2lzY29zcGFyazovL3VzL1NJTkdMRV9OVU1CRVJfUkVBQ0gvS3pFM01ERXhOVFU0TVRZNQ
+                  phoneNumber: '+17011558169'
+                  enabled: true
+                  name: myNumber
+                  doNotForwardCallsEnabled: false
+                  answerConfirmationEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Single Number Reach Settings For A Person
+      operationId: GetSingleNumberReachSettingsForAPerson
+      description: 'Retrieve Single Number Reach settings for the given person.
+
+
+        Single number reach allows you to setup your work calls ring any phone number. This means that your office phone, mobile phone, or any other designated devices can ring at the same time, ensuring you don''t miss important calls.
+
+
+        Retrieving Single number reach settings requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Single Number Reach'
+      parameters:
+      - name: personId
+        in: path
+        description: Unique identifier for the person.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BFUlNPTi8wMDAwNWUwMC01M2I0LTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Single Number Reach Settings For A Person
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Single Number Reach Settings For A Person
+      operationId: UpdateSingleNumberReachSettingsForAPerson
+      description: 'Update Single number reach settings for a person.
+
+
+        Single number reach allows you to setup your work calls ring any phone number. This means that your office phone, mobile phone, or any other designated devices can ring at the same time, ensuring you don''t miss important calls.
+
+
+        Updating a single number reach settings for a person requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Single Number Reach'
+      parameters:
+      - name: personId
+        in: path
+        description: Unique identifier for the person.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BFUlNPTi8wMDAwNWUwMC01M2I0LTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              alertAllNumbersForClickToDialCallsEnabled: false
+            schema:
+              $ref: '#/components/schemas/SingleNumberReachPatchRequestObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Single Number Reach Settings For A Person
+  /telephony/config/people/{personId}/singleNumberReach/numbers/{id}:
+    put:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the updated single number reach. Note that this ID can change if the phone number is changed, as the ID contains base64 encoded phone number data.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1NJTkdMRV9OVU1CRVJfUkVBQ0gvS3pFM01ERXhOVFU0TVRZNQ
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Single Number Reach Settings For A Number
+      operationId: UpdateSingleNumberReachSettingsForANumber
+      description: 'Update Single number reach settings for a number.
+
+
+        Single number reach allows you to setup your work calls ring any phone number. This means that your office phone, mobile phone, or any other designated devices can ring at the same time, ensuring you don''t miss important calls.
+
+
+        The response returns an ID that can change if the phoneNumber is modified, as the ID contains base64 encoded phone number data.
+
+
+        Updating a single number reach settings for a number requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Single Number Reach'
+      parameters:
+      - name: personId
+        in: path
+        description: Unique identifier for the person.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BFUlNPTi8wMDAwNWUwMC01M2I0LTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Unique identifier for single number reach.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NJTkdMRV9OVU1CRVJfUkVBQ0gvT1RnNU56WTNPRGMyTlE9PQ
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              phoneNumber: '+17011558169'
+              enabled: true
+              name: myNumber
+              doNotForwardCallsEnabled: false
+              answerConfirmationEnabled: false
+            schema:
+              $ref: '#/components/schemas/SingleNumberReachNumberPatchRequestObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Single Number Reach Settings For A Number
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete A Single Number Reach Number
+      operationId: DeleteASingleNumberReachNumber
+      description: 'Delete Single number reach number for a person.
+
+
+        Single number reach allows you to setup your work calls ring any phone number. This means that your office phone, mobile phone, or any other designated devices can ring at the same time, ensuring you don''t miss important calls.
+
+
+        Deleting a Single number reach number requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Single Number Reach'
+      parameters:
+      - name: personId
+        in: path
+        description: Unique identifier for the person.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BFUlNPTi8wMDAwNWUwMC01M2I0LTQwYzMtYTdhZC01NjUwZmRkZGQ1M2M
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Unique identifier for single number reach.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1NJTkdMRV9OVU1CRVJfUkVBQ0gvT1RnNU56WTNPRGMyTlE9PQ
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete A Single Number Reach Number
+components:
+  schemas:
+    SingleNumberReachPrimaryAvailableNumberObject:
+      type: object
+      required:
+      - phoneNumber
+      - state
+      - isMainNumber
+      - tollFreeNumber
+      - telephonyType
+      - isServiceNumber
+      properties:
+        phoneNumber:
+          type: string
+          example: '+12056350001'
+          description: A unique identifier for the PSTN phone number.
+        state:
+          $ref: '#/components/schemas/STATE'
+          description: Phone number's state.
+        isMainNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is used as a location CLID.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a toll-free number.
+        telephonyType:
+          $ref: '#/components/schemas/TelephonyType'
+          description: The telephony type for the number.
+        isServiceNumber:
+          type: boolean
+          example: true
+          description: If `true`, the phone number is a service number; otherwise, it is a standard number. Service numbers are high-utilization or high-concurrency PSTN phone numbers that are neither mobile nor toll-free.
+    SingleNumberReachPrimaryAvailableNumberListGetObject:
+      type: object
+      required:
+      - phoneNumbers
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SingleNumberReachPrimaryAvailableNumberObject'
+          description: Array of phone numbers.
+    SingleNumberReachNumberPatchRequestObject:
+      type: object
+      required:
+      - phoneNumber
+      - enabled
+      - name
+      properties:
+        phoneNumber:
+          type: string
+          example: '+17011558169'
+          description: Personal phone number used as single Number Reach.
+        enabled:
+          type: boolean
+          example: true
+          description: A flag to enable or disable single Number Reach phone number.
+        name:
+          type: string
+          example: myNumber
+          description: Name of the single number reach phone number entry.
+        doNotForwardCallsEnabled:
+          type: boolean
+          description: If enabled, the call forwarding settings of provided phone Number will not be applied.
+        answerConfirmationEnabled:
+          type: boolean
+          description: If enabled, the call recepient will be prompted to press a key before being connected.
+    PostSingleNumberReachObject:
+      type: object
+      required:
+      - phoneNumber
+      - enabled
+      - name
+      properties:
+        phoneNumber:
+          type: string
+          example: '+17011558169'
+          description: Personal phone number used as single Number Reach.
+        enabled:
+          type: boolean
+          example: true
+          description: A flag to enable or disable single Number Reach.
+        name:
+          type: string
+          example: myNumber
+          description: Name of the single number reach phone number entry.
+        doNotForwardCallsEnabled:
+          type: boolean
+          description: If enabled, the call forwarding settings of provided phone Number will not be applied.
+        answerConfirmationEnabled:
+          type: boolean
+          description: If enabled, the call recepient will be prompted to press a key before being connected.
+    TelephonyType:
+      type: string
+      enum:
+      - PSTN_NUMBER
+      description: ' * `PSTN_NUMBER` - The object is a PSTN number.
+
+        '
+    GetSingleNumberReachObject:
+      type: object
+      required:
+      - enabled
+      - numbers
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: A flag to enable or disable single Number Reach.
+        alertAllNumbersForClickToDialCallsEnabled:
+          type: boolean
+          description: Flag to enable alerting single number reach numbers for click to dial calls.
+        numbers:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - phoneNumber
+            - enabled
+            - name
+            - doNotForwardCallsEnabled
+            - answerConfirmationEnabled
+            properties:
+              id:
+                type: string
+                example: Y2lzY29zcGFyazovL3VzL1NJTkdMRV9OVU1CRVJfUkVBQ0gvS3pFM01ERXhOVFU0TVRZNQ
+                description: ID of Single number reach. Note that this ID contains base64 encoded phoneNumber data and can change if the phone number is modified.
+              phoneNumber:
+                type: string
+                example: '+17011558169'
+                description: The phone number that will ring when a call is received. The number should be in E.164 format.
+              enabled:
+                type: boolean
+                example: true
+                description: A flag to enable or disable this single Number Reach phone number.
+              name:
+                type: string
+                example: myNumber
+                description: Name of the single number reach phone number entry.
+              doNotForwardCallsEnabled:
+                type: boolean
+                description: If enabled, the call forwarding settings of provided phone Number will not be applied.
+              answerConfirmationEnabled:
+                type: boolean
+                description: If enabled, the call recipient will be prompted to press a key before being connected.
+          description: Array of single number reach number entries.
+    SingleNumberReachPatchRequestObject:
+      type: object
+      properties:
+        alertAllNumbersForClickToDialCallsEnabled:
+          type: boolean
+          description: Flag to enable alerting single number reach numbers for click to dial calls.
+    STATE:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      description: " * `ACTIVE` - Phone number is in the active state.\n * `INACTIVE` - Phone number is in the inactive state.\n"
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

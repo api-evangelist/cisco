@@ -1,0 +1,728 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Workspace Call Settings API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Workspace Call Settings
+paths:
+  /workspaces/{workspaceId}/features/monitoring:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMonitoringGet'
+              example:
+                callParkNotificationEnabled: false
+                availableEntriesCount: 10
+                monitoredElements:
+                - member:
+                    id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NzQzNTI1Yi02ZjgxLTQ0NTktYTYxNC0yN2E0ZDIyZTZhYzI
+                    lastName: Hughes
+                    firstName: Jack
+                    displayName: Jack Hughes
+                    type: PEOPLE
+                    email: jhughes@example.com
+                    numbers:
+                    - extension: '34496'
+                      routingPrefix: '1234'
+                      esn: '123434496'
+                      primary: true
+                    location: Richardson
+                    locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M2MDliOGE1LTAxNmQtNDAwNy1hN2E0LTJhMThiZmZjY2FmNg
+                - callparkextension:
+                    id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vOGI2NzlmMzktMTdmMC00ODY3LTk4MmYtYmEwMWJmYmE3YjQw
+                    name: patch postman test
+                    extension: '4594'
+                    routingPrefix: '1234'
+                    esn: '12344594'
+                    location: Banglore
+                    locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2E4Mjg5NzIyLTFiODAtNDFiNy05Njc4LTBlNzdhZThjMTA5OA
+                - speedDial:
+                    id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NzQzNTI1Yi02ZjgxLTQ0NTktYTYxNC0yN2E0ZDIyZTZhYzI
+                    displayName: Jack Hughes
+                    type: PEOPLE
+                    lineKeyLabel: Manager
+                    phoneNumber: '+19075552859'
+                    location: Richardson
+                    locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M2MDliOGE1LTAxNmQtNDAwNy1hN2E0LTJhMThiZmZjY2FmNg
+                - speedDial:
+                    lineKeyLabel: Sr Manager
+                    phoneNumber: '+19075552859'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Retrieve Monitoring Settings for a Workspace
+      operationId: getMonitoringSettingsWorkspace
+      description: 'Retrieve the monitoring settings for a workspace, which show specified people, places, virtual lines, or call park extensions that are being monitored.
+
+        Monitors the line status, indicating if a person, place, or virtual line is on a call and if a call has been parked on that extension.
+
+
+        This API requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:workspaces_read` or a user auth token with `spark:workspaces_read` scope can be used to read workspace settings.'
+      tags:
+      - Workspace Call Settings
+      parameters:
+      - name: workspaceId
+        in: path
+        description: Unique identifier for the workspace.
+        required: true
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS8xNzdmNTNlZC1hNzY2LTRkYTAtOGQ3OC03MjE0MjhjMmFjZTQ=
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: ID of the organization within which the workspace resides. Only admin users of another organization (such as partners) may use this parameter as the default is the same organization as the token used to access the API.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Monitoring Settings for a Workspace
+      operationId: modifyMonitoringSettingsWorkspace
+      description: 'Modifies the monitoring settings of the workspace.
+
+        Monitors the line status of specified people, places, virtual lines or call park extension. The line status indicates if a person, place or virtual line is on a call and if a call has been parked on that extension. Maximum 50 monitored elements.
+
+
+        This API requires a full or user administrator or location administrator auth token with the `spark-admin:workspaces_write` scope or a user auth token with `spark:workspaces_write` scope can be used to update workspace settings.'
+      tags:
+      - Workspace Call Settings
+      parameters:
+      - name: workspaceId
+        in: path
+        description: Unique identifier for the workspace.
+        required: true
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS8xNzdmNTNlZC1hNzY2LTRkYTAtOGQ3OC03MjE0MjhjMmFjZTQ=
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: ID of the organization within which the workspace resides. Only admin users of another organization (such as partners) may use this parameter as the default is the same organization as the token used to access the API.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              enableCallParkNotification: true
+              monitoredElements:
+              - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYjhkYjA4YS0wY2JlLTRlZDctOThmMy05ZThlZjBhOGI2N2E
+                type: MEMBER
+              - id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vZmJjNzlkNzAtMjM5Zi00YjIyLWE2YTAtZjAwNWFmOGNlMjA0
+                type: CALL_PARK_EXTENSION
+              - id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vZmJjNzlkNzAtMjM5Zi00YjIyLWE2YTAtZjAwNWFmOGNlMjA0
+                type: SPEED_DIAL
+              - lineKeyLabel: Sr Manager
+                phoneNumber: '+19075552859'
+            schema:
+              $ref: '#/components/schemas/WorkspaceMonitoringPatch'
+  /telephony/config/workspaces/{workspaceId}/monitoring/speedDials/availableMembers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAvailableMembersForMonitoringResponse'
+              example:
+                members:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ODhiYTQyOC0zMjMyLTRmNjItYjUyNy1hZGEyNTRlMTk0MjE
+                  firstName: John
+                  lastName: Doe
+                  displayName: John Doe
+                  phoneNumber: '+14085551234'
+                  extension: '1234'
+                  type: PEOPLE
+                  location:
+                    id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4OTAxMjM0NTY3ODkw
+                    name: San Jose
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Available Speed Dials for Workspace Monitoring
+      operationId: getAvailableSpeedDialsForWorkspaceMonitoring
+      description: 'Get available speed dials for Workspace monitoring configuration. This API allows administrators to retrieve a list of members that can be added as speed dials for monitoring a specific workspace.
+
+
+        This API requires a full, user, or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Workspace Call Settings
+      parameters:
+      - name: workspaceId
+        in: path
+        description: Unique identifier for the workspace.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS8xNzdmNTNlZC1hNzY2LTRkYTAtOGQ3OC03MjE0MjhjMmFjZTQ=
+      - name: orgId
+        in: query
+        description: ID of the organization within which the workspace resides. Only admin users of another organization (such as partners) may use this parameter as the default is the same organization as the token used to access the API.
+        required: false
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+      - name: locationId
+        in: query
+        description: Search for the available speed dials in the location ID.
+        required: false
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4OTAxMjM0NTY3ODkw
+      - name: memberName
+        in: query
+        description: Search for available members by name.
+        required: false
+        schema:
+          type: string
+        example: John
+      - name: phoneNumber
+        in: query
+        description: Search for available members by number or extension.
+        required: false
+        schema:
+          type: string
+        example: '1234'
+      - name: order
+        in: query
+        description: Sort response based on `firstName` or `lastName` with sort direction `asc` or `desc`.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - lastName-asc
+      - name: start
+        in: query
+        description: Number of records to skip for pagination.
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+        example: 0
+      - name: max
+        in: query
+        description: 'Number of records per page for pagination. Default: 2000. Maximum: 2000.'
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 2000
+          default: 2000
+        example: 100
+  /telephony/config/workspaces/{workspaceId}/monitoring/availableMembers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAvailableMembersForMonitoringResponse'
+              example:
+                members:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ODhiYTQyOC0zMjMyLTRmNjItYjUyNy1hZGEyNTRlMTk0MjE
+                  firstName: John
+                  lastName: Doe
+                  displayName: John Doe
+                  phoneNumber: '+14085551234'
+                  extension: '1234'
+                  type: PEOPLE
+                  location:
+                    id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4OTAxMjM0NTY3ODkw
+                    name: San Jose
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Available Members for Workspace Monitoring
+      operationId: getAvailableMembersForWorkspaceMonitoring
+      description: 'Get available members for workspace monitoring. This API allows administrators to retrieve a list of members that can be added to the monitoring list for a specific workspace.
+
+
+        This API requires a full, user, or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Workspace Call Settings
+      parameters:
+      - name: workspaceId
+        in: path
+        description: Unique identifier for the workspace.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+        example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMV9pbnQxMy9QTEFDRS8xNzdmNTNlZC1hNzY2LTRkYTAtOGQ3OC03MjE0MjhjMmFjZTQ=
+      - name: orgId
+        in: query
+        description: ID of the organization within which the workspace resides. Only admin users of another organization (such as partners) may use this parameter as the default is the same organization as the token used to access the API.
+        required: false
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+      - name: locationId
+        in: query
+        description: Search for the available members in the location ID.
+        required: false
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4OTAxMjM0NTY3ODkw
+      - name: memberName
+        in: query
+        description: Search for available members by name.
+        required: false
+        schema:
+          type: string
+        example: John
+      - name: phoneNumber
+        in: query
+        description: Search for available members by number or extension.
+        required: false
+        schema:
+          type: string
+        example: '1234'
+      - name: order
+        in: query
+        description: Sort response based on `firstName` or `lastName` with sort direction `asc` or `desc`.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - lastName-asc
+      - name: start
+        in: query
+        description: Number of records to skip for pagination.
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+        example: 0
+      - name: max
+        in: query
+        description: 'Number of records per page for pagination. Default: 2000. Maximum: 2000.'
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 2000
+          default: 2000
+        example: 100
+components:
+  schemas:
+    LocationObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1Njc4OTAxMjM0NTY3ODkw
+          description: The ID of the location.
+        name:
+          type: string
+          example: San Jose
+          description: The name of the location.
+    WorkspaceMonitoringPatch:
+      type: object
+      properties:
+        enableCallParkNotification:
+          type: boolean
+          example: true
+          description: Call park notification is enabled or disabled.
+        monitoredElements:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/MonitoredElementItemPatch'
+          description: Array of monitored elements. Maximum 50 elements.
+    MonitoredElementItemPatch:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+          description: The identifier of the monitored element.
+        type:
+          type: string
+          enum:
+          - MEMBER
+          - CALL_PARK_EXTENSION
+          - SPEED_DIAL
+          description: "The type of the monitored element.\n * `MEMBER` - Monitored element is a person, place, or virtual line.\n * `CALL_PARK_EXTENSION` - Monitored element is a call park extension.\n * `SPEED_DIAL` - Monitored element is a speed dial.\n"
+        lineKeyLabel:
+          type: string
+          example: Sr Manager
+          description: Customizable line key label for speed dial.
+        phoneNumber:
+          type: string
+          example: '+19075552859'
+          description: Phone number for the speed dial.
+    MonitoredElementSpeedDial:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+          description: The identifier of the speed dial.
+        displayName:
+          type: string
+          example: John Brown
+          description: The display name of the speed dial.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - VIRTUAL_LINE
+          description: "The type of the speed dial.\n * `PEOPLE` - Object is a user.\n * `PLACE` - Object is a workspace.\n * `VIRTUAL_LINE` - Object is a virtual line.\n"
+        lineKeyLabel:
+          type: string
+          example: Manager
+          description: Customizable line key label for speed dial.
+        phoneNumber:
+          type: string
+          example: '+19075552859'
+          description: The phone number of the speed dial.
+        location:
+          type: string
+          example: Richardson
+          description: The location name where the speed dial is.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: The ID for the location.
+    AvailableMemberObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ODhiYTQyOC0zMjMyLTRmNjItYjUyNy1hZGEyNTRlMTk0MjE
+          description: The identifier of the available member.
+        firstName:
+          type: string
+          example: John
+          description: The first name of the available member.
+        lastName:
+          type: string
+          example: Doe
+          description: The last name of the available member.
+        displayName:
+          type: string
+          example: John Doe
+          description: The display name of the available member.
+        phoneNumber:
+          type: string
+          example: '+14085551234'
+          description: The phone number of the available member.
+        extension:
+          type: string
+          example: '1234'
+          description: The extension of the available member.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - VIRTUAL_LINE
+          description: "The type of the available member.\n * `PEOPLE` - Object is a user.\n * `PLACE` - Object is a workspace.\n * `VIRTUAL_LINE` - Object is a virtual line.\n"
+        location:
+          $ref: '#/components/schemas/LocationObject'
+          description: The location of the available member.
+    UserMonitoringGet:
+      type: object
+      required:
+      - callParkNotificationEnabled
+      properties:
+        callParkNotificationEnabled:
+          type: boolean
+          example: true
+          description: Call park notification enabled or disabled.
+        availableEntriesCount:
+          type: integer
+          example: 5
+          description: Number of available entries for monitoring.
+        monitoredElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoredElementItem'
+          description: Monitored element items.
+    MonitoredElementUser:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+          description: The identifier of the monitored person or workspace.
+        firstName:
+          type: string
+          example: John
+          description: The first name of the monitored person, place, or virtual line.
+        lastName:
+          type: string
+          example: Brown
+          description: The last name of the monitored person, place, or virtual line.
+        displayName:
+          type: string
+          example: John Brown
+          description: The display name of the monitored person, place, or virtual line.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          description: "The type of the monitored person, place, or virtual line.\n * `PEOPLE` - Object is a user.\n * `PLACE` - Object is a workspace.\n"
+        email:
+          type: string
+          example: john.brown@gmail.com
+          description: The email address of the monitored person, place, or virtual line.
+        numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserNumberItem'
+          description: The list of phone numbers of the monitored person, place, or virtual line.
+        location:
+          type: string
+          example: Alaska
+          description: The location name where the line is.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: The ID for the location.
+        lineKeyLabel:
+          type: string
+          example: Member Label
+          description: Customizable line key label for monitored member.
+    MonitoredElementCallParkExtension:
+      type: object
+      required:
+      - id
+      - name
+      - extension
+      - location
+      - locationId
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+          description: ID of call park extension.
+        name:
+          type: string
+          example: CPE1
+          description: Name of call park extension.
+        extension:
+          type: string
+          example: '8080'
+          description: Extension of call park extension.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12348080'
+          description: Routing prefix + extension of a person or workspace.
+        location:
+          type: string
+          example: Alaska
+          description: Name of location for call park extension.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: ID of location for call park extension.
+        lineKeyLabel:
+          type: string
+          example: CPE Label
+          description: Customizable line key label for monitored call park extension.
+    GetAvailableMembersForMonitoringResponse:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableMemberObject'
+          description: List of available members.
+    MonitoredElementItem:
+      type: object
+      properties:
+        callparkextension:
+          $ref: '#/components/schemas/MonitoredElementCallParkExtension'
+          description: Monitored Call Park extension.
+        member:
+          $ref: '#/components/schemas/MonitoredElementUser'
+          description: Monitored member for this workspace.
+        speedDial:
+          $ref: '#/components/schemas/MonitoredElementSpeedDial'
+          description: Monitored Speed Dial.
+    UserNumberItem:
+      type: object
+      required:
+      - primary
+      properties:
+        external:
+          type: string
+          example: '+19075552859'
+          description: Phone number of person or workspace. Either `phoneNumber` or `extension` is mandatory.
+        extension:
+          type: string
+          example: '8080'
+          description: Extension of person or workspace. Either `phoneNumber` or `extension` is mandatory.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12348080'
+          description: Routing prefix + extension of a person or workspace.
+        primary:
+          type: boolean
+          example: true
+          description: Flag to indicate primary phone.
+        tollFreeNumber:
+          type: boolean
+          example: true
+          description: Flag to indicate toll free number.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

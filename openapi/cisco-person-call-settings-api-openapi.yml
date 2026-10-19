@@ -1,0 +1,415 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Person Call Settings API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Person Call Settings
+paths:
+  /people/{personId}/features/monitoring:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringSettingsGet'
+              example:
+                callParkNotificationEnabled: true
+                availableEntriesCount: 5
+                monitoredElements:
+                - member:
+                    id: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85OWNlZjRmYS03YTM5LTQ1ZDItOTNmNi1jNjA5YTRiMjgzODY
+                    lastName: Nelson
+                    firstName: John
+                    displayName: John Nelson
+                    type: PEOPLE
+                    email: john.nelson@gmail.com
+                    numbers:
+                    - external: '+19728138888'
+                      extension: '34496'
+                      routingPrefix: '1234'
+                      esn: '123434496'
+                      primary: true
+                    location: Dallas
+                    locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+                - member:
+                    id: Y2lzY29zcGFyazovL3VzL1ZJUlRVQUxfTElORS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc3OGg=
+                    lastName: Smith
+                    firstName: Alice
+                    displayName: AliceSmith
+                    type: PEOPLE
+                    numbers:
+                    - external: '+19075552859'
+                      extension: '8086'
+                      routingPrefix: '1234'
+                      esn: '12348086'
+                      primary: true
+                    location: Dallas
+                    locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+                - callparkextension:
+                    id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vZTdlZDdiMDEtN2E4Ni00NDEwLWFlODMtOWJmODMzZGEzNzQy
+                    name: Dallas-Test
+                    extension: '4001'
+                    routingPrefix: '1234'
+                    esn: '12344001'
+                    location: Dallas
+                    locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+                - speedDial:
+                    id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NzQzNTI1Yi02ZjgxLTQ0NTktYTYxNC0yN2E0ZDIyZTZhYzI
+                    displayName: Jack Hughes
+                    type: PEOPLE
+                    lineKeyLabel: Manager
+                    phoneNumber: '+19075552859'
+                    location: Richardson
+                    locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M2MDliOGE1LTAxNmQtNDAwNy1hN2E0LTJhMThiZmZjY2FmNg
+                - speedDial:
+                    lineKeyLabel: Sr Manager
+                    phoneNumber: '+19075552859'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Retrieve a Person's Monitoring Settings
+      operationId: getMonitoringSettingsPerson
+      description: 'Retrieve the monitoring settings for a person, which show specified people, places, virtual lines, or call park extensions that are being monitored.
+
+        Monitors the line status, indicating if a person, place, or virtual line is on a call and if a call has been parked on that extension.
+
+
+        This API requires a full, user, or read-only administrator or location administrator auth token with a scope of `spark-admin:people_read`.'
+      tags:
+      - Person Call Settings
+      parameters:
+      - name: personId
+        in: path
+        description: Unique identifier for the person.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xMWEzZjk5MC1hNjg5LTQ3N2QtYmU2Yi03MTIwMDI1ZDhhYmI
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: ID of the organization in which the person resides. Only admin users of another organization (such as partners) may use this parameter, as the default is the same organization as the token used to access the API.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Monitoring Settings for a Person
+      operationId: modifyMonitoringSettingsPerson
+      description: 'Modifies the monitoring settings of the person.
+
+        Monitors the line status of specified people, places, virtual lines or call park extension. The line status indicates if a person, place or virtual line is on a call and if a call has been parked on that extension. Maximum 50 monitored elements.
+
+
+        This API requires a full or user administrator or location administrator auth token with the `spark-admin:people_write` scope.'
+      tags:
+      - Person Call Settings
+      parameters:
+      - name: personId
+        in: path
+        description: Unique identifier for the person.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xMWEzZjk5MC1hNjg5LTQ3N2QtYmU2Yi03MTIwMDI1ZDhhYmI
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: ID of the organization in which the person resides. Only admin users of another organization (such as partners) may use this parameter, as the default is the same organization as the token used to access the API.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              enableCallParkNotification: true
+              monitoredElements:
+              - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYjhkYjA4YS0wY2JlLTRlZDctOThmMy05ZThlZjBhOGI2N2E
+                type: MEMBER
+              - id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vZmJjNzlkNzAtMjM5Zi00YjIyLWE2YTAtZjAwNWFmOGNlMjA0
+                type: CALL_PARK_EXTENSION
+              - id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vZmJjNzlkNzAtMjM5Zi00YjIyLWE2YTAtZjAwNWFmOGNlMjA0
+                type: SPEED_DIAL
+              - lineKeyLabel: Sr Manager
+                phoneNumber: '+19075552859'
+            schema:
+              $ref: '#/components/schemas/UserMonitoringPatch'
+components:
+  schemas:
+    PeopleOrPlaceOrVirtualLineType:
+      type: string
+      enum:
+      - PEOPLE
+      - PLACE
+      - VIRTUAL_LINE
+      description: " * `PEOPLE` - Person or list of people.\n * `PLACE` - Workspace that is not assigned to a specific person such as for a shared device in a common area.\n * `VIRTUAL_LINE` - Virtual line or list of virtual lines.\n"
+    MonitoringSettingsGet:
+      type: object
+      description: Monitoring settings for a person including available entries count.
+      required:
+      - callParkNotificationEnabled
+      - availableEntriesCount
+      - monitoredElements
+      properties:
+        callParkNotificationEnabled:
+          type: boolean
+          example: true
+          description: Indicates whether call park notification is enabled.
+        availableEntriesCount:
+          type: integer
+          example: 5
+          description: Indicates additional number of entries that can be stored (more than the number of entries listed).
+        monitoredElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetMonitoredElementsObject'
+          description: Settings of monitored elements, which can be a person, place, virtual line, or call park extension.
+    GetMonitoredElementsObject:
+      type: object
+      description: Monitored element details, which can be a member, call park extension, or speed dial.
+      properties:
+        member:
+          type: object
+          description: Monitored person, workspace, or virtual line.
+          required:
+          - id
+          - numbers
+          - location
+          - locationId
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85OWNlZjRmYS03YTM5LTQ1ZDItOTNmNi1jNjA5YTRiMjgzODY
+              description: The identifier of the monitored person, workspace, or virtual line.
+            lastName:
+              type: string
+              example: Nelson
+              description: Last name of the monitored member (Virtual Line or User). For Workspace, this field is not applicable.
+            firstName:
+              type: string
+              example: John
+              description: First name of the monitored member (Virtual Line or User). For Workspace, this field is not applicable.
+            displayName:
+              type: string
+              example: John Nelson
+              description: The display name of the monitored person, workspace, or virtual line.
+            lineKeyLabel:
+              type: string
+              example: Manager
+              description: This is a custom line key label configured for the Member.
+            type:
+              $ref: '#/components/schemas/PeopleOrPlaceOrVirtualLineType'
+              description: Indicates whether the monitored element is a person, workspace, or virtual line.
+            email:
+              type: string
+              example: john.nelson@gmail.com
+              description: The email address of the monitored person.
+            numbers:
+              type: array
+              items:
+                $ref: '#/components/schemas/MonitoredNumberObject'
+              description: The list of phone numbers containing only the primary number for the monitored person, workspace or virtual line.
+            location:
+              type: string
+              example: Dallas
+              description: The name of the location where the monitored person, workspace, or virtual line is situated.
+            locationId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzZhZjk4ZGViLWVlZGItNGFmYi1hMDAzLTEzNzgyYjdjODAxYw
+              description: The ID of the location.
+        callparkextension:
+          type: object
+          description: Monitored call park extension.
+          required:
+          - id
+          - location
+          - locationId
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vZTdlZDdiMDEtN2E4Ni00NDEwLWFlODMtOWJmODMzZGEzNzQy
+              description: The identifier of the call park extension.
+            name:
+              type: string
+              example: Dallas-Test
+              description: The name used to describe the call park extension.
+            lineKeyLabel:
+              type: string
+              example: Manager
+              description: This is a custom line key label configured for the Call Park Extension.
+            extension:
+              type: string
+              example: '4001'
+              description: The extension number for the call park extension.
+            routingPrefix:
+              type: string
+              example: '1234'
+              description: Routing prefix of the location.
+            esn:
+              type: string
+              example: '12344001'
+              description: Routing prefix plus extension of the Call Park Extension. If routing prefix is not configured for the location, esn will be same as extension.
+            location:
+              type: string
+              example: Dallas
+              description: The location name where the call park extension is.
+            locationId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzZhZjk4ZGViLWVlZGItNGFmYi1hMDAzLTEzNzgyYjdjODAxYw
+              description: The ID of the location.
+        speedDial:
+          $ref: '#/components/schemas/MonitoredElementSpeedDial'
+          description: Speed dial configured as a monitored element.
+    MonitoredElementSpeedDial:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+          description: The identifier of the speed dial.
+        displayName:
+          type: string
+          example: John Brown
+          description: The display name of the speed dial.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - VIRTUAL_LINE
+          description: "The type of the speed dial.\n * `PEOPLE` - Object is a user.\n * `PLACE` - Object is a workspace.\n * `VIRTUAL_LINE` - Object is a virtual line.\n"
+        lineKeyLabel:
+          type: string
+          example: Manager
+          description: Customizable line key label for speed dial.
+        phoneNumber:
+          type: string
+          example: '+19075552859'
+          description: The phone number of the speed dial.
+        location:
+          type: string
+          example: Richardson
+          description: The location name where the speed dial is.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: The ID for the location.
+    MonitoredNumberObject:
+      type: object
+      description: Phone number details of a monitored person, workspace, or virtual line.
+      properties:
+        external:
+          type: string
+          example: '+19845551088'
+          description: External phone number of the monitored person, workspace or virtual line.
+        extension:
+          type: string
+          example: '1088'
+          description: Extension number of the monitored person, workspace or virtual line.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12341088'
+          description: Routing prefix + extension of a person or workspace.
+        primary:
+          type: boolean
+          example: true
+          description: Indicates whether phone number is a primary number.
+    UserMonitoringPatch:
+      type: object
+      properties:
+        enableCallParkNotification:
+          type: boolean
+          example: true
+          description: Call park notification is enabled or disabled.
+        monitoredElements:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+          description: Array of ID strings of monitored elements. Maximum 50 elements.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

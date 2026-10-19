@@ -1,0 +1,1047 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Recording Report API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Recording Report
+paths:
+  /recordingReport/accessSummary:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecordingReportSummaryObject'
+                    description: An array of recording audit report summaries objects.
+              example:
+                items:
+                - recordingId: 4f914b1dfe3c4d11a61730f18c0f5387
+                  topic: Example Topic
+                  timeRecorded: '2020-07-13T17:05:35Z'
+                  siteUrl: site4-example.webex.com
+                  hostEmail: john.andersen@example.com
+                  viewCount: 18
+                  downloadCount: 10
+                - recordingId: 3324fb76946249cfa07fc30b3ccbf580
+                  topic: Example Topic
+                  timeRecorded: '2020-07-13T17:05:35Z'
+                  siteUrl: site4-example.webex.com
+                  hostEmail: john.andersen@example.com
+                  viewCount: 0
+                  downloadCount: 2
+                - recordingId: 42b80117a2a74dcf9863bf06264f8075
+                  topic: Example Topic
+                  timeRecorded: '2020-07-13T17:05:35Z'
+                  siteUrl: site4-example.webex.com
+                  hostEmail: john.andersen@example.com
+                  viewCount: 7
+                  downloadCount: 20
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List of Recording Audit Report Summaries
+      operationId: ListOfRecordingAuditReportSummaries
+      description: 'Lists of recording audit report summaries. You can specify a date range and the maximum number of recording audit report summaries to return.
+
+
+        Only recording audit report summaries of meetings hosted by or shared with the authenticated user will be listed.
+
+
+        The list returned is sorted in descending order by the date and time that the recordings were created.
+
+
+        Long result sets are split into pages.
+
+
+        * If `siteUrl` is specified, the recording audit report summaries of the specified site will be listed; otherwise, recording audit report summaries of the user''s preferred site will be listed. All available Webex sites and the preferred site of the user can be retrieved by the `Get Site List` API.
+
+
+        #### Request Header
+
+
+        * `timezone`: Time zone in conformance with the IANA time zone database. The default is UTC if `timezone` is not defined.'
+      tags:
+      - Recording Report
+      parameters:
+      - name: max
+        in: query
+        description: Maximum number of recording audit report summaries to return in a single page. `max` must be equal to or greater than `1` and equal to or less than `100`.
+        schema:
+          type: number
+          default: 10
+      - name: from
+        in: query
+        description: Starting date and time (inclusive) for recording audit report summaries to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `from` cannot be after `to`. Please note that the interval between `to` and `from` cannot exceed 90 days and the interval between the current time and `from` cannot exceed 365 days.
+        example: '2020-07-12T09:30:00+08:00'
+        schema:
+          type: string
+          default: If `to` is specified, the default value is 7 days before `to`; if `to` is not specified, the default value is 7 days before the current date and time.
+      - name: to
+        in: query
+        description: Ending date and time (exclusive) for recording audit report summaries to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `to` cannot be before `from`. Please note that the interval between `to` and `from` cannot exceed 90 days and the interval between the current time and `from` cannot exceed 365 days.
+        example: '2020-07-31T09:30:00+08:00'
+        schema:
+          type: string
+          default: If `from` is specified, the default value is 7 days after `from`; if `from` is not specified, the default value is the current date and time.
+      - name: hostEmail
+        in: query
+        description: Email address for the meeting host. This parameter is only used if the user or application calling the API has the admin on-behalf-of scopes. If set, the admin may specify the email of a user in a site they manage and the API will return recording audit report summaries of that user. If a special value of `all` is set for `hostEmail`, the admin can list recording audit report summaries of all users on the target site, not of a single user.
+        example: john.andersen@example.com
+        schema:
+          type: string
+      - name: siteUrl
+        in: query
+        description: URL of the Webex site which the API lists recording audit report summaries from. If not specified, the API lists summary audit report for recordings from the user's preferred site. All available Webex sites and the preferred site of the user can be retrieved by `Get Site List` API.
+        example: example.webex.com
+        schema:
+          type: string
+      - name: timezone
+        in: header
+        description: e.g. UTC
+        required: false
+        schema:
+          type: string
+        example: UTC
+      x-operation-id-source: normalized
+      x-operation-id-original: List of Recording Audit Report Summaries
+  /recordingReport/accessDetail:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecordingReportObject'
+                    description: An array of recording audit report objects.
+              example:
+                items:
+                - recordingId: 4f914b1dfe3c4d11a61730f18c0f5387
+                  topic: Example Topic
+                  name: John Andersen
+                  email: john.andersen@example.com
+                  accessTime: '2020-07-13T17:05:35Z'
+                  viewed: true
+                  downloaded: false
+                - recordingId: 4f914b1dfe3c4d11a61730f18c0f5387
+                  topic: Example Topic
+                  name: Brenda Song
+                  email: brenda.song@example.com
+                  accessTime: '2020-07-18T19:05:35Z'
+                  viewed: false
+                  downloaded: true
+                - recordingId: 4f914b1dfe3c4d11a61730f18c0f5387
+                  topic: Example Topic
+                  name: Joe Doe
+                  email: joeDoe@example.com
+                  accessTime: '2020-08-18T19:08:33Z'
+                  viewed: true
+                  downloaded: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Recording Audit Report Details
+      operationId: GetRecordingAuditReportDetails
+      description: 'Retrieves details for a recording audit report with a specified recording ID.
+
+
+        Only recording audit report details of meetings hosted by or shared with the authenticated user may be retrieved.
+
+
+        #### Request Header
+
+
+        * `timezone`: Time zone in conformance with the IANA time zone database. The default is UTC if `timezone` is not defined.'
+      tags:
+      - Recording Report
+      parameters:
+      - name: recordingId
+        in: query
+        description: A unique identifier for the recording.
+        required: true
+        example: 4f914b1dfe3c4d11a61730f18c0f5387
+        schema:
+          type: string
+      - name: hostEmail
+        in: query
+        description: Email address for the meeting host. This parameter is only used if the user or application calling the API has the admin on-behalf-of scopes. If set, the admin may specify the email of a user in a site they manage and the API will return recording details of that user.
+        example: john.andersen@example.com
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Maximum number of recording audit report details to return in a single page. `max` must be equal to or greater than `1` and equal to or less than `100`.
+        schema:
+          type: number
+          default: 10
+      - name: timezone
+        in: header
+        description: e.g. UTC
+        required: false
+        schema:
+          type: string
+        example: UTC
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Recording Audit Report Details
+  /recordingReport/meetingArchiveSummaries:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecordingAchriveSummaryObject'
+                    description: An array of meeting archive summaries objects.
+              example:
+                items:
+                - archiveId: 7d7ea5f42b921eace05386ca24ad730e_R_1000634462
+                  serviceType: MeetingCenter
+                  title: Test003_xml
+                  createTime: '2022-10-31T15:50:11Z'
+                - archiveId: 7d7ea5f42b921eace05386ca24ad730e_R_1000634107
+                  serviceType: MeetingCenter
+                  title: Gang test pwd 01_xml
+                  createTime: '2022-10-31T09:08:00Z'
+                - archiveId: 7d7ea5f42b921eace05386ca24ad730e_R_1000633967
+                  serviceType: MeetingCenter
+                  title: Numeric password Test2_xml
+                  createTime: '2022-10-31T07:53:05Z'
+                - archiveId: 7d7ea5f42b921eace05386ca24ad730e_R_1000633912
+                  serviceType: MeetingCenter
+                  title: Numeric password Test2_xml
+                  createTime: '2022-10-31T07:44:31Z'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Meeting Archive Summaries
+      operationId: ListMeetingArchiveSummaries
+      description: 'Lists of meeting archive summaries. You can specify a date range and the maximum number of meeting archive summaries to return.
+
+
+        Meeting archive summaries are only available to full administrators, not even the meeting host.
+
+
+        The list returned is sorted in descending order by the date and time that the archives were created.
+
+
+        Long result sets are split into pages.
+
+
+        * If `siteUrl` is specified, the meeting archive summaries of the specified site will be listed; otherwise, meeting archive summaries of the user''s preferred site will be listed. All available Webex sites and the preferred site of the user can be retrieved by the `Get Site List` API.
+
+
+        #### Request Header
+
+
+        * `timezone`: Time zone in conformance with the IANA time zone database. The default is UTC if `timezone` is not defined.'
+      tags:
+      - Recording Report
+      parameters:
+      - name: max
+        in: query
+        description: Maximum number of meeting archive summaries to return in a single page. `max` must be equal to or greater than `1` and equal to or less than `100`.
+        schema:
+          type: number
+          default: 10
+      - name: from
+        in: query
+        description: Starting date and time (inclusive) for meeting archive summaries to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `from` cannot be after `to`. Please note that the interval between `to` and `from` cannot exceed 30 days.
+        example: '2020-07-12T09:30:00+08:00'
+        schema:
+          type: string
+          default: If `to` is specified, the default value is 7 days before `to`; if `to` is not specified, the default value is 7 days before the current date and time.
+      - name: to
+        in: query
+        description: Ending date and time (exclusive) for meeting archive summaries to return, in any [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. `to` cannot be before `from`. Please note that the interval between `to` and `from` cannot exceed 30 days.
+        example: '2020-07-31T09:30:00+08:00'
+        schema:
+          type: string
+          default: If `from` is specified, the default value is 7 days after `from`; if `from` is not specified, the default value is the current date and time.
+      - name: siteUrl
+        in: query
+        description: URL of the Webex site which the API lists meeting archive summaries from. If not specified, the API lists meeting archive summaries for recordings from the user's preferred site. All available Webex sites and the preferred site of the user can be retrieved by `Get Site List` API.
+        example: example.webex.com
+        schema:
+          type: string
+      - name: timezone
+        in: header
+        description: e.g. UTC
+        required: false
+        schema:
+          type: string
+        example: UTC
+      x-operation-id-source: normalized
+      x-operation-id-original: List Meeting Archive Summaries
+  /recordingReport/meetingArchives/{archiveId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/RecordingArchiveReportObject'
+              example:
+                archiveId: 4E3254897D3A2E24E05386CA24AD93A6_R_1000637312
+                serviceType: MeetingCenter
+                title: Marcos Alonso's Personal Room
+                start: '2022-11-03T10:37:32+08:00'
+                end: '2022-11-03T10:37:32+08:00'
+                hostDisplayName: Marcos Alonso
+                hostEmail: marcos@example.com
+                participants:
+                - correlationId: -25516827
+                  displayName: Marcos Alonso
+                  joinedTime: '2022-11-03T10:32:09+08:00'
+                  leftTime: '2022-11-03T10:37:32+08:00'
+                - correlationId: 10947662
+                  displayName: Antoine Griezmann
+                  joinedTime: '2022-11-03T10:32:09+08:00'
+                  leftTime: '2022-11-03T10:37:32+08:00'
+                  email: linzhou@example.com
+                - correlationId: -25516842
+                  displayName: Marco Reus
+                  joinedTime: '2022-11-03T10:32:09+08:00'
+                  leftTime: '2022-11-03T10:37:32+08:00'
+                chats:
+                - type: public
+                  senderName: Marcos Alonso
+                  chatTime: '2022-11-03T10:32:48+08:00'
+                  target: All Participants
+                  text: Hi everyone!
+                polls:
+                - type: public
+                  startTime: '2022-11-03T10:33:40+08:00'
+                  endTime: '2022-11-03T10:37:32+08:00'
+                  content:
+                    questionCount: 1
+                    userCount: 1
+                    votedUserCount: 3
+                    questions:
+                    - voteUsers:
+                      - correlationId: -25516827
+                        displayName: Marcos Alonso
+                      - correlationId: -25516842
+                        displayName: Antoine Griezmann
+                      - correlationId: -25516847
+                        displayName: Marco Reus
+                      question:
+                        choiceCount: 3
+                        type: single answer
+                        text: Q1
+                      answerSummary:
+                      - totalRespondents: 1
+                        isCorrect: false
+                        text: '1'
+                        voteUsers:
+                        - correlationId: -25516842
+                          displayName: Antoine Griezmann
+                      - totalRespondents: 2
+                        isCorrect: false
+                        text: '2'
+                        voteUsers:
+                        - correlationId: -25516827
+                          displayName: Marcos Alonso
+                        - correlationId: -25516847
+                          displayName: Marco Reus
+                      - totalRespondents: 0
+                        isCorrect: true
+                        text: '3'
+                      respondents:
+                      - correlationId: -25516827
+                        displayName: Marcos Alonso
+                        answers:
+                        - '2'
+                      - correlationId: -25516842
+                        displayName: Antoine Griezmann
+                        answers:
+                        - '1'
+                      - correlationId: -25516847
+                        displayName: Marco Reus
+                        answers:
+                        - '2'
+                qas:
+                - priority: NA
+                  type: private
+                  displayName: Marcos Alonso
+                  questionTime: '2022-11-03T10:32:40+08:00'
+                  target: All Panelists
+                  question: What we will do next step?
+                  answers:
+                  - displayName: Marcos Alonso
+                    correlationId: -25516827
+                    answerTime: '2022-11-03T10:32:34+08:00'
+                    text: Go home
+                  - displayName: Adam Zhou
+                    correlationId: 10947662
+                    email: linzhou@example.com
+                    answerTime: '2022-11-03T10:34:58+08:00'
+                    text: Hiking
+                  - displayName: Marcos Alonso
+                    correlationId: -25516827
+                    answerTime: '2022-11-03T10:32:40+08:00'
+                    text: Drink Some
+                - type: dismissed
+                  displayName: Marcos Alonso
+                  questionTime: '2022-11-03T10:35:30+08:00'
+                  question: Thank you for your question. The information that you requested cannot be provided by any of the hosts or cohosts.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Meeting Archive Details
+      operationId: GetMeetingArchiveDetails
+      description: 'Retrieves details for a meeting archive report with a specified archive ID, which contains recording metadata.
+
+
+        Meeting archive details are only available to full administrators, not even the meeting host.
+
+
+        #### Request Header
+
+
+        * `timezone`: Time zone in conformance with the IANA time zone database. The default is UTC if `timezone` is not defined.'
+      tags:
+      - Recording Report
+      parameters:
+      - name: archiveId
+        in: path
+        description: A unique identifier for the meeting archive summary.
+        required: true
+        example: 7d7ea5f42b921eace05386ca24ad730e_R_1000634462
+        schema:
+          type: string
+      - name: timezone
+        in: header
+        description: e.g. UTC
+        required: false
+        schema:
+          type: string
+        example: UTC
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Meeting Archive Details
+components:
+  schemas:
+    MeetingRecordingArchivePollAnswerSummary:
+      type: object
+      properties:
+        totalRespondents:
+          type: number
+          example: 10
+          description: The total number of people who selected this answer.
+        isCorrect:
+          type: boolean
+          example: true
+          description: Whether the answer is correct.
+        text:
+          type: string
+          example: Yes, I do.
+          description: The text of the answer.
+        voteUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchiveUser'
+          description: The voters among users.
+    MeetingRecordingArchiveUser:
+      type: object
+      properties:
+        correlationId:
+          type: number
+          example: 28208023
+          description: An internal ID that is associated with each join.
+        displayName:
+          type: string
+          example: John Andersen
+          description: Display name for the meeting participant.
+        email:
+          type: string
+          example: john.andersen@example.com
+          description: Email address for the meeting participant.
+    MeetingRecordingArchiveQAAnswer:
+      type: object
+      properties:
+        responseMode:
+          type: string
+          example: private
+          description: The answer's response mode.
+        displayName:
+          type: string
+          example: John Andersen
+          description: The name of the person who answered the question.
+        correlationId:
+          type: number
+          example: 10947662
+          description: An internal ID that is associated with the answer's each join.
+        email:
+          type: string
+          example: alex.green@example.com
+          description: The email of the person who answered the question.
+        answerTime:
+          type: string
+          example: '2021-07-06T09:52:34Z'
+          description: The date and time the question answered in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+        text:
+          type: string
+          example: Yes, I am.
+          description: The text of the answer.
+    MeetingRecordingArchivePollRespondent:
+      type: object
+      properties:
+        correlationId:
+          type: number
+          example: 28208023
+          description: An internal ID that is associated with the respondent's each join.
+        displayName:
+          type: string
+          example: Alex Green
+          description: Display name for the poll respondent.
+        email:
+          type: string
+          example: alex.green@example.com
+          description: Email address for the poll respondent.
+        answers:
+          type: array
+          items:
+            type: string
+          description: An array of answers to the question.
+    MeetingRecordingArchiveChat:
+      type: object
+      properties:
+        type:
+          type: string
+          example: private
+          description: Whether the type of the chat is private, public or group. Private chat is for the 1:1 chat. Public chat is for the message which is sent to all the people in the meeting. Group chat is for the message which is sent to a small group of people, like a message to the "host and presenter".
+        senderName:
+          type: string
+          example: John Andersen
+          description: Display name for the sender of the chat snippet.
+        chatTime:
+          type: string
+          example: '2021-07-06T09:22:34Z'
+          description: Chat time for the chat snippet in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+        target:
+          type: string
+          example: All Participants
+          description: Information of the receivers of the chat snippet.
+        text:
+          type: string
+          example: It's nice to meet you
+          description: The text of the chat snippet.
+    RecordingReportObject:
+      type: object
+      properties:
+        recordingId:
+          type: string
+          example: 4f914b1dfe3c4d11a61730f18c0f5387
+          description: A unique identifier for the recording.
+        topic:
+          type: string
+          example: John's Meeting
+          description: The recording's topic.
+        name:
+          type: string
+          example: John Andersen
+          description: The name of the person who accessed the recording.
+        email:
+          type: string
+          example: john.andersen@example.com
+          description: The email address of the person who accessed the recording.
+        accessTime:
+          type: string
+          example: '2019-01-27T17:40:20Z'
+          description: The date and time the recording was accessed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+        viewed:
+          type: boolean
+          example: true
+          description: Whether or not the recording was viewed by the person.
+        downloaded:
+          type: boolean
+          example: true
+          description: Whether or not the recording was downloaded by the person.
+    RecordingReportSummaryObject:
+      type: object
+      properties:
+        recordingId:
+          type: string
+          example: 4f914b1dfe3c4d11a61730f18c0f5387
+          description: A unique identifier for the recording.
+        topic:
+          type: string
+          example: John's Meeting
+          description: The recording's topic.
+        timeRecorded:
+          type: string
+          example: '2019-01-27T17:40:20Z'
+          description: The date and time the recording started in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format. the time is the record button was clicked in the meeting.
+        siteUrl:
+          type: string
+          example: site4-example.webex.com
+          description: Site URL for the recording.
+        hostEmail:
+          type: string
+          example: john.andersen@example.com
+          description: Email address for the meeting host.
+        viewCount:
+          type: number
+          example: 7
+          description: The number of times the recording was viewed.
+        downloadCount:
+          type: number
+          example: 20
+          description: The number of times the recording was downloaded.
+    SystemInfoCatalog:
+      type: object
+      properties:
+        systemSummary:
+          type: string
+          example: 'User Name: John{*}Operating System: Mac OS X 12.6{*}User Home Directory: /Users/John{*}Date and Time: Tue Oct 18 10:38:17 CST 2022{*}'
+          description: System summary.
+        browser:
+          type: string
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+          description: The browser user agent of the person who acted.
+        hardware:
+          type: string
+          example: mac book
+          description: The type of hardware that the user used to attend the meeting.
+        installedSoftware:
+          type: string
+          example: webex
+          description: The software that the user used to attend the meeting.
+        runningSoftware:
+          type: string
+          example: webex
+          description: The software the user used that is running.
+        startupPrograms:
+          type: string
+          example: Macintosh HD
+          description: Startup Programs.
+        storage:
+          type: string
+          example: 16 GB 2667 MHz DDR4
+          description: The storage information of the user's device.
+        video:
+          type: string
+          example: AirPlay
+          description: The video of the user's device.
+        network:
+          type: string
+          example: Wi-Fi
+          description: The network of the user's device.
+        operatingSystem:
+          type: string
+          example: Mac OS X 10.0
+          description: The operating system of the user's device.
+        environmentVariables:
+          type: string
+          example: /usr/local/bin:$PATH
+          description: The environment variables of the user's device.
+        processes:
+          type: string
+          example: 2.6 GHz 6-Core Intel Core i7
+          description: The processes of the user's device.
+        logicalDrives:
+          type: string
+          example: webapp
+          description: The logical drives of the user's device.
+        devices:
+          type: string
+          example: device1
+          description: The device of the user.
+        services:
+          type: string
+          example: Firewall
+          description: The service of the user's device.
+        systemDrivers:
+          type: string
+          example: 32drivers
+          description: The system driver of the user's device.
+        signedDrivers:
+          type: string
+          example: 32drivers
+          description: The sign driver system of the user's device.
+        eventViewer:
+          type: string
+          example: Screen Sharing
+          description: The event viewer of the user's device.
+        bios:
+          type: string
+          example: AwardBIOS
+          description: The basic input and output system.
+    MeetingRecordingArchiveQA:
+      type: object
+      properties:
+        priority:
+          type: string
+          example: NA
+          description: The priority of the Q and A.
+        type:
+          type: string
+          example: private
+          description: Whether the type of the Q and A is private, public, or group. Private Q and A is for the 1:1 chat. Public Q and A are for the message which is sent to all the people in the meeting. Group Q and A are for the message which is sent to a small group of people, like a Q and A to "host and presenter".
+        displayName:
+          type: string
+          example: john.andersen@example.com`
+          description: The email of the user who asked the question.
+        questionTime:
+          type: string
+          example: '2021-07-06T09:22:34Z'
+          description: The date and time the question was created in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+        target:
+          type: string
+          example: All Participants
+          description: Information of the user who asked the question.
+        question:
+          type: string
+          example: Are you ok?
+          description: The question that was asked.
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchiveQAAnswer'
+          description: Question's answers.
+    MeetingRecordingArchivePollQuestion:
+      type: object
+      properties:
+        voteUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchiveUser'
+          description: The voters among users.
+        question:
+          type: object
+          properties:
+            choiceCount:
+              type: number
+              example: 3
+              description: The number of choices in the questions.
+            type:
+              type: string
+              example: single
+              description: The type of the question.
+            text:
+              type: string
+              example: Do you like this API?
+              description: The text of the question.
+          description: The poll's question.
+        answerSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchivePollAnswerSummary'
+          description: The answer summary of the archive poll.
+        respondents:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchivePollRespondent'
+          description: The question's respondents.
+    MeetingRecordingArchiveParticipant:
+      type: object
+      properties:
+        correlationId:
+          type: number
+          example: 28208023
+          description: An internal ID that is associated with each join.
+        displayName:
+          type: string
+          example: John Andersen
+          description: Display name for the meeting participant.
+        joinedTime:
+          type: string
+          example: '2022-07-20T07:01:31Z'
+          description: The time the participant joined the meeting.
+        leftTime:
+          type: string
+          example: '2022-07-20T07:01:31Z'
+          description: The time the participant left the meeting.
+        email:
+          type: string
+          example: john.andersen@example.com
+          description: Email address for the meeting participant.
+    MeetingRecordingArchiveSystemInfo:
+      type: object
+      properties:
+        displayName:
+          type: string
+          example: John Andersen
+          description: The name of the person who accessed the meeting archive.
+        catalogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SystemInfoCatalog'
+          description: The catalogs of system information.
+    RecordingAchriveSummaryObject:
+      type: object
+      properties:
+        archiveId:
+          type: string
+          example: 7d7ea5f42b921eace05386ca24ad730e_R_1000634462
+          description: A unique identifier for the meeting archive summary.
+        serviceType:
+          type: string
+          enum:
+          - MeetingCenter
+          - EventCenter
+          - TrainingCenter
+          - SupportCenter
+          description: Recording achrive summary's service-type.
+        title:
+          type: string
+          example: John's Meeting
+          description: Meeting title.
+        createTime:
+          type: string
+          example: '2019-01-27T17:43:24Z'
+          description: The date and time in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format that when the archive was created by the system.
+    RecordingArchiveReportObject:
+      type: object
+      properties:
+        archiveId:
+          type: string
+          example: 7d7ea5f42b921eace05386ca24ad730e_R_1000634462
+          description: A unique identifier for the meeting archive summary.
+        serviceType:
+          type: string
+          enum:
+          - MeetingCenter
+          - EventCenter
+          - TrainingCenter
+          - SupportCenter
+          description: Recording achrive report's service-type.
+        title:
+          type: string
+          example: John's Meeting
+          description: Meeting title.
+        start:
+          type: string
+          example: '2019-03-18T11:26:30Z'
+          description: Start time for meeting in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+        end:
+          type: string
+          example: '2019-03-18T12:26:30Z'
+          description: End time for a meeting in ISO 8601 compliant format.
+        hostDisplayName:
+          type: string
+          example: John Andersen
+          description: Display name for the meeting host.
+        hostEmail:
+          type: string
+          example: john.andersen@example.com
+          description: Email address for the meeting host.
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchiveParticipant'
+          description: The participants of the meeting archive.
+        chats:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchiveChat'
+          description: The chats of the meeting archive.
+        polls:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchivePoll'
+          description: The polls of the meeting archive.
+        qas:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchiveQA'
+          description: Meeting meeting archive's Q and A.
+        systemInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecordingArchiveSystemInfo'
+          description: The system Information of the meeting archive, which can be only supported when serviceType is `SupportCenter`.
+    MeetingRecordingArchivePoll:
+      type: object
+      properties:
+        type:
+          type: string
+          example: single
+          description: The type of the question.
+        startTime:
+          type: string
+          example: '2021-07-06T09:25:34Z'
+          description: The date and time the poll started in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+        endTime:
+          type: string
+          example: '2021-07-06T09:28:34Z'
+          description: The date and time the poll ended in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) compliant format.
+        content:
+          type: object
+          properties:
+            questionCount:
+              type: number
+              example: 10
+              description: The total number of questions.
+            userCount:
+              type: number
+              example: 10
+              description: The total number of users.
+            votedUserCount:
+              type: number
+              example: 3
+              description: The number of voters among users.
+            questions:
+              type: array
+              items:
+                $ref: '#/components/schemas/MeetingRecordingArchivePollQuestion'
+              description: Poll's questions.
+          description: The content of the meeting archive poll;
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

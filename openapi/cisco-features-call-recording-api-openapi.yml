@@ -1,0 +1,3344 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Call Recording API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features: Call Recording'
+  description: Webex Calling Call Recording settings, including organization- and location-level vendor configuration, terms of service, compliance announcements, and custom call recording announcements.
+paths:
+  /telephony/config/callRecording:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallRecordingObject'
+              example:
+                enabled: true
+                organization:
+                  id: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+                  name: Alaska Cisco Organization
+                vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvNTNkYzRjODctODQwOC00ODgyLTk1NzAtZGNhMmJjZGI5Mjgw
+                vendorName: Dubber
+                termsOfServiceUrl: https://www.dubber.net/terms
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Recording Settings
+      operationId: getCallRecordingSettings
+      description: 'Retrieve call recording settings for the organization.
+
+
+        The Call Recording feature enables authorized agents to record any active call that Webex Contact Center manages.
+
+
+        Retrieving call recording settings requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve call recording settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Call Recording Settings
+      operationId: updateCallRecordingSettings
+      description: 'Update call recording settings for the organization.
+
+
+        The Call Recording feature enables authorized agents to record any active call that Webex Contact Center manages.
+
+
+        Updating call recording settings requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: This API is for Cisco partners only.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve call recording settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: true
+            schema:
+              $ref: '#/components/schemas/ModifyCallRecordingSettingsObject'
+  /telephony/config/callRecording/vendors/{vendorId}/termsOfService:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallRecordingTermsOfServiceObject'
+              example:
+                vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvNTNkYzRjODctODQwOC00ODgyLTk1NzAtZGNhMmJjZGI5Mjgw
+                vendorName: Dubber
+                termsOfServiceEnabled: true
+                termsOfServiceUrl: https://www.dubber.net/terms
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Recording Terms of Service Settings
+      operationId: getCallRecordingTermsOfServiceSettings
+      description: 'Retrieve call recording terms of service settings for the organization.
+
+
+        The Call Recording feature enables authorized agents to record any active call that Webex Contact Center manages.
+
+
+        Retrieving call recording terms of service settings requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: vendorId
+        in: path
+        description: Retrieve call recording terms of service details for the given vendor.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvNTNkYzRjODctODQwOC00ODgyLTk1NzAtZGNhMmJjZGI5Mjgw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve call recording terms of service details from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Call Recording Terms of Service Settings
+      operationId: updateCallRecordingTermsOfServiceSettings
+      description: 'Update call recording terms of service settings for the given vendor.
+
+
+        The Call Recording feature enables authorized agents to record any active call that Webex Contact Center manages.
+
+
+        Updating call recording terms of service settings requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: vendorId
+        in: path
+        description: Update call recording terms of service settings for the given vendor.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvNTNkYzRjODctODQwOC00ODgyLTk1NzAtZGNhMmJjZGI5Mjgw
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update call recording terms of service settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              termsOfServiceEnabled: true
+            schema:
+              $ref: '#/components/schemas/ModifyCallRecordingTermsOfServiceObject'
+  /telephony/config/callRecording/complianceAnnouncement:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrgComplianceAnnouncementObject'
+              example:
+                inboundPSTNCallsEnabled: true
+                outboundPSTNCallsEnabled: false
+                outboundPSTNCallsDelayEnabled: false
+                delayInSeconds: 10
+                useCustomAnnouncementEnabled: true
+                audioAnnouncementFile:
+                  id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+                  fileName: SampleAnnouncement
+                  mediaFileType: WAV
+                  level: ORGANIZATION
+                  isTextToSpeech: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for the Organization Compliance Announcement Setting
+      operationId: getDetailsForTheOrganizationComplianceAnnouncementSetting
+      description: 'Retrieve the organization compliance announcement settings.
+
+
+        The Compliance Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Retrieving organization compliance announcement setting requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve compliance announcement setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update the Organization Compliance Announcement
+      operationId: updateTheOrganizationComplianceAnnouncement
+      description: 'Update the organization compliance announcement.
+
+
+        The Compliance Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Updating the organization compliance announcement requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Update the compliance announcement setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              inboundPSTNCallsEnabled: false
+              outboundPSTNCallsEnabled: false
+              outboundPSTNCallsDelayEnabled: false
+              delayInSeconds: 10
+              useCustomAnnouncementEnabled: true
+              audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+            schema:
+              $ref: '#/components/schemas/ModifyOrgComplianceAnnouncementObject'
+  /telephony/config/locations/{locationId}/callRecording/complianceAnnouncement:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComplianceAnnouncementObject'
+              example:
+                inboundPSTNCallsEnabled: true
+                useOrgSettingsEnabled: true
+                outboundPSTNCallsEnabled: false
+                outboundPSTNCallsDelayEnabled: false
+                delayInSeconds: 10
+                useOrgLevelAnnouncementEnabled: false
+                customComplianceAnnouncement:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details of Call Recording Compliance Announcement for the Location
+      operationId: getDetailsOfCallRecordingComplianceAnnouncementForTheLocation
+      description: 'Retrieve the location compliance announcement settings.
+
+
+        The Compliance Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Retrieving location compliance announcement setting requires a full, read-only, or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve compliance announcement settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve compliance announcement setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Call Recording Compliance Announcement for the Location
+      operationId: updateCallRecordingComplianceAnnouncementForTheLocation
+      description: 'Update the location compliance announcement.
+
+
+        The Compliance Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Updating the location compliance announcement requires a full or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: locationId
+        in: path
+        description: Update the compliance announcement settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update the compliance announcement setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              inboundPSTNCallsEnabled: true
+              useOrgSettingsEnabled: true
+              outboundPSTNCallsEnabled: false
+              outboundPSTNCallsDelayEnabled: false
+              delayInSeconds: 10
+              useOrgLevelAnnouncementEnabled: false
+              customComplianceAnnouncement:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+            schema:
+              $ref: '#/components/schemas/ModifyComplianceAnnouncementObject'
+  /telephony/config/callRecording/regions:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingRegionsResponse'
+              example:
+                regions:
+                - code: AU
+                  name: Australia
+                  defaultEnabled: false
+                - code: CA
+                  name: Canada
+                  defaultEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Recording Regions
+      operationId: getCallRecordingRegions
+      description: 'Retrieve all the call recording regions that are available for an organization.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve call recording regions for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/callRecording/vendorUsers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingVendorUsersResponse'
+              example:
+                vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+                members:
+                - id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1BMQUNFL2U2OTczZDgyLWM1NTUtNDMwOC05NGU3LWI3ZWU2MjczY2YyMg
+                  lastName: Last
+                  firstName: HQ-Shared-Device
+                  type: PLACE
+                  licenseType: WORKSPACE
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS82MzE1ZTcxMy1hNGMzLTRmN2UtYmE2YS1hNjIyNTA3YjhmNzk
+                  lastName: G
+                  firstName: Viktor
+                  type: PEOPLE
+                  licenseType: PROFESSIONAL_USER
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Recording Vendor Users
+      operationId: getCallRecordingVendorUsers
+      description: 'Retrieve call recording vendor users of an organization. This API is used to get the list of users who are assigned to the default call-recording vendor of the organization.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve call recording vendor users for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of vendor users returned to this maximum count. The default is 2000.
+        example: 10
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects. The default is 0.
+        schema:
+          type: number
+        example: 1
+      - name: standardUserOnly
+        in: query
+        description: If true, results only include Webex Calling standard users.
+        example: true
+        schema:
+          type: boolean
+  /telephony/config/locations/{locationId}/callRecording/vendor:
+    put:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingVendorPatchResponse'
+              example:
+                jobId: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8yOTQ5ZmRiOC1kODg1LTQxMzAtYjhiNy1jNmJiYmM5ZWQzOTE
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Set Call Recording Vendor for a Location
+      operationId: setCallRecordingVendorForALocation
+      description: 'Assign a call recording vendor to a location of an organization. Response will be `204` if the changes can be applied immediatley otherwise `200` with a job ID is returned.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: locationId
+        in: path
+        description: Update the call recording vendor for this location
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update the call recording vendor for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+              orgDefaultEnabled: false
+              failureBehavior: PROCEED_CALL_WITH_ANNOUNCEMENT
+              orgFailureBehaviorEnabled: true
+            schema:
+              $ref: '#/components/schemas/CallRecordingVendorsPatchRequest'
+  /telephony/config/locations/{locationId}/callRecording/vendors:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingLocationVendorsResponse'
+              example:
+                orgDefaultEnabled: false
+                orgDefaultVendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+                orgDefaultVendorName: Webex
+                defaultVendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+                defaultVendorName: Webex
+                vendors:
+                - id: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvZmVjYjYzNGUtYzMyZS00ZWJmLThlYzMtMmVhYjk3Y2IyNjNk
+                  name: Dubber
+                  description: This is the Dubber instance for the US region.
+                  migrateUserCreationEnabled: true
+                  loginUrl: https://wxc-us.dubber.net/login?sso=webex
+                  termsOfServiceUrl: https://www.dubber.net/terms
+                orgStorageRegionEnabled: true
+                orgStorageRegion: US
+                storageRegion: US
+                orgFailureBehaviorEnabled: true
+                orgFailureBehavior: PROCEED_WITH_CALL_NO_ANNOUNCEMENT
+                failureBehavior: PROCEED_WITH_CALL_NO_ANNOUNCEMENT
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Location Call Recording Vendors
+      operationId: getLocationCallRecordingVendors
+      description: 'Retrieve details of the call recording vendor that the location is assigned and also a list of vendors.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve vendor details for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve vendor details for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/locations/{locationId}/callRecording/vendorUsers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingVendorUsersResponse'
+              example:
+                vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+                members:
+                - id: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1BMQUNFL2U2OTczZDgyLWM1NTUtNDMwOC05NGU3LWI3ZWU2MjczY2YyMg
+                  lastName: Last
+                  firstName: HQ-Shared-Device
+                  type: PLACE
+                  licenseType: WORKSPACE
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYzQ1Y2U0OC1hZWFmLTRmOGUtYmVlOS0zMjg5NDI2ZmYxZTY
+                  lastName: Miller
+                  firstName: Gary
+                  type: PEOPLE
+                  licenseType: PROFESSIONAL_USER
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Recording Vendor Users for a Location
+      operationId: getCallRecordingVendorUsersForALocation
+      description: 'Retrieve call recording vendor users of a location. This API is used to get the list of users assigned to the call recording vendor of the location.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve vendor users for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve vendor users for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of vendor users returned to this maximum count. The default is 2000.
+        example: 10
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects. The default is 0.
+        schema:
+          type: number
+        example: 1
+      - name: standardUserOnly
+        in: query
+        description: If true, results only include Webex Calling standard users.
+        example: true
+        schema:
+          type: boolean
+  /telephony/config/jobs/callRecording:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingJobList'
+              example:
+                items:
+                - id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8yOTQ5ZmRiOC1kODg1LTQxMzAtYjhiNy1jNmJiYmM5ZWQzOTE
+                  trackingId: ADMINBATCHCLIENT_926cde91-bbbd-4288-80d6-8ec19738f3bd_0
+                  sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODA2NzZhZC0yNjRlLTRmMWMtYmIwYS1jMWZiNmQ0ODlmZTI
+                  sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8zNDEyODExZi0xMWI4LTQ2YTAtYWExNS1lZmEwMjRjODI5ODM
+                  targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8zNDEyODExZi0xMWI4LTQ2YTAtYWExNS1lZmEwMjRjODI5ODM
+                  instanceId: 637238
+                  jobExecutionStatus:
+                  - id: 660912
+                    startTime: '2024-05-08T14:12:28.371Z'
+                    endTime: '2024-05-08T14:12:39.848Z'
+                    lastUpdated: '2024-05-08T14:12:39.983Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    createdTime: '2024-05-08T14:12:27.997Z'
+                    stepExecutionStatuses:
+                    - id: 1909985
+                      startTime: '2024-05-08T14:12:28.746Z'
+                      endTime: '2024-05-08T14:12:29.145Z'
+                      lastUpdated: '2024-05-08T14:12:29.145Z'
+                      statusMessage: COMPLETED
+                      exitCode: COMPLETED
+                      name: managecallrecordingproviderGetUserThatNeedCallRecProviderUpdate
+                      timeElapsed: PT0.399S
+                    - id: 1909986
+                      startTime: '2024-05-08T14:12:29.156Z'
+                      endTime: '2024-05-08T14:12:39.843Z'
+                      lastUpdated: '2024-05-08T14:12:39.843Z'
+                      statusMessage: COMPLETED
+                      exitCode: COMPLETED
+                      name: managecallrecordingproviderUpdateCallRecordingProviderForUsers
+                      timeElapsed: PT10.687S
+                    timeElapsed: PT11.086S
+                  latestExecutionStatus: COMPLETED
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzlmZTFmZDllLTlkM2QtNDUxZi04MDEwLTMwY2U1ZjRlNTYyNQ
+                  vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+                  counts:
+                    totalNumberOfLocations: 0
+                    totalNumberOfUsers: 6
+                    failedUsers: 0
+                    updatedUsers: 6
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Call Recording Jobs
+      operationId: listCallRecordingJobs
+      description: 'Get the list of all call recording jobs in an organization.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: List call recording jobs in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of jobs returned to this maximum count. The default is 50.
+        example: 10
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects. The default is 0.
+        schema:
+          type: number
+        example: 1
+  /telephony/config/jobs/callRecording/{jobId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingJobStatus'
+              example:
+                name: managecallrecordingprovider
+                id: Y2lzY29zcGFyazovL3VzL0pPQl9JRC80ZDA4MDZhYy1hN2M3LTRjM2MtYmVlNy01NDM3MDk4MmYzMWI
+                trackingId: ADMINBATCHCLIENT_a02c7b0c-4d28-4e98-b47b-0a135a4b287f_0
+                sourceUserId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODA2NzZhZC0yNjRlLTRmMWMtYmIwYS1jMWZiNmQ0ODlmZTI
+                sourceCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8zNDEyODExZi0xMWI4LTQ2YTAtYWExNS1lZmEwMjRjODI5ODM
+                targetCustomerId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8zNDEyODExZi0xMWI4LTQ2YTAtYWExNS1lZmEwMjRjODI5ODM
+                instanceId: 637210
+                jobExecutionStatus:
+                - id: 660884
+                  startTime: '2024-05-08T13:51:47.275Z'
+                  endTime: '2024-05-08T13:51:57.873Z'
+                  lastUpdated: '2024-05-08T13:51:57.978Z'
+                  statusMessage: COMPLETED
+                  exitCode: COMPLETED
+                  createdTime: '2024-05-08T13:51:47.018Z'
+                  stepExecutionStatuses:
+                  - id: 1909908
+                    startTime: '2024-05-08T13:51:47.550Z'
+                    endTime: '2024-05-08T13:51:47.978Z'
+                    lastUpdated: '2024-05-08T13:51:47.978Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    name: managecallrecordingproviderGetUserThatNeedCallRecProviderUpdate
+                    timeElapsed: PT0.428S
+                  - id: 1909909
+                    startTime: '2024-05-08T13:51:47.994Z'
+                    endTime: '2024-05-08T13:51:57.866Z'
+                    lastUpdated: '2024-05-08T13:51:57.866Z'
+                    statusMessage: COMPLETED
+                    exitCode: COMPLETED
+                    name: managecallrecordingproviderUpdateCallRecordingProviderForUsers
+                    timeElapsed: PT9.872S
+                  timeElapsed: PT10.3S
+                latestExecutionStatus: COMPLETED
+                locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzlmZTFmZDllLTlkM2QtNDUxZi04MDEwLTMwY2U1ZjRlNTYyNQ
+                vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvZmYzNzMzOTYtMGVmMC00N2NiLTk5NzEtNzg0MDI5YzZjMTQ3
+                counts:
+                  totalNumberOfLocations: 0
+                  totalNumberOfUsers: 6
+                  failedUsers: 0
+                  updatedUsers: 6
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get the Job Status of a Call Recording Job
+      operationId: getTheJobStatusOfACallRecordingJob
+      description: 'Get the details of a call recording job by its job ID.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: jobId
+        in: path
+        description: Retrieve job status for this `jobId`.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve job status in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+  /telephony/config/jobs/callRecording/{jobId}/errors:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseObject'
+              example:
+                items:
+                - itemNumber: 0
+                  item: 5d320be1-e28c-420a-8935-1a54c7826eb4
+                  error:
+                    key: '500'
+                    message:
+                    - description: 'POST failed: HTTP/1.1 404 Not Found'
+                      code: '404'
+                      locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzlmZTFmZDllLTlkM2QtNDUxZi04MDEwLTMwY2U1ZjRlNTYyNQ
+                  trackingId: ADMINBATCHCLIENT_2830be24-766e-4a2a-be36-d289eb890322_0_3
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Job Errors for a Call Recording Job
+      operationId: getJobErrorsForACallRecordingJob
+      description: 'Get errors for a call recording job in an organization.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: jobId
+        in: path
+        description: Retrieve job errors for this job.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC83ZWUyMjAzMS0xM2Q5LTRmYTctODQ0NS1lNDMzNjE3MmVjYmU
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve job errors for a call recording job in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of errors returned to this maximum count. The default is 50.
+        example: 10
+        schema:
+          type: number
+  /telephony/config/callRecording/vendors:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingVendorsList'
+              example:
+                vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+                vendorName: Webex
+                vendors:
+                  items:
+                  - id: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvNTNkYzRjODctODQwOC00ODgyLTk1NzAtZGNhMmJjZGI5Mjgw
+                    name: Dubber
+                    description: Dubber Call Recording Provider
+                    migrateUserCreationEnabled: true
+                    loginUrl: https://wxc-sandbox.dubber.net/login?sso=webex
+                    termsOfServiceUrl: https://www.dubber.net/terms
+                  - id: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+                    name: Webex
+                    description: Webex CRP
+                    migrateUserCreationEnabled: false
+                    loginUrl: ''
+                    termsOfServiceUrl: ''
+                storageRegion: US
+                failureBehavior: PROCEED_WITH_CALL_NO_ANNOUNCEMENT
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Organization Call Recording Vendors
+      operationId: getOrganizationCallRecordingVendors
+      description: 'Returns what the current vendor is as well as a list of all the available vendors.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve call recording settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+        schema:
+          type: string
+  /telephony/config/callRecording/vendor:
+    put:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRecordingVendorPatchResponse'
+              example:
+                jobId: Y2lzY29zcGFyazovL3VzL0pPQl9JRC9mYjg1ZDAzNC01NDc0LTQ5YjMtOGM3Ny0zZDZlZDQ1MzA3MGY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Set Organization Call Recording Vendor
+      operationId: setOrganizationCallRecordingVendor
+      description: 'Returns a Job ID that you can use to get the status of the job.
+
+
+        The Call Recording feature supports multiple third-party call recording providers, or vendors, to capture and manage call recordings. An organization is configured with an overall provider, but locations can be configured to use a different vendor than the overall organization default.
+
+
+        Requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`, `spark-admin:telephony_config_read`, and `spark-admin:people_write`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Modify call recording settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              vendorId: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+              failureBehavior: PROCEED_WITH_CALL_NO_ANNOUNCEMENT
+            schema:
+              $ref: '#/components/schemas/CallRecordingVendorPatch'
+  /telephony/config/callRecording/announcements:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrgCallRecordingAnnouncementObject'
+              example:
+                start:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iOTg2MWI3MS1hN2MxLTQxZmUtYjNmZC1lZDNkOTdjYTFjMzQ=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                stop:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                pause:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82M2NiYTMwOS05NjQ2LTQzMjUtOTZlNC02N2ZmYWVlZjNiOWI=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                resume:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8xM2NlNzBkYS00NDkwLTQ2OWItOTg4YS1mYjA0MzExNmQ3ZTU=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                failureEndWithCall:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9mZTU4YTE1ZS1kNzMwLTQ4ZGYtYWU4Ny1jNjc5YjM3YmQ4Mzk=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                failureProceedWithCall:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Organization Call Recording Announcement Settings
+      operationId: getOrganizationCallRecordingAnnouncementSettings
+      description: 'Retrieve the organization call recording announcements setting.
+
+
+        The call recording Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Retrieving organization compliance announcement setting requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve call recording announcements setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Organization Call Recording Announcement Settings
+      operationId: updateOrganizationCallRecordingAnnouncementSettings
+      description: 'Update Organization Call Recording Announcement Settings.
+
+
+        The Compliance Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Updating the organization compliance announcement requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: orgId
+        in: query
+        description: Update the call recording announcements setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              start:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iOTg2MWI3MS1hN2MxLTQxZmUtYjNmZC1lZDNkOTdjYTFjMzQ=
+              stop:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+              pause:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82M2NiYTMwOS05NjQ2LTQzMjUtOTZlNC02N2ZmYWVlZjNiOWI=
+              resume:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8xM2NlNzBkYS00NDkwLTQ2OWItOTg4YS1mYjA0MzExNmQ3ZTU=
+              failureEndWithCall:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9mZTU4YTE1ZS1kNzMwLTQ4ZGYtYWU4Ny1jNjc5YjM3YmQ4Mzk=
+              failureProceedWithCall:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+            schema:
+              $ref: '#/components/schemas/ModifyOrgCallRecordingAnnouncementObject'
+  /telephony/config/locations/{locationId}/callRecording/announcements:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocationCallRecordingAnnouncementObject'
+              example:
+                useOrgLevelAnnouncementEnabled: false
+                start:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iOTg2MWI3MS1hN2MxLTQxZmUtYjNmZC1lZDNkOTdjYTFjMzQ=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                stop:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                pause:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82M2NiYTMwOS05NjQ2LTQzMjUtOTZlNC02N2ZmYWVlZjNiOWI=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                resume:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8xM2NlNzBkYS00NDkwLTQ2OWItOTg4YS1mYjA0MzExNmQ3ZTU=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                failureEndWithCall:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9mZTU4YTE1ZS1kNzMwLTQ4ZGYtYWU4Ny1jNjc5YjM3YmQ4Mzk=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+                failureProceedWithCall:
+                  type: CUSTOM
+                  audioAnnouncementFile:
+                    id: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                    fileName: SampleAnnouncement
+                    mediaFileType: WAV
+                    level: ORGANIZATION
+                    isTextToSpeech: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Location Call Recording Announcement Settings
+      operationId: getLocationCallRecordingAnnouncementSettings
+      description: 'Retrieve the location call recording announcements setting.
+
+
+        The Compliance Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Retrieving location compliance announcement setting requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve compliance announcement settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve compliance announcement setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Location Call Recording Announcement Settings
+      operationId: updateLocationCallRecordingAnnouncementSettings
+      description: 'Update Location Call Recording Announcement Settings.
+
+
+        The Compliance Announcement feature interacts with the Call Recording feature, specifically with the playback of the start/stop announcement. When the compliance announcement is played to the PSTN party, and the PSTN party is connected to a party with call recording enabled, then the start/stop announcement is inhibited.
+
+
+        Updating the location compliance announcement requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Call Recording'
+      parameters:
+      - name: locationId
+        in: path
+        description: Update the call recording announcements setting for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update the call recording announcements setting from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              useOrgLevelAnnouncementEnabled: false
+              start:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iOTg2MWI3MS1hN2MxLTQxZmUtYjNmZC1lZDNkOTdjYTFjMzQ=
+              stop:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+              pause:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82M2NiYTMwOS05NjQ2LTQzMjUtOTZlNC02N2ZmYWVlZjNiOWI=
+              resume:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8xM2NlNzBkYS00NDkwLTQ2OWItOTg4YS1mYjA0MzExNmQ3ZTU=
+              failureEndWithCall:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9mZTU4YTE1ZS1kNzMwLTQ4ZGYtYWU4Ny1jNjc5YjM3YmQ4Mzk=
+              failureProceedWithCall:
+                type: CUSTOM
+                audioAnnouncementFileId: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+            schema:
+              $ref: '#/components/schemas/ModifyLocationCallRecordingAnnouncementObject'
+components:
+  schemas:
+    GetOrgComplianceAnnouncementObject:
+      type: object
+      required:
+      - inboundPSTNCallsEnabled
+      - outboundPSTNCallsEnabled
+      - outboundPSTNCallsDelayEnabled
+      - delayInSeconds
+      - useCustomAnnouncementEnabled
+      - audioAnnouncementFile
+      properties:
+        inboundPSTNCallsEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether the call recording START/STOP announcement is played to an inbound caller.
+        outboundPSTNCallsEnabled:
+          type: boolean
+          description: Flag to indicate whether the call recording START/STOP announcement is played to an outbound caller.
+        outboundPSTNCallsDelayEnabled:
+          type: boolean
+          description: Flag to indicate whether compliance announcement is played after a specified delay in seconds.
+        delayInSeconds:
+          type: number
+          example: 10
+          description: Number of seconds to wait before playing the compliance announcement.
+        useCustomAnnouncementEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the custom compliance announcement. If true it uses the organization's custom compliance announcement file, and if false default compliance announcement used.
+        audioAnnouncementFile:
+          type: object
+          description: The custom audio announcement file to be played.
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+            fileName:
+              type: string
+              example: SampleAnnouncement
+              description: The original file name of the uploaded custom audio announcement.
+            mediaFileType:
+              type: string
+              enum:
+              - WAV
+              example: WAV
+              description: Type of the announcement file. Type is an enum with supported values WAV
+            level:
+              type: string
+              enum:
+              - ORGANIZATION
+              - LOCATION
+              description: Announcement audio file level.
+              example: ORGANIZATION
+            isTextToSpeech:
+              type: boolean
+              example: true
+              description: Indicates if the announcement is created by TTS.
+    MemberType:
+      type: string
+      enum:
+      - PEOPLE
+      - PLACE
+      description: " * `PEOPLE` - Indicates the associated member is a person.\n * `PLACE` - Indicates the associated member is a workspace.\n"
+    CallRecordingVendorPatch:
+      type: object
+      required:
+      - vendorId
+      properties:
+        vendorId:
+          type: string
+          description: Unique identifier of the vendor.
+        failureBehavior:
+          description: Call recording failure behavior.
+          allOf:
+          - $ref: '#/components/schemas/FailureBehavior'
+    stepExecutionStatusesObject:
+      type: object
+      required:
+      - id
+      - lastUpdated
+      - statusMessage
+      - name
+      - timeElapsed
+      properties:
+        id:
+          type: number
+          example: 3624681
+          description: Unique identifier that identifies each step in a job.
+        startTime:
+          type: string
+          example: '2023-05-30T13:04:00.469Z'
+          description: The date and time with seconds, the step execution has started in UTC format.
+        endTime:
+          type: string
+          example: '2023-05-30T13:04:03.245Z'
+          description: The date and time with seconds, the step execution has ended in UTC format.
+        lastUpdated:
+          type: string
+          example: '2023-05-30T13:04:03.574Z'
+          description: The date and time with seconds, the step has last updated in UTC format.
+        statusMessage:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Displays status for a step.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        exitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Exit Code for a step.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        name:
+          type: string
+          example: moveusersvalidateAndMove
+          description: Step name.
+        timeElapsed:
+          type: string
+          example: PT2.752S
+          description: Time lapsed in seconds since the job execution started.
+    FailureBehavior:
+      type: string
+      enum:
+      - PROCEED_WITH_CALL_NO_ANNOUNCEMENT
+      - PROCEED_CALL_WITH_ANNOUNCEMENT
+      - END_CALL_WITH_ANNOUNCEMENT
+      description: " * `PROCEED_WITH_CALL_NO_ANNOUNCEMENT` - Failure behavior will make sure that the call proceeds without announcement.\n * `PROCEED_CALL_WITH_ANNOUNCEMENT` - Failure behavior will make sure that the call proceeds with an announcement.\n * `END_CALL_WITH_ANNOUNCEMENT` - Failure behavior will make sure that the call ends with an announcement.\n"
+    ErrorObject:
+      type: object
+      properties:
+        key:
+          type: string
+          description: HTTP error code.
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorMessageObject'
+          description: Message string with further error information.
+    CallRecordingRegionsResponse:
+      type: object
+      required:
+      - regions
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Regions'
+          description: Contains region details.
+    ModifyCallRecordingSettingsObject:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Whether or not the call recording is enabled.
+    CallRecordingJobStatus:
+      type: object
+      required:
+      - id
+      - trackingId
+      - sourceUserId
+      - sourceCustomerId
+      - targetCustomerId
+      - instanceId
+      - latestExecutionStatus
+      - vendorId
+      - counts
+      properties:
+        name:
+          type: string
+          example: managecallrecordingprovider
+          description: Name of the job.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8wNjZkOTQzNC1kODEyLTQzODItODVhMC00MjBlOTFlODg3ZTY
+          description: Unique identifier of the job.
+        trackingId:
+          type: string
+          example: ADMINBATCHCLIENT_a02c7b0c-4d28-4e98-b47b-0a135a4b287f_0
+          description: Unique identifier to track the flow of HTTP requests.
+        sourceUserId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jODA2NzZhZC0yNjRlLTRmMWMtYmIwYS1jMWZiNmQ0ODlmZTI
+          description: Unique identifier of the user who has run the job.
+        sourceCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8zNDEyODExZi0xMWI4LTQ2YTAtYWExNS1lZmEwMjRjODI5ODM
+          description: Unique identifier of the customer who has run the job.
+        targetCustomerId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8zNDEyODExZi0xMWI4LTQ2YTAtYWExNS1lZmEwMjRjODI5ODM
+          description: Unique identifier of the customer for which the job was run.
+        instanceId:
+          type: number
+          example: 637210
+          description: Unique identifier to identify the instance of the job.
+        jobExecutionStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobExecutionStatusObject'
+          description: Displays the most recent step's execution status. Contains execution statuses of all the steps involved in the execution of the job.
+        latestExecutionStatus:
+          description: Most recent status of the job at the time of invocation.
+          allOf:
+          - $ref: '#/components/schemas/LatestExecutionStatus'
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzlmZTFmZDllLTlkM2QtNDUxZi04MDEwLTMwY2U1ZjRlNTYyNQ
+          description: Unique identifier of a location.
+        vendorId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvZmYzNzMzOTYtMGVmMC00N2NiLTk5NzEtNzg0MDI5YzZjMTQ3
+          description: Unique identifier of a vendor.
+        counts:
+          description: Job statistics.
+          allOf:
+          - $ref: '#/components/schemas/CountObject'
+    CallRecordingVendorsPatchRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+          description: Unique identifier of the call recording vendor.
+        orgDefaultEnabled:
+          type: boolean
+          example: true
+          description: Vendor is enabled by default.
+        failureBehavior:
+          description: Type of failure behavior.
+          allOf:
+          - $ref: '#/components/schemas/FailureBehavior'
+        orgFailureBehaviorEnabled:
+          type: boolean
+          example: true
+          description: Failure behavior is enabled.
+    ModifyComplianceAnnouncementObject:
+      type: object
+      properties:
+        inboundPSTNCallsEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether the Call Recording START/STOP announcement is played to an inbound caller.
+        useOrgSettingsEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the customer level compliance announcement default settings.
+        outboundPSTNCallsEnabled:
+          type: boolean
+          description: Flag to indicate whether the Call Recording START/STOP announcement is played to an outbound caller.
+        outboundPSTNCallsDelayEnabled:
+          type: boolean
+          description: Flag to indicate whether compliance announcement is played after a specified delay in seconds.
+        delayInSeconds:
+          type: number
+          example: 10
+          description: Number of seconds to wait before playing the compliance announcement.
+        useOrgLevelAnnouncementEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the organization level custom compliance announcement. If this flag is set to true, takes the organization's announcement setting. If this flag is set to false, takes the location's custom announcement.
+        customComplianceAnnouncement:
+          type: object
+          description: Custom compliance announcement settings.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              example: CUSTOM
+              description: Type of compliance announcement to be played. Type is an enum with supported values CUSTOM | DEFAULT. CUSTOM is used to play a custom announcement file. DEFAULT is used to play the default system announcement file.
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+    ErrorResponseObject:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemObject'
+    ModifyCallRecordingTermsOfServiceObject:
+      type: object
+      required:
+      - termsOfServiceEnabled
+      properties:
+        termsOfServiceEnabled:
+          type: boolean
+          example: true
+          description: Whether or not the call recording terms of service are enabled.
+    Members:
+      type: object
+      required:
+      - id
+      - type
+      - licenseType
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1BMQUNFL2U2OTczZDgyLWM1NTUtNDMwOC05NGU3LWI3ZWU2MjczY2YyMg
+          description: Unique identifier of the member.
+        lastName:
+          type: string
+          example: jones
+          description: Last name of the member.
+        firstName:
+          type: string
+          example: Vickor
+          description: First name of the member.
+        type:
+          description: Type of the member.
+          allOf:
+          - $ref: '#/components/schemas/MemberType'
+        licenseType:
+          description: License type of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserLicenseType'
+    ModifyOrgComplianceAnnouncementObject:
+      type: object
+      properties:
+        inboundPSTNCallsEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether the call recording START/STOP announcement is played to an inbound caller.
+        outboundPSTNCallsEnabled:
+          type: boolean
+          description: Flag to indicate whether the call recording START/STOP announcement is played to an outbound caller.
+        outboundPSTNCallsDelayEnabled:
+          type: boolean
+          description: Flag to indicate whether compliance announcement is played after a specified delay in seconds.
+        delayInSeconds:
+          type: number
+          example: 10
+          description: Number of seconds to wait before playing the compliance announcement.
+        useCustomAnnouncementEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the custom compliance announcement. If true it uses the organization's custom compliance announcement file, and if false default compliance announcement used.
+        audioAnnouncementFileId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+          description: Unique identifier for the custom audio announcement file.
+    ItemObject:
+      type: object
+      properties:
+        item:
+          type: string
+          description: Phone number
+        itemNumber:
+          type: number
+          description: Index of error number.
+        trackingId:
+          type: string
+          description: Unique identifier to track the HTTP requests.
+        error:
+          $ref: '#/components/schemas/ErrorObject'
+    CallRecordingVendor:
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - migrateUserCreationEnabled
+      - loginUrl
+      - termsOfServiceUrl
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the vendor.
+        name:
+          type: string
+          description: Name of the vendor.
+        description:
+          type: string
+          description: Description of the vendor.
+        migrateUserCreationEnabled:
+          type: boolean
+          description: Represents whether user creation is integrated for this vendor. When user creation is integrated, a call recording account in the vendor's system is automatically created when a user is created or added.
+        loginUrl:
+          type: string
+          description: Vendor login page to access user call recordings.
+        termsOfServiceUrl:
+          type: string
+          description: Vendor terms of service URL.
+    GetComplianceAnnouncementObject:
+      type: object
+      required:
+      - inboundPSTNCallsEnabled
+      - useOrgSettingsEnabled
+      - outboundPSTNCallsEnabled
+      - outboundPSTNCallsDelayEnabled
+      - delayInSeconds
+      - useOrgLevelAnnouncementEnabled
+      - customComplianceAnnouncement
+      properties:
+        inboundPSTNCallsEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether the call recording START/STOP announcement is played to an inbound caller.
+        useOrgSettingsEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the customer level compliance announcement default settings.
+        outboundPSTNCallsEnabled:
+          type: boolean
+          description: Flag to indicate whether the call recording START/STOP announcement is played to an outbound caller.
+        outboundPSTNCallsDelayEnabled:
+          type: boolean
+          description: Flag to indicate whether compliance announcement is played after a specified delay in seconds.
+        delayInSeconds:
+          type: number
+          example: 10
+          description: Number of seconds to wait before playing the compliance announcement.
+        useOrgLevelAnnouncementEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the organization level custom compliance announcement. If this flag is set to true, takes the organization's announcement setting. If this flag is set to false, takes the location's custom announcement.
+        customComplianceAnnouncement:
+          type: object
+          description: Custom compliance announcement settings.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              example: CUSTOM
+              description: Type of compliance announcement to be played. Type is an enum with supported values CUSTOM | DEFAULT. CUSTOM is used to play a custom announcement file. DEFAULT is used to play the default system announcement file.
+            audioAnnouncementFile:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+    JobExecutionStatusObject:
+      type: object
+      required:
+      - id
+      - lastUpdated
+      - statusMessage
+      - createdTime
+      - timeElapsed
+      properties:
+        id:
+          type: number
+          example: 735206
+          description: Unique identifier that identifies each instance of the job.
+        startTime:
+          type: string
+          example: '2023-05-30T13:04:00.469Z'
+          description: The date and time with seconds, the job has started in UTC format.
+        endTime:
+          type: string
+          example: '2023-05-30T13:04:03.245Z'
+          description: The date and time with seconds, the job has ended in UTC format.
+        lastUpdated:
+          type: string
+          example: '2023-05-30T13:04:03.574Z'
+          description: The date and time with seconds, the job has last updated in UTC format post one of the step execution completion.
+        statusMessage:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - COMPLETED
+          - FAILED
+          - UNKNOWN
+          - ABANDONED
+          description: "Displays status for overall steps that are part of the job.\n * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has completed.\n * `FAILED` - Job has failed.\n * `UNKNOWN` - Job status is unknown.\n * `ABANDONED` - Job has been abandoned (manually stopped).\n"
+        exitCode:
+          type: string
+          enum:
+          - UNKNOWN
+          - COMPLETED
+          - FAILED
+          - STOPPED
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED_WITH_PENDING_ORDERS
+          description: "Exit Code for a job.\n * `UNKNOWN` - Job is in progress.\n * `COMPLETED` - Job has completed successfully.\n * `FAILED` - Job has failed.\n * `STOPPED` - Job has been stopped.\n * `COMPLETED_WITH_ERRORS` - Job has completed with errors.\n * `COMPLETED_WITH_PENDING_ORDERS` - Job has completed with pending number orders.\n"
+        createdTime:
+          type: string
+          example: '2023-05-30T13:04:00.457Z'
+          description: The date and time with seconds, the job has created in UTC format.
+        timeElapsed:
+          type: string
+          example: PT2.752S
+          description: Time lapsed in seconds since the job execution started.
+        stepExecutionStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/stepExecutionStatusesObject'
+          description: Status of each step within a job.
+    ModifyLocationCallRecordingAnnouncementObject:
+      type: object
+      properties:
+        useOrgLevelAnnouncementEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the organization level call recording announcement settings. If the flag is set to true, indicates that the callRecordingAnnouncementSelection setting is inherited from the organization-level configuration. If the flag is set to false, indicates that the callRecordingAnnouncementSelection setting is customized at the location level.
+        start:
+          type: object
+          description: The start announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iOTg2MWI3MS1hN2MxLTQxZmUtYjNmZC1lZDNkOTdjYTFjMzQ=
+              description: Unique identifier for the custom audio announcement file.
+        stop:
+          type: object
+          description: The stop announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+              description: Unique identifier for the custom audio announcement file.
+        pause:
+          type: object
+          description: The pause announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82M2NiYTMwOS05NjQ2LTQzMjUtOTZlNC02N2ZmYWVlZjNiOWI=
+              description: Unique identifier for the custom audio announcement file.
+        resume:
+          type: object
+          description: The resume announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8xM2NlNzBkYS00NDkwLTQ2OWItOTg4YS1mYjA0MzExNmQ3ZTU=
+              description: Unique identifier for the custom audio announcement file.
+        failureEndWithCall:
+          type: object
+          description: The failure end with call announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9mZTU4YTE1ZS1kNzMwLTQ4ZGYtYWU4Ny1jNjc5YjM3YmQ4Mzk=
+              description: Unique identifier for the custom audio announcement file.
+        failureProceedWithCall:
+          type: object
+          description: The failure proceed with call announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+              description: Unique identifier for the custom audio announcement file.
+    CallRecordingVendorPatchResponse:
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0pPQl9JRC8yOTQ5ZmRiOC1kODg1LTQxMzAtYjhiNy1jNmJiYmM5ZWQzOTE
+          description: Unique job ID of the call recording job.
+    GetCallRecordingTermsOfServiceObject:
+      type: object
+      required:
+      - vendorId
+      - vendorName
+      - termsOfServiceEnabled
+      - termsOfServiceUrl
+      properties:
+        vendorId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvNTNkYzRjODctODQwOC00ODgyLTk1NzAtZGNhMmJjZGI5Mjgw
+          description: A unique identifier for the vendor.
+        vendorName:
+          type: string
+          example: Dubber
+          description: A unique name for the vendor.
+        termsOfServiceEnabled:
+          type: boolean
+          example: true
+          description: Whether or not the call recording terms of service are enabled.
+        termsOfServiceUrl:
+          type: string
+          example: https://www.dubber.net/terms
+          description: 'Url where can be found terms of service for the vendor.
+
+
+            **NOTE**: This is expected to be empty for webex recording platform.'
+    CallRecordingLocationVendorsResponse:
+      type: object
+      required:
+      - orgDefaultEnabled
+      - orgDefaultVendorId
+      - orgDefaultVendorName
+      - defaultVendorId
+      - defaultVendorName
+      - vendors
+      - failureBehavior
+      properties:
+        orgDefaultEnabled:
+          type: boolean
+          example: true
+          description: Default call recording is enabled.
+        orgDefaultVendorId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+          description: Unique identifier of a vendor.
+        orgDefaultVendorName:
+          type: string
+          example: Webex
+          description: Name of the call recording vendor.
+        defaultVendorId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+          description: Unique identifier of a vendor.
+        defaultVendorName:
+          type: string
+          example: Webex
+          description: Name of the call recording vendor.
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vendor'
+          description: List of available vendors and their details.
+        orgStorageRegionEnabled:
+          type: boolean
+          example: true
+          description: Region-based storage is enabled.
+        orgStorageRegion:
+          type: string
+          example: US
+          description: Org level two character Region code.
+        storageRegion:
+          type: string
+          example: US
+          description: Location level character Region code.
+        orgFailureBehaviorEnabled:
+          type: boolean
+          example: true
+          description: Failure behavior is enabled.
+        orgFailureBehavior:
+          description: Type of org-level failure behavior.
+          allOf:
+          - $ref: '#/components/schemas/FailureBehavior'
+        failureBehavior:
+          description: Type of location level failure behavior.
+          allOf:
+          - $ref: '#/components/schemas/FailureBehavior'
+    GetOrgCallRecordingAnnouncementObject:
+      type: object
+      required:
+      - start
+      - stop
+      - pause
+      - resume
+      - failureEndWithCall
+      - failureProceedWithCall
+      properties:
+        start:
+          type: object
+          description: The start announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iOTg2MWI3MS1hN2MxLTQxZmUtYjNmZC1lZDNkOTdjYTFjMzQ=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        stop:
+          type: object
+          description: The stop announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        pause:
+          type: object
+          description: The pause announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82M2NiYTMwOS05NjQ2LTQzMjUtOTZlNC02N2ZmYWVlZjNiOWI=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        resume:
+          type: object
+          description: The resume announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8xM2NlNzBkYS00NDkwLTQ2OWItOTg4YS1mYjA0MzExNmQ3ZTU=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        failureProceedWithCall:
+          type: object
+          description: The failure proceed with call announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        failureEndWithCall:
+          type: object
+          description: The failure end with call announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9mZTU4YTE1ZS1kNzMwLTQ4ZGYtYWU4Ny1jNjc5YjM3YmQ4Mzk=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+    UserLicenseType:
+      type: string
+      enum:
+      - BASIC_USER
+      - PROFESSIONAL_USER
+      - WORKSPACE
+      - PROFESSIONAL_WORKSPACE
+      - VIRTUAL_PROFILE
+      description: " * `BASIC_USER` - License type is webex calling standard user.\n * `PROFESSIONAL_USER` - License type is webex calling professional user.\n * `WORKSPACE` - License type is webex calling common area workspace.\n * `PROFESSIONAL_WORKSPACE` - License type is webex calling professional workspace.\n * `VIRTUAL_PROFILE` - License type is webex calling virtual profile.\n"
+    CallRecordingVendors:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallRecordingVendor'
+          description: List of call recording vendors.
+    CallRecordingVendorsList:
+      type: object
+      required:
+      - vendorId
+      - vendorName
+      - vendors
+      - failureBehavior
+      properties:
+        vendorId:
+          type: string
+          description: Unique identifier of the vendor.
+        vendorName:
+          type: string
+          description: Name of the vendor.
+        vendors:
+          description: List of call recording vendors
+          allOf:
+          - $ref: '#/components/schemas/CallRecordingVendors'
+        storageRegion:
+          type: string
+          description: Call recording storage region. Only applicable for Webex as a vendor and isn't used for other vendors.
+        failureBehavior:
+          description: Call recording failure behavior.
+          allOf:
+          - $ref: '#/components/schemas/FailureBehavior'
+    CallRecordingJobList:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallRecordingJobStatus'
+          description: List of call recording jobs.
+    CallRecordingVendorUsersResponse:
+      type: object
+      required:
+      - vendorId
+      - members
+      properties:
+        vendorId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvMGE0MjY3NTQtYTQ3MC00YzJkLThiYTAtZmJjNjc3M2E4YTdj
+          description: Call recording vendor ID.
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/Members'
+          description: Contains member details
+    Vendor:
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - migrateUserCreationEnabled
+      - loginUrl
+      - termsOfServiceUrl
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvZmVjYjYzNGUtYzMyZS00ZWJmLThlYzMtMmVhYjk3Y2IyNjNk
+          description: Unique identifier of a vendor.
+        name:
+          type: string
+          example: Dubber
+          description: Name of a call recording vendor.
+        description:
+          type: string
+          example: This is the Dubber instance for the US region.
+          description: Describing some vendor info.
+        migrateUserCreationEnabled:
+          type: boolean
+          example: true
+          description: Users can be migrated.
+        loginUrl:
+          type: string
+          example: https://wxc-us.dubber.net/login?sso=webex
+          description: Login URL of the vendor.
+        termsOfServiceUrl:
+          type: string
+          example: https://www.dubber.net/terms
+          description: URL to vendor's terms of service.
+    GetCallRecordingObject:
+      type: object
+      required:
+      - organization
+      - enabled
+      - vendorId
+      - vendorName
+      - termsOfServiceUrl
+      properties:
+        organization:
+          type: object
+          required:
+          - id
+          - name
+          properties:
+            id:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9lNTEzMTg1Zi01YTJmLTQ0OTUtYjM1Yi03MDY3YmY3Y2U0OGU
+              description: A unique identifier for the organization.
+            name:
+              type: string
+              example: Alaska Cisco Organization
+              description: A unique name for the organization.
+          description: Details of the organization.
+        enabled:
+          type: boolean
+          example: true
+          description: Whether or not the call recording is enabled.
+        vendorId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1JFQ09SRElOR19WRU5ET1IvNTNkYzRjODctODQwOC00ODgyLTk1NzAtZGNhMmJjZGI5Mjgw
+          description: A unique identifier for the vendor.
+        vendorName:
+          type: string
+          example: Dubber
+          description: A unique name for the vendor.
+        termsOfServiceUrl:
+          type: string
+          example: https://www.dubber.net/terms
+          description: 'Url where can be found terms of service for the vendor.
+
+
+            **NOTE**: This is expected to be empty for webex recording platform.'
+    ErrorMessageObject:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Internal error code.
+        locationId:
+          type: string
+          description: Error messages describing the location ID in which the error occurs. For a move operation, this is the target location ID.
+    CountObject:
+      type: object
+      required:
+      - totalMoves
+      - moved
+      - failed
+      - pending
+      - skipped
+      properties:
+        totalMoves:
+          type: number
+          example: 100
+          description: Total number of user moves requested.
+        moved:
+          type: number
+          example: 50
+          description: Total number of user moves completed successfully.
+        failed:
+          type: number
+          example: 50
+          description: Total number of user moves that were completed with failures.
+        pending:
+          type: number
+          example: 50
+          description: Total number of user moves that were pending with number orders.
+        skipped:
+          type: number
+          example: 50
+          description: Total number of user moves that were skipped.
+    Regions:
+      type: object
+      required:
+      - code
+      - name
+      - defaultEnabled
+      properties:
+        code:
+          type: string
+          example: US
+          description: Two character region code.
+        name:
+          type: string
+          example: United States
+          description: Name of the region.
+        defaultEnabled:
+          type: boolean
+          example: false
+          description: Enabled by default.
+    ModifyOrgCallRecordingAnnouncementObject:
+      type: object
+      properties:
+        start:
+          type: object
+          description: The start announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+        stop:
+          type: object
+          description: The stop announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+        pause:
+          type: object
+          description: The pause announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+        resume:
+          type: object
+          description: The resume announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+        failureEndWithCall:
+          type: object
+          description: The failure end with call announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+        failureProceedWithCall:
+          type: object
+          description: The failure proceed with call announcement settings for this organization.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFileId:
+              type: string
+              example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82YTcwZWQ4MS1hZGM5LTQ4OWEtODhjOC0zMWI3ODllODQ1ODU
+              description: Unique identifier for the custom audio announcement file.
+    LatestExecutionStatus:
+      type: string
+      enum:
+      - STARTING
+      - STARTED
+      - COMPLETED
+      - FAILED
+      description: " * `STARTING` - Job has started.\n * `STARTED` - Job is in progress.\n * `COMPLETED` - Job has been completed.\n * `FAILED` - Job has failed.\n"
+    GetLocationCallRecordingAnnouncementObject:
+      type: object
+      required:
+      - useOrgLevelAnnouncementEnabled
+      - start
+      - stop
+      - pause
+      - resume
+      - failureEndWithCall
+      - failureProceedWithCall
+      properties:
+        useOrgLevelAnnouncementEnabled:
+          type: boolean
+          example: true
+          description: Flag to indicate whether to use the organization level call recording announcement settings. If the flag is set to true, indicates that the callRecordingAnnouncementSelection setting is inherited from the organization-level configuration. If the flag is set to false, indicates that the callRecordingAnnouncementSelection setting is customized at the location level.
+        start:
+          type: object
+          description: The start announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9iOTg2MWI3MS1hN2MxLTQxZmUtYjNmZC1lZDNkOTdjYTFjMzQ=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        stop:
+          type: object
+          description: The stop announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        pause:
+          type: object
+          description: The pause announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC82M2NiYTMwOS05NjQ2LTQzMjUtOTZlNC02N2ZmYWVlZjNiOWI=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        resume:
+          type: object
+          description: The resume announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC8xM2NlNzBkYS00NDkwLTQ2OWItOTg4YS1mYjA0MzExNmQ3ZTU=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        failureProceedWithCall:
+          type: object
+          description: The failure proceed with call announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC80ZjU0Y2NhNS05ZWY5LTQ3N2EtYThkNi0wY2EyNzU4MTAxM2Y=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+        failureEndWithCall:
+          type: object
+          description: The failure end with call announcement settings for this location.
+          properties:
+            type:
+              type: string
+              enum:
+              - CUSTOM
+              - DEFAULT
+              description: "Type of announcement file to be played.\n * `CUSTOM` - Custom announcement file.\n * `DEFAULT` - Default announcement file.\n"
+            audioAnnouncementFile:
+              type: object
+              description: The custom audio announcement file to be played.
+              properties:
+                id:
+                  type: string
+                  example: Y2lzY29zcGFyazovL3VzL0FOTk9VTkNFTUVOVC9mZTU4YTE1ZS1kNzMwLTQ4ZGYtYWU4Ny1jNjc5YjM3YmQ4Mzk=
+                  description: Unique identifier for the custom audio announcement file.
+                fileName:
+                  type: string
+                  example: SampleAnnouncement
+                  description: The original file name of the uploaded custom audio announcement.
+                mediaFileType:
+                  type: string
+                  enum:
+                  - WAV
+                  example: WAV
+                  description: Type of the announcement file. Type is an enum with supported values WAV
+                level:
+                  type: string
+                  enum:
+                  - ORGANIZATION
+                  - LOCATION
+                  description: Announcement audio file level.
+                  example: ORGANIZATION
+                isTextToSpeech:
+                  type: boolean
+                  example: true
+                  description: Indicates if the announcement is created by TTS.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

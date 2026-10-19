@@ -1,0 +1,267 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Beta Device Call Settings With Dynamic…
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Beta Device Call Settings With Dynamic Device Settings
+paths:
+  /telephony/config/devices/dynamicSettings/validationSchema:
+    get:
+      responses:
+        '200':
+          description: OK.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceDynamicSettingsValidationSchemaGet'
+              example:
+                tags:
+                - familyOrModelDisplayName: Poly
+                  tag: '%G711U_ORDER%'
+                  friendlyName: voice.codecPref.G711Mu
+                  tooltip: Tag tooltip.
+                  level:
+                  - location
+                  - device
+                  validationRule:
+                    type: int
+                    min: 0
+                    max: 10
+                    increment: 1
+                - familyOrModelDisplayName: Poly
+                  tag: '%G722_ORDER%'
+                  friendlyName: voice.codecPref.G722
+                  tooltip: Tag tooltip.
+                  level:
+                  - location
+                  - device
+                  validationRule:
+                    type: int
+                    min: 0
+                    max: 10
+                    increment: 1
+                - familyOrModelDisplayName: Poly
+                  tag: '%ENABLE_BLUETOOTH%'
+                  friendlyName: feature.bluetooth.enabled
+                  tooltip: Tag tooltip.
+                  level:
+                  - organization
+                  - location
+                  - device
+                  validationRule:
+                    type: boolean
+                    values:
+                    - '1'
+                    - '0'
+                - familyOrModelDisplayName: Poly
+                  tag: '%DO_BLUETOOTH_DEVICE_NAME%'
+                  friendlyName: bluetooth.device.name
+                  tooltip: Tag tooltip.
+                  alert: Alert text.
+                  level:
+                  - organization
+                  - location
+                  - device
+                  validationRule:
+                    type: string
+                    regex: '[A-Za-z0-9]+'
+                    maxLength: 255
+                - familyOrModelDisplayName: Poly
+                  tag: '%DO_UI_MENU_BACKGROUND%'
+                  friendlyName: ui.menu.background
+                  tooltip: Tag tooltip.
+                  level:
+                  - organization
+                  - location
+                  - device
+                  validationRule:
+                    type: string
+                    regex: '#[0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F]'
+                    maxLength: 7
+                    validationHint: '#RRGGBB'
+                - familyOrModelDisplayName: Poly
+                  tag: '%UP_BACKLIGHT_IDLE_INTENSITY%'
+                  friendlyName: up.backlight.idleIntensity
+                  tooltip: Tag tooltip.
+                  level:
+                  - organization
+                  - location
+                  - device
+                  validationRule:
+                    type: enum
+                    values:
+                    - '0'
+                    - '1'
+                    - '2'
+                    - '3'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      operationId: getValidationSchema
+      summary: Get Validation Schema
+      description: 'This API returns the validation schema for `tags` of all or specific `familyOrModelDisplayName`.
+
+
+        The schema is used to validate the `tag` for devices in the `Webex Calling` platform. The schema includes information about the required fields, data types, and validation rules for each setting.'
+      parameters:
+      - name: orgId
+        in: query
+        description: Validation schema for devices in this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: familyOrModelDisplayName
+        in: query
+        description: Device family or model display name to filter the schema.
+        example: Poly
+        schema:
+          type: string
+      tags:
+      - Beta Device Call Settings With Dynamic Device Settings
+components:
+  schemas:
+    ValidationRule:
+      type: object
+      description: Validation rules and constraints for device setting values.
+      properties:
+        type:
+          type: string
+          description: The data type of the setting. Possible values are `string`, `integer`, `boolean`, `enum` , `password` or `network`.
+          example: '"int"'
+        values:
+          type: array
+          items:
+            type: string
+          description: Possible values for `enum` or `boolean` types.
+          example:
+          - '0'
+          - '1'
+          - '2'
+          - NumberOnly
+        min:
+          type: integer
+          description: Minimum value for numeric types.
+          example: 0
+        max:
+          type: integer
+          description: Maximum value for numeric types.
+          example: 10
+        increment:
+          type: integer
+          description: Increment value for numeric types.
+          example: 1
+        regex:
+          type: string
+          description: Regular expression pattern for string validation.
+          example: '[A-Za-z0-9]+'
+        maxLength:
+          type: integer
+          description: Maximum length for string values.
+          example: 255
+        validationHint:
+          type: string
+          description: Hint to display to users about validation requirements.
+          example: 5-60
+    DeviceDynamicSettingsValidationSchemaGet:
+      type: object
+      example:
+        tags:
+        - familyOrModelDisplayName: Poly
+          tag: '%G711U_ORDER%'
+          friendlyName: voice.codecPref.G711Mu
+          tooltip: Tag tooltip.
+          level:
+          - location
+          - device
+          validationRule:
+            type: int
+            min: 0
+            max: 10
+            increment: 1
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceTag'
+          description: Array of device settings tags with their validation rules.
+    DeviceTag:
+      type: object
+      properties:
+        familyOrModelDisplayName:
+          type: string
+          description: The family or model name of the device to which these settings apply.
+          example: Poly
+        tag:
+          type: string
+          description: The unique identifier for the setting.
+          example: '%G711U_ORDER%'
+        friendlyName:
+          type: string
+          description: A user-friendly name for the setting. It helps to correlate the tag with the UI in settings groups.
+          example: voice.codecPref.G711Mu
+        tooltip:
+          type: string
+          description: Explanatory text for the setting.
+          example: Tag tooltip.
+        alert:
+          type: string
+          description: Alert message related to this setting, if applicable.
+          example: Alert text.
+        level:
+          type: array
+          items:
+            type: string
+          description: The levels at which this setting can be configured. When fetching tags or updating tags, the tag should be allowed at the level the request is made for.
+          example:
+          - organization
+          - location
+          - device
+        validationRule:
+          $ref: '#/components/schemas/ValidationRule'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

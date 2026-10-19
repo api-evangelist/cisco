@@ -1,0 +1,853 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Call Settings For Me Phase 5 API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Call Settings For Me Phase 5
+paths:
+  /telephony/config/people/me/settings/personalAssistant:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalAssistantSettings'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Personal Assistant Settings
+      operationId: getPersonalAssistantSettings
+      description: 'Retrieve personal assistant settings for a person. The personal assistant feature allows users to configure an automated attendant that can handle incoming calls when they are unavailable, including presence-based routing and call transfer options.
+
+
+        Personal Assistant is a feature of Webex Calling that helps manage incoming calls based on the user''s availability status.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me Phase 5
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: 'No Content: Personal assistant settings successfully updated.'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Personal Assistant Settings
+      operationId: updatePersonalAssistantSettings
+      description: 'Update personal assistant settings for a person. Allows configuring the personal assistant feature including enabling/disabling it, setting presence status, configuring call transfer options, and alerting preferences.
+
+
+        Personal Assistant is a feature of Webex Calling that helps manage incoming calls based on the user''s availability status.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me Phase 5
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonalAssistantSettingsUpdate'
+  /telephony/config/people/me/voicemail/rules:
+    get:
+      summary: Get Person's Voicemail Rules
+      operationId: getUserVoicemailRules
+      description: 'Get person''s voicemail passcode rules. Voicemail rules specify the default passcode requirements. They are provided for informational purposes only and cannot be modified.
+
+
+        The voicemail feature allows users to manage their voicemail settings as part of Webex Calling. Voicemail rules help ensure secure access to voice messages by defining passcode complexity requirements.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me Phase 5
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicemailRules'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+  /telephony/config/people/me/voicemail/pin:
+    put:
+      summary: Update Voicemail PIN
+      operationId: updateVoicemailPin
+      description: 'Set the voicemail PIN for a person. Updates the PIN used to access voicemail messages. The PIN must comply with the passcode rules defined for the organization.
+
+
+        The voicemail feature is part of Webex Calling, allowing users to secure their voicemail access with a PIN. The PIN is required to retrieve voice messages via phone.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me Phase 5
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoicemailPin'
+      responses:
+        '204':
+          description: 'No Content: Voicemail PIN successfully updated.'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+  /telephony/config/people/me/settings/hoteling/guest:
+    get:
+      summary: Get Hoteling Guest Settings
+      operationId: getHotelingGuestSettings
+      description: 'Retrieve hoteling guest settings for a person. Hoteling allows a person to temporarily use a device as a guest, associating their extension and configuration with that device for a limited time. This API returns the current hoteling guest configuration including any active host association details.
+
+
+        Hoteling is a feature of Webex Calling that enables flexible workspace solutions by allowing users to log into shared devices.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me Phase 5
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelingGuestSettings'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+    put:
+      summary: Update Hoteling Guest Settings
+      operationId: updateHotelingGuestSettings
+      description: 'Update hoteling guest settings for a person. Allows enabling or disabling the ability to use hoteling as a guest, configuring whether an association will be removed automatically after a specified time period, and associating with a hoteling host.
+
+
+        Hoteling is a feature of Webex Calling that enables flexible workspace solutions by allowing users to log into shared devices.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me Phase 5
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HotelingGuestSettingsUpdate'
+      responses:
+        '204':
+          description: 'No Content: Hoteling guest settings successfully updated.'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+  /telephony/config/people/me/settings/hoteling/availableHosts:
+    get:
+      summary: Get Available Hoteling Hosts
+      operationId: getAvailableHotelingHosts
+      description: 'Retrieve a list of available hoteling hosts that a person can associate with as a guest. Returns hosts that have hoteling enabled on their devices and are available for guest associations. The list can be filtered by name or phone number and supports pagination.
+
+
+        Hoteling is a feature of Webex Calling that enables flexible workspace solutions by allowing users to log into shared devices.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me Phase 5
+      parameters:
+      - name: max
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 2000
+          default: 2000
+        description: Limit the maximum number of hosts in the response. Default is 100.
+        example: 100
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        description: Start index for pagination. Default is 0.
+        example: 0
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter hosts by name (first name or last name). Partial match is supported.
+        example: John
+      - name: phoneNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter hosts by phone number. Partial match is supported.
+        example: '+14085551234'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailableHotelingHosts'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+components:
+  schemas:
+    BlockRepeatedDigits:
+      type: object
+      required:
+      - enabled
+      - max
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: If enabled, checks for sequence of the same digit being repeated.
+        max:
+          type: integer
+          minimum: 1
+          maximum: 6
+          example: 3
+          description: Maximum number of repeated digit sequence allowed. The minimum value is 1. The maximum value is 6.
+      description: Settings to prevent single digits from being repeated in the passcode. For example, with a maximum value of 3, 111222 is allowed but 112222 is not allowed since it contains a repeated digit sequence longer than 3.
+    BlockContiguousSequences:
+      type: object
+      required:
+      - enabled
+      - numberOfAscendingDigits
+      - numberOfDescendingDigits
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: If enabled, passcode should not contain a numerical sequence.
+        numberOfAscendingDigits:
+          type: integer
+          minimum: 2
+          maximum: 5
+          example: 3
+          description: 'Specifies the maximum length of an ascending numerical sequence allowed. The minimum value is 2. The maximum value is 5. Example: If this value is set to 3, then 123856 is allowed, but 123485 is not allowed (since the ascending sequence 1234 exceeds 3 digits).'
+        numberOfDescendingDigits:
+          type: integer
+          minimum: 2
+          maximum: 5
+          example: 3
+          description: 'Specifies the maximum length of a descending numerical sequence allowed. The minimum value is 2. The maximum value is 5. Example: If this value is set to 3, then 321856 is allowed, but 432185 is not allowed (since the descending sequence 4321 exceeds 3 digits).'
+      description: Settings for not allowing numerical sequence in passcode (for example, 012345 or 987654).
+    BlockPreviousPasscodes:
+      type: object
+      required:
+      - enabled
+      - numberOfPasscodes
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: If enabled, set how many of the previous passcodes are not allowed to be re-used.
+        numberOfPasscodes:
+          type: integer
+          minimum: 1
+          maximum: 10
+          example: 3
+          description: Number of previous passcodes. The minimum value is 1. The maximum value is 10.
+      description: Settings for previous passcode usage.
+    HotelingGuestSettings:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/Disable hoteling guest functionality for the person. When enabled, the person can associate themselves with a hoteling host device.
+        associationLimitEnabled:
+          type: boolean
+          example: true
+          description: When enabled, the person's hoteling guest association will be automatically removed after the specified time period.
+        associationLimitHours:
+          type: integer
+          minimum: 1
+          maximum: 999
+          example: 12
+          description: Time limit in hours for the hoteling guest association (1-999). Applicable when associationLimitEnabled is true.
+        hostAssociationLimitHours:
+          type: integer
+          minimum: 1
+          maximum: 999
+          example: 24
+          description: Time limit in hours configured by the host for guest associations.
+        hostEnforcedAssociationLimitEnabled:
+          type: boolean
+          example: false
+          description: Indicates whether the host has enforced an association time limit.
+        hostFirstName:
+          type: string
+          example: John
+          description: First name of the hoteling host.
+        hostLastName:
+          type: string
+          example: Smith
+          description: Last name of the hoteling host.
+        hostId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYmNkZWYxMi0zNDU2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTA
+          description: Unique identifier of the hoteling host person or workspace.
+        hostPhoneNumber:
+          type: string
+          example: '+1234567890'
+          description: Phone number of the hoteling host.
+        hostExtension:
+          type: string
+          example: '1234'
+          description: Extension of the hoteling host.
+        hostLocation:
+          $ref: '#/components/schemas/HotelingHostLocation'
+      example:
+        enabled: true
+        associationLimitEnabled: true
+        associationLimitHours: 12
+        hostAssociationLimitHours: 24
+        hostEnforcedAssociationLimitEnabled: false
+        hostFirstName: John
+        hostLastName: Smith
+        hostId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYmNkZWYxMi0zNDU2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTA
+        hostPhoneNumber: '+1234567890'
+        hostExtension: '1234'
+        hostLocation:
+          id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzU0MDQ5NzQzLTIwM2MtNDM5OS1iN2NjLTU4ZmNkYzIwNjA3Zg
+          name: San Jose
+      description: Hoteling guest settings for a person.
+    PersonalAssistantSettings:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/Disable the personal assistant feature.
+        presence:
+          type: string
+          enum:
+          - BUSINESS_TRIP
+          - GONE_FOR_THE_DAY
+          - LUNCH
+          - MEETING
+          - OUT_OF_OFFICE
+          - TEMPORARILY_OUT
+          - TRAINING
+          - UNAVAILABLE
+          - VACATION
+          example: OUT_OF_OFFICE
+          description: Presence status that triggers the personal assistant.
+        untilDateTime:
+          type: string
+          format: date-time
+          example: '2026-03-28T14:30:00Z'
+          description: Date and time until which the personal assistant is active (ISO 8601 format).
+        transferEnabled:
+          type: boolean
+          example: true
+          description: Enable/Disable call transfer when personal assistant is active.
+        transferNumber:
+          type: string
+          example: '+14126525012'
+          description: Phone number to transfer calls to when transfer is enabled.
+        alerting:
+          type: string
+          enum:
+          - ALERT_ME_FIRST
+          - PLAY_RING_REMINDER
+          - NONE
+          example: ALERT_ME_FIRST
+          description: 'Alerting behavior for incoming calls when personal assistant is active. Possible values: ALERT_ME_FIRST - Ring the user''s phone first before the personal assistant takes over. PLAY_RING_REMINDER - Play a ring reminder to the user. NONE - No alerting.'
+        alertMeFirstNumberOfRings:
+          type: integer
+          minimum: 0
+          maximum: 20
+          example: 3
+          description: Number of rings before transferring the call when alerting is set to ALERT_ME_FIRST.
+      description: Personal assistant settings for a person.
+      example:
+        enabled: true
+        presence: OUT_OF_OFFICE
+        untilDateTime: '2026-03-28T14:30:00Z'
+        transferEnabled: true
+        transferNumber: '+14126525012'
+        alerting: ALERT_ME_FIRST
+        alertMeFirstNumberOfRings: 3
+    VoicemailPin:
+      type: object
+      required:
+      - passcode
+      properties:
+        passcode:
+          type: string
+          description: Person voicemail PIN. The PIN must comply with the passcode rules defined for the organization.
+          example: '27850230'
+    HotelingGuestSettingsUpdate:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/Disable hoteling guest functionality for the person. When enabled, the person can associate themselves with a hoteling host device.
+        associationLimitEnabled:
+          type: boolean
+          example: true
+          description: When enabled, the person's hoteling guest association will be automatically removed after the specified time period.
+        associationLimitHours:
+          type: integer
+          minimum: 1
+          maximum: 999
+          example: 12
+          description: Time limit in hours for the hoteling guest association (1-999). Applicable when associationLimitEnabled is true.
+        hostId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYmNkZWYxMi0zNDU2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTA
+          description: Unique identifier of the hoteling host person or workspace to associate with. Required when enabling hoteling guest functionality.
+      example:
+        enabled: true
+        associationLimitEnabled: true
+        associationLimitHours: 12
+        hostId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYmNkZWYxMi0zNDU2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTA
+      description: Hoteling guest settings update request.
+    AvailableHotelingHosts:
+      type: object
+      required:
+      - hosts
+      properties:
+        hosts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableHotelingHost'
+          description: List of available hoteling hosts.
+      description: List of available hoteling hosts that a person can associate with as a guest.
+      example:
+        hosts:
+        - hostId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYmNkZWYxMi0zNDU2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTA
+          firstName: John
+          lastName: Doe
+          phoneNumber: '+14085551234'
+          extension: '1234'
+          allowedAssociationDuration: 24
+        - hostId: Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ODc2NTQzMi0xMjM0LTU2NzgtOTBhYi1jZGVmMTIzNDU2Nzg
+          firstName: Jane
+          lastName: Smith
+          phoneNumber: '+14085555678'
+          extension: '5678'
+          allowedAssociationDuration: 12
+    HotelingHostLocation:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzU0MDQ5NzQzLTIwM2MtNDM5OS1iN2NjLTU4ZmNkYzIwNjA3Zg
+          description: Unique identifier of the hoteling host location.
+        name:
+          type: string
+          example: San Jose
+          description: Name of the hoteling host location.
+      description: Location information for the hoteling host.
+    VoicemailRules:
+      type: object
+      required:
+      - blockRepeatedPatternsEnabled
+      - blockUserNumberEnabled
+      - blockReversedUserNumberEnabled
+      - blockPreviousPasscodes
+      - blockReversedOldPasscodeEnabled
+      - blockRepeatedDigits
+      - blockContiguousSequences
+      - length
+      properties:
+        blockRepeatedPatternsEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode cannot contain repeated patterns. For example, 121212 and 123123.
+        blockUserNumberEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode must not match the user's own phone number.
+        blockReversedUserNumberEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode must not match the user's phone number in reverse.
+        blockPreviousPasscodes:
+          $ref: '#/components/schemas/BlockPreviousPasscodes'
+        blockReversedOldPasscodeEnabled:
+          type: boolean
+          example: true
+          description: If enabled, the passcode must not match the user's old passcodes in reverse.
+        blockRepeatedDigits:
+          $ref: '#/components/schemas/BlockRepeatedDigits'
+        blockContiguousSequences:
+          $ref: '#/components/schemas/BlockContiguousSequences'
+        length:
+          $ref: '#/components/schemas/PasscodeLength'
+      description: Person's voicemail passcode rules and restrictions.
+      example:
+        blockRepeatedPatternsEnabled: true
+        blockUserNumberEnabled: true
+        blockReversedUserNumberEnabled: true
+        blockPreviousPasscodes:
+          enabled: true
+          numberOfPasscodes: 3
+        blockReversedOldPasscodeEnabled: true
+        blockRepeatedDigits:
+          enabled: true
+          max: 3
+        blockContiguousSequences:
+          enabled: true
+          numberOfAscendingDigits: 3
+          numberOfDescendingDigits: 3
+        length:
+          min: 6
+          max: 15
+    AvailableHotelingHost:
+      type: object
+      required:
+      - hostId
+      - firstName
+      - lastName
+      - phoneNumber
+      - extension
+      - allowedAssociationDuration
+      properties:
+        hostId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYmNkZWYxMi0zNDU2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTA
+          description: Unique identifier for the person or workspace.
+        firstName:
+          type: string
+          example: John
+          description: First name of the hoteling host.
+        lastName:
+          type: string
+          example: Doe
+          description: Last name of the hoteling host.
+        phoneNumber:
+          type: string
+          example: '+14085551234'
+          description: Phone number of the hoteling host.
+        extension:
+          type: string
+          example: '1234'
+          description: Extension of the hoteling host.
+        allowedAssociationDuration:
+          type: integer
+          minimum: 1
+          maximum: 999
+          example: 24
+          description: Maximum allowed association duration in hours for this host.
+      description: Information about an available hoteling host.
+    PersonalAssistantSettingsUpdate:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/Disable the personal assistant feature.
+        presence:
+          type: string
+          enum:
+          - BUSINESS_TRIP
+          - GONE_FOR_THE_DAY
+          - LUNCH
+          - MEETING
+          - OUT_OF_OFFICE
+          - TEMPORARILY_OUT
+          - TRAINING
+          - UNAVAILABLE
+          - VACATION
+          example: OUT_OF_OFFICE
+          description: Presence status that triggers the personal assistant.
+        untilDateTime:
+          type: string
+          format: date-time
+          example: '2026-03-28T14:30:00Z'
+          description: Date and time until which the personal assistant is active (ISO 8601 format).
+        transferEnabled:
+          type: boolean
+          example: true
+          description: Enable/Disable call transfer when personal assistant is active.
+        transferNumber:
+          type: string
+          example: '+14126525012'
+          description: Phone number to transfer calls to when transfer is enabled.
+        alerting:
+          type: string
+          enum:
+          - ALERT_ME_FIRST
+          - PLAY_RING_REMINDER
+          - NONE
+          example: ALERT_ME_FIRST
+          description: 'Alerting behavior for incoming calls when personal assistant is active. Possible values: ALERT_ME_FIRST - Ring the user''s phone first before the personal assistant takes over. PLAY_RING_REMINDER - Play a ring reminder to the user. NONE - No alerting.'
+        alertMeFirstNumberOfRings:
+          type: integer
+          minimum: 0
+          maximum: 20
+          example: 3
+          description: Number of rings before transferring the call when alerting is set to ALERT_ME_FIRST.
+      description: Personal assistant settings update request.
+      example:
+        enabled: true
+        presence: OUT_OF_OFFICE
+        untilDateTime: '2026-03-28T14:30:00Z'
+        transferEnabled: true
+        transferNumber: '+14126525012'
+        alerting: ALERT_ME_FIRST
+        alertMeFirstNumberOfRings: 3
+    PasscodeLength:
+      type: object
+      required:
+      - min
+      - max
+      properties:
+        min:
+          type: integer
+          minimum: 2
+          maximum: 15
+          example: 6
+          description: The minimum value is 2. The maximum value is 15.
+        max:
+          type: integer
+          minimum: 3
+          maximum: 30
+          example: 15
+          description: The minimum value is 3. The maximum value is 30.
+      description: Length of the passcode.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

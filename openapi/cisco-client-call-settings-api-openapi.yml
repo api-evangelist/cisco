@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Client Call Settings API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Client Call Settings
+paths:
+  /telephony/config/settings/msTeams:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCustomerMSTeamsSettingsObject'
+              example:
+                level: ORGANIZATION
+                orgId: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi84NzU2ZjkwZS1iZDg4LTRhOTQtOGZiZC0wMzM2NzhmMDU5ZjM
+                settings:
+                - settingName: HIDE_WEBEX_APP
+                  value: true
+                  lastModified: '2024-02-24T07:22:23.494198Z'
+                - settingName: PRESENCE_SYNC
+                  value: false
+                  lastModified: '2024-02-24T07:21:23.494198Z'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get an Organization's MS Teams Settings
+      operationId: GetAnOrganization'sMSTeamsSettings
+      description: 'Not supported for Webex for Government (FedRAMP)
+
+
+        Get organization MS Teams settings.
+
+
+        At an organization level, MS Teams settings allow access to viewing the `HIDE WEBEX APP` and `PRESENCE SYNC` settings.
+
+
+        To retrieve an organization''s MS Teams settings requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - Client Call Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Retrieve MS Teams settings for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi84NzU2ZjkwZS1iZDg4LTRhOTQtOGZiZC0wMzM2NzhmMDU5ZjM
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get an Organization's MS Teams Settings
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update an Organization's MS Teams Setting
+      operationId: UpdateAnOrganization'sMSTeamsSetting
+      description: 'Not supported for Webex for Government (FedRAMP)
+
+
+        Update an MS Teams setting.
+
+
+        MS Teams setting can be updated at the organization level.
+
+
+        Requires a full administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - Client Call Settings
+      parameters:
+      - name: orgId
+        in: query
+        description: Update MS Teams setting value for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi84NzU2ZjkwZS1iZDg4LTRhOTQtOGZiZC0wMzM2NzhmMDU5ZjM
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              settingName: HIDE_WEBEX_APP
+              value: true
+            schema:
+              $ref: '#/components/schemas/ModifyCustomerMSTeamsSettingsObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update an Organization's MS Teams Setting
+components:
+  schemas:
+    SettingsObject:
+      type: object
+      required:
+      - settingName
+      - level
+      - value
+      - lastModified
+      properties:
+        settingName:
+          type: string
+          enum:
+          - HIDE_WEBEX_APP
+          - PRESENCE_SYNC
+          description: "Name of the setting retrieved.\n * `HIDE_WEBEX_APP` - Webex will continue to run but its windows will be closed by default. Users can still access Webex from the system tray on Windows or the Menu Bar on Mac.\n * `PRESENCE_SYNC` - Sync presence status between Microsoft Teams and Webex.\n"
+        level:
+          type: string
+          enum:
+          - GLOBAL
+          - ORGANIZATION
+          - GROUP
+          - PEOPLE
+          description: "Level at which the `settingName` has been set.\n * `GLOBAL` - `settingName` configured at the `GLOBAL` `level`.\n * `ORGANIZATION` - `settingName` configured at the `ORGANIZATION` `level`.\n * `GROUP` - `settingName` configured at the `GROUP` `level`.\n * `PEOPLE` - `settingName` configured at the `PEOPLE` `level`.\n"
+        value:
+          type: boolean
+          example: true
+          description: Either `true` or `false` for the respective `settingName` to be retrieved.
+        lastModified:
+          type: string
+          example: '2024-02-24T07:21:23.494198Z'
+          description: The date and time when the respective `settingName` was last updated.
+    GetCustomerMSTeamsSettingsObject:
+      type: object
+      required:
+      - level
+      - orgId
+      - settings
+      properties:
+        level:
+          type: string
+          enum:
+          - GLOBAL
+          - ORGANIZATION
+          description: "Level at which the `settingName` has been set.\n * `GLOBAL` - `settingName` configured at the `GLOBAL` `level`.\n * `ORGANIZATION` - `settingName` configured at the `ORGANIZATION` `level`.\n"
+        orgId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi84NzU2ZjkwZS1iZDg4LTRhOTQtOGZiZC0wMzM2NzhmMDU5ZjM
+          description: Unique identifier for the organization.
+        settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettingsObject'
+          description: Array of `SettingsObject`.
+    ModifyCustomerMSTeamsSettingsObject:
+      type: object
+      required:
+      - settingName
+      - value
+      properties:
+        settingName:
+          type: string
+          enum:
+          - HIDE_WEBEX_APP
+          - PRESENCE_SYNC
+          description: "The enum value, either `HIDE_WEBEX_APP` or `PRESENCE_SYNC`, for the respective `settingName` to be updated.\n * `HIDE_WEBEX_APP` - Webex will continue to run but its windows will be closed by default. Users can still access Webex from the system tray on Windows or the Menu Bar on Mac.\n * `PRESENCE_SYNC` - Sync presence status between Microsoft Teams and Webex.\n"
+        value:
+          type: boolean
+          example: true
+          description: The boolean value, either `true` or `false`, for the respective `settingName` to be updated.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

@@ -534,6 +534,771 @@ apis:
   - type: JSONSchema
     url: >-
       json-schema/cisco-get-v1-messages-y2-lzy29-zcgfyazovl3-vzl01-fu1-nbr0-uvmzizzwuyzjatowf-schema.json
+- aid: cisco:cisco-ai-receptionist-api
+  name: Cisco AI Receptionist API
+  description: >-
+    <!-- feature-toggle-name:calling-air-transcript-api-CALL-205781 -->
+
+
+    APIs for retrieving AI Receptionist sessions and conversational transcripts. Restricted to organization
+    Full Administrators (CI role `id_full_admin`).
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - AI Receptionist
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-ai-receptionist-api-openapi.yml
+- aid: cisco:cisco-ai-receptionist-for-webex-calling-api
+  name: Cisco AI Receptionist for Webex Calling API
+  description: APIs for managing AI Receptionists in Webex Calling.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - AI Receptionist for Webex Calling
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-ai-receptionist-for-webex-calling-api-openapi.yml
+- aid: cisco:cisco-beta-call-settings-for-me-with-userhub-phase1-api
+  name: Cisco Beta Call Settings For Me With Userhub Phase1 API
+  description: >-
+    The Beta Call Settings For Me With Userhub Phase1 API from Cisco — 9 operation(s) for beta call settings
+    for me with userhub phase1.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Beta Call Settings For Me With Userhub Phase1
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-beta-call-settings-for-me-with-userhub-phase1-api-openapi.yml
+- aid: cisco:cisco-beta-device-call-settings-with-dynamic-device-settings-api
+  name: Cisco Beta Device Call Settings With Dynamic Device Settings API
+  description: >-
+    The Beta Device Call Settings With Dynamic Device Settings API from Cisco — 1 operation(s) for beta
+    device call settings with dynamic device settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Beta Device Call Settings With Dynamic Device Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-beta-device-call-settings-with-dynamic-device-settings-api-openapi.yml
+- aid: cisco:cisco-beta-settings-features-for-barge-in-api
+  name: Cisco Beta Settings Features For Barge-In API
+  description: >-
+    The Beta Settings Features For Barge-In API from Cisco — 1 operation(s) for beta settings features
+    for barge-in.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Beta Settings Features For Barge-In
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-beta-settings-features-for-barge-in-api-openapi.yml
+- aid: cisco:cisco-call-controls-api
+  name: Cisco Call Controls API
+  description: The Call Controls API from Cisco — 73 operation(s) for call controls.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Controls
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-controls-api-openapi.yml
+- aid: cisco:cisco-call-controls-members-api
+  name: Cisco Call Controls Members API
+  description: The Call Controls Members API from Cisco — 1 operation(s) for call controls members.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Controls Members
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-controls-members-api-openapi.yml
+- aid: cisco:cisco-call-controls-members-me-api
+  name: Cisco Call Controls Members Me API
+  description: >-
+    The Call Controls Members Me API from Cisco — 1 operation(s) for call controls members me.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Controls Members Me
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-controls-members-me-api-openapi.yml
+- aid: cisco:cisco-call-queue-settings-with-playlist-settings-api
+  name: Cisco Call Queue Settings with Playlist Settings API
+  description: >-
+    The Call Queue Settings with Playlist Settings API from Cisco — 1 operation(s) for call queue settings
+    with playlist settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Queue Settings with Playlist Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-queue-settings-with-playlist-settings-api-openapi.yml
+- aid: cisco:cisco-call-routing-api
+  name: Cisco Call Routing API
+  description: The Call Routing API from Cisco — 29 operation(s) for call routing.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Routing
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-routing-api-openapi.yml
+- aid: cisco:cisco-call-settings-configurable-storage-region-api
+  name: Cisco Call Settings Configurable Storage Region API
+  description: >-
+    The Call Settings Configurable Storage Region API from Cisco — 3 operation(s) for call settings configurable
+    storage region.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Settings Configurable Storage Region
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-settings-configurable-storage-region-api-openapi.yml
+- aid: cisco:cisco-call-settings-for-me-api
+  name: Cisco Call Settings For Me API
+  description: The Call Settings For Me API from Cisco — 45 operation(s) for call settings for me.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Settings For Me
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-settings-for-me-api-openapi.yml
+- aid: cisco:cisco-call-settings-for-me-phase-4-api
+  name: Cisco Call Settings For Me Phase 4 API
+  description: >-
+    The Call Settings For Me Phase 4 API from Cisco — 6 operation(s) for call settings for me phase 4.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Settings For Me Phase 4
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-settings-for-me-phase-4-api-openapi.yml
+- aid: cisco:cisco-call-settings-for-me-phase-5-api
+  name: Cisco Call Settings For Me Phase 5 API
+  description: >-
+    The Call Settings For Me Phase 5 API from Cisco — 5 operation(s) for call settings for me phase 5.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Settings For Me Phase 5
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-settings-for-me-phase-5-api-openapi.yml
+- aid: cisco:cisco-call-settings-for-me-with-userhub-phase2-api
+  name: Cisco Call Settings For Me With UserHub Phase2 API
+  description: >-
+    The Call Settings For Me With UserHub Phase2 API from Cisco — 18 operation(s) for call settings for
+    me with userhub phase2.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Settings For Me With UserHub Phase2
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-settings-for-me-with-userhub-phase2-api-openapi.yml
+- aid: cisco:cisco-call-settings-for-me-with-userhub-phase3-api
+  name: Cisco Call Settings For Me With UserHub Phase3 API
+  description: >-
+    The Call Settings For Me With UserHub Phase3 API from Cisco — 8 operation(s) for call settings for
+    me with userhub phase3.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Call Settings For Me With UserHub Phase3
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-call-settings-for-me-with-userhub-phase3-api-openapi.yml
+- aid: cisco:cisco-caller-reputation-provider-api
+  name: Cisco Caller Reputation Provider API
+  description: >-
+    The Caller Reputation Provider API from Cisco — 4 operation(s) for caller reputation provider.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Caller Reputation Provider
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-caller-reputation-provider-api-openapi.yml
+- aid: cisco:cisco-calling-metrics-api
+  name: Cisco Calling Metrics API
+  description: Webex Calling call and media-quality metrics.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Calling Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-calling-metrics-api-openapi.yml
+- aid: cisco:cisco-calling-service-settings-api
+  name: Cisco Calling Service Settings API
+  description: >-
+    The Calling Service Settings API from Cisco — 6 operation(s) for calling service settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Calling Service Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-calling-service-settings-api-openapi.yml
+- aid: cisco:cisco-client-call-settings-api
+  name: Cisco Client Call Settings API
+  description: The Client Call Settings API from Cisco — 1 operation(s) for client call settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Client Call Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-client-call-settings-api-openapi.yml
+- aid: cisco:cisco-conference-controls-api
+  name: Cisco Conference Controls API
+  description: The Conference Controls API from Cisco — 30 operation(s) for conference controls.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Conference Controls
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-conference-controls-api-openapi.yml
+- aid: cisco:cisco-converged-recordings-api
+  name: Cisco Converged Recordings API
+  description: The Converged Recordings API from Cisco — 8 operation(s) for converged recordings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Converged Recordings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-converged-recordings-api-openapi.yml
+- aid: cisco:cisco-dect-devices-settings-api
+  name: Cisco DECT Devices Settings API
+  description: The DECT Devices Settings API from Cisco — 15 operation(s) for dect devices settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - DECT Devices Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-dect-devices-settings-api-openapi.yml
+- aid: cisco:cisco-device-call-settings-api
+  name: Cisco Device Call Settings API
+  description: The Device Call Settings API from Cisco — 33 operation(s) for device call settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Device Call Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-device-call-settings-api-openapi.yml
+- aid: cisco:cisco-device-call-settings-with-device-dynamic-settings-api
+  name: Cisco Device Call Settings With Device Dynamic Settings API
+  description: >-
+    The Device Call Settings With Device Dynamic Settings API from Cisco — 9 operation(s) for device call
+    settings with device dynamic settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Device Call Settings With Device Dynamic Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-device-call-settings-with-device-dynamic-settings-api-openapi.yml
+- aid: cisco:cisco-devices-api
+  name: Cisco Devices API
+  description: The Devices API from Cisco — 3 operation(s) for devices.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-devices-api-openapi.yml
+- aid: cisco:cisco-emergency-services-settings-api
+  name: Cisco Emergency Services Settings API
+  description: >-
+    The Emergency Services Settings API from Cisco — 17 operation(s) for emergency services settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Emergency Services Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-emergency-services-settings-api-openapi.yml
+- aid: cisco:cisco-external-voicemail-api
+  name: Cisco External Voicemail API
+  description: Operations related to external voicemail Message Waiting Indicator (MWI) status.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - External Voicemail
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-external-voicemail-api-openapi.yml
+- aid: cisco:cisco-features-announcement-playlist-api
+  name: 'Cisco Features: Announcement Playlist API'
+  description: >-
+    The Features: Announcement Playlist API from Cisco — 3 operation(s) for features: announcement playlist.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Announcement Playlist'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-announcement-playlist-api-openapi.yml
+- aid: cisco:cisco-features-announcement-repository-api
+  name: 'Cisco Features: Announcement Repository API'
+  description: >-
+    The Features: Announcement Repository API from Cisco — 14 operation(s) for features: announcement
+    repository.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Announcement Repository'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-announcement-repository-api-openapi.yml
+- aid: cisco:cisco-features-auto-attendant-api
+  name: 'Cisco Features:  Auto Attendant API'
+  description: >-
+    The Features:  Auto Attendant API from Cisco — 12 operation(s) for features:  auto attendant.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features:  Auto Attendant'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-auto-attendant-api-openapi.yml
+- aid: cisco:cisco-features-call-park-api
+  name: 'Cisco Features:  Call Park API'
+  description: 'The Features:  Call Park API from Cisco — 8 operation(s) for features:  call park.'
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features:  Call Park'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-call-park-api-openapi.yml
+- aid: cisco:cisco-features-call-pickup-api
+  name: 'Cisco Features:  Call Pickup API'
+  description: 'The Features:  Call Pickup API from Cisco — 3 operation(s) for features:  call pickup.'
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features:  Call Pickup'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-call-pickup-api-openapi.yml
+- aid: cisco:cisco-features-call-queue-api
+  name: 'Cisco Features:  Call Queue API'
+  description: 'The Features:  Call Queue API from Cisco — 30 operation(s) for features:  call queue.'
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features:  Call Queue'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-call-queue-api-openapi.yml
+- aid: cisco:cisco-features-call-recording-api
+  name: 'Cisco Features: Call Recording API'
+  description: >-
+    Webex Calling Call Recording settings, including organization- and location-level vendor configuration,
+    terms of service, compliance announcements, and custom call recording announcements.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Call Recording'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-call-recording-api-openapi.yml
+- aid: cisco:cisco-features-customer-assist-api
+  name: 'Cisco Features: Customer Assist API'
+  description: >-
+    The Features: Customer Assist API from Cisco — 8 operation(s) for features: customer assist.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Customer Assist'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-customer-assist-api-openapi.yml
+- aid: cisco:cisco-features-hot-desking-members-api
+  name: 'Cisco Features: Hot Desking Members API'
+  description: >-
+    The Features: Hot Desking Members API from Cisco — 2 operation(s) for features: hot desking members.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Hot Desking Members'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-hot-desking-members-api-openapi.yml
+- aid: cisco:cisco-features-hot-desking-sign-in-via-voice-portal-api
+  name: 'Cisco Features: Hot Desking Sign-in via Voice Portal API'
+  description: >-
+    The Features: Hot Desking Sign-in via Voice Portal API from Cisco — 2 operation(s) for features: hot
+    desking sign-in via voice portal.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Hot Desking Sign-in via Voice Portal'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-hot-desking-sign-in-via-voice-portal-api-openapi.yml
+- aid: cisco:cisco-features-hunt-group-api
+  name: 'Cisco Features:  Hunt Group API'
+  description: 'The Features:  Hunt Group API from Cisco — 10 operation(s) for features:  hunt group.'
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features:  Hunt Group'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-hunt-group-api-openapi.yml
+- aid: cisco:cisco-features-operating-modes-api
+  name: 'Cisco Features: Operating Modes API'
+  description: >-
+    The Features: Operating Modes API from Cisco — 7 operation(s) for features: operating modes.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Operating Modes'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-operating-modes-api-openapi.yml
+- aid: cisco:cisco-features-paging-group-api
+  name: 'Cisco Features:  Paging Group API'
+  description: 'The Features:  Paging Group API from Cisco — 4 operation(s) for features:  paging group.'
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features:  Paging Group'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-paging-group-api-openapi.yml
+- aid: cisco:cisco-features-single-number-reach-api
+  name: 'Cisco Features: Single Number Reach API'
+  description: >-
+    The Features: Single Number Reach API from Cisco — 4 operation(s) for features: single number reach.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Single Number Reach'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-single-number-reach-api-openapi.yml
+- aid: cisco:cisco-features-virtual-extensions-api
+  name: 'Cisco Features: Virtual Extensions API'
+  description: >-
+    The Features: Virtual Extensions API from Cisco — 7 operation(s) for features: virtual extensions.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Features: Virtual Extensions'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-features-virtual-extensions-api-openapi.yml
+- aid: cisco:cisco-hot-desk-api
+  name: Cisco Hot Desk API
+  description: The Hot Desk API from Cisco — 2 operation(s) for hot desk.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Hot Desk
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-hot-desk-api-openapi.yml
+- aid: cisco:cisco-location-call-settings-api
+  name: Cisco Location Call Settings API
+  description: The Location Call Settings API from Cisco — 28 operation(s) for location call settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Location Call Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-location-call-settings-api-openapi.yml
+- aid: cisco:cisco-location-call-settings-call-handling-api
+  name: 'Cisco Location Call Settings: Call Handling API'
+  description: >-
+    The Location Call Settings: Call Handling API from Cisco — 8 operation(s) for location call settings:
+    call handling.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Location Call Settings: Call Handling'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-location-call-settings-call-handling-api-openapi.yml
+- aid: cisco:cisco-location-call-settings-schedules-api
+  name: 'Cisco Location Call Settings:  Schedules API'
+  description: >-
+    The Location Call Settings:  Schedules API from Cisco — 4 operation(s) for location call settings:  schedules.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Location Call Settings:  Schedules'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-location-call-settings-schedules-api-openapi.yml
+- aid: cisco:cisco-location-call-settings-voicemail-api
+  name: 'Cisco Location Call Settings:  Voicemail API'
+  description: >-
+    The Location Call Settings:  Voicemail API from Cisco — 9 operation(s) for location call settings:  voicemail.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Location Call Settings:  Voicemail'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-location-call-settings-voicemail-api-openapi.yml
+- aid: cisco:cisco-locations-api
+  name: Cisco Locations API
+  description: The Locations API from Cisco — 4 operation(s) for locations.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-locations-api-openapi.yml
+- aid: cisco:cisco-mode-management-api
+  name: Cisco Mode Management API
+  description: The Mode Management API from Cisco — 9 operation(s) for mode management.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Mode Management
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-mode-management-api-openapi.yml
+- aid: cisco:cisco-numbers-api
+  name: Cisco Numbers API
+  description: The Numbers API from Cisco — 8 operation(s) for numbers.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Numbers
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-numbers-api-openapi.yml
+- aid: cisco:cisco-partner-reports-templates-api
+  name: Cisco Partner Reports/Templates API
+  description: >-
+    The Partner Reports/Templates API from Cisco — 3 operation(s) for partner reports/templates.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Partner Reports/Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-partner-reports-templates-api-openapi.yml
+- aid: cisco:cisco-people-api
+  name: Cisco People API
+  description: The People API from Cisco — 3 operation(s) for people.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - People
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-people-api-openapi.yml
+- aid: cisco:cisco-person-call-settings-api
+  name: Cisco Person Call Settings API
+  description: The Person Call Settings API from Cisco — 1 operation(s) for person call settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Person Call Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-person-call-settings-api-openapi.yml
+- aid: cisco:cisco-pstn-api
+  name: Cisco PSTN API
+  description: The PSTN API from Cisco — 8 operation(s) for pstn.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - PSTN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-pstn-api-openapi.yml
+- aid: cisco:cisco-recording-report-api
+  name: Cisco Recording Report API
+  description: The Recording Report API from Cisco — 4 operation(s) for recording report.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Recording Report
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-recording-report-api-openapi.yml
+- aid: cisco:cisco-reports-api
+  name: Cisco Reports API
+  description: The Reports API from Cisco — 2 operation(s) for reports.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-reports-api-openapi.yml
+- aid: cisco:cisco-reports-detailed-call-history-api
+  name: 'Cisco Reports: Detailed Call History API'
+  description: >-
+    The Reports: Detailed Call History API from Cisco — 2 operation(s) for reports: detailed call history.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - 'Reports: Detailed Call History'
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-reports-detailed-call-history-api-openapi.yml
+- aid: cisco:cisco-telephony-api
+  name: Cisco Telephony API
+  description: The Telephony API from Cisco — 1 operation(s) for telephony.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Telephony
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-telephony-api-openapi.yml
+- aid: cisco:cisco-user-call-settings-1-2-api
+  name: Cisco User Call Settings (1/2) API
+  description: >-
+    The User Call Settings (1/2) API from Cisco — 26 operation(s) for user call settings (1/2).
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - User Call Settings (1/2)
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-user-call-settings-1-2-api-openapi.yml
+- aid: cisco:cisco-user-call-settings-2-2-api
+  name: Cisco User Call Settings (2/2) API
+  description: >-
+    APIs for managing user call settings including music on hold, access codes, transfer numbers, digit
+    patterns, and more.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - User Call Settings (2/2)
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-user-call-settings-2-2-api-openapi.yml
+- aid: cisco:cisco-user-call-settings-3-3-api
+  name: Cisco User Call Settings (3/3) API
+  description: >-
+    The User Call Settings (3/3) API from Cisco — 11 operation(s) for user call settings (3/3).
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - User Call Settings (3/3)
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-user-call-settings-3-3-api-openapi.yml
+- aid: cisco:cisco-user-call-settings-api
+  name: Cisco User Call Settings API
+  description: The User Call Settings API from Cisco — 2 operation(s) for user call settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - User Call Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-user-call-settings-api-openapi.yml
+- aid: cisco:cisco-user-call-settings-members-api
+  name: Cisco User Call Settings Members API
+  description: >-
+    The User Call Settings Members API from Cisco — 6 operation(s) for user call settings members.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - User Call Settings Members
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-user-call-settings-members-api-openapi.yml
+- aid: cisco:cisco-user-call-settings-members-me-api
+  name: Cisco User Call Settings Members Me API
+  description: >-
+    The User Call Settings Members Me API from Cisco — 6 operation(s) for user call settings members me.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - User Call Settings Members Me
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-user-call-settings-members-me-api-openapi.yml
+- aid: cisco:cisco-virtual-line-call-settings-api
+  name: Cisco Virtual Line Call Settings API
+  description: Webex Calling settings for a specific virtual line.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Virtual Line Call Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-virtual-line-call-settings-api-openapi.yml
+- aid: cisco:cisco-webhook-interest-registrations-api
+  name: Cisco Webhook Interest Registrations API
+  description: >-
+    Operations for managing client registrations that enable organization-wide emission of Webex Calling
+    webhook events that are not emitted by default.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Webhook Interest Registrations
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-webhook-interest-registrations-api-openapi.yml
+- aid: cisco:cisco-workspace-call-settings-1-2-api
+  name: Cisco Workspace Call Settings (1/2) API
+  description: >-
+    The Workspace Call Settings (1/2) API from Cisco — 9 operation(s) for workspace call settings (1/2).
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Workspace Call Settings (1/2)
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-workspace-call-settings-1-2-api-openapi.yml
+- aid: cisco:cisco-workspace-call-settings-2-2-api
+  name: Cisco Workspace Call Settings (2/2) API
+  description: Webex Calling settings for a specific workspace.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Workspace Call Settings (2/2)
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-workspace-call-settings-2-2-api-openapi.yml
+- aid: cisco:cisco-workspace-call-settings-api
+  name: Cisco Workspace Call Settings API
+  description: The Workspace Call Settings API from Cisco — 3 operation(s) for workspace call settings.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Workspace Call Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-workspace-call-settings-api-openapi.yml
+- aid: cisco:cisco-workspaces-api
+  name: Cisco Workspaces API
+  description: The Workspaces API from Cisco — 3 operation(s) for workspaces.
+  humanURL: https://developer.cisco.com/meraki/api-v1/
+  baseURL: https://api.meraki.com/api/v1
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-workspaces-api-openapi.yml
 x-coverage:
   state: blocked
   reason: bot-challenge

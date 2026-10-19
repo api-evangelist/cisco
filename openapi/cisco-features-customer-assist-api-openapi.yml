@@ -1,0 +1,1487 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Customer Assist API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features: Customer Assist'
+paths:
+  /telephony/config/cxEssentials/wrapup/reasons:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - wrapupReasons
+                properties:
+                  wrapupReasons:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WrapUpReasonObject'
+                    description: List of wrap-up reasons.
+              example:
+                wrapupReasons:
+                - id: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+                  name: Test Wrapup Reason 1
+                  description: This is a description for wrap-up reason 1
+                  numberOfQueuesAssigned: 5
+                - id: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvYjY2ZGY0ZjItYTc3Yy00MWNmLTkyYzAtOTA3MGUzZDA4M2Ex
+                  name: Test Wrapup Reason 2
+                  description: This is a description for wrap-up reason 2
+                  numberOfQueuesAssigned: 13
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Wrap Up Reasons
+      operationId: ListWrapUpReasons
+      description: 'Return the list of wrap-up reasons configured for a customer.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues. Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue. Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Retrieving the list of wrap-up reasons requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters: []
+      x-operation-id-source: normalized
+      x-operation-id-original: List Wrap Up Reasons
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+                    description: Unique wrap-up identifier.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create Wrap Up Reason
+      operationId: CreateWrapUpReason
+      description: 'Create a wrap-up reason.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Creating a wrap-up reason requires a full or device administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Wrap up reason 1
+              description: This is a description for wrap-up reason 1
+              queues:
+              - Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+              assignAllQueuesEnabled: false
+            schema:
+              $ref: '#/components/schemas/CreateWrapUpReasonPayload'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Wrap Up Reason
+  /telephony/config/cxEssentials/wrapup/reasons/{wrapupReasonId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrapUpReasonDetailsObject'
+                description: Wrap-up reason object.
+              example:
+                name: Wrap up reason 1
+                description: This is a description for wrap-up reason 1
+                defaultWrapupQueuesCount: 1
+                queues:
+                - id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+                  name: Queue 1
+                  locationName: Location 1
+                  phoneNumber: '+1234567890'
+                  extension: '1234'
+                  defaultWrapupEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read Wrap Up Reason
+      operationId: ReadWrapUpReason
+      description: 'Return the wrap-up reason by ID.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Retrieving the wrap-up reason by ID requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: wrapupReasonId
+        in: path
+        description: Wrap-up reason ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read Wrap Up Reason
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Wrap Up Reason
+      operationId: UpdateWrapUpReason
+      description: 'Modify a wrap-up reason.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Modifying a wrap-up reason requires a full or device administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: wrapupReasonId
+        in: path
+        description: Wrap-up reason ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Wrap up reason 1
+              description: This is a description for wrap-up reason 1
+              queuesToAssign:
+              - Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+              queuesToUnassign:
+              - Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYmI0MDc4NWMtZGZmMi00ODA3LTkwZTYtNGRlMzEwZmI1YTA5
+              assignAllQueuesEnabled: false
+              unassignAllQueuesEnabled: false
+            schema:
+              $ref: '#/components/schemas/UpdateWrapUpReasonPayload'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Wrap Up Reason
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete Wrap Up Reason
+      operationId: DeleteWrapUpReason
+      description: 'Delete a wrap-up reason.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Deleting the wrap-up reason requires a full or device administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: wrapupReasonId
+        in: path
+        description: Wrap-up reason ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete Wrap Up Reason
+  /telephony/config/cxEssentials/wrapup/reasons/actions/validateName/invoke:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Validate Wrap Up Reason
+      operationId: ValidateWrapUpReason
+      description: 'Validate the wrap-up reason name.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Validating the wrap-up reason name requires a full or device administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Wrap up reason 1
+            schema:
+              $ref: '#/components/schemas/ValidateWrapUpReasonPayload'
+      x-operation-id-source: normalized
+      x-operation-id-original: Validate Wrap Up Reason
+  /telephony/config/cxEssentials/wrapup/reasons/{wrapupReasonId}/availableQueues:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - queues
+                properties:
+                  queues:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QueueObject'
+                    description: List of queues.
+              example:
+                queues:
+                - id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+                  name: Queue 1
+                  locationName: Location 1
+                  extension: '1234'
+                - id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvMTM1NDg0YTMtN2Y0Yi00MTlhLWI2ZGQtMTk4NmY5MmQwYWQ1
+                  name: Queue 2
+                  locationName: Location 2
+                  extension: '12345'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read Available Queues
+      operationId: ReadAvailableQueues
+      description: 'Return the available queues for a wrap-up reason.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Retrieving the available queues for a wrap-up reason requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: wrapupReasonId
+        in: path
+        description: Wrap-up reason ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read Available Queues
+  /telephony/config/cxEssentials/locations/{locationId}/queues/{queueId}/wrapup/settings:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - wrapupReasons
+                properties:
+                  wrapupTimerEnabled:
+                    type: boolean
+                    example: true
+                    description: Denotes whether the wrap-up timer is enabled.
+                  wrapupTimer:
+                    type: number
+                    example: 60
+                    description: Wrap up timer value in seconds.
+                  wrapupReasons:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QueueWrapUpReasonObject'
+                    description: List of wrap-up reasons.
+              example:
+                wrapupTimerEnabled: true
+                wrapupTimer: 60
+                wrapupReasons:
+                - id: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+                  name: Wrap up reason 1
+                  description: This is a description for wrap-up reason 1
+                  isDefaultEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read Wrap Up Reason Settings
+      operationId: ReadWrapUpReasonSettings
+      description: 'Return a wrap-up reason by location ID and queue ID.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Retrieving the wrap-up reason by location ID and queue ID requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: locationId
+        in: path
+        description: The location ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2ZkZDA1MzYyLTdlZjctNDYzYS1hMjg5LTY5NzgxMzc5Y2NhNg==
+        schema:
+          type: string
+      - name: queueId
+        in: path
+        description: The queue ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read Wrap Up Reason Settings
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Wrap Up Reason Settings
+      operationId: UpdateWrapUpReasonSettings
+      description: 'Modify a wrap-up reason by location ID and queue ID.
+
+
+        Agents handling calls use wrap-up reasons to categorize the outcome after a call ends. The control hub admin can configure these reasons for customers and assign them to queues.
+
+        Upon call completion, agents select a wrap-up reason from the queue''s assigned list. Each wrap-up reason includes a name and description, and can be set as the default for a queue.
+
+        Admins can also configure a timer, which dictates the time agents have to select a reason post-call, with a default of 60 seconds. This timer can be disabled if necessary.
+
+
+        Modifying a wrap-up reason by location ID and queue ID requires a full or device administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: locationId
+        in: path
+        description: The location ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2ZkZDA1MzYyLTdlZjctNDYzYS1hMjg5LTY5NzgxMzc5Y2NhNg==
+        schema:
+          type: string
+      - name: queueId
+        in: path
+        description: The queue ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              wrapupReasons:
+              - Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+              defaultWrapupReasonId: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+              wrapupTimerEnabled: true
+              wrapupTimer: 60
+            schema:
+              $ref: '#/components/schemas/UpdateWrapUpReasonByLocationQueuePayload'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Wrap Up Reason Settings
+  /telephony/config/locations/{locationId}/queues/{queueId}/cxEssentials/screenPop:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScreenPopConfigurationObject'
+              example:
+                enabled: true
+                screenPopUrl: http://localhost:8086/screenpop
+                desktopLabel: example screen pop
+                queryParams:
+                  example-param: example-value
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read Screen Pop Configuration
+      operationId: ReadScreenPopConfiguration
+      description: 'Returns the screen pop configuration for a call queue in a location.
+
+
+        Screen pop lets agents view customer-related info in a pop-up window.
+
+
+        Retrieving the screen pop configuration requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: locationId
+        in: path
+        description: The location ID where the call queue resides.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzVlZmI5MTFhLThmNmUtNGU2Ny1iOTZkLWNkM2VmNmRhNDE2OA
+        schema:
+          type: string
+      - name: queueId
+        in: path
+        required: true
+        description: The call queue ID for which screen pop configuration is modified.
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYUhaaFpUTjJNRzh5YjBBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: The organization ID of the customer or partner's organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read Screen Pop Configuration
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Screen Pop Configuration
+      operationId: UpdateScreenPopConfiguration
+      description: 'Modifies the screen pop configuration for a call queue in a location.
+
+
+        Screen pop lets agents view customer-related info in a pop-up window.
+
+
+        Modifying the screen pop configuration requires a full or device administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: locationId
+        in: path
+        description: The location ID where the call queue resides.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzVlZmI5MTFhLThmNmUtNGU2Ny1iOTZkLWNkM2VmNmRhNDE2OA
+        schema:
+          type: string
+      - name: queueId
+        in: path
+        required: true
+        description: The call queue ID for which screen pop configuration is modified.
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvYUhaaFpUTjJNRzh5YjBBMk5EazBNVEk1Tnk1cGJuUXhNQzVpWTJ4a0xuZGxZbVY0TG1OdmJRPT0
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: The organization ID of the customer or partner's organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: true
+              screenPopUrl: http://localhost:8086/screenpop
+              desktopLabel: example screen pop
+              queryParams:
+                example-parameter-1: example-value-1
+                example-parameter-2: example-value-2
+            schema:
+              $ref: '#/components/schemas/ModifyScreenPopConfigurationPayload'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Screen Pop Configuration
+  /telephony/config/locations/{locationId}/cxEssentials/agents/availableAgents:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - agents
+                properties:
+                  agents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GetAvailableAgentsCallQueueObject'
+                    description: List of available agents in the given location.
+              example:
+                agents:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YzFjOWE2YS1jYjZiLTRjYjItOWJkYi02YjkyZTA1ZTI4ZmY
+                  lastName: Smith
+                  firstName: John
+                  displayName: John_Smith
+                  type: PEOPLE
+                  email: JohnSmith@gmail.com
+                  hasCxEssentials: true
+                  phoneNumber:
+                  - external: '+12165553518'
+                    extension: '5024'
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNGZkMGJkZS03MmM5LTRkMTktYmUxNS03YTdjMTM0YzExZmQ
+                  lastName: Will
+                  firstName: David
+                  displayName: David Will
+                  type: PEOPLE
+                  email: davidWill@test.com
+                  hasCxEssentials: true
+                  phoneNumber:
+                  - external: '+19458880340'
+                    extension: '5024'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: List Available Agents
+      operationId: ListAvailableAgents
+      description: 'Return a list of available agents with Customer Assist license in a location.
+
+
+        Retrieving the list of available agents requires a full or read-only administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve the list of avaiilable agents in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: The organization ID of the customer or partner's organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: hasCxEssentials
+        in: query
+        description: Returns only the list of available agents with Customer Assist license when `true`, otherwise returns the list of available agents with Customer Experience Basic license.
+        example: true
+        schema:
+          type: boolean
+      x-operation-id-source: normalized
+      x-operation-id-original: List Available Agents
+  /telephony/config/cxEssentials/agents/availableAgents:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailableAgentListGetObject'
+              example:
+                agents:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YzFjOWE2YS1jYjZiLTRjYjItOWJkYi02YjkyZTA1ZTI4ZmY
+                  lastName: Smith
+                  firstName: John
+                  displayName: John Smith
+                  type: PEOPLE
+                  email: john.smith@example.com
+                  hasCxEssentials: true
+                  phoneNumbers:
+                  - external: '+12165553518'
+                    extension: '5024'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Available Agents
+      operationId: getAvailableAgents
+      description: 'List eligible people who can be assigned as Customer Assist agents.
+
+
+        Returns people with a Webex Calling Professional license across all locations visible to the caller''s authorization. Workspaces and virtual lines are not included.
+
+
+        Calls from call queues are routed to assigned agents based on configuration. An agent can be assigned to one or more call queues and can be managed by supervisors.
+
+
+        Retrieving this list requires a full, read-only or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features: Customer Assist'
+      parameters:
+      - name: locationId
+        in: query
+        description: The location ID of the call queue. Temporary mandatory query parameter, used for performance reasons only and not a filter.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List available agents for this organization. If omitted, uses the organization associated with the OAuth token.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: hasCxEssentials
+        in: query
+        description: Filter agents by Customer Assist license status. When `true`, returns only agents with Customer Assist license. When `false`, returns only agents with Customer Experience Basic license. When omitted, returns all eligible agents regardless of license type.
+        example: true
+        schema:
+          type: boolean
+      - name: max
+        in: query
+        description: Limit the number of objects returned to this maximum count.
+        example: 2000
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 2000
+          default: 2000
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects.
+        example: 0
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 9999
+          default: 0
+      - name: name
+        in: query
+        description: Filter agents by name. Supports partial matching. Multiple values can be provided to search for agents matching any of the specified names.
+        example: John
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+      - name: phoneNumbers
+        in: query
+        description: Filter agents by phone number. Supports partial matching. Multiple values can be provided to search for agents matching any of the specified phone numbers.
+        example: '+1216555'
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+      - name: order
+        in: query
+        description: Sort order for the results. Supported fields are `firstName`, `lastName`, `displayName`, and `extension`. Use `asc` or `desc` suffix to specify direction (e.g., `lastName asc`). Default is `lastName asc`.
+        example: lastName asc
+        schema:
+          type: string
+components:
+  schemas:
+    QueryParamsObject:
+      type: object
+      properties:
+        example_param_1:
+          type: string
+          example: example_value_1
+          description: An example key-value pair that will be sent to the agent.
+        example_param_2:
+          type: string
+          example: example_value_2
+          description: Another example key-value pair that will be sent to the agent.
+        example_param_3:
+          type: string
+          example: example_value_3
+          description: Another example key-value pair that will be sent to the agent.
+    UpdateWrapUpReasonByLocationQueuePayload:
+      type: object
+      properties:
+        wrapupReasons:
+          type: array
+          items:
+            type: string
+            example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+          description: List of wrap-up reason IDs.
+        defaultWrapupReasonId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+          description: Unique wrap-up identifier.
+        wrapupTimerEnabled:
+          type: boolean
+          example: true
+          description: Denotes whether the wrap-up timer is enabled.
+        wrapupTimer:
+          type: number
+          example: 60
+          description: Wrap up timer value in seconds.
+    AvailableAgentObject:
+      type: object
+      required:
+      - id
+      - type
+      - email
+      - hasCxEssentials
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YzFjOWE2YS1jYjZiLTRjYjItOWJkYi02YjkyZTA1ZTI4ZmY
+          description: ID of a person.
+        lastName:
+          type: string
+          example: Smith
+          description: Last name of a person.
+        firstName:
+          type: string
+          example: John
+          description: First name of a person.
+        displayName:
+          type: string
+          example: John Smith
+          description: Display name of a person.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          description: "Type of the person.\n * `PEOPLE` - Object is a user.\n"
+        email:
+          type: string
+          example: johnsmith@gmail.com
+          description: Email of a person.
+        hasCxEssentials:
+          type: boolean
+          example: true
+          description: Person has the CX Essentials license.
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetUserNumberItemObject'
+          description: List of phone numbers of a person.
+    WrapUpReasonObject:
+      type: object
+      required:
+      - id
+      - name
+      - numberOfQueuesAssigned
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+          description: Unique wrap-up identifier.
+        name:
+          type: string
+          example: Wrap up reason 1
+          description: Name of the wrap-up reason.
+        description:
+          type: string
+          example: This is a description for wrap-up reason 1
+          description: Description of the wrap-up reason.
+        numberOfQueuesAssigned:
+          type: number
+          example: 1
+          description: Number of queues assigned to the wrap-up reason.
+    WrapUpReasonDetailsObject:
+      type: object
+      required:
+      - name
+      - defaultWrapupQueuesCount
+      - queues
+      properties:
+        name:
+          type: string
+          example: Wrap up reason 1
+          description: Name of the wrap-up reason.
+        description:
+          type: string
+          example: This is a description for wrap-up reason 1
+          description: Description of the wrap-up reason.
+        defaultWrapupQueuesCount:
+          type: number
+          example: 1
+          description: Number of queues assigned to the wrap-up reason.
+        queues:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueueObjectWithDefaultEnabled'
+          description: List of queues assigned to the wrap-up reason.
+    UserType:
+      type: string
+      enum:
+      - PEOPLE
+      - PLACE
+      - VIRTUAL_LINE
+      description: " * `PEOPLE` - The associated member is a person.\n * `PLACE` - The associated member is a workspace.\n * `VIRTUAL_LINE` - The associated member is a virtual line.\n"
+    GetAvailableAgentsCallQueueObject:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BMQUNFLzE3NzczMWRiLWE1YzEtNGI2MC05ZTMwLTNhM2MxMGFiM2IxMQ
+          description: Unique agent identifier.
+        lastName:
+          type: string
+          example: Smith
+          description: Last name of the agent assigned to the particular location.
+        firstName:
+          type: string
+          example: John
+          description: First name of the agent assigned to the particular location.
+        displayName:
+          type: string
+          example: John Smith
+          description: Display name of the agent.
+        type:
+          $ref: '#/components/schemas/UserType'
+          description: Type of the person, workspace or virtual line.
+        email:
+          type: string
+          example: johnSmith@gmail.com
+          description: Email of the agent.
+        hasCxEssentials:
+          type: boolean
+          example: true
+          description: Denotes whether the agent has Customer Assist license.
+        phoneNumbers:
+          type: object
+          properties:
+            external:
+              type: string
+              example: '+12143456103'
+              description: External phoneNumber of the agent.
+            extension:
+              type: string
+              example: '23234'
+              description: Extension of the agent.
+          description: Phone number and extension of the agent.
+    GetScreenPopConfigurationObject:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/disable screen pop.
+        screenPopUrl:
+          type: string
+          example: https://www.salesforce.com/page
+          description: The screen pop URL that integrates Webex calls with other business apps like CRM, ticketing tools, and order entry systems.
+        desktopLabel:
+          type: string
+          example: CRM Integration with Webex CallQueue screen pop
+          description: A label for the screen pop configuration.
+        queryParams:
+          $ref: '#/components/schemas/QueryParamsObject'
+          description: The additional user-defined key-value pairs that must be sent to the agent.
+    ModifyScreenPopConfigurationPayload:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: Enable/disable screen pop.
+        screenPopUrl:
+          type: string
+          example: https://www.salesforce.com/page
+          description: The screen pop URL that integrates Webex calls with other business apps like CRM, ticketing tools, and order entry systems.
+        desktopLabel:
+          type: string
+          example: CRM Integration with Webex CallQueue screen pop
+          description: A label for the screen pop configuration.
+        queryParams:
+          $ref: '#/components/schemas/QueryParamsObject'
+          description: The additional user-defined key-value pairs that must be sent to the agent.
+    QueueObjectWithDefaultEnabled:
+      type: object
+      required:
+      - id
+      - name
+      - locationName
+      - locationId
+      - phoneNumber
+      - defaultWrapupEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+          description: Unique queue identifier.
+        name:
+          type: string
+          example: Queue 1
+          description: Name of the queue.
+        locationName:
+          type: string
+          example: Location 1
+          description: Name of the location.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M3YmRjMmI5LWFmZmUtNDE0NC1hZTNkLTI4MWZmZTFjZThlYw
+          description: Unique location identifier.
+        phoneNumber:
+          type: string
+          example: '+1234567890'
+          description: Phone number of the queue.
+        extension:
+          type: number
+          example: 1234
+          description: Extension of the queue.
+        defaultWrapupEnabled:
+          type: boolean
+          description: Denotes whether the default wrap-up is enabled for the queue.
+    QueueWrapUpReasonObject:
+      type: object
+      required:
+      - id
+      - name
+      - isDefaultEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1dSQVBVUF9SRUFTT05fSUQvOGVmNzM4OTctMmQzNS00ZjgwLWJkOGQtYzRjNmRhNWNlZjA2
+          description: Unique wrap-up identifier.
+        name:
+          type: string
+          example: Wrap up reason 1
+          description: Name of the wrap-up reason.
+        description:
+          type: string
+          example: This is a description for wrap-up reason 1
+          description: Description of the wrap-up reason.
+        isDefaultEnabled:
+          type: boolean
+          example: true
+          description: Denotes whether the default wrap-up is enabled for the queue.
+    CreateWrapUpReasonPayload:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: Wrap up reason 1
+          description: Name of the wrap-up reason.
+        description:
+          type: string
+          example: This is a description for wrap-up reason 1
+          description: Description of the wrap-up reason.
+        queues:
+          type: array
+          items:
+            type: string
+            example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+          description: List of queue IDs assigned to the wrap-up reason.
+        assignAllQueuesEnabled:
+          type: boolean
+          description: Denotes whether all queues are assigned to the wrap-up reason.
+    UpdateWrapUpReasonPayload:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Wrap up reason 1
+          description: Name of the wrap-up reason.
+        description:
+          type: string
+          example: This is a description for wrap-up reason 1
+          description: Description of the wrap-up reason.
+        queuesToAssign:
+          type: array
+          items:
+            type: string
+            example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+          description: List of queue IDs to assign to the wrap-up reason.
+        queuesToUnassign:
+          type: array
+          items:
+            type: string
+            example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvMTM1NDg0YTMtN2Y0Yi00MTlhLWI2ZGQtMTk4NmY5MmQwYWQ1
+          description: List of queue IDs to unassign from the wrap-up reason.
+        assignAllQueuesEnabled:
+          type: boolean
+          description: Denotes whether all queues are assigned to the wrap-up reason.
+        unassignAllQueuesEnabled:
+          type: boolean
+          description: Denotes whether all queues are unassigned from the wrap-up reason.
+    QueueObject:
+      type: object
+      required:
+      - id
+      - name
+      - locationName
+      - locationId
+      - phoneNumber
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvOGY1MDI2ZjMtMDZjYi00OTU3LWE0MDQtNDYyM2UzYjJjYzVi
+          description: Unique queue identifier.
+        name:
+          type: string
+          example: Queue 1
+          description: Name of the queue.
+        locationName:
+          type: string
+          example: Location 1
+          description: Name of the location.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2M3YmRjMmI5LWFmZmUtNDE0NC1hZTNkLTI4MWZmZTFjZThlYw
+          description: Unique location identifier.
+        phoneNumber:
+          type: string
+          example: '+1234567890'
+          description: Phone number of the queue.
+        extension:
+          type: number
+          example: 1234
+          description: Extension of the queue.
+    ValidateWrapUpReasonPayload:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: Wrap up reason 1
+          description: Name of the wrap-up reason.
+    AvailableAgentListGetObject:
+      type: object
+      required:
+      - agents
+      properties:
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableAgentObject'
+          description: Array of available agents.
+    GetUserNumberItemObject:
+      type: object
+      properties:
+        external:
+          type: string
+          example: '+12143456103'
+          description: Phone number of a person.
+        extension:
+          type: string
+          example: '23234'
+          description: Extension of a person.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

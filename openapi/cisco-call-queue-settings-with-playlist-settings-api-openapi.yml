@@ -1,0 +1,134 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Call Queue Settings with Playlist…
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Call Queue Settings with Playlist Settings
+paths:
+  /telephony/config/announcements/playlists/{playListId}/usage:
+    get:
+      summary: Get Playlist Usage
+      operationId: getPlaylistUsage
+      tags:
+      - Call Queue Settings with Playlist Settings
+      parameters:
+      - name: playListId
+        in: path
+        required: true
+        description: Unique identifier of the playlist.
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL1BMQVlMSVNULzg1NWU1N2M0LWUzYTAtNGEyZS1hYWYxLTQ3ZWUxMmI3M2U2MA==
+      - name: playlistUsageType
+        in: query
+        schema:
+          type: string
+          enum:
+          - feature
+          - location
+        description: Filter usage by type.
+        example: feature
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistUsage'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1BMQVlMSVNULzg1NWU1N2M0LWUzYTAtNGEyZS1hYWYxLTQ3ZWUxMmI3M2U2MA
+                locations:
+                - name: RCDN6
+                  id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzAxNWFmN2QzLTRlNzktNGY2ZC04Nzk5LWRlMjEzYTBhZDNhYQ
+                  featureReference:
+                    id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNGFlMzJkMTAtNWI0Zi00NmNmLWI4ZTQtYmE2YzNiZjMyZGZi
+                    name: Test Call Queue
+                    type: CALL_QUEUE
+                - name: RCDN6
+                  id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzAxNWFmN2QzLTRlNzktNGY2ZC04Nzk5LWRlMjEzYTBhZDNhYQ
+                  featureReference:
+                    id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvMTkyNDYxMjEtZDhiYi00NTdjLWEzZjQtNGQ3YTBlYmQ4Nzk2
+                    name: Test Call Queue 3
+                    type: CALL_QUEUE
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+components:
+  schemas:
+    PlaylistUsage:
+      description: Mapping of a playlist to the locations and features where it is used.
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier of the playlist.
+        locations:
+          type: array
+          description: List of locations using this playlist.
+          items:
+            type: object
+            description: Location and feature referencing this playlist.
+            properties:
+              id:
+                type: string
+                description: Location identifier.
+              name:
+                type: string
+                description: Location name.
+              featureReference:
+                type: object
+                description: Feature referencing the playlist.
+                properties:
+                  id:
+                    type: string
+                    description: Feature identifier.
+                  name:
+                    type: string
+                    description: Feature name.
+                  type:
+                    type: string
+                    description: Feature type.
+                required:
+                - id
+                - name
+                - type
+            required:
+            - id
+            - name
+            - featureReference
+      required:
+      - id
+      - locations
+      example:
+        id: Y2lzY29zcGFyazovL3VzL1BMQVlMSVNULzg1NWU1N2M0LWUzYTAtNGEyZS1hYWYxLTQ3ZWUxMmI3M2U2MA
+        locations:
+        - name: RCDN6
+          id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzAxNWFmN2QzLTRlNzktNGY2ZC04Nzk5LWRlMjEzYTBhZDNhYQ
+          featureReference:
+            id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNGFlMzJkMTAtNWI0Zi00NmNmLWI4ZTQtYmE2YzNiZjMyZGZi
+            name: Test Call Queue
+            type: CALL_QUEUE
+        - name: RCDN6
+          id: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzAxNWFmN2QzLTRlNzktNGY2ZC04Nzk5LWRlMjEzYTBhZDNhYQ
+          featureReference:
+            id: Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvMTkyNDYxMjEtZDhiYi00NTdjLWEzZjQtNGQ3YTBlYmQ4Nzk2
+            name: Test Call Queue 3
+            type: CALL_QUEUE
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

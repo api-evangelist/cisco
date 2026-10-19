@@ -1,0 +1,72 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Call Controls Members Me API
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Call Controls Members Me
+paths:
+  /telephony/calls/members/me/wrapupreasons:
+    post:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+      summary: Set Wrap-up Reasons
+      operationId: setWrapupReasons
+      description: Sets wrap-up reasons for the authenticated user's last completed call. The request must provide wrapupReasons.
+      tags:
+      - Call Controls Members Me
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              wrapupReasons:
+              - Reason1
+              - Reason2
+              - Reason3
+            schema:
+              type: object
+              properties:
+                wrapupReasons:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - Reason1
+                  - Reason2
+                  - Reason3
+                  description: Array of wrap-up reason names to apply to the agent's last completed call.
+components:
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

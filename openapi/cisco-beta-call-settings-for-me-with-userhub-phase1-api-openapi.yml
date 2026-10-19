@@ -1,0 +1,1443 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Beta Call Settings For Me With Userhub…
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Beta Call Settings For Me With Userhub Phase1
+paths:
+  /telephony/config/people/me/settings/callPolicies:
+    get:
+      responses:
+        '200':
+          description: Call policies retrieved successfully for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCallPoliciesGet'
+              example:
+                connectedLineIdPrivacyOnRedirectedCalls: NO_PRIVACY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Policies Settings for User
+      operationId: getMyCallPoliciesSettings
+      description: 'Get call policies settings for the authenticated user.
+
+
+        Call Policies in Webex allow you to manage how your call information is displayed and handled. You can view privacy settings for your connected line ID on redirected calls and review other call-related preferences.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: Call policies updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Call Policies Settings for User
+      operationId: updateMyCallPoliciesSettings
+      description: 'Update call policies settings for the authenticated user.
+
+
+        Call Policies in Webex allow you to manage how your call information is displayed and handled. You can configure privacy settings for your connected line ID on redirected calls and control other call-related preferences.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              connectedLineIdPrivacyOnRedirectedCalls: NO_PRIVACY
+            schema:
+              $ref: '#/components/schemas/UserCallPoliciesPut'
+  /telephony/config/people/me/settings/executive/screening:
+    get:
+      responses:
+        '200':
+          description: User executive screening settings retrieved successfully.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutiveScreeningGet'
+              example:
+                enabled: true
+                alertType: SILENT
+                alertAnywhereLocationEnabled: false
+                alertMobilityLocationEnabled: false
+                alertSharedCallAppearanceLocationEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get User Executive Screening Settings
+      operationId: getMyExecutiveScreeningSettings
+      description: 'Get executive screening settings for the authenticated user.
+
+
+        Executive Screening in Webex allows you to manage how incoming calls are screened and alerted based on your preferences. You can enable or disable executive screening and configure alert types and locations for notifications.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: User executive screening settings modified successfully.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify User Executive Screening Settings
+      operationId: updateMyExecutiveScreeningSettings
+      description: 'Update executive screening settings for the authenticated user.
+
+
+        Executive Screening in Webex allows you to manage how incoming calls are screened and alerted based on your preferences. You can enable or disable executive screening and configure alert types and locations for notifications.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: false
+              alertType: RING_SPLASH
+              alertAnywhereLocationEnabled: false
+              alertMobilityLocationEnabled: false
+              alertSharedCallAppearanceLocationEnabled: false
+            schema:
+              $ref: '#/components/schemas/ExecutiveScreeningPut'
+  /telephony/config/people/me/settings/executive/callFiltering:
+    get:
+      responses:
+        '200':
+          description: User executive call filtering settings retrieved successfully.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutiveCallFilteringGet'
+              example:
+                enabled: true
+                filterType: CUSTOM_CALL_FILTERS
+                criteria:
+                - id: ZmlsdGVyMQ==
+                  filterName: VIP Callers
+                  source: SELECT_PHONE_NUMBERS
+                  activationEnabled: true
+                  filterEnabled: true
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get User Executive Call Filtering Settings
+      operationId: getMyExecutiveCallFilteringSettings
+      description: 'Get executive call filtering settings for the authenticated user.
+
+
+        Executive Call Filtering in Webex allows you to control which calls are allowed to reach the executive assistant based on custom criteria, such as specific phone numbers or call types. You can enable or disable call filtering and configure filter rules to manage incoming calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: Executive call filtering settings modified successfully.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify User Executive Call Filtering Settings
+      operationId: updateMyExecutiveCallFilteringSettings
+      description: 'Update executive call filtering settings for the authenticated user.
+
+
+        Executive Call Filtering in Webex allows you to control which calls are allowed to reach the executive assistant based on custom criteria, such as specific phone numbers or call types. You can enable or disable call filtering and configure filter rules to manage incoming calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: true
+              filterType: CUSTOM_CALL_FILTERS
+              criteriaActivation:
+              - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+                activationEnabled: true
+            schema:
+              $ref: '#/components/schemas/ExecutiveCallFilteringPatch'
+  /telephony/config/people/me/settings/executive/callFiltering/criteria/{id}:
+    get:
+      responses:
+        '200':
+          description: User executive call filtering criteria retrieved successfully.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutiveCallFilteringCriteriaGet'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+                filterName: VIP Callers
+                scheduleName: Business Hours
+                scheduleType: businessHours
+                scheduleLevel: PEOPLE
+                callsFrom: SELECT_PHONE_NUMBERS
+                anonymousCallersEnabled: false
+                unavailableCallersEnabled: false
+                phoneNumbers:
+                - '+14085551234'
+                - '+14085551235'
+                filterEnabled: true
+                callsToNumbers:
+                - type: PRIMARY
+                  phoneNumber: '+14085556789'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get User Executive Call Filtering Criteria Settings
+      operationId: getMyExecutiveCallFilteringCriteria
+      description: 'Get executive call filtering criteria settings for the authenticated user.
+
+
+        Executive Call Filtering Criteria in Webex allows you to retrieve detailed configuration for a specific filter rule. This includes schedule settings, phone number filters, and call routing preferences for executive call filtering.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+        description: 'The `id` parameter specifies the unique identifier for the executive call filtering criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0`.'
+    put:
+      responses:
+        '200':
+          description: Executive call filtering criteria updated successfully. Returns the updated criteria ID.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1JFU1VSTkFNRV9IRVJF
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify User Executive Call Filtering Criteria Settings
+      operationId: updateMyExecutiveCallFilteringCriteria
+      description: 'Update executive call filtering criteria settings for the authenticated user.
+
+
+        Executive Call Filtering Criteria in Webex allows you to modify detailed configuration for a specific filter rule. This includes updating schedule settings, phone number filters, and call routing preferences for executive call filtering.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+        description: 'The `id` parameter specifies the unique identifier for the executive call filtering criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0`.'
+      requestBody:
+        content:
+          application/json:
+            example:
+              filterName: VIP Callers Updated
+              scheduleName: Business Hours
+              scheduleType: businessHours
+              scheduleLevel: PEOPLE
+              callsFrom: SELECT_PHONE_NUMBERS
+              anonymousCallersEnabled: false
+              unavailableCallersEnabled: false
+              phoneNumbers:
+              - '+14085551234'
+              - '+14085551235'
+              filterEnabled: true
+              callsToNumbers:
+              - type: PRIMARY
+                phoneNumber: '+14085556789'
+            schema:
+              $ref: '#/components/schemas/ExecutiveCallFilteringCriteriaPatch'
+    delete:
+      summary: Delete User Executive Call Filtering Criteria
+      operationId: deleteMyExecutiveCallFilteringCriteria
+      description: 'Delete a specific executive call filtering criteria for the authenticated user.
+
+
+        Executive Call Filtering Criteria in Webex allows you to manage detailed filter rules for incoming calls. This API removes a specific filter rule by its unique identifier.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+        description: 'The `id` parameter specifies the unique identifier for the executive call filtering criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0`.'
+      responses:
+        '204':
+          description: Executive call filtering criteria deleted successfully. No content is returned.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/doNotDisturb:
+    get:
+      responses:
+        '200':
+          description: Do Not Disturb settings retrieved successfully for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoNotDisturbGet'
+              example:
+                enabled: true
+                ringSplashEnabled: false
+                webexGoOverrideEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Do Not Disturb Settings for User
+      operationId: getMyDoNotDisturbSettings
+      description: 'Get Do Not Disturb settings for the authenticated user.
+
+
+        Do Not Disturb (DND) enables users to block or silence incoming calls on their phone. When activated, the phone either stops ringing or rejects calls depending on the configured option, but users can still see call information and answer calls if desired.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: Do Not Disturb settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Do Not Disturb Settings for User
+      operationId: updateMyDoNotDisturbSettings
+      description: 'Update Do Not Disturb settings for the authenticated user.
+
+
+        Do Not Disturb (DND) enables users to block or silence incoming calls on their phone. When activated, the phone either stops ringing or rejects calls depending on the configured option, but users can still see call information and answer calls if desired.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: true
+              ringSplashEnabled: false
+              webexGoOverrideEnabled: false
+            schema:
+              $ref: '#/components/schemas/DoNotDisturbPut'
+  /telephony/config/people/me/settings/executive/callFiltering/criteria:
+    post:
+      summary: Add User Executive Call Filtering Criteria
+      operationId: createMyExecutiveCallFilteringCriteria
+      description: 'Create a new executive call filtering criteria for the authenticated user.
+
+
+        Executive Call Filtering Criteria in Webex allows you to define detailed filter rules for incoming calls. This API creates a new filter rule with the specified configuration, including schedule, phone numbers, and call routing preferences.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutiveCallFilteringCriteriaPatch'
+            example:
+              filterName: VIP Callers
+              scheduleName: Business Hours
+              scheduleType: businessHours
+              scheduleLevel: PEOPLE
+              callsFrom: SELECT_PHONE_NUMBERS
+              anonymousCallersEnabled: false
+              unavailableCallersEnabled: false
+              phoneNumbers:
+              - '+14085551234'
+              - '+14085551235'
+              filterEnabled: true
+              callsToNumbers:
+              - type: PRIMARY
+                phoneNumber: '+14085556789'
+      responses:
+        '200':
+          description: Executive call filtering criteria created successfully. Returns the criteria ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1ZJUF9DQUxMRVJTIg==
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/executive/alert:
+    get:
+      responses:
+        '200':
+          description: User executive alert settings retrieved successfully.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutiveAlertGet'
+              example:
+                alertingMode: SEQUENTIAL
+                nextAssistantNumberOfRings: 3
+                rolloverEnabled: true
+                rolloverAction: VOICE_MESSAGING
+                rolloverForwardToPhoneNumber: '+14085267209'
+                rolloverWaitTimeInSecs: 60
+                clidNameMode: EXECUTIVE_ORIGINATOR
+                customCLIDName: John Anderson
+                customCLIDNameInUnicode: ''
+                clidPhoneNumberMode: EXECUTIVE
+                customCLIDPhoneNumber: '+14085267208'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+      summary: Get User Executive Alert Settings
+      operationId: getMyExecutiveAlertSettings
+      description: 'Get executive alert settings for the authenticated user.
+
+
+        Executive Alert settings in Webex allow you to control how calls are routed to executive assistants, including alerting mode, rollover options, and caller ID presentation. You can configure settings such as sequential or simultaneous alerting, and specify what happens when calls aren''t answered.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: User executive alert settings modified successfully.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+      summary: Modify User Executive Alert Settings
+      operationId: updateMyExecutiveAlertSettings
+      description: 'Update executive alert settings for the authenticated user.
+
+
+        Executive Alert settings in Webex allow you to control how calls are routed to executive assistants, including alerting mode, rollover options, and caller ID presentation. You can configure settings such as sequential or simultaneous alerting, and specify what happens when calls aren''t answered.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              alertingMode: SEQUENTIAL
+              nextAssistantNumberOfRings: 3
+              rolloverEnabled: true
+              rolloverAction: VOICE_MESSAGING
+              rolloverForwardToPhoneNumber: ''
+              rolloverWaitTimeInSecs: 60
+              clidNameMode: EXECUTIVE_ORIGINATOR
+              customCLIDNameInUnicode: ''
+              clidPhoneNumberMode: EXECUTIVE
+              customCLIDPhoneNumber: ''
+            schema:
+              $ref: '#/components/schemas/ExecutiveAlertPut'
+  /telephony/config/people/me/countries/{countryCode}:
+    get:
+      summary: Get country-specific telephony configuration requirements
+      description: 'Retrieve country-specific telephony configuration requirements for the authenticated user.
+
+
+        Webex Calling supports multiple regions and time zones to validate and present the information using the local date and time, as well as localized dialing rules.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      parameters:
+      - name: countryCode
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The ISO country code for which configuration requirements are requested.
+        example: US
+      responses:
+        '200':
+          description: Country-specific telephony configuration requirements retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stateRequired:
+                    type: boolean
+                    description: If `stateRequired` should be a Mandatory field in UI
+                  zipCodeRequired:
+                    type: boolean
+                    description: If `zipCodeRequired` should be a Mandatory field in UI
+                  states:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: State Code
+                        name:
+                          type: string
+                          description: State Name
+                  timeZones:
+                    type: array
+                    items:
+                      type: string
+                    description: List of supported timezones for the country.
+                example:
+                  stateRequired: true
+                  zipCodeRequired: false
+                  states:
+                  - code: CA
+                    name: California
+                  - code: NY
+                    name: New York
+                  timeZones:
+                  - America/Los_Angeles
+                  - America/New_York
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+      operationId: getCountryTelephonyConfigRequirements
+  /telephony/config/people/me/announcementLanguages:
+    get:
+      summary: Get announcement languages for the authenticated user
+      description: 'Retrieve the list of available announcement languages for the authenticated user''s telephony configuration.
+
+
+        Announcement languages determine the language used for system prompts and announcements during calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Beta Call Settings For Me With Userhub Phase1
+      operationId: getAnnouncementLanguagesForMe
+      responses:
+        '200':
+          description: Announcement languages retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  languages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Language Name
+                        code:
+                          type: string
+                          description: Language Code
+                example:
+                  languages:
+                  - name: English
+                    code: en
+                  - name: Spanish
+                    code: es
+              examples:
+                success:
+                  summary: A list of announcement languages
+                  value:
+                    languages:
+                    - name: English
+                      code: en
+                    - name: Spanish
+                      code: es
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+components:
+  schemas:
+    DoNotDisturbPut:
+      type: object
+      description: Request body for configuring Do Not Disturb settings for a person.
+      required:
+      - webexGoOverrideEnabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`true` if the Do Not Disturb feature is enabled.'
+        ringSplashEnabled:
+          type: boolean
+          description: Enables a Ring Reminder to play a brief tone on your desktop phone when you receive incoming calls.
+        webexGoOverrideEnabled:
+          type: boolean
+          description: '`true` if a mobile device will still ring even if Do Not Disturb is enabled.'
+    ExecutiveScreeningPut:
+      type: object
+      description: Executive screening settings request object for updating call screening and alert preferences.
+      properties:
+        enabled:
+          type: boolean
+          description: Set to enable or disable executive screening.
+        alertType:
+          type: string
+          enum:
+          - SILENT
+          - RING_SPLASH
+          description: " * `SILENT` - No audible alert is provided for executive screening.\n * `RING_SPLASH` - A short ring (splash) is used as an alert for executive screening.\n"
+        alertAnywhereLocationEnabled:
+          type: boolean
+          description: Indicates if alerts are enabled for Single Number Reach locations.
+        alertMobilityLocationEnabled:
+          type: boolean
+          description: Indicates if alerts are enabled for Webex Go locations.
+        alertSharedCallAppearanceLocationEnabled:
+          type: boolean
+          description: Indicates if alerts are enabled for Shared Call Appearance locations.
+      example:
+        enabled: true
+        alertType: SILENT
+        alertAnywhereLocationEnabled: false
+        alertMobilityLocationEnabled: false
+        alertSharedCallAppearanceLocationEnabled: false
+    ExecutiveCallFilteringCriteriaPatch:
+      type: object
+      description: Executive call filtering criteria settings request object for updating detailed filter rules and routing configuration.
+      properties:
+        scheduleName:
+          type: string
+          description: Name of the schedule associated with this criteria.
+        scheduleType:
+          type: string
+          enum:
+          - holidays
+          - businessHours
+          description: " * `businessHours` - The schedule type that specifies the business or working hours during the day.\n * `holidays` - The schedule type that specifies the day when your organization is not open.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - GROUP
+          description: " * `PEOPLE` - The schedule level that specifies that criteria is of People level.\n * `GROUP` - The schedule level that specifies that criteria is of Group (Location) level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          - ANY_INTERNAL
+          - ANY_EXTERNAL
+          description: " * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n * `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n * `ANY_INTERNAL` - The criteria applies to any internal number.\n * `ANY_EXTERNAL` - The criteria applies to any external number.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Set to enable or disable the criteria for anonymous callers.
+        unavailableCallersEnabled:
+          type: boolean
+          description: Set to enable or disable the criteria for unavailable callers.
+        phoneNumbers:
+          type: array
+          description: The list of phone numbers that this filtering criteria applies to, when `callsFrom` is set to `SELECT_PHONE_NUMBERS`.
+          items:
+            type: string
+            description: Phone number that the criteria applies to based on `callsFrom` selection.
+        filterEnabled:
+          type: boolean
+          description: Controls the action when this criteria matches a call. When `true`, matching calls are filtered and will alert the executive's assistants. When `false`, matching calls are not filtered and will not alert the executive's assistants. Criteria with `filterEnabled` as `false` take precedence over other filtering criteria with `filterEnabled` as `true`, allowing exceptions where certain calls are not filtered to the executive's assistants.
+        callsToNumbers:
+          type: array
+          description: List of numbers for the executive that will match the criteria when called. This may include the executive’s primary number and/or extension, as well as secondary (alternate) numbers (and associated extensions). If the list is empty, any number or extension for the executive matches the criteria when called. If the list is not empty, only the specified numbers and their extensions match the criteria.
+          items:
+            type: object
+            description: Executive phone number that will match the criteria when called.
+            properties:
+              type:
+                type: string
+                enum:
+                - PRIMARY
+                - ALTERNATE
+                description: " * `PRIMARY` - Number is assigned as primary to executive.\n * `ALTERNATE` - Number is assigned as alternate (secondary) to the executive.\n"
+              phoneNumber:
+                type: string
+                description: The phone number assigned to the executive that will be used to match criteria.
+    ExecutiveAlertPut:
+      type: object
+      properties:
+        alertingMode:
+          type: string
+          enum:
+          - SEQUENTIAL
+          - SIMULTANEOUS
+          description: " * `SEQUENTIAL` - Alerts assistants one at a time in the defined order.\n * `SIMULTANEOUS` - Alerts all assistants at the same time.\n"
+        nextAssistantNumberOfRings:
+          type: integer
+          description: Number of rings before alerting the next assistant when `alertingMode` is `SEQUENTIAL`.
+        rolloverEnabled:
+          type: boolean
+          description: Controls whether the rollover timer (`rolloverWaitTimeInSecs`) is enabled. When set to `true`, rollover will trigger after the timer expires, even if assistants are still available. When `false`, rollover only occurs when no assistants remain.
+        rolloverAction:
+          type: string
+          enum:
+          - VOICE_MESSAGING
+          - NO_ANSWER_PROCESSING
+          - FORWARD
+          description: "Specifies what happens when rollover is triggered.\n * `VOICE_MESSAGING` - The call is sent to the executive's voicemail.\n * `FORWARD` - The call is forwarded to the specified destination (`rolloverForwardToPhoneNumber`).\n * `NO_ANSWER_PROCESSING` - The call is sent to no answer processing which may trigger executive services such as call forwarding or voicemail.\nRollover is always triggered when no assistants remain for a filtered call. If the rollover timer is enabled, rollover can also be triggered when the timer expires, even if assistants are still available."
+        rolloverForwardToPhoneNumber:
+          type: string
+          description: Phone number to forward calls to when rollover action is set to `FORWARD`.
+        rolloverWaitTimeInSecs:
+          type: integer
+          description: Time in seconds to wait before applying the rollover action when `rolloverEnabled` is `true`.
+        clidNameMode:
+          type: string
+          enum:
+          - EXECUTIVE_ORIGINATOR
+          - ORIGINATOR_EXECUTIVE
+          - EXECUTIVE
+          - ORIGINATOR
+          - CUSTOM
+          description: "Controls how Caller ID name is displayed on assistant's phone.\n * `EXECUTIVE_ORIGINATOR` - Display executive name followed by caller name.\n * `ORIGINATOR_EXECUTIVE` - Display caller name followed by executive name.\n * `EXECUTIVE` - Display only executive name.\n * `ORIGINATOR` - Display only caller name.\n * `CUSTOM` - Display a custom name.\n"
+        customCLIDName:
+          type: string
+          description: Custom caller ID name to display when `clidNameMode` is set to `CUSTOM` (deprecated).
+        customCLIDNameInUnicode:
+          type: string
+          description: Unicode Custom caller ID name to display when `clidNameMode` is set to `CUSTOM`.
+        clidPhoneNumberMode:
+          type: string
+          enum:
+          - EXECUTIVE
+          - ORIGINATOR
+          - CUSTOM
+          description: "Controls which Caller ID phone number is displayed on assistant's phone.\n * `EXECUTIVE` - Display executive's phone number.\n * `ORIGINATOR` - Display caller's phone number.\n * `CUSTOM` - Display a custom phone number.\n"
+        customCLIDPhoneNumber:
+          type: string
+          description: Custom caller ID phone number to display on assistant's phone when `clidPhoneNumberMode` is set to `CUSTOM`.
+    ExecutiveAlertGet:
+      type: object
+      required:
+      - alertingMode
+      - rolloverWaitTimeInSecs
+      - clidNameMode
+      - clidPhoneNumberMode
+      properties:
+        alertingMode:
+          type: string
+          enum:
+          - SEQUENTIAL
+          - SIMULTANEOUS
+          description: " * `SEQUENTIAL` - Alerts assistants one at a time in the defined order.\n * `SIMULTANEOUS` - Alerts all assistants at the same time.\n"
+        nextAssistantNumberOfRings:
+          type: integer
+          description: Number of rings before alerting the next assistant when `alertingMode` is `SEQUENTIAL`.
+        rolloverEnabled:
+          type: boolean
+          description: Controls whether the rollover timer (`rolloverWaitTimeInSecs`) is enabled. When set to `true`, rollover will trigger after the timer expires, even if assistants are still available. When `false`, rollover only occurs when no assistants remain.
+        rolloverAction:
+          type: string
+          enum:
+          - VOICE_MESSAGING
+          - NO_ANSWER_PROCESSING
+          - FORWARD
+          description: "Specifies what happens when rollover is triggered.\n * `VOICE_MESSAGING` - The call is sent to the executive's voicemail.\n * `FORWARD` - The call is forwarded to the specified destination (`rolloverForwardToPhoneNumber`).\n * `NO_ANSWER_PROCESSING` - The call is sent to no answer processing which may trigger executive services such as call forwarding or voicemail.\nRollover is always triggered when no assistants remain for a filtered call. If the rollover timer is enabled, rollover can also be triggered when the timer expires, even if assistants are still available."
+        rolloverForwardToPhoneNumber:
+          type: string
+          description: Phone number to forward calls to when rollover action is set to `FORWARD`.
+        rolloverWaitTimeInSecs:
+          type: integer
+          description: Time in seconds to wait before applying the rollover action when `rolloverEnabled` is `true`.
+        clidNameMode:
+          type: string
+          enum:
+          - EXECUTIVE_ORIGINATOR
+          - ORIGINATOR_EXECUTIVE
+          - EXECUTIVE
+          - ORIGINATOR
+          - CUSTOM
+          description: "Controls how Caller ID name is displayed on assistant's phone.\n * `EXECUTIVE_ORIGINATOR` - Display executive name followed by caller name.\n * `ORIGINATOR_EXECUTIVE` - Display caller name followed by executive name.\n * `EXECUTIVE` - Display only executive name.\n * `ORIGINATOR` - Display only caller name.\n * `CUSTOM` - Display a custom name.\n"
+        customCLIDName:
+          type: string
+          description: Custom caller ID name to display when `clidNameMode` is set to `CUSTOM` (deprecated).
+        customCLIDNameInUnicode:
+          type: string
+          description: Unicode Custom caller ID name to display when `clidNameMode` is set to `CUSTOM`.
+        clidPhoneNumberMode:
+          type: string
+          enum:
+          - EXECUTIVE
+          - ORIGINATOR
+          - CUSTOM
+          description: "Controls which Caller ID phone number is displayed on assistant's phone.\n * `EXECUTIVE` - Display executive's phone number.\n * `ORIGINATOR` - Display caller's phone number.\n * `CUSTOM` - Display a custom phone number.\n"
+        customCLIDPhoneNumber:
+          type: string
+          description: Custom caller ID phone number to display on assistant's phone when `clidPhoneNumberMode` is set to `CUSTOM`.
+      example:
+        alertingMode: SEQUENTIAL
+        nextAssistantNumberOfRings: 3
+        rolloverEnabled: true
+        rolloverAction: VOICE_MESSAGING
+        rolloverForwardToPhoneNumber: '+14085267209'
+        rolloverWaitTimeInSecs: 60
+        clidNameMode: EXECUTIVE_ORIGINATOR
+        customCLIDName: John Anderson
+        customCLIDNameInUnicode: ''
+        clidPhoneNumberMode: EXECUTIVE
+        customCLIDPhoneNumber: '+14085267208'
+    ExecutiveScreeningGet:
+      type: object
+      description: Executive screening settings response object containing configuration for call screening and alert preferences.
+      required:
+      - enabled
+      - alertType
+      - alertAnywhereLocationEnabled
+      - alertMobilityLocationEnabled
+      - alertSharedCallAppearanceLocationEnabled
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates if executive screening is enabled.
+        alertType:
+          type: string
+          enum:
+          - SILENT
+          - RING_SPLASH
+          description: " * `SILENT` - No audible alert is provided for executive screening.\n * `RING_SPLASH` - A short ring (splash) is used as an alert for executive screening.\n"
+        alertAnywhereLocationEnabled:
+          type: boolean
+          description: Indicates if alerts are enabled for Single Number Reach locations.
+        alertMobilityLocationEnabled:
+          type: boolean
+          description: Indicates if alerts are enabled for Webex Go locations.
+        alertSharedCallAppearanceLocationEnabled:
+          type: boolean
+          description: Indicates if alerts are enabled for Shared Call Appearance locations.
+      example:
+        enabled: true
+        alertType: SILENT
+        alertAnywhereLocationEnabled: false
+        alertMobilityLocationEnabled: false
+        alertSharedCallAppearanceLocationEnabled: false
+    ExecutiveCallFilteringCriteriaGet:
+      type: object
+      description: Executive call filtering criteria detailed settings response object that contains the schedule, phone numbers, and routing configuration.
+      required:
+      - id
+      - filterName
+      - callsFrom
+      - filterEnabled
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the filter criteria.
+        filterName:
+          type: string
+          description: Name of the criteria.
+        scheduleName:
+          type: string
+          description: Name of the schedule associated with this criteria.
+        scheduleType:
+          type: string
+          enum:
+          - holidays
+          - businessHours
+          description: " * `businessHours` - The schedule type that specifies the business or working hours during the day.\n * `holidays` - The schedule type that specifies the day when your organization is not open.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - GROUP
+          description: " * `PEOPLE` - The schedule level that specifies that criteria is of People level.\n * `GROUP` - The schedule level that specifies that criteria is of Group (Location) level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          - ANY_INTERNAL
+          - ANY_EXTERNAL
+          description: " * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n * `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n * `ANY_INTERNAL` - The criteria applies to any internal number.\n * `ANY_EXTERNAL` - The criteria applies to any external number.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Indicates if the criteria applies to anonymous callers.
+        unavailableCallersEnabled:
+          type: boolean
+          description: Indicates if the criteria applies to unavailable callers.
+        phoneNumbers:
+          type: array
+          description: The list of phone numbers that this filtering criteria applies to, when `callsFrom` is set to `SELECT_PHONE_NUMBERS`.
+          items:
+            type: string
+            description: Phone number that the criteria applies to based on `callsFrom` selection.
+        filterEnabled:
+          type: boolean
+          description: Controls the action when this criteria matches a call. When `true`, matching calls are filtered and will alert the executive's assistants. When `false`, matching calls are not filtered and will not alert the executive's assistants. Criteria with `filterEnabled` as `false` take precedence over other filtering criteria with `filterEnabled` as `true`, allowing exceptions where certain calls are not filtered to the executive's assistants.
+        callsToNumbers:
+          type: array
+          description: List of numbers for the executive that will match the criteria when called. This may include the executive’s primary number and/or extension, as well as secondary (alternate) numbers (and associated extensions). If the list is empty, any number or extension for the executive matches the criteria when called. If the list is not empty, only the specified numbers and their extensions match the criteria.
+          items:
+            type: object
+            description: Executive phone number that will match the criteria when called.
+            properties:
+              type:
+                type: string
+                enum:
+                - PRIMARY
+                - ALTERNATE
+                description: " * `PRIMARY` - Number is assigned as primary to executive.\n * `ALTERNATE` - Number is assigned as alternate (secondary) to the executive.\n"
+              phoneNumber:
+                type: string
+                description: The phone number assigned to the executive that will be used to match criteria.
+      example:
+        id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+        filterName: VIP Callers
+        scheduleName: Business Hours
+        scheduleType: businessHours
+        scheduleLevel: PEOPLE
+        callsFrom: SELECT_PHONE_NUMBERS
+        anonymousCallersEnabled: false
+        unavailableCallersEnabled: false
+        phoneNumbers:
+        - '+14085551234'
+        - '+14085551235'
+        filterEnabled: true
+        callsToNumbers:
+        - type: PRIMARY
+          phoneNumber: '+14085556789'
+    UserCallPoliciesPut:
+      type: object
+      description: User call policies settings request object for updating privacy configuration for redirected calls.
+      properties:
+        connectedLineIdPrivacyOnRedirectedCalls:
+          type: string
+          enum:
+          - NO_PRIVACY
+          - PRIVACY_FOR_EXTERNAL_CALLS
+          - PRIVACY_FOR_ALL_CALLS
+          description: " * `NO_PRIVACY` - Caller sees the final destination's identity when call is redirected.\n * `PRIVACY_FOR_EXTERNAL_CALLS` - Internal callers see the final destination's identity; external callers see the original recipient's identity.\n * `PRIVACY_FOR_ALL_CALLS` - All callers see the original recipient's identity when call is redirected.\n"
+    ExecutiveCallFilteringGet:
+      type: object
+      description: Executive call filtering settings response object that contains the filter configuration and criteria.
+      required:
+      - enabled
+      - filterType
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates whether executive call filtering is enabled.
+        filterType:
+          type: string
+          enum:
+          - CUSTOM_CALL_FILTERS
+          - ALL_CALLS
+          - ALL_INTERNAL_CALLS
+          - ALL_EXTERNAL_CALLS
+          description: " * `CUSTOM_CALL_FILTERS` - Choose this option to ensure that only specific calls are sent to the executive assistant.\n * `ALL_CALLS` - Choose this option to send both internal and external calls to the executive assistant.\n * `ALL_INTERNAL_CALLS` - Choose this option to send all internal calls to the executive assistant.\n * `ALL_EXTERNAL_CALLS` - Choose this option to send all external calls to the executive assistant.\n"
+        criteria:
+          type: array
+          description: The list of call filtering criteria configured for executive call filtering.
+          items:
+            type: object
+            description: The configuration for an individual call filtering criterion.
+            required:
+            - id
+            - filterName
+            - source
+            - activationEnabled
+            - filterEnabled
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the filter criteria.
+              filterName:
+                type: string
+                description: Name of the criteria.
+              source:
+                type: string
+                enum:
+                - ANY_PHONE_NUMBER
+                - SELECT_PHONE_NUMBERS
+                - ANY_INTERNAL
+                - ANY_EXTERNAL
+                description: " * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n * `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n * `ANY_INTERNAL` - The criteria applies to any internal number.\n * `ANY_EXTERNAL` - The criteria applies to any external number.\n"
+              activationEnabled:
+                type: boolean
+                description: Controls whether this filter criteria is active. When `true`, the criteria is evaluated for incoming calls. When `false`, the criteria is completely ignored and has no effect on call filtering.
+              filterEnabled:
+                type: boolean
+                description: Controls the action when this criteria matches a call. When `true`, matching calls are filtered and will alert the executive's assistants. When `false`, matching calls are not filtered and will not alert the executive's assistants. Criteria with `filterEnabled` as `false` take precedence over other filtering criteria with `filterEnabled` as `true`, allowing exceptions where certain calls are not filtered to the executive's assistants.
+      example:
+        enabled: true
+        filterType: CUSTOM_CALL_FILTERS
+        criteria:
+        - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1FtVjNORE15TXc9PQ
+          filterName: VIP Callers
+          source: SELECT_PHONE_NUMBERS
+          activationEnabled: true
+          filterEnabled: true
+    DoNotDisturbGet:
+      type: object
+      description: Do Not Disturb settings response object containing DND configuration for the user.
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates if Do Not Disturb is enabled.
+        ringSplashEnabled:
+          type: boolean
+          description: Indicates if ring splash is enabled while DND is active.
+        webexGoOverrideEnabled:
+          type: boolean
+          description: Indicates if Webex Go override is enabled while DND is active.
+      example:
+        enabled: true
+        ringSplashEnabled: false
+        webexGoOverrideEnabled: false
+    ExecutiveCallFilteringPatch:
+      type: object
+      description: Executive call filtering settings request object for updating the filter configuration and criteria activation.
+      properties:
+        enabled:
+          type: boolean
+          description: Set to `true` to enable executive call filtering or `false` to disable it.
+        filterType:
+          type: string
+          enum:
+          - CUSTOM_CALL_FILTERS
+          - ALL_CALLS
+          - ALL_INTERNAL_CALLS
+          - ALL_EXTERNAL_CALLS
+          description: " * `CUSTOM_CALL_FILTERS` - Choose this option to ensure that only specific calls are sent to the executive assistant.\n * `ALL_CALLS` - Choose this option to send both internal and external calls to the executive assistant.\n * `ALL_INTERNAL_CALLS` - Choose this option to send all internal calls to the executive assistant.\n * `ALL_EXTERNAL_CALLS` - Choose this option to send all external calls to the executive assistant.\n"
+        criteriaActivation:
+          type: array
+          description: The list of criteria activation settings to update for executive call filtering.
+          items:
+            type: object
+            required:
+            - id
+            - activationEnabled
+            description: The activation configuration for an individual filter criterion.
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the filter criteria.
+              activationEnabled:
+                type: boolean
+                description: Controls whether this filter criteria is active. When `true`, the criteria is evaluated for incoming calls. When `false`, the criteria is completely ignored and has no effect on call filtering.
+    UserCallPoliciesGet:
+      type: object
+      required:
+      - connectedLineIdPrivacyOnRedirectedCalls
+      properties:
+        connectedLineIdPrivacyOnRedirectedCalls:
+          type: string
+          enum:
+          - NO_PRIVACY
+          - PRIVACY_FOR_EXTERNAL_CALLS
+          - PRIVACY_FOR_ALL_CALLS
+          description: "Specifies the connection type to be used.\n * `NO_PRIVACY` - Connected line identification is not blocked on redirected calls.\n * `PRIVACY_FOR_EXTERNAL_CALLS` - Connected line identification is blocked on redirected calls to external numbers.\n * `PRIVACY_FOR_ALL_CALLS` - Connected line identification is blocked on all redirected calls.\n"
+    ResponseId:
+      type: object
+      description: Response object that contains the unique identifier for the created or updated criteria.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the criteria.
+      example:
+        id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

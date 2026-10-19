@@ -1,0 +1,1705 @@
+openapi: 3.2.0
+info:
+  title: 'Webex Cloud Calling Features: Call Park API'
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: 'Features:  Call Park'
+paths:
+  /telephony/config/locations/{locationId}/callParks:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callParks
+                properties:
+                  callParks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListCallParkObject'
+                    description: Array of call parks.
+              example:
+                callParks:
+                - name: technical support - cards - customer 1
+                  id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JqWVhKa2N5QXRJR04xYzNSdmJXVnlJREU9
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+                - name: technical support - insurance - customer 1
+                  id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+                  locationName: Alaska
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Call Parks
+      operationId: ReadTheListOfCallParks
+      description: 'List all Call Parks for the organization.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Retrieving this list requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.
+
+
+        **NOTE**: The Call Park ID will change upon modification of the Call Park name.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the list of call parks for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: List call parks for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of call parks returned to this maximum count. Default is 2000.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching call parks. Default is 0.
+        example: '0'
+        schema:
+          type: number
+      - name: order
+        in: query
+        description: Sort the list of call parks by name, either ASC or DSC. Default is ASC.
+        example: ASC
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Return the list of call parks that contains the given name. The maximum length is 80.
+        example: technical support
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Call Parks
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9WR1Z6ZEMxRFVFY3RNZz09
+                    description: ID of the newly created call park.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Call Park
+      operationId: CreateACallPark
+      description: 'Create new Call Parks for the given location.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Creating a call park requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Park ID will change upon modification of the Call Park name.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create the call park for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the call park for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: technical support - insurance - customer 1
+              recall:
+                huntGroupId: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+                option: ALERT_PARKING_USER_FIRST_THEN_HUNT_GROUP
+              agents:
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc1MWQ
+              parkOnAgentsEnabled: false
+              callParkExtensions:
+              - Y3lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc2MWQ
+            schema:
+              $ref: '#/components/schemas/PostCallParkObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Call Park
+  /telephony/config/locations/{locationId}/callParks/{callParkId}:
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Call Park
+      operationId: DeleteACallPark
+      description: 'Delete the designated Call Park.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Deleting a call park requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Park ID will change upon modification of the Call Park name.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete a call park.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: callParkId
+        in: path
+        description: Delete the call park with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the call park from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Call Park
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallParkObject'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+                name: technical support - insurance - customer 1
+                recall:
+                  huntGroupId: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+                  huntGroupName: Technical Support Group - 5558675309
+                  option: ALERT_PARKING_USER_FIRST_THEN_HUNT_GROUP
+                agents:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+                  firstName: John
+                  lastName: Brown
+                  displayName: John Brown
+                  type: PEOPLE
+                  email: john.brown@example.com
+                  numbers:
+                  - external: '+19075552859'
+                    extension: '8080'
+                    routingPrefix: '1234'
+                    esn: '12348080'
+                    primary: 'true'
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc1MWQ
+                  firstName: John
+                  lastName: Smith
+                  displayName: John Smith
+                  type: PEOPLE
+                  email: john.smith@example.com
+                  numbers:
+                  - external: '+19075553859'
+                    extension: '8081'
+                    routingPrefix: '1234'
+                    esn: '12348081'
+                    primary: 'true'
+                parkOnAgentsEnabled: false
+                callParkExtensions:
+                - id: Y3lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc2MWQ
+                  extension: '1415'
+                  name: '14159265'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for a Call Park
+      operationId: GetDetailsForACallPark
+      description: 'Retrieve Call Park details.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Retrieving call park details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.
+
+
+        **NOTE**: The Call Park ID will change upon modification of the Call Park name.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve settings for a call park in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: callParkId
+        in: path
+        description: Retrieve settings for a call park with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve call park settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for a Call Park
+    put:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the target call park.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Call Park
+      operationId: UpdateACallPark
+      description: 'Update the designated Call Park.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Updating a call park requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.
+
+
+        **NOTE**: The Call Park ID will change upon modification of the Call Park name.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this call park exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: callParkId
+        in: path
+        description: Update settings for a call park with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update call park settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: technical support - insurance - customer 1
+              recall:
+                huntGroupId: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+                option: ALERT_PARKING_USER_FIRST_THEN_HUNT_GROUP
+              agents:
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+              - Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc1MWQ
+              parkOnAgentsEnabled: false
+              callParkExtensions:
+              - Y3lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc2MWQ
+            schema:
+              $ref: '#/components/schemas/ModifyCallParkObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Call Park
+  /telephony/config/locations/{locationId}/callParks/availableUsers:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - agents
+                properties:
+                  agents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GetPersonPlaceVirtualLineCallParksObject'
+                    description: Array of agents.
+              example:
+                agents:
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+                  firstName: John
+                  lastName: Brown
+                  displayName: John Brown
+                  type: PEOPLE
+                  email: john.brown@example.com
+                  numbers:
+                  - external: '+19075552859'
+                    extension: '8080'
+                    routingPrefix: '1234'
+                    esn: '12348080'
+                    primary: 'true'
+                - id: Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MGY2MzYzMC1mZjlmLTExZWItODU5YS0xZjhiYjRjNzc1MWQ
+                  firstName: John
+                  lastName: Smith
+                  displayName: John Smith
+                  type: PEOPLE
+                  email: john.smith@example.com
+                  numbers:
+                  - external: '+19075553859'
+                    extension: '8081'
+                    routingPrefix: '1234'
+                    esn: '12348081'
+                    primary: 'true'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get available agents from Call Parks
+      operationId: GetAvailableAgentsFromCallParks
+      description: 'Retrieve available agents from call parks for a given location.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Retrieving available agents from call parks requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the available agents for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzhmZjMwMjg5LWVhMzMtNDc1Ny1iMTBmLWQ2MWIyNzFhMDVlZg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Return the available agents for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: callParkName
+        in: query
+        description: Only return available agents from call parks with the matching name.
+        example: technical support - insurance - customer 1
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of available agents returned to this maximum count.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching available agents.
+        example: '0'
+        schema:
+          type: number
+      - name: name
+        in: query
+        description: Only return available agents with the matching name.
+        example: John
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: Only return available agents with the matching primary number.
+        example: '+19075552859'
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: 'Order the available agents according to the designated fields. Up to three vertical bar (|) separated sort order fields may be specified. Available sort fields: fname, lname, number and extension. The maximum supported sort order value is 3.'
+        example: lname|fname|extension
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get available agents from Call Parks
+  /telephony/config/locations/{locationId}/callParks/availableRecallHuntGroups:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - huntGroups
+                properties:
+                  huntGroups:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GetAvailableRecallHuntGroupsObject'
+                    description: Array of available recall hunt groups.
+              example:
+                huntGroups:
+                - id: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+                  name: Technical Support Group - 5558675309
+                - id: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TWpRMU5ESXpPVEF3TUVCbmJXRnBiQzVqYjIwPQ
+                  name: Technical Support Group - 2454239000
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get available recall hunt groups from Call Parks
+      operationId: GetAvailableRecallHuntGroupsFromCallParks
+      description: 'Retrieve available recall hunt groups from call parks for a given location.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Retrieving available recall hunt groups from call parks requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the available recall hunt groups for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Return the available recall hunt groups for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of available recall hunt groups returned to this maximum count.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching available recall hunt groups.
+        example: '0'
+        schema:
+          type: number
+      - name: name
+        in: query
+        description: Only return available recall hunt groups with the matching name.
+        example: Technical Support Group
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: 'Order the available recall hunt groups according to the designated fields. Available sort fields: lname.'
+        example: lname
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get available recall hunt groups from Call Parks
+  /telephony/config/locations/{locationId}/callParks/settings:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallParkSettingsObject'
+              example:
+                callParkRecall:
+                  huntGroupId: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+                  huntGroupName: Technical Support Group - 5558675309
+                  option: ALERT_HUNT_GROUP_ONLY
+                callParkSettings:
+                  ringPattern: NORMAL
+                  recallTime: 45
+                  huntWaitTime: 45
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Park Settings
+      operationId: GetCallParkSettings
+      description: 'Retrieve Call Park Settings from call parks for a given location.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Retrieving settings from call parks requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Return the call park settings for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Return the call park settings for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Call Park Settings
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update Call Park settings
+      operationId: UpdateCallParkSettings
+      description: 'Update Call Park settings for the designated location.
+
+
+        Call Park allows call recipients to place a call on hold so that it can be retrieved from another device.
+
+
+        Updating call park settings requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location for which call park settings will be updated.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update call park settings from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              callParkRecall:
+                huntGroupId: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+                huntGroupName: Technical Support Group - 5558675309
+                option: ALERT_HUNT_GROUP_ONLY
+              callParkSettings:
+                ringPattern: NORMAL
+                recallTime: 45
+                huntWaitTime: 45
+            schema:
+              $ref: '#/components/schemas/ModifyCallParkSettingsObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Call Park settings
+  /telephony/config/callParkExtensions:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - callParkExtensions
+                properties:
+                  callParkExtensions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListCallParkExtensionObject'
+                    description: Array of call park extensions.
+              example:
+                callParkExtensions:
+                - id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vMGYzZTkwNGItYzliNC00ODNmLWI4MWItZmI0ZjkyMWcxNDUzCg
+                  extension: '1415'
+                  routingPrefix: '1234'
+                  esn: '12341415'
+                  name: '14159265'
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+                  locationName: WXCSIVDKCPAPIC4S1
+                - id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vMGYzZTkwNGItYzliNC00ODNmLWI4MWItZmI0ZjkyMWcxNDUyCg
+                  extension: '7182'
+                  routingPrefix: '1234'
+                  esn: '12347182'
+                  name: '71828182'
+                  locationId: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+                  locationName: WXCSIVDKCPAPIC4S1
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Read the List of Call Park Extensions
+      operationId: ReadTheListOfCallParkExtensions
+      description: 'List all Call Park Extensions for the organization.
+
+
+        The Call Park service, enabled for all users by default, allows a user to park a call against an available user''s extension or to a Call Park Extension. Call Park Extensions are extensions defined within the Call Park service for holding parked calls.
+
+
+        Retrieving this list requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: orgId
+        in: query
+        description: List call park extensions for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      - name: locationId
+        in: query
+        description: Only return call park extensions with matching location ID.
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Limit the number of objects returned to this maximum count.
+        example: '5'
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Start at the zero-based offset in the list of matching objects.
+        example: '0'
+        schema:
+          type: number
+      - name: extension
+        in: query
+        description: Only return call park extensions with the matching extension.
+        example: '1415'
+        schema:
+          type: string
+      - name: locationName
+        in: query
+        description: Only return call park extensions with the matching extension.
+        example: Customer Support
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Only return call park extensions with the matching name.
+        example: '14159265'
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: 'Order the available agents according to the designated fields.  Available sort fields: `groupName`, `callParkExtension`, `callParkExtensionName`, `callParkExtensionExternalId`.'
+        example: groupName|callParkExtension|callParkExtensionName|callParkExtensionExternalId
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Read the List of Call Park Extensions
+  /telephony/config/locations/{locationId}/callParkExtensions/{callParkExtensionId}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallParkExtensionObject'
+              example:
+                extension: '1415'
+                routingPrefix: '1234'
+                esn: '12341415'
+                name: '14159265'
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Details for a Call Park Extension
+      operationId: GetDetailsForACallParkExtension
+      description: 'Retrieve Call Park Extension details.
+
+
+        The Call Park service, enabled for all users by default, allows a user to park a call against an available user''s extension or to a Call Park Extension. Call Park Extensions are extensions defined within the Call Park service for holding parked calls.
+
+
+        Retrieving call park extension details requires a full or read-only administrator or location administrator auth token with a scope of `spark-admin:telephony_config_read`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Retrieve details for a call park extension in this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: callParkExtensionId
+        in: path
+        description: Retrieve details for a call park extension with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vMGYzZTkwNGItYzliNC00ODNmLWI4MWItZmI0ZjkyMWcxNDUzCg
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Retrieve call park extension details from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Details for a Call Park Extension
+    delete:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Delete a Call Park Extension
+      operationId: DeleteACallParkExtension
+      description: 'Delete the designated Call Park Extension.
+
+
+        Call Park Extension enables a call recipient to park a call to an extension, so someone else within the same Organization can retrieve the parked call by dialing that extension. Call Park Extensions can be added as monitored lines by users'' Cisco phones, so users can park and retrieve calls by pressing the associated phone line key.
+
+
+        Deleting a call park extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location from which to delete a call park extension.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: callParkExtensionId
+        in: path
+        description: Delete the call park extension with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vNmFlNjI4ZGEtOTg5My00ODYyLWE0YTItM2VmZDIwNDJmODEy
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Delete the call park extension from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete a Call Park Extension
+    put:
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+          content: {}
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Update a Call Park Extension
+      operationId: UpdateACallParkExtension
+      description: 'Update the designated Call Park Extension.
+
+
+        Call Park Extension enables a call recipient to park a call to an extension, so someone else within the same Organization can retrieve the parked call by dialing that extension. Call Park Extensions can be added as monitored lines by users'' Cisco phones, so users can park and retrieve calls by pressing the associated phone line key.
+
+
+        Updating a call park extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Location in which this call park extension exists.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: callParkExtensionId
+        in: path
+        description: Update a call park extension with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vNmFlNjI4ZGEtOTg5My00ODYyLWE0YTItM2VmZDIwNDJmODEy
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Update a call park extension from this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Illinois, Call Park Extension
+              extension: '407721'
+            schema:
+              $ref: '#/components/schemas/ModifyCallExtensionParkObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Update a Call Park Extension
+  /telephony/config/locations/{locationId}/callParkExtensions:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the newly created call park extension.
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vMzI4YjZlOGMtYjM0OC00ZDI1LWJlZjctZTZiMjRiN2Q0NGU5
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served. An accompanying error message will explain further.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Create a Call Park Extension
+      operationId: CreateACallParkExtension
+      description: 'Create new Call Park Extensions for the given location.
+
+
+        Call Park Extension enables a call recipient to park a call to an extension, so someone else within the same Organization can retrieve the parked call by dialing that extension. Call Park Extensions can be added as monitored lines by users'' Cisco phones, so users can park and retrieve calls by pressing the associated phone line key.
+
+
+        Creating a call park extension requires a full administrator or location administrator auth token with a scope of `spark-admin:telephony_config_write`.'
+      tags:
+      - 'Features:  Call Park'
+      parameters:
+      - name: locationId
+        in: path
+        description: Create the call park extension for this location.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+        schema:
+          type: string
+      - name: orgId
+        in: query
+        description: Create the call park extension for this organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Illinois, Call Park Extension
+              extension: '407721'
+            schema:
+              $ref: '#/components/schemas/PostCallParkExtensionObject'
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a Call Park Extension
+components:
+  schemas:
+    ListCallParkObject:
+      type: object
+      required:
+      - name
+      - id
+      - locationName
+      - locationId
+      properties:
+        name:
+          type: string
+          example: technical support - insurance - customer 1
+          description: Unique name for the call park. The maximum length is 80.
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+          description: A unique identifier for the call park.
+        locationName:
+          type: string
+          example: Alaska
+          description: Name of the location for the call park.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzEyMzQ1
+          description: ID of the location for the call park.
+    ListCPCallParkExtensionObject:
+      type: object
+      required:
+      - id
+      - extension
+      - name
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vMGYzZTkwNGItYzliNC00ODNmLWI4MWItZmI0ZjkyMWcxNDUzCg
+          description: Unique identifier for the call park extension.
+        extension:
+          type: string
+          example: '1415'
+          description: The extension for the call park.
+        name:
+          type: string
+          example: '14159265'
+          description: A unique name for the call park extension.
+    GetPersonPlaceVirtualLineCallParksObject:
+      type: object
+      required:
+      - id
+      - type
+      - email
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDVkMzMzMC1mNjE3LTExZWItOWQyZS01NzViODE3ZGE2NmE
+          description: ID of a person, workspace or virtual line.
+        firstName:
+          type: string
+          example: John
+          description: First name of a person, workspace or virtual line.
+        lastName:
+          type: string
+          example: Brown
+          description: Last name of a person, workspace or virtual line.
+        displayName:
+          type: string
+          example: johnBrown
+          description: Display name of a person, workspace or virtual line.
+        type:
+          type: string
+          enum:
+          - PEOPLE
+          - PLACE
+          - VIRTUAL_LINE
+          description: "Type of the person, workspace or virtual line.\n * `PEOPLE` - Indicates that this object is a user.\n * `PLACE` - Indicates that this object is a place.\n * `VIRTUAL_LINE` - Indicates that this object is a virtual line.\n"
+        email:
+          type: string
+          example: john.brown@example.com
+          description: Email of a person or workspace.
+        numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetUserNumberItemObject'
+          description: List of phone numbers of a person, workspace or virtual line.
+    GetAvailableRecallHuntGroupsObject:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+          description: A unique identifier for the hunt group.
+        name:
+          type: string
+          example: Technical Support Group - 5558675309
+          description: Unique name for the hunt group.
+    GetRecallHuntGroupObject:
+      type: object
+      required:
+      - option
+      properties:
+        huntGroupId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+          description: Alternate user which is a hunt group ID for call park recall alternate destination.
+        huntGroupName:
+          type: string
+          example: Technical Support Group - 5558675309
+          description: Unique name for the hunt group.
+        option:
+          type: string
+          enum:
+          - ALERT_PARKING_USER_ONLY
+          - ALERT_PARKING_USER_FIRST_THEN_HUNT_GROUP
+          - ALERT_HUNT_GROUP_ONLY
+          description: "Call park recall options.\n * `ALERT_PARKING_USER_ONLY` - Alert parking user only.\n * `ALERT_PARKING_USER_FIRST_THEN_HUNT_GROUP` - Alert parking user first, then hunt group.\n * `ALERT_HUNT_GROUP_ONLY` - Alert hunt group only.\n"
+    PutRecallHuntGroupObject:
+      type: object
+      required:
+      - option
+      properties:
+        huntGroupId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0hVTlRfR1JPVVAvZEdWamFHNXBZMkZzTFhOMWNIQnZjblF0TlRVMU9EWTNOVE13T1VCbmJXRnBiQzVqYjIwPQ
+          description: Alternate user which is a hunt group ID for call park recall alternate destination.
+        option:
+          type: string
+          enum:
+          - ALERT_PARKING_USER_ONLY
+          - ALERT_PARKING_USER_FIRST_THEN_HUNT_GROUP
+          - ALERT_HUNT_GROUP_ONLY
+          description: "Call park recall options.\n * `ALERT_PARKING_USER_ONLY` - Alert parking user only.\n * `ALERT_PARKING_USER_FIRST_THEN_HUNT_GROUP` - Alert parking user first, then hunt group.\n * `ALERT_HUNT_GROUP_ONLY` - Alert hunt group only.\n"
+    ListCallParkExtensionObject:
+      type: object
+      required:
+      - id
+      - extension
+      - name
+      - locationId
+      - locationName
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSS19FWFRFTlNJT04vMGYzZTkwNGItYzliNC00ODNmLWI4MWItZmI0ZjkyMWcxNDUzCg
+          description: Unique identifier for the call park extension.
+        extension:
+          type: string
+          example: '1415'
+          description: The extension for the call park extension.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12341415'
+          description: Routing prefix + extension of a person or workspace.
+        name:
+          type: string
+          example: '14159265'
+          description: A unique name for the call park extension.
+        locationId:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OLzMxMTYx
+          description: ID of location for call park extension.
+        locationName:
+          type: string
+          example: WXCSIVDKCPAPIC4S1
+          description: Name of location for call park extension.
+    PostCallParkObject:
+      type: object
+      required:
+      - name
+      - recall
+      properties:
+        name:
+          type: string
+          example: technical support - insurance - customer 1
+          description: Unique name for the call park. The maximum length is 80.
+        recall:
+          $ref: '#/components/schemas/PutRecallHuntGroupObject'
+          description: Recall options that are added to the call park.
+        agents:
+          type: array
+          items:
+            type: string
+          description: Array of ID strings of people, workspaces and virtual lines that are added to the call park.
+        parkOnAgentsEnabled:
+          type: boolean
+          description: Whether or not the calls will be parked on agents as a destination.
+        callParkExtensions:
+          type: array
+          items:
+            type: string
+          description: Array of ID strings of call park extensions assigned to a call park.
+    GetCallParkSettingsObject:
+      type: object
+      required:
+      - callParkRecall
+      - callParkSettings
+      properties:
+        callParkRecall:
+          $ref: '#/components/schemas/GetRecallHuntGroupObject'
+          description: Recall options that are added to call park.
+        callParkSettings:
+          $ref: '#/components/schemas/CallParkSettingsObject'
+          description: Setting controlling call park behavior.
+    PostCallParkExtensionObject:
+      type: object
+      required:
+      - name
+      - extension
+      properties:
+        name:
+          type: string
+          example: Illinois, Call Park Extension
+          description: Name for the call park extension. The maximum length is 30.
+        extension:
+          type: string
+          example: '407721'
+          description: Unique extension which will be assigned to call park extension. The minimum length is 2, maximum length is 10.
+    GetCallParkExtensionObject:
+      type: object
+      required:
+      - extension
+      - name
+      properties:
+        extension:
+          type: string
+          example: '1415'
+          description: The extension for the call park extension.
+        routingPrefix:
+          type: string
+          example: '1234'
+          description: Routing prefix of location.
+        esn:
+          type: string
+          example: '12341415'
+          description: Routing prefix + extension of a person or workspace.
+        name:
+          type: string
+          example: '14159265'
+          description: Unique name for the call park extension.
+    CallParkSettingsObject:
+      type: object
+      required:
+      - ringPattern
+      properties:
+        ringPattern:
+          type: string
+          enum:
+          - NORMAL
+          - LONG_LONG
+          - SHORT_SHORT_LONG
+          - SHORT_LONG_SHORT
+          description: "Ring pattern for when this callpark is called.\n * `NORMAL` - Normal incoming ring pattern.\n * `LONG_LONG` - Incoming ring pattern of two long rings.\n * `SHORT_SHORT_LONG` - Incoming ring pattern of two short rings, followed by a short ring.\n * `SHORT_LONG_SHORT` - Incoming ring pattern of a short ring, followed by a long ring, followed by a short ring.\n"
+        recallTime:
+          type: number
+          example: 60
+          description: Amount of time within 30 and 600 seconds the Call Park will be parked. If the call isn't picked up within the set time, then the call will be recalled based on the Call Park Recall setting.
+        huntWaitTime:
+          type: number
+          example: 60
+          description: Amount of time within 30 and 600 seconds the Call Park will be parked. If the call isn't picked up, the call will revert back to the hunt group (after the person who parked the call is alerted).
+    ModifyCallParkObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: technical support - insurance - customer 1
+          description: Unique name for the call park. The maximum length is 80.
+        recall:
+          $ref: '#/components/schemas/PutRecallHuntGroupObject'
+          description: Recall options that are added to call park.
+        agents:
+          type: array
+          items:
+            type: string
+          description: Array of ID strings of people, workspaces and virtual lines that are added to call park. The new list of `agents` will replace any existing call park agents list.
+        parkOnAgentsEnabled:
+          type: boolean
+          description: Whether or not the calls will be parked on agents as a destination.
+        callParkExtensions:
+          type: array
+          items:
+            type: string
+          description: Array of ID strings of call park extensions assigned to a call park.
+    GetCallParkObject:
+      type: object
+      required:
+      - id
+      - name
+      - recall
+      - parkOnAgentsEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NBTExfUEFSSy9kR1ZqYUc1cFkyRnNJSE4xY0hCdmNuUWdMU0JwYm5OMWNtRnVZMlVnTFNCamRYTjBiMjFsY2lBeA==
+          description: A unique identifier for the call park.
+        name:
+          type: string
+          example: technical support - insurance - customer 1
+          description: Unique name for the call park. The maximum length is 80.
+        recall:
+          $ref: '#/components/schemas/GetRecallHuntGroupObject'
+          description: Recall options that are added to call park.
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetPersonPlaceVirtualLineCallParksObject'
+          description: People, workspaces and virtual lines that are eligible to receive calls.
+        parkOnAgentsEnabled:
+          type: boolean
+          description: Whether or not the calls will be parked on agents as a destination.
+        callParkExtensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListCPCallParkExtensionObject'
+          description: Array of call park extensions assigned to a call park.
+    ModifyCallExtensionParkObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Illinois, Call Park Extension
+          description: Name for the call park extension. The maximum length is 30.
+        extension:
+          type: string
+          example: '407721'
+          description: Unique extension which will be assigned to call park extension. The minimum length is 2, maximum length is 10.
+    GetUserNumberItemObject:
+      type: object
+      properties:
+        external:
+          type: string
+          example: '+12143456103'
+          description: Phone number of a person.
+        extension:
+          type: string
+          example: '23234'
+          description: Extension of a person.
+    ModifyCallParkSettingsObject:
+      type: object
+      properties:
+        callParkRecall:
+          $ref: '#/components/schemas/PutRecallHuntGroupObject'
+          description: Recall options that are added to call park.
+        callParkSettings:
+          $ref: '#/components/schemas/CallParkSettingsObject'
+          description: Setting controlling call park behavior.
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,3757 @@
+openapi: 3.2.0
+info:
+  title: Webex Cloud Calling Call Settings For Me With UserHub…
+  version: 1.0.0
+  description: The Webex Cloud Calling APIs enable comprehensive management of cloud-based calling services, including user provisioning, device assignment, call routing, feature configuration, and number management. These APIs facilitate integration with enterprise directories, automation of telephony workflows, and centralized management of global calling infrastructure. Use cases include automated onboarding, self-service portals, integration with CRM/ERP systems, and real-time monitoring of call quality and usage.
+tags:
+- name: Call Settings For Me With UserHub Phase2
+paths:
+  /telephony/config/people/me/settings/priorityAlert:
+    get:
+      responses:
+        '200':
+          description: Priority Alert Settings retrieved successfully for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityAlertGet'
+              example:
+                enabled: false
+                criteria:
+                - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                  scheduleName: CustomHoliday(Group)
+                  source: ALL_NUMBERS
+                  notificationEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Priority Alert Settings
+      operationId: getMyPriorityAlertSettings
+      description: 'Get Priority Alert Settings for the authenticated user.
+
+
+        Priority alert allows you to set up a unique ringtone based on predefined criteria. This is helpful, when the user wants to be quickly notified that a specific phone number is calling.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: Priority Alert Settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Priority Alert Settings for User
+      operationId: updateMyPriorityAlertSettings
+      description: 'Update Priority Alert Settings for the authenticated user.
+
+
+        Priority alert allows you to set up a unique ringtone based on predefined criteria. This is helpful, when the user wants to be quickly notified that a specific phone number is calling.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: false
+            schema:
+              $ref: '#/components/schemas/PriorityAlertPatch'
+  /telephony/config/people/me/settings/priorityAlert/criteria:
+    post:
+      summary: Add a Priority Alert Criteria
+      operationId: createMyPriorityAlertCriteria
+      description: 'Create a Priority Alert Criteria for the authenticated user.
+
+
+        Priority alert allows you to set up a unique ringtone based on predefined criteria. This is helpful, when the user wants to be quickly notified that a specific phone number is calling.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriorityAlertCriteriaPatch'
+            example:
+              scheduleName: Holiday V2
+              scheduleType: businessHours
+              scheduleLevel: PEOPLE
+              callsFrom: ANY_PHONE_NUMBER
+              anonymousCallersEnabled: true
+              unavailableCallersEnabled: false
+              notificationEnabled: true
+      responses:
+        '200':
+          description: Priority Alert Criteria created successfully. Returns the criteria ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/priorityAlert/criteria/{id}:
+    get:
+      responses:
+        '200':
+          description: Call Priority Alert Criteria Settings retrieved for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityAlertCriteriaGet'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                scheduleName: CustomHoliday(Group)
+                scheduleType: holidays
+                scheduleLevel: PEOPLE
+                callsFrom: SELECT_PHONE_NUMBERS
+                anonymousCallersEnabled: false
+                unavailableCallersEnabled: false
+                phoneNumbers:
+                - '+16177817765'
+                notificationEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Priority Alert Criteria Settings
+      operationId: getMyPriorityAlertCriteriaSettings
+      description: 'Get Priority Alert Criteria Settings for the authenticated user.
+
+
+        Priority alert allows you to set up a unique ringtone based on predefined criteria. This is helpful, when the user wants to be quickly notified that a specific phone number is calling.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the priority alert criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+    put:
+      responses:
+        '204':
+          description: Priority Alert Criteria Settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Settings for a Priority Alert Criteria
+      operationId: updateMyPriorityAlertCriteriaSettings
+      description: 'Modify Priority Alert Criteria Settings for the authenticated user.
+
+
+        Priority alert allows you to set up a unique ringtone based on predefined criteria. This API allows modifying attributes such as name, phoneNumbers etc for a particular criteria.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the priority alert criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      requestBody:
+        content:
+          application/json:
+            example:
+              scheduleName: Holiday V2
+              scheduleType: holidays
+              scheduleLevel: LOCATION
+              callsFrom: SELECT_PHONE_NUMBERS
+              anonymousCallersEnabled: true
+              unavailableCallersEnabled: true
+              notificationEnabled: false
+              phoneNumbers:
+              - '+16177817766'
+            schema:
+              $ref: '#/components/schemas/PriorityAlertCriteriaPatch'
+    delete:
+      summary: Delete a Priority Alert Criteria
+      operationId: deleteMyPriorityAlertCriteria
+      description: 'Delete a Priority Alert criteria for the authenticated user.
+
+
+        Priority alert allows you to set up a unique ringtone based on predefined criteria. This API removes a specific criteria rule by its unique identifier.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the priority alert criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      responses:
+        '204':
+          description: Priority Alert criteria deleted successfully. No content is returned.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/schedules:
+    get:
+      responses:
+        '200':
+          description: Schedules retrieved successfully for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheduleListGetResponse'
+              example:
+                schedules:
+                - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+                  name: Schedule1
+                  type: businessHours
+                  level: PEOPLE
+                - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVkdWaGJTQkliMnhwWkdGNQ
+                  name: Team Holiday
+                  type: holidays
+                  level: LOCATION
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get User (and Location) Schedules
+      operationId: getMySchedules
+      description: 'Get Schedules for Call Settings for the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+    post:
+      summary: Add a User level Schedule for Call Settings
+      operationId: createMySchedule
+      description: 'Create a new Schedule for the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSchedulePostRequest'
+            example:
+              name: Holiday V2
+              type: businessHours
+              events:
+              - name: Day_Shift
+                startDate: '2020-03-18'
+                endDate: '2020-03-18'
+                startTime: 08:00
+                endTime: '17:00'
+                allDayEnabled: false
+                recurrence:
+                  recurForEver: true
+                  recurEndDate: '2020-03-18'
+                  recurEndOccurrence: 1
+                  recurDaily:
+                    recurInterval: 1
+                  recurWeekly:
+                    recurInterval: 1
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: true
+                    thursday: false
+                    friday: false
+                    saturday: false
+      responses:
+        '200':
+          description: Schedule created successfully. Returns the Schedule ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/schedules/{scheduleType}/{scheduleId}:
+    get:
+      responses:
+        '200':
+          description: Schedule retrieved successfully for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheduleGetResponse'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+                type: businessHours
+                name: Schedule1
+                events:
+                - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+                  name: EVENT NAME
+                  startDate: '2023-02-06'
+                  endDate: '2023-02-06'
+                  allDayEnabled: true
+                  recurrence:
+                    recurForEver: true
+                    recurDaily:
+                      recurInterval: 1
+                - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUm5KcFpHRjVJREk9
+                  name: Friday 2
+                  startDate: '2020-10-30'
+                  endDate: '2020-10-30'
+                  startTime: '13:00'
+                  endTime: '17:00'
+                  allDayEnabled: false
+                  recurrence:
+                    recurForEver: true
+                    recurWeekly:
+                      sunday: false
+                      monday: false
+                      tuesday: false
+                      wednesday: false
+                      thursday: false
+                      friday: true
+                      saturday: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get User Schedule
+      operationId: getMySchedule
+      description: 'Get a Schedule details for Call Settings of the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Retrieve the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: Schedule Configurations updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify User Schedule
+      operationId: updateMySchedule
+      description: 'Modify a Schedule details for Call Settings of the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Update the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Schedule1
+              events:
+              - name: EVENT NAME
+                newName: Event Name
+                startDate: '2023-02-06'
+                endDate: '2023-02-06'
+                allDayEnabled: true
+                recurrence:
+                  recurForEver: true
+                  recurDaily:
+                    recurInterval: 1
+              - name: Friday 2
+                newName: Weekly Event
+                startDate: '2020-10-30'
+                endDate: '2020-10-30'
+                startTime: '13:00'
+                endTime: '17:00'
+                allDayEnabled: false
+                recurrence:
+                  recurForEver: true
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: false
+                    thursday: false
+                    friday: true
+                    saturday: false
+            schema:
+              $ref: '#/components/schemas/UserSchedulePatchRequest'
+    delete:
+      summary: Delete a User Schedule
+      operationId: deleteMyUserSchedule
+      description: 'Delete a specific schedule for the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Delete the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Schedule deleted successfully. No content is returned.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/schedules/{scheduleType}/{scheduleId}/events:
+    post:
+      summary: Add an event for a User Schedule
+      operationId: createMyScheduleEvent
+      description: 'Create a new Event for for the authenticated user''s specified schedule.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: add an event for the specified schedule ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserScheduleEventPostRequest'
+            example:
+              name: Schedule1
+              startDate: '2023-02-06'
+              endDate: '2023-02-06'
+              allDayEnabled: true
+              startTime: 09:00
+              endTime: '18:00'
+              recurrence:
+                recurForEver: false
+                recurEndDate: '2023-02-06'
+                recurEndOccurrence: 1
+                recurDaily:
+                  recurInterval: 1
+                recurWeekly:
+                  sunday: false
+                  monday: false
+                  tuesday: false
+                  wednesday: false
+                  thursday: false
+                  friday: true
+                  saturday: false
+      responses:
+        '200':
+          description: Schedule Event created successfully. Returns the user schedule event ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/schedules/{scheduleType}/{scheduleId}/events/{eventId}:
+    get:
+      responses:
+        '200':
+          description: Schedule Event retrieved successfully for the authenticated user's specified schedule.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheduleEvent'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+                name: Schedule1
+                startDate: '2023-02-06'
+                endDate: '2023-02-06'
+                allDayEnabled: true
+                startTime: 09:00
+                endTime: '18:00'
+                recurrence:
+                  recurForEver: false
+                  recurEndDate: '2023-02-06'
+                  recurEndOccurrence: 1
+                  recurDaily:
+                    recurInterval: 1
+                  recurWeekly:
+                    sunday: false
+                    monday: false
+                    tuesday: false
+                    wednesday: false
+                    thursday: false
+                    friday: true
+                    saturday: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get User Schedule Event
+      operationId: getMyScheduleEvent
+      description: 'Get a Schedule Event details for Call Settings of the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Retrieve the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        description: Retrieve the event with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+        schema:
+          type: string
+    put:
+      responses:
+        '204':
+          description: Schedule Event Configurations updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify User Schedule Event
+      operationId: updateMyScheduleEvent
+      description: 'Modify a Schedule event details for Call Settings of the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Update an event for the specified schedule ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        description: Update the event with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Schedule1
+              startDate: '2023-02-06'
+              endDate: '2023-02-06'
+              allDayEnabled: true
+              startTime: 09:00
+              endTime: '18:00'
+              recurrence:
+                recurForEver: false
+                recurEndDate: '2023-02-06'
+                recurEndOccurrence: 1
+                recurDaily:
+                  recurInterval: 1
+                recurWeekly:
+                  sunday: false
+                  monday: false
+                  tuesday: false
+                  wednesday: false
+                  thursday: false
+                  friday: true
+                  saturday: false
+            schema:
+              $ref: '#/components/schemas/UserScheduleEventPatch'
+    delete:
+      summary: Delete User a Schedule Event
+      operationId: deleteMyUserScheduleEvent
+      description: 'Delete a specific schedule event for the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Delete an event for the specified schedule ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        description: Delete the event with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Schedule Event deleted successfully. No content is returned.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/locations/schedules/{scheduleType}/{scheduleId}:
+    get:
+      responses:
+        '200':
+          description: Location Schedule retrieved successfully for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLocationScheduleGetResponse'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+                type: businessHours
+                name: Schedule1
+                events:
+                - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+                  name: EVENTNAME
+                  startDate: '2023-02-06'
+                  endDate: '2023-02-06'
+                  allDayEnabled: true
+                  recurrence:
+                    recurForEver: true
+                    recurYearlyByDay:
+                      day: MONDAY
+                      week: FIRST
+                      month: FEBRUARY
+                - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUm5KcFpHRjVJREk9
+                  name: Friday 2
+                  startDate: '2020-10-30'
+                  endDate: '2020-10-30'
+                  startTime: '13:00'
+                  endTime: '17:00'
+                  allDayEnabled: false
+                  recurrence:
+                    recurForEver: true
+                    recurWeekly:
+                      sunday: false
+                      monday: false
+                      tuesday: false
+                      wednesday: false
+                      thursday: false
+                      friday: true
+                      saturday: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get User's Location Level Schedule
+      operationId: getMyLocationSchedule
+      description: 'Get Location Schedule for Call Settings of the authenticated user.
+
+
+        Schedules are used to define specific time periods which can be applied to various Call Settings, such as Sequential Ring, or Priority Alert. These call settings perform the defined actions based on the time frame in the schedule, making it more convenient for users to manage their calls.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: scheduleType
+        in: path
+        required: true
+        description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        example: businessHours
+        schema:
+          type: string
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+          enum:
+          - businessHours
+          - holidays
+      - name: scheduleId
+        in: path
+        description: Retrieve the schedule with the matching ID.
+        required: true
+        example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvU0c5c2FXUmhlU0JXTWc
+        schema:
+          type: string
+  /telephony/config/people/me/settings/callNotify:
+    get:
+      responses:
+        '200':
+          description: Call Notify Settings retrieved for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallNotifyGet'
+              example:
+                emailAddress: callnotify@example.com
+                enabled: true
+                criteria:
+                - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                  scheduleName: CustomHoliday(Group)
+                  source: ALL_NUMBERS
+                  notificationEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Notify Settings for User
+      operationId: getMyCallNotifySettings
+      description: 'Get Call Notify Settings for the authenticated user.
+
+
+        Call Notify allows you to set up a unique ringtone based on predefined criteria. This is helpful, when the user wants to be quickly notified that a specific phone number is calling.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: Call Notify Settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Call Notify Settings for User
+      operationId: updateMyCallNotifySettings
+      description: 'Update Call Notify Settings for the authenticated user.
+
+
+        Call Notify allows you to set up a unique ringtone based on predefined criteria. This API allows modifying attributes such as name, phoneNumbers etc for a particular criteria.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              emailAddress: callNotify@example.com
+              enabled: false
+            schema:
+              $ref: '#/components/schemas/CallNotifyPatch'
+  /telephony/config/people/me/settings/callNotify/criteria:
+    post:
+      summary: Add a Call Notify Criteria
+      operationId: createMyCallNotifyCriteria
+      description: 'Create a Call Notify Criteria for the authenticated user.
+
+
+        Call Notify allows you to set up a unique ringtone based on predefined criteria. This is helpful, when the user wants to be quickly notified that a specific phone number is calling.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallNotifyCriteriaPatch'
+            example:
+              scheduleName: Holiday V2
+              scheduleType: businessHours
+              scheduleLevel: PEOPLE
+              callsFrom: ANY_PHONE_NUMBER
+              anonymousCallersEnabled: true
+              unavailableCallersEnabled: false
+              notificationEnabled: true
+      responses:
+        '200':
+          description: Call Notify Criteria created successfully. Returns the criteria ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/callNotify/criteria/{id}:
+    get:
+      responses:
+        '200':
+          description: Call Notify Criteria Settings retrieved for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallNotifyCriteriaGet'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                scheduleName: CustomHoliday(Group)
+                scheduleType: holidays
+                scheduleLevel: PEOPLE
+                callsFrom: SELECT_PHONE_NUMBERS
+                anonymousCallersEnabled: false
+                unavailableCallersEnabled: false
+                phoneNumbers:
+                - '+16177817765'
+                notificationEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Call Notify Criteria Settings
+      operationId: getMyCallNotifyCriteriaSettings
+      description: 'Get Call Notify Criteria Settings for the authenticated user.
+
+
+        Call Notify allows you to set up a unique ringtone based on predefined criteria. This is helpful, when the user wants to be quickly notified that a specific phone number is calling.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the call notify criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+    put:
+      responses:
+        '204':
+          description: Call Notify Criteria Settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify a Call Notify Criteria
+      operationId: updateMyCallNotifyCriteriaSettings
+      description: 'Modify Call Notify Criteria Settings for the authenticated user.
+
+
+        Call Notify allows you to set up a unique ringtone based on predefined criteria. This API allows modifying attributes such as name, phoneNumbers etc for a particular criteria.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the call notify criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      requestBody:
+        content:
+          application/json:
+            example:
+              scheduleName: Holiday V2
+              scheduleType: holidays
+              scheduleLevel: LOCATION
+              callsFrom: SELECT_PHONE_NUMBERS
+              anonymousCallersEnabled: true
+              unavailableCallersEnabled: true
+              notificationEnabled: false
+              phoneNumbers:
+              - '+16177817766'
+            schema:
+              $ref: '#/components/schemas/CallNotifyCriteriaPatch'
+    delete:
+      summary: Delete a Call Notify Criteria
+      operationId: deleteMyCallNotifyCriteria
+      description: 'Delete a Call Notify criteria for the authenticated user.
+
+
+        Call Notify allows you to set up a unique ringtone based on predefined criteria. This API removes a specific criteria rule by its unique identifier.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the call notify criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      responses:
+        '204':
+          description: Call Notify criteria deleted successfully. No content is returned.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/selectiveAccept:
+    get:
+      responses:
+        '200':
+          description: Selective Call Accept Settings retrieved for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectiveAcceptCallSettingsGet'
+              example:
+                enabled: true
+                criteria:
+                - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                  scheduleName: CustomHoliday(Group)
+                  source: ALL_NUMBERS
+                  acceptEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Selective Call Accept Settings for User
+      operationId: getMySelectiveAcceptSettings
+      description: 'Get Selective Call Accept Settings for the authenticated user.
+
+
+        Selective Call Accept allows you to create customized rules to accept specific calls for users based on the phone number,identity and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: Selective Call Accept Settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Selective Call Accept Settings for User
+      operationId: updateMySelectiveAcceptSettings
+      description: 'Update Selective Call Accept Settings for the authenticated user.
+
+
+        Selective Call Accept allows you to create customized rules to accept specific calls for users based on the phone number,identity and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: false
+            schema:
+              $ref: '#/components/schemas/SelectiveAcceptCallSettingPatch'
+  /telephony/config/people/me/settings/selectiveAccept/criteria:
+    post:
+      summary: Add User Selective Call Accept Criteria
+      operationId: createMySelectiveAcceptCriteria
+      description: 'Create a new Selective Call Accept Criteria for the authenticated user.
+
+
+        Selective Call Accept allows you to create customized rules to accept specific calls for users based on the phone number,identity and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectiveAcceptCallCriteriaPost'
+            example:
+              scheduleName: Holiday V2
+              scheduleType: businessHours
+              scheduleLevel: PEOPLE
+              callsFrom: SELECT_PHONE_NUMBERS
+              anonymousCallersEnabled: true
+              unavailableCallersEnabled: true
+              phoneNumbers:
+              - '+19064441748'
+              - '+19186663950'
+              acceptEnabled: true
+      responses:
+        '200':
+          description: Selective Call Accept Criteria created successfully. Returns the criteria ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/selectiveAccept/criteria/{id}:
+    get:
+      responses:
+        '200':
+          description: Selective Call Accept Criteria Settings retrieved for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectiveAcceptCallCriteriaGet'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                scheduleName: CustomHoliday(Group)
+                scheduleType: holidays
+                scheduleLevel: PEOPLE
+                callsFrom: SELECT_PHONE_NUMBERS
+                anonymousCallersEnabled: false
+                unavailableCallersEnabled: false
+                phoneNumbers:
+                - '+16177817765'
+                acceptEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Selective Call Accept Criteria Settings for User
+      operationId: getMySelectiveAcceptCriteriaSettings
+      description: 'Get Selective Call Accept Criteria Settings for the authenticated user.
+
+
+        Selective Call Accept allows you to create customized rules to accept specific calls for users based on the phone number,identity and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the selective call accept criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+    put:
+      responses:
+        '204':
+          description: Selective Call Accept Criteria Settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify a Selective Call Accept Criteria
+      operationId: updateMySelectiveCallAcceptCriteriaSettings
+      description: 'Modify Selective Call Accept Criteria Settings for the authenticated user.
+
+
+        Selective Call Accept allows you to create customized rules to accept specific calls for users based on the phone number,identity and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the selective call accept. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      requestBody:
+        content:
+          application/json:
+            example:
+              scheduleName: Holiday V2
+              scheduleType: holidays
+              scheduleLevel: LOCATION
+              callsFrom: SELECT_PHONE_NUMBERS
+              anonymousCallersEnabled: true
+              unavailableCallersEnabled: true
+              acceptEnabled: false
+              phoneNumbers:
+              - '+16177817766'
+            schema:
+              $ref: '#/components/schemas/SelectiveAcceptCallCriteriaPatch'
+    delete:
+      summary: Delete a Selective Call Accept Criteria
+      operationId: deleteMySelectiveCallAcceptCriteria
+      description: 'Delete a Selective Call Accept Criteria for the authenticated user.
+
+
+        Selective Call Accept allows you to create customized rules to accept specific calls for users based on the phone number,identity and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the selective call accept criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      responses:
+        '204':
+          description: Selective Call Accept Criteria deleted successfully. No content is returned.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/location/assignedNumbers:
+    get:
+      responses:
+        '200':
+          description: Available numbers retrieved for the authenticated user's location.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationAssignedNumbersGet'
+              example:
+                phoneNumbers:
+                - phoneNumber: '+16177817765'
+                  extension: '765'
+                  state: ACTIVE
+                  phoneNumberType: PRIMARY
+                  tollFreeNumber: false
+                  owner:
+                    type: HUNT_GROUP
+                    displayName: testingdemoHunt
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Available Numbers for User's Location
+      operationId: getAvailableNumbersForMyLocation
+      description: 'Get Available Numbers for User''s Location.
+
+
+        Fetch all the numbers available in User''s location.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: max
+        in: query
+        description: Limit the maximum number of numbers in the response.
+        example: 100
+        schema:
+          type: number
+      - name: start
+        in: query
+        description: Specify the offset from the first result that you want to fetch.
+        example: 0
+        schema:
+          type: number
+      - name: name
+        in: query
+        description: List numbers whose owner name contains this string.
+        example: Denver
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: List numbers whose phoneNumber contains this string.
+        example: '27888'
+        schema:
+          type: string
+      - name: extension
+        in: query
+        description: List numbers whose extension contains this string.
+        example: '7899'
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: Sort the list of numbers based on `lastName`, `dn`, `extension` either asc or desc.
+        example: lastName-asc
+        schema:
+          type: string
+  /telephony/config/people/me/settings/selectiveForward/criteria:
+    post:
+      summary: Add a Selective Call Forwarding Criteria
+      operationId: createMySelectiveCallForwardCriteria
+      description: 'Create a Selective Call Forwarding Criteria for the authenticated user.
+
+
+        Selective Call Forward allows you to define rules that automatically forward incoming calls based on specific criteria, such as the caller’s phone number, caller identity, and the time and day the call is received.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectiveCallForwardCriteriaPatch'
+            example:
+              forwardToPhoneNumber: '+16175550100'
+              destinationVoicemailEnabled: false
+              scheduleName: Holiday V2
+              scheduleType: businessHours
+              scheduleLevel: PEOPLE
+              callsFrom: SELECT_PHONE_NUMBERS
+              phoneNumbers:
+              - '+16177817766'
+              anonymousCallersEnabled: true
+              unavailableCallersEnabled: false
+              forwardEnabled: true
+      responses:
+        '200':
+          description: Selective Call Forwarding Criteria created successfully. Returns the criteria ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseId'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/selectiveForward/criteria/{id}:
+    get:
+      responses:
+        '200':
+          description: Selective Call Forwarding Criteria Settings retrieved.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectiveCallForwardCriteriaGet'
+              example:
+                id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                forwardToPhoneNumber: '+16175550100'
+                destinationVoicemailEnabled: false
+                scheduleName: CustomHoliday(Group)
+                scheduleType: holidays
+                scheduleLevel: PEOPLE
+                callsFrom: SELECT_PHONE_NUMBERS
+                anonymousCallersEnabled: false
+                unavailableCallersEnabled: false
+                phoneNumbers:
+                - '+16177817765'
+                forwardEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Settings for a Selective Call Forwarding Criteria
+      operationId: getMySelectiveCallForwardCriteria
+      description: 'Get settings for a Selective Call Forwarding Criteria for the authenticated user.
+
+
+        Selective Call Forward allows you to define rules that automatically forward incoming calls based on specific criteria, such as the caller’s phone number, caller identity, and the time and day the call is received.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the selective call forwarding criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+    put:
+      responses:
+        '204':
+          description: Selective Call Forward Criteria Settings updated successfully.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Settings for a Selective Call Forwarding Criteria
+      operationId: updateMySelectiveCallForwardingCriteriaSettings
+      description: 'Modify settings for a Selective Call Forwarding Criteria for the authenticated user.
+
+
+        Selective Call Forward allows you to define rules that automatically forward incoming calls based on specific criteria, such as the caller’s phone number, caller identity, and the time and day the call is received.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the selective call forwarding criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      requestBody:
+        content:
+          application/json:
+            example:
+              forwardToPhoneNumber: '+16175550100'
+              destinationVoicemailEnabled: true
+              scheduleName: Holiday ABC
+              scheduleType: holidays
+              scheduleLevel: LOCATION
+              callsFrom: ANY_PHONE_NUMBER
+              anonymousCallersEnabled: false
+              unavailableCallersEnabled: true
+              forwardEnabled: true
+            schema:
+              $ref: '#/components/schemas/SelectiveCallForwardCriteriaPatch'
+    delete:
+      summary: Delete a Selective Call Forwarding Criteria
+      operationId: deleteMySelectiveCallForwardingCriteria
+      description: 'Delete a Selective Call Forwarding Criteria for the authenticated user.
+
+
+        Selective call forwarding allows you to define rules that automatically forward incoming calls based on specific criteria. This API removes a specific criteria rule by its unique identifier.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        description: 'The `id` parameter specifies the unique identifier for the selective call forwarding criteria. Example: `Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY`.'
+      responses:
+        '204':
+          description: Selective Call Forwarding criteria deleted successfully. No content is returned.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+  /telephony/config/people/me/settings/selectiveForward:
+    get:
+      responses:
+        '200':
+          description: Selective Call Forwarding Settings retrieved for the authenticated user.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectiveForwardCallSettingsGet'
+              example:
+                enabled: true
+                defaultPhoneNumberToForward: '+16177817765'
+                destinationVoicemailEnabled: false
+                ringReminderEnabled: false
+                criteria:
+                - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+                  scheduleName: CustomHoliday(Group)
+                  source: ALL_NUMBERS
+                  forwardEnabled: false
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Get Selective Call Forward Settings for User
+      operationId: getMySelectiveForwardSettings
+      description: 'Get Selective Call Forward Settings for the authenticated user.
+
+
+        Selective Call Forward allows you to create customized rules to forward specific calls for users based on the phone number,identity and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_read`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+    put:
+      responses:
+        '204':
+          description: Selective Call Forward Settings updated successfully for the authenticated user.
+        '400':
+          description: 'Bad Request: The request was invalid or cannot be otherwise served.'
+        '401':
+          description: 'Unauthorized: Authentication credentials were missing or incorrect.'
+        '403':
+          description: 'Forbidden: The request is understood, but it has been refused or access is not allowed.'
+        '404':
+          description: 'Not Found: The URI requested is invalid or the resource requested, such as a user, does not exist. Also returned when the requested format is not supported by the requested method.'
+        '405':
+          description: 'Method Not Allowed: The request was made to a resource using an HTTP request method that is not supported.'
+        '409':
+          description: 'Conflict: The request could not be processed because it conflicts with some established rule of the system. For example, a person may not be added to a room more than once.'
+        '410':
+          description: 'Gone: The requested resource is no longer available.'
+        '415':
+          description: 'Unsupported Media Type: The request was made to a resource without specifying a media type or used a media type that is not supported.'
+        '423':
+          description: 'Locked: The requested resource is temporarily unavailable. A Retry-After header may be present that specifies how many seconds you need to wait before attempting the request again.'
+        '428':
+          description: 'Precondition Required: File(s) cannot be scanned for malware and need to be force downloaded.'
+        '429':
+          description: 'Too Many Requests: Too many requests have been sent in a given amount of time and the request has been rate limited. A Retry-After header should be present that specifies how many seconds you need to wait before a successful request can be made.'
+        '500':
+          description: 'Internal Server Error: Something went wrong on the server. If the issue persists, feel free to contact the [Webex Developer Support team](/explore/support).'
+        '502':
+          description: 'Bad Gateway: The server received an invalid response from an upstream server while processing the request. Try again later.'
+        '503':
+          description: 'Service Unavailable: Server is overloaded with requests. Try again later.'
+        '504':
+          description: 'Gateway Timeout: An upstream server failed to respond on time. If your query uses max parameter, please try to reduce it.'
+      summary: Modify Selective Call Forward Settings for User
+      operationId: updateMySelectiveForwardSettings
+      description: 'Update the Selective Call Forward Settings for the authenticated user.
+
+
+        Selective Call Accept allows you to create customized rules to accept specific calls for users based on the phone number, identity, and the time or day of the call.
+
+
+        This API requires a user auth token with a scope of `spark:telephony_config_write`.'
+      tags:
+      - Call Settings For Me With UserHub Phase2
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              enabled: false
+              defaultForwardToPhoneNumber: '+16175550100'
+              ringReminderEnabled: false
+              destinationVoicemailEnabled: false
+            schema:
+              $ref: '#/components/schemas/SelectiveForwardCallSettingPatch'
+components:
+  schemas:
+    PriorityAlertCriteriaGet:
+      type: object
+      description: Priority Alert individual Criterion detailed settings response object containing schedule, phone numbers, and notification configurations.
+      example:
+        id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        scheduleName: CustomHoliday(Group)
+        scheduleType: holidays
+        scheduleLevel: PEOPLE
+        callsFrom: SELECT_PHONE_NUMBERS
+        anonymousCallersEnabled: false
+        unavailableCallersEnabled: false
+        phoneNumbers:
+        - '+16177817765'
+        notificationEnabled: false
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the priority alert criteria.
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        scheduleName:
+          type: string
+          description: Name of the schedule associated with the criteria.
+          example: CustomHoliday(Group)
+        scheduleType:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - LOCATION
+          description: " * `PEOPLE` - The schedule is at the user level.\n * `LOCATION` - The schedule is at the location level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          description: "Specifies the type of callsFrom, categorizing incoming data based on callsFrom types or numbers that match the current criteria.\n * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n* `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Indicates whether anonymous callers are included in this criteria.
+          example: false
+        unavailableCallersEnabled:
+          type: boolean
+          description: Indicates whether unavailable callers are included in this criteria.
+          example: false
+        phoneNumbers:
+          type: array
+          description: List of phone numbers that this criteria applies to.
+          items:
+            type: string
+            description: Phone number that the criteria applies to.
+        notificationEnabled:
+          type: boolean
+          description: Determines whether priority alerting is applied for calls matching this criteria. If `true`, priority alerting is applied. If `false`, this criteria acts as a 'Don't Alert' rule, preventing priority alerting. Criteria with `notificationEnabled` set to `false` (Don't Alert) take precedence over criteria with `notificationEnabled` set to `true` (Alert).
+          example: false
+    SelectiveAcceptCallCriteriaPatch:
+      type: object
+      required:
+      - callsFrom
+      - acceptEnabled
+      properties:
+        scheduleName:
+          type: string
+          example: CFS-Criteria-F-2
+          description: Name of the schedule to which the criteria is created.
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+          description: Schedule Type.
+        scheduleLevel:
+          $ref: '#/components/schemas/ScheduleLevel'
+          description: schedule level of the criteria.
+        callsFrom:
+          $ref: '#/components/schemas/CallsFromSelectiveAccept'
+          description: Accept calls from selected.
+        anonymousCallersEnabled:
+          type: boolean
+          description: Boolean flag indicating if calls from custom numbers, private numbers are enabled.
+        unavailableCallersEnabled:
+          type: boolean
+          description: Boolean flag indicating if calls from custom numbers, unavailable numbers are enabled.
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+            example: '["+1986751234","+1986751234"]'
+          description: List of phone numbers. It does not include extensions. In some regions phone numbers are not returned in E.164 format. This will be supported in a future update.
+        acceptEnabled:
+          type: boolean
+          example: true
+          description: Boolean flag to enable/disable the selective accept criteria.
+    UserScheduleEvent:
+      type: object
+      description: Schedule Event configuration.
+      required:
+      - id
+      - name
+      - startDate
+      - endDate
+      - allDayEnabled
+      example:
+        id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+        name: Event1 Name
+        startDate: '2023-02-06'
+        endDate: '2023-02-06'
+        allDayEnabled: true
+        recurrence:
+          recurForEver: true
+          recurYearlyByDay:
+            day: MONDAY
+            week: FIRST
+            month: FEBRUARY
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RXOXVaR0Y1VTJOb1pXUjFiR1U
+          description: A unique identifier for the schedule event.
+        name:
+          type: string
+          example: MondaySchedule
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start Date of Event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End Date of Event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not.
+        recurrence:
+          $ref: '#/components/schemas/UserScheduleRecurrenceObject'
+    SelectiveForwardCallSettingPatch:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`true` if the Selective Forward feature is enabled.'
+        defaultPhoneNumberToForward:
+          type: string
+          example: '+1934898988'
+          description: Enter the phone number to forward calls to during this schedule.
+        ringReminderEnabled:
+          type: boolean
+          example: true
+          description: When `true`, enables a ring reminder for such calls.
+        destinationVoicemailEnabled:
+          type: boolean
+          description: Enables forwarding for all calls to voicemail. This option is only available for internal phone numbers or extensions.
+    NumberOwnerType:
+      type: string
+      enum:
+      - PLACE
+      - PEOPLE
+      - VIRTUAL_LINE
+      - AUTO_ATTENDANT
+      - CALL_QUEUE
+      - GROUP_PAGING
+      - HUNT_GROUP
+      - VOICE_MESSAGING
+      - OFFICE_ANYWHERE
+      - CONTACT_CENTER_LINK
+      - CONTACT_CENTER_ADAPTER
+      - ROUTE_LIST
+      - VOICEMAIL_GROUP
+      - COLLABORATE_BRIDGE
+      description: " * `PLACE` - PSTN phone number's owner is a workspace.\n * `PEOPLE` - PSTN phone number's owner is a person.\n * `VIRTUAL_LINE` - PSTN phone number's owner is a Virtual Profile.\n * `AUTO_ATTENDANT` - PSTN phone number's owner is an auto-attendant.\n * `CALL_QUEUE` - PSTN phone number's owner is a call queue.\n * `GROUP_PAGING` - PSTN phone number's owner is a group paging.\n * `HUNT_GROUP` - PSTN phone number's owner is a hunt group.\n * `VOICE_MESSAGING` - PSTN phone number's owner is a voice messaging.\n * `OFFICE_ANYWHERE` - PSTN phone number's owner is a Single Number Reach.\n * `CONTACT_CENTER_LINK` - PSTN phone number's owner is a Contact Center link.\n * `CONTACT_CENTER_ADAPTER` - PSTN phone number's owner is a Contact Center adapter.\n * `ROUTE_LIST` - PSTN phone number's owner is a route list.\n * `VOICEMAIL_GROUP` - PSTN phone number's owner is a voicemail group.\n * `COLLABORATE_BRIDGE` - PSTN phone number's owner is a collaborate bridge.\n"
+    UserSchedulePatchRequest:
+      type: object
+      description: Modify the schedule name and / or it's events' details for the requested Schedule.
+      required:
+      - name
+      example:
+        name: Schedule1
+        events:
+        - name: EVENT NAME
+          newName: Event Name
+          startDate: '2023-02-06'
+          endDate: '2023-02-06'
+          allDayEnabled: true
+          recurrence:
+            recurForEver: true
+            recurDaily:
+              recurInterval: 1
+        - name: Friday 2
+          newName: Weekly Event
+          startDate: '2020-10-30'
+          endDate: '2020-10-30'
+          startTime: '13:00'
+          endTime: '17:00'
+          allDayEnabled: false
+          recurrence:
+            recurForEver: true
+            recurWeekly:
+              sunday: false
+              monday: false
+              tuesday: false
+              wednesday: false
+              thursday: false
+              friday: true
+              saturday: false
+      properties:
+        name:
+          type: string
+          description: Name of the schedule.
+          example: Schedule1
+        events:
+          type: array
+          description: List of events in the schedule.
+          items:
+            $ref: '#/components/schemas/UserScheduleEventPatch'
+    RecurYearlyByDateObject:
+      type: object
+      required:
+      - dayOfMonth
+      - month
+      properties:
+        dayOfMonth:
+          type: number
+          example: 1
+          description: Schedule the event on a specific day of the month.
+        month:
+          type: string
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+          description: Schedule the event on a specific month of the year.
+    SelectiveCallForwardCriteriaPatch:
+      type: object
+      example:
+        forwardToPhoneNumber: '+16175550100'
+        destinationVoicemailEnabled: false
+        scheduleName: Holiday V2
+        scheduleType: businessHours
+        scheduleLevel: PEOPLE
+        callsFrom: SELECT_PHONE_NUMBERS
+        phoneNumbers:
+        - '+16177817766'
+        anonymousCallersEnabled: true
+        unavailableCallersEnabled: false
+        forwardEnabled: true
+      description: Request body for updating selective call forwarding criteria settings.
+      properties:
+        forwardToPhoneNumber:
+          type: string
+          description: The phone number to which calls are forwarded when the criteria conditions are met.
+          example: '+16175550100'
+        destinationVoicemailEnabled:
+          type: boolean
+          description: Indicates whether calls that meet the criteria are forwarded to the destination phone number's voicemail.
+          example: false
+        scheduleName:
+          type: string
+          description: Name of the schedule to be associated with the criteria.
+          example: Holiday V2
+        scheduleType:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - LOCATION
+          description: " * `PEOPLE` - The schedule is at the user level.\n * `LOCATION` - The schedule is at the location level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          - ANY_INTERNAL
+          - ANY_EXTERNAL
+          description: "Specifies the type of callsFrom, categorizing incoming data based on callsFrom types or numbers that match the current criteria.\n * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n* `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n* `ANY_INTERNAL` - The criteria applies to any internal number.\n* `ANY_EXTERNAL` - The criteria applies to any external number.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Indicates whether anonymous callers are included in this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          example: true
+        unavailableCallersEnabled:
+          type: boolean
+          description: Indicates whether unavailable callers are included in this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          example: true
+        phoneNumbers:
+          type: array
+          description: List of phone numbers to update for this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          items:
+            type: string
+            description: Phone number that the criteria applies to.
+        forwardEnabled:
+          type: boolean
+          description: Determines whether selective call forwarding is applied for calls matching this criteria. If `true`, the selective forwarding is applied. If `false`, this criteria acts as a 'Don't Forward' rule, preventing selectively forwarding of the calls. Criteria with `forwardEnabled` set to `false` (Don't Forward) take precedence over criteria with `forwardEnabled` set to `true` (Forward).
+          example: false
+    PriorityAlertCriteria:
+      type: object
+      required:
+      - id
+      - source
+      - notificationEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBLzg2NTAxZDFlLTg1MWMtNDgwYi1hZmE2LTA5MTU4NzQ3NzdmZQ
+          description: Unique identifier for criteria.
+        scheduleName:
+          type: string
+          example: Business Vacation
+          description: Name of the location's schedule which determines when the priority alert is in effect.
+        source:
+          type: string
+          enum:
+          - ALL_NUMBERS
+          - SPECIFIC_NUMBERS
+          description: "If criteria are applicable for calls from any phone number or specific phone number.\n * `ALL_NUMBERS` - Indicates that priority alert criteria apply for all incoming numbers.\n * `SPECIFIC_NUMBERS` - Indicates priority alert criteria only apply to specific incoming numbers.\n"
+        notificationEnabled:
+          type: boolean
+          example: true
+          description: When set to `true` notification is enabled for calls that meet the current criteria. Criteria with `notificationEnabled` set to `false` take priority.
+    SelectiveAcceptCallCriteria:
+      type: object
+      required:
+      - id
+      - scheduleName
+      - source
+      - acceptEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBLzg2NTAxZDFlLTg1MWMtNDgwYi1hZmE2LTA5MTU4NzQ3NzdmZQ
+          description: Unique identifier for criteria.
+        scheduleName:
+          type: string
+          example: Business Vacation
+          description: Name of the location's schedule which determines when the selective reject is in effect.
+        source:
+          $ref: '#/components/schemas/SelectiveAcceptCallSource'
+          description: If criteria are applicable for calls from any phone number, specific phone number or forwarded ones.
+        acceptEnabled:
+          type: boolean
+          example: true
+          description: This setting specifies to choose to accept or not to accept the calls that fit within these parameters.
+    PriorityAlertGet:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`true` if the Priority Alert feature is enabled.'
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriorityAlertCriteria'
+          description: A list of criteria specifying conditions when priority alert is in effect.
+    UserScheduleEventPostRequest:
+      type: object
+      description: Modify the Schedule Event configuration.
+      required:
+      - name
+      - startDate
+      - endDate
+      - allDayEnabled
+      example:
+        name: EVENT
+        startDate: '2023-02-06'
+        endDate: '2023-02-06'
+        allDayEnabled: true
+        recurrence:
+          recurForEver: true
+          recurYearlyByDay:
+            day: MONDAY
+            week: FIRST
+            month: FEBRUARY
+      properties:
+        name:
+          type: string
+          example: EVENT
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start Date of Event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End Date of Event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not.
+        recurrence:
+          $ref: '#/components/schemas/UserScheduleRecurrenceObject'
+    ScheduleEventObject:
+      type: object
+      required:
+      - name
+      - startDate
+      - endDate
+      properties:
+        name:
+          type: string
+          example: MondaySchedule
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start date of event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End date of event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event. Mandatory if the event is not all day.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event. Mandatory if the event is not all day.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not. Mandatory if the `startTime` and `endTime` are not defined.
+        recurrence:
+          $ref: '#/components/schemas/RecurrenceObject'
+          description: Recurrence definition.
+    LocationAssignedNumber:
+      type: object
+      description: Details of a assigned phone number/extension in the user's location.
+      properties:
+        phoneNumber:
+          type: string
+          description: The phone number in E.164 format.
+        extension:
+          type: string
+          description: The extension.
+        state:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: " * `ACTIVE` - Phone number is in the active state.\n * `INACTIVE` - Phone number is in the inactive state.\n"
+        phoneNumberType:
+          type: string
+          enum:
+          - PRIMARY
+          - ALTERNATE
+          - FAX
+          description: '* `PRIMARY` - A direct phone number.
+
+            * `ALTERNATE` - An alternate phone number.
+
+            * `FAX` - A FAX number.
+
+            '
+        tollFreeNumber:
+          type: boolean
+          description: Indicate if the number is toll free.
+        owner:
+          type: object
+          required:
+          - type
+          properties:
+            type:
+              $ref: '#/components/schemas/NumberOwnerType'
+            firstName:
+              type: string
+              example: Test
+              description: First name of the phone number/extension owner. This field is present only for type `PEOPLE` and `VIRTUAL_LINE`.
+            lastName:
+              type: string
+              example: Person
+              description: Last name of the phone number/extension owner. This field is present only for type `PEOPLE` and `VIRTUAL_LINE`.
+            displayName:
+              type: string
+              example: Test
+              description: Display Name of the phone number/extension owner.
+          description: The owner details.
+    SelectiveForwardCallSettingsGet:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`true` if the Selective Forward feature is enabled.'
+        defaultPhoneNumberToForward:
+          type: string
+          description: The phone number to which calls are forwarded by default when the criteria conditions are met.
+          example: '+16175550100'
+        ringReminderEnabled:
+          type: boolean
+          description: If `true`, a brief tone will be played on the person's phone when a call has been forwarded.
+          example: false
+        destinationVoicemailEnabled:
+          type: boolean
+          description: Indicates whether calls that meet the criteria are forwarded to the destination phone number's voicemail.
+          example: false
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectiveForwardCallCriteria'
+          description: A list of criteria specifying conditions when selective accept is in effect.
+      example:
+        enabled: true
+        defaultPhoneNumberToForward: '+16175550100'
+        ringReminderEnabled: false
+        destinationVoicemailEnabled: false
+        criteria:
+        - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+          scheduleName: CustomHoliday(Group)
+          source: ALL_NUMBERS
+          forwardEnabled: true
+    UserLocationScheduleGetResponse:
+      type: object
+      description: Lists the schedule and it's events' details for the requested (Location) Schedule. LOCATION level schedule for the user's location.
+      required:
+      - id
+      - type
+      - name
+      example:
+        id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+        type: businessHours
+        name: Schedule1
+        events:
+        - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+          name: EVENTNAME
+          startDate: '2023-02-06'
+          endDate: '2023-02-06'
+          allDayEnabled: true
+          recurrence:
+            recurForEver: true
+            recurYearlyByDay:
+              day: MONDAY
+              week: FIRST
+              month: FEBRUARY
+        - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUm5KcFpHRjVJREk9
+          name: Friday 2
+          startDate: '2020-10-30'
+          endDate: '2020-10-30'
+          startTime: '13:00'
+          endTime: '17:00'
+          allDayEnabled: false
+          recurrence:
+            recurForEver: true
+            recurWeekly:
+              sunday: false
+              monday: false
+              tuesday: false
+              wednesday: false
+              thursday: false
+              friday: true
+              saturday: false
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the schedule.
+          example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+        name:
+          type: string
+          description: Name of the schedule.
+          example: Schedule1
+        type:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: " * `businessHours` - The schedule is for business hours.\n * `holidays` - The schedule is for holidays.\n"
+        events:
+          type: array
+          description: List of events in the schedule.
+          items:
+            $ref: '#/components/schemas/UserLocationScheduleEvent'
+    CallNotifyCriteriaPatch:
+      type: object
+      description: Request body for updating call notify criteria settings.
+      properties:
+        scheduleName:
+          type: string
+          description: Name of the schedule to be associated with the criteria.
+          example: Holiday V2
+        scheduleType:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - LOCATION
+          description: " * `PEOPLE` - The schedule is at the user level.\n * `LOCATION` - The schedule is at the location level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          description: "Specifies the type of callsFrom, categorizing incoming data based on callsFrom types or numbers that match the current criteria.\n * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n* `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Indicates whether anonymous callers are included in this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          example: true
+        unavailableCallersEnabled:
+          type: boolean
+          description: Indicates whether unavailable callers are included in this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          example: true
+        phoneNumbers:
+          type: array
+          description: List of phone numbers to update for this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          items:
+            type: string
+            description: Phone number that the criteria applies to.
+        notificationEnabled:
+          type: boolean
+          description: Determines whether call notification is applied for calls matching this criteria. If `true`, call notify is applied. If `false`, this criteria acts as a 'Don't Notify Me' rule, preventing call notification. Criteria with `notificationEnabled` set to `false` (Don't Notify Me) take precedence over criteria with `notificationEnabled` set to `true` (Notify).
+          example: false
+    LocationAssignedNumbersGet:
+      type: object
+      description: Response object containing the list of assigned phone numbers/extension in the user's location.
+      properties:
+        phoneNumbers:
+          type: array
+          description: List of assigned phone numbers/extension in user's location.
+          items:
+            $ref: '#/components/schemas/LocationAssignedNumber'
+      example:
+        phoneNumbers:
+        - phoneNumber: '+12145551234'
+          extension: '1234'
+          state: ACTIVE
+          phoneNumberType: PRIMARY
+          tollFreeNumber: false
+    SelectiveForwardCallCriteria:
+      type: object
+      required:
+      - id
+      - scheduleName
+      - source
+      - ringEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBLzg2NTAxZDFlLTg1MWMtNDgwYi1hZmE2LTA5MTU4NzQ3NzdmZQ
+          description: Unique identifier for criteria.
+        scheduleName:
+          type: string
+          example: Business Vacation
+          description: Name of the location's schedule which determines when the sequential ring is in effect.
+        source:
+          $ref: '#/components/schemas/SourceForSelectiveForward'
+          description: Criteria are applicable for calls from any phone number or a specific phone number.
+        ringEnabled:
+          type: boolean
+          example: true
+          description: When set to `true` sequential ringing is enabled for calls that meet the current criteria. Criteria with `ringEnabled` set to `false` take priority.
+    ScheduleLevel:
+      type: string
+      enum:
+      - PEOPLE
+      - GROUP
+      description: " * `PEOPLE` - The schedule level that specifies that criteria is of People level.\n * `GROUP` - The schedule level that specifies that criteria is of Group level.\n"
+    UserScheduleEventPatch:
+      type: object
+      description: Modify the Schedule Event configuration.
+      required:
+      - name
+      - startDate
+      - endDate
+      - allDayEnabled
+      example:
+        name: EVENT
+        newName: Event Name
+        startDate: '2023-02-06'
+        endDate: '2023-02-06'
+        allDayEnabled: true
+        recurrence:
+          recurForEver: true
+          recurYearlyByDay:
+            day: MONDAY
+            week: FIRST
+            month: FEBRUARY
+      properties:
+        name:
+          type: string
+          example: EVENT
+          description: Name for the event.
+        newName:
+          type: string
+          example: Event Name
+          description: New Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start Date of Event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End Date of Event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not.
+        recurrence:
+          $ref: '#/components/schemas/UserScheduleRecurrenceObject'
+    SelectiveAcceptCallSettingsGet:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          example: true
+          description: '`true` if the Selective Accept feature is enabled.'
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectiveAcceptCallCriteria'
+          description: A list of criteria specifying conditions when selective accept is in effect.
+      example:
+        enabled: true
+        criteria:
+        - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+          scheduleName: CustomHoliday(Group)
+          source: ALL_NUMBERS
+          acceptEnabled: true
+    PriorityAlertCriteriaPatch:
+      type: object
+      example:
+        scheduleName: Holiday V2
+        scheduleType: holidays
+        scheduleLevel: LOCATION
+        callsFrom: SELECT_PHONE_NUMBERS
+        anonymousCallersEnabled: true
+        unavailableCallersEnabled: true
+        notificationEnabled: false
+        phoneNumbers:
+        - '+16177817766'
+      description: Request body for updating priority alert criteria settings.
+      properties:
+        scheduleName:
+          type: string
+          description: Name of the schedule to be associated with the criteria.
+          example: Holiday V2
+        scheduleType:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - LOCATION
+          description: " * `PEOPLE` - The schedule is at the user level.\n * `LOCATION` - The schedule is at the location level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          description: "Specifies the type of callsFrom, categorizing incoming data based on callsFrom types or numbers that match the current criteria.\n * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n* `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Indicates whether anonymous callers are included in this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          example: true
+        unavailableCallersEnabled:
+          type: boolean
+          description: Indicates whether unavailable callers are included in this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          example: true
+        phoneNumbers:
+          type: array
+          description: List of phone numbers to update for this criteria. Required if `callsFrom` is `SELECT_PHONE_NUMBERS`.
+          items:
+            type: string
+            description: Phone number that the criteria applies to.
+        notificationEnabled:
+          type: boolean
+          description: Determines whether priority alerting is applied for calls matching this criteria. If `true`, priority alerting is applied. If `false`, this criteria acts as a 'Don't Alert' rule, preventing priority alerting. Criteria with `notificationEnabled` set to `false` (Don't Alert) take precedence over criteria with `notificationEnabled` set to `true` (Alert).
+          example: false
+    SelectiveAcceptCallSource:
+      type: string
+      enum:
+      - ALL_NUMBERS
+      - SPECIFIC_NUMBERS
+      - FORWARDED
+      description: " * `ALL_NUMBERS` - Selective accept criteria applies for all incoming numbers.\n * `SPECIFIC_NUMBERS` - Selective accept criteria applies for calls from specific numbers.\n * `FORWARDED` - Selective accept criteria applies for all forwarded calls.\n"
+    UserSchedulePostRequest:
+      type: object
+      description: Request body for creating a new user schedule.
+      required:
+      - type
+      - name
+      properties:
+        type:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        name:
+          type: string
+          example: Schedule ABC
+          description: Unique name for the schedule.
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleEventObject'
+          description: List of schedule events.
+    SelectiveAcceptCallCriteriaGet:
+      type: object
+      required:
+      - callsFrom
+      - acceptEnabled
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzI5NzA4NzUwMTY4MDI
+          description: Criteria ID.
+        scheduleName:
+          type: string
+          example: CFS-Criteria-F-2
+          description: Name of the Schedule to which the criteria is created.
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+          description: Schedule Type.
+        scheduleLevel:
+          $ref: '#/components/schemas/ScheduleLevel'
+          description: Schedule Level of the criteria.
+        callsFrom:
+          $ref: '#/components/schemas/CallsFromSelectiveAccept'
+          description: Accept calls selection.
+        anonymousCallersEnabled:
+          type: boolean
+          description: Boolean flag indicating if calls from custom numbers, private numbers are enabled.
+        unavailableCallersEnabled:
+          type: boolean
+          description: Boolean flag indicating if calls from custom numbers, unavailable numbers are enabled.
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+            example: '["+1986751234","+1986751234"]'
+          description: List of phone numbers. It does not include extensions. In some regions phone numbers are not returned in E.164 format. This will be supported in a future update.
+        acceptEnabled:
+          type: boolean
+          example: true
+          description: Boolean flag indicating if selective call accept is enabled.
+    CallNotifyPatch:
+      type: object
+      description: Request body for updating call notify settings.
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates whether the call notify feature should be enabled or disabled for the user.
+          example: false
+        emailAddress:
+          type: string
+          description: Email Address to which call notifications to be received.
+          example: callnotify@example.com
+      required:
+      - enabled
+    ScheduleType:
+      type: string
+      enum:
+      - businessHours
+      - holidays
+      description: " * `businessHours` - The schedule type that specifies the business or working hours during the day.\n * `holidays` - The schedule type that specifies the day when your organization is not open.\n"
+    SourceForSelectiveForward:
+      type: string
+      enum:
+      - ALL_NUMBERS
+      - SPECIFIC_NUMBERS
+      - ANY_INTERNAL
+      - ANY_EXTERNAL
+      description: " * `ALL_NUMBERS` - Criteria applies to all incoming numbers.\n * `SPECIFIC_NUMBERS` - Criteria applies only for specific incoming numbers.\n * `ANY_INTERNAL` - Criteria applies to all internal incoming numbers.\n * `ANY_EXTERNAL` - Criteria applies to all external incoming numbers.\n"
+    RecurrenceObject:
+      type: object
+      properties:
+        recurForEver:
+          type: boolean
+          description: Flag to indicate if event will recur forever.
+        recurEndDate:
+          type: string
+          example: '2021-11-30'
+          description: End date of recurrence.
+        recurWeekly:
+          $ref: '#/components/schemas/RecurWeeklyObject'
+          description: Weekly recurrence definition.
+        recurYearlyByDate:
+          $ref: '#/components/schemas/RecurYearlyByDateObject'
+          description: Recurrence definition yearly by date.
+        recurYearlyByDay:
+          $ref: '#/components/schemas/RecurYearlyByDayObject'
+          description: Recurrence definition yearly by day.
+    SelectiveCallForwardCriteriaGet:
+      type: object
+      description: Selective Call Forwarding individual Criterion detailed settings response object.
+      example:
+        id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        forwardToPhoneNumber: '+16175550100'
+        destinationVoicemailEnabled: false
+        scheduleName: CustomHoliday(Group)
+        scheduleType: holidays
+        scheduleLevel: PEOPLE
+        callsFrom: SELECT_PHONE_NUMBERS
+        anonymousCallersEnabled: false
+        unavailableCallersEnabled: false
+        phoneNumbers:
+        - '+16177817765'
+        forwardEnabled: false
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the priority alert criteria.
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        forwardToPhoneNumber:
+          type: string
+          description: The phone number to which calls are forwarded when the criteria conditions are met.
+          example: '+16175550100'
+        destinationVoicemailEnabled:
+          type: boolean
+          description: Indicates whether calls that meet the criteria are forwarded to the destination phone number's voicemail.
+          example: false
+        scheduleName:
+          type: string
+          description: Name of the schedule associated with the criteria.
+          example: CustomHoliday(Group)
+        scheduleType:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - LOCATION
+          description: " * `PEOPLE` - The schedule is at the user level.\n * `LOCATION` - The schedule is at the location level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          - ANY_INTERNAL
+          - ANY_EXTERNAL
+          description: "Specifies the type of callsFrom, categorizing incoming data based on callsFrom types or numbers that match the current criteria.\n * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n* `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n* `ANY_INTERNAL` - The criteria applies to any internal number.\n* `ANY_EXTERNAL` - The criteria applies to any external number.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Indicates whether anonymous callers are included in this criteria.
+          example: false
+        unavailableCallersEnabled:
+          type: boolean
+          description: Indicates whether unavailable callers are included in this criteria.
+          example: false
+        phoneNumbers:
+          type: array
+          description: List of phone numbers that this criteria applies to.
+          items:
+            type: string
+            description: Phone number that the criteria applies to.
+        forwardEnabled:
+          type: boolean
+          description: Determines whether selective call forwarding is applied for calls matching this criteria. If `true`, the selective forwarding is applied. If `false`, this criteria acts as a 'Don't Forward' rule, preventing selectively forwarding of the calls. Criteria with `forwardEnabled` set to `false` (Don't Forward) take precedence over criteria with `forwardEnabled` set to `true` (Forward).
+          example: false
+    UserScheduleListGetResponse:
+      type: object
+      description: Lists all the schedules for the authenticated user. Also includes LOCATION level schedules for the user's location.
+      example:
+        schedules:
+        - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+          name: Schedule1
+          type: businessHours
+          level: PEOPLE
+        - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVkdWaGJTQkliMnhwWkdGNQ
+          name: Team Holiday
+          type: holidays
+          level: LOCATION
+      properties:
+        schedules:
+          type: array
+          description: List of schedules
+          items:
+            $ref: '#/components/schemas/UserSchedule'
+    UserScheduleGetResponse:
+      type: object
+      description: Lists the schedule and it's events' details for the requested Schedule.
+      required:
+      - id
+      - type
+      - name
+      example:
+        id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+        type: businessHours
+        name: Schedule1
+        events:
+        - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+          name: EVENTNAME
+          startDate: '2023-02-06'
+          endDate: '2023-02-06'
+          allDayEnabled: true
+          recurrence:
+            recurForEver: true
+            recurDaily:
+              recurInterval: 1
+        - id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUm5KcFpHRjVJREk9
+          name: Friday 2
+          startDate: '2020-10-30'
+          endDate: '2020-10-30'
+          startTime: '13:00'
+          endTime: '17:00'
+          allDayEnabled: false
+          recurrence:
+            recurForEver: true
+            recurWeekly:
+              sunday: false
+              monday: false
+              tuesday: false
+              wednesday: false
+              thursday: false
+              friday: true
+              saturday: false
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the schedule.
+          example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+        name:
+          type: string
+          description: Name of the schedule.
+          example: Schedule1
+        type:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: " * `businessHours` - The schedule is for business hours.\n * `holidays` - The schedule is for holidays.\n"
+        events:
+          type: array
+          description: List of events in the schedule.
+          items:
+            $ref: '#/components/schemas/UserScheduleEvent'
+    CallNotifyCriteriaListGet:
+      type: object
+      description: User call notify criteria response object containing configurations of Criteria.
+      example:
+        id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        scheduleName: CustomHoliday(Group)
+        source: ALL_NUMBERS
+        notificationEnabled: false
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the call notify criteria.
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        scheduleName:
+          type: string
+          description: Name of the schedule associated with the criteria.
+          example: CustomHoliday(Group)
+        source:
+          type: string
+          enum:
+          - ALL_NUMBERS
+          - SPECIFIC_NUMBERS
+          description: "Type of the source.\n * `ALL_NUMBERS` - User wants to be notified for calls from Any Phone Number.\n * `SPECIFIC_NUMBERS` - User wants to be notified for calls from Select Phone Numbers.\n"
+        notificationEnabled:
+          type: boolean
+          description: Determines whether call notify is applied for calls matching this criteria. If `true`, call notification is applied. If `false`, this criteria acts as a 'Don't Notify Me' rule, preventing call notification. Criteria with `notificationEnabled` set to `false` (Don't Notify Me) take precedence over criteria with `notificationEnabled` set to `true` (Notify Me).
+    PriorityAlertPatch:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          description: '`true` if the Priority Alert feature is enabled.'
+    CallNotifyCriteriaGet:
+      type: object
+      description: Call Notify individual Criterion detailed settings response object containing schedule, phone numbers, and notification configurations.
+      example:
+        id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        scheduleName: CustomHoliday(Group)
+        scheduleType: holidays
+        scheduleLevel: PEOPLE
+        callsFrom: SELECT_PHONE_NUMBERS
+        anonymousCallersEnabled: false
+        unavailableCallersEnabled: false
+        phoneNumbers:
+        - '+16177817765'
+        notificationEnabled: false
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the call notify criteria.
+          example: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+        scheduleName:
+          type: string
+          description: Name of the schedule associated with the criteria.
+          example: CustomHoliday(Group)
+        scheduleType:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: "Type of the schedule.\n * `businessHours` - Business hours schedule type.\n * `holidays` - Holidays schedule type.\n"
+        scheduleLevel:
+          type: string
+          enum:
+          - PEOPLE
+          - LOCATION
+          description: " * `PEOPLE` - The schedule is at the user level.\n * `LOCATION` - The schedule is at the location level.\n"
+        callsFrom:
+          type: string
+          enum:
+          - ANY_PHONE_NUMBER
+          - SELECT_PHONE_NUMBERS
+          description: "Specifies the type of callsFrom, categorizing incoming data based on callsFrom types or numbers that match the current criteria.\n * `ANY_PHONE_NUMBER` - The criteria applies to any phone number.\n* `SELECT_PHONE_NUMBERS` - The criteria applies to selected phone numbers.\n"
+        anonymousCallersEnabled:
+          type: boolean
+          description: Indicates whether anonymous callers are included in this criteria.
+          example: false
+        unavailableCallersEnabled:
+          type: boolean
+          description: Indicates whether unavailable callers are included in this criteria.
+          example: false
+        phoneNumbers:
+          type: array
+          description: List of phone numbers that this criteria applies to.
+          items:
+            type: string
+            description: Phone number that the criteria applies to.
+        notificationEnabled:
+          type: boolean
+          description: Determines whether call notify is applied for calls matching this criteria. If `true`, call notification is applied. If `false`, this criteria acts as a 'Don't Notify Me' rule, preventing call notification. Criteria with `notificationEnabled` set to `false` (Don't Notify Me) take precedence over criteria with `notificationEnabled` set to `true` (Notify Me).
+          example: false
+    RecurWeeklyObject:
+      type: object
+      required:
+      - sunday
+      properties:
+        sunday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Sunday.
+        monday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Monday.
+        tuesday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Tuesday.
+        wednesday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Wednesday.
+        thursday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Thursday.
+        friday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Friday.
+        saturday:
+          type: boolean
+          example: true
+          description: Frequency of occurrence in weeks and select the day - Saturday.
+    SelectiveAcceptCallCriteriaPost:
+      type: object
+      required:
+      - callsFrom
+      - acceptEnabled
+      properties:
+        scheduleName:
+          type: string
+          example: CFS-Criteria-F-2
+          description: Name of the schedule to which the criteria is created.
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+          description: The schedule type.
+        scheduleLevel:
+          $ref: '#/components/schemas/ScheduleLevel'
+          description: schedule level of the criteria.
+        callsFrom:
+          $ref: '#/components/schemas/CallsFromSelectiveAccept'
+          description: Accept calls selection.
+        anonymousCallersEnabled:
+          type: boolean
+          description: Boolean flag indicating if calls from custom numbers, private numbers are enabled.
+        unavailableCallersEnabled:
+          type: boolean
+          description: Boolean flag indicating if calls from custom numbers, unavailable numbers are enabled.
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+            example: '["+1986751234","+1986751234"]'
+          description: List of phone numbers. It does not include extensions. In some regions, phone numbers are not returned in E.164 format. This will be supported in a future update.
+        acceptEnabled:
+          type: boolean
+          example: true
+          description: Boolean flag indicating if selective call accept is enabled.
+    RecurYearlyByDayObject:
+      type: object
+      required:
+      - day
+      - week
+      - month
+      properties:
+        day:
+          type: string
+          enum:
+          - SUNDAY
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          description: Schedule the event on a specific day.
+        week:
+          type: string
+          enum:
+          - FIRST
+          - SECOND
+          - THIRD
+          - FOURTH
+          - LAST
+          description: Schedule the event on a specific week.
+        month:
+          type: string
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+          description: Schedule the event on a specific month.
+    UserSchedule:
+      type: object
+      description: Individual Schedule configuration.
+      required:
+      - id
+      - name
+      - type
+      - level
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the schedule.
+          example: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEUvVTJOb1pXUjFiR1V4
+        name:
+          type: string
+          description: Name of the schedule.
+          example: Schedule1
+        type:
+          type: string
+          enum:
+          - businessHours
+          - holidays
+          description: " * `businessHours` - The schedule is for business hours.\n * `holidays` - The schedule is for holidays.\n"
+        level:
+          type: string
+          enum:
+          - PEOPLE
+          - LOCATION
+          description: " * `PEOPLE` - The schedule is at the user level.\n * `LOCATION` - The schedule is at the location level.\n"
+    UserLocationScheduleEvent:
+      type: object
+      description: Schedule Event configuration.
+      required:
+      - id
+      - name
+      - startDate
+      - endDate
+      - allDayEnabled
+      example:
+        id: Y2lzY29zcGFyazovL3VzL1VTRVJfU0NIRURVTEVfRVZFTlQvUlZaRlRsUk9RVTFG
+        name: Event1 Name
+        startDate: '2023-02-06'
+        endDate: '2023-02-06'
+        allDayEnabled: true
+        recurrence:
+          recurForEver: true
+          recurYearlyByDay:
+            day: MONDAY
+            week: FIRST
+            month: FEBRUARY
+      properties:
+        id:
+          type: string
+          example: Y2lzY29zcGFyazovL3VzL1NDSEVEVUxFX0VWRU5UL1RXOXVaR0Y1VTJOb1pXUjFiR1U
+          description: A unique identifier for the schedule event.
+        name:
+          type: string
+          example: MondaySchedule
+          description: Name for the event.
+        startDate:
+          type: string
+          example: '2021-11-01'
+          description: Start Date of Event.
+        endDate:
+          type: string
+          example: '2021-11-30'
+          description: End Date of Event.
+        startTime:
+          type: string
+          example: '12:20'
+          description: Start time of event.
+        endTime:
+          type: string
+          example: '14:20'
+          description: End time of event.
+        allDayEnabled:
+          type: boolean
+          description: An indication of whether given event is an all-day event or not.
+        recurrence:
+          $ref: '#/components/schemas/RecurrenceObject'
+    UserScheduleRecurrenceObject:
+      type: object
+      description: Recurrence definition for a user's schedule event.
+      example:
+        recurForEver: true
+        recurEndDate: '2020-03-31'
+        recurDaily:
+          recurInterval: 1
+        recurWeekly:
+          sunday: false
+          monday: true
+          tuesday: false
+          wednesday: true
+          thursday: false
+          friday: true
+          saturday: false
+      properties:
+        recurForEver:
+          type: boolean
+          example: true
+          description: Flag to indicate if event will recur forever.
+        recurEndDate:
+          type: string
+          example: '2021-11-30'
+          description: End date of recurrence.
+        recurEndOccurrence:
+          type: integer
+          example: 2
+          description: Number of occurrences after which the event will stop recurring.
+        recurDaily:
+          type: object
+          example:
+            recurInterval: 1
+          required:
+          - recurInterval
+          properties:
+            recurInterval:
+              type: number
+              example: 1
+              description: Recurring interval in days. The number of days after the start when an event will repeat.  Repetitions cannot overlap.
+          description: Specifies the number of days between the start of each recurrence and is not allowed with `recurWeekly`.
+        recurWeekly:
+          $ref: '#/components/schemas/RecurWeeklyObject'
+    CallNotifyGet:
+      type: object
+      description: User call notify settings response object containing configurations of Criteria and whether CallNotify is enabled.
+      example:
+        enabled: false
+        emailAddress: callnotify@example.com
+        criteria:
+        - id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL1oxNzU0MzgzODQzNTA5NzY
+          scheduleName: CustomHoliday(Group)
+          source: ALL_NUMBERS
+          notificationEnabled: false
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates whether the call notify feature is enabled for the user.
+        emailAddress:
+          type: string
+          description: Email Address to which call notifications to be received.
+        criteria:
+          type: array
+          description: List of Call Notify Criteria configured by the user.
+          items:
+            $ref: '#/components/schemas/CallNotifyCriteriaListGet'
+    SelectiveAcceptCallSettingPatch:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+          description: indicates whether selective accept is enabled or not.
+    CallsFromSelectiveAccept:
+      type: string
+      enum:
+      - ANY_PHONE_NUMBER
+      - SELECT_PHONE_NUMBERS
+      description: " * `ANY_PHONE_NUMBER` - Criteria applies for any incoming number.\n * `SELECT_PHONE_NUMBERS` - Criteria applies for selected incoming numbers.\n"
+    ResponseId:
+      type: object
+      description: Response object that contains the unique identifier for the created or updated criteria.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the criteria.
+      example:
+        id: Y2lzY29zcGFyazovL3VzL0NSSVRFUklBL2RHVnpkRjltYVd4MFpYST0
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          scopes: {}
+          tokenUrl: /
+      type: oauth2
+    bearerAuth:
+      type: http
+      description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+      scheme: bearer
+      bearerFormat: JWT
