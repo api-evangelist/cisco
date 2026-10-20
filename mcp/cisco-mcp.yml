@@ -80,3 +80,12 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools:
+- name: Meraki-API-Doc-Search
+  description: Search Meraki API documentation
+- name: Meraki-API-OperationId-Search
+  description: The MCP tool accepts an operationId as a parameter to identify and retrieve the relevant
+    Meraki API associated with that unique identifier.
+- name: CatalystCenter-API-Doc-Search
+  description: Search Cisco Catalyst Center API documentation.
+tools_count: 3
