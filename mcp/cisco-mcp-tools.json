@@ -1,0 +1,373 @@
+{
+  "endpoint": "https://devnet.cisco.com/v1/foundation-search-mcp/mcp",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "DevNet Content Retriever",
+    "version": "1.24.0"
+  },
+  "result": {
+    "tools": [
+      {
+        "name": "Meraki-API-Doc-Search",
+        "description": "Search Meraki API documentation",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Search keyword for Catalyst Center API docs",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "top_k": {
+              "type": "integer",
+              "description": "Number of results to return",
+              "default": 3,
+              "minimum": 1,
+              "maximum": 10
+            },
+            "return_api_only": {
+              "type": "boolean",
+              "description": "If true, only return API specific documentation. This is useful for filtering out non-API content. If false, it will return all relevant documentation including guides and tutorials.",
+              "default": true
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "DevNet MCP Tool Response - Flat Structure",
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "array",
+              "items": {
+                "description": "Individual search result or document item",
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "API or document name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Brief description or summary of the API or document"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Full content of the document"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of associated products"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of relevant tags or keywords"
+                  },
+                  "categories": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of categories the API or document belongs to"
+                  },
+                  "api_path": {
+                    "type": "string",
+                    "description": "The endpoint path of the API"
+                  },
+                  "api_description": {
+                    "type": "string",
+                    "description": "Detailed description of the API"
+                  },
+                  "api_method": {
+                    "type": "string",
+                    "description": "HTTP method used by the API (e.g., GET, POST)"
+                  },
+                  "api_operation_id": {
+                    "type": "string",
+                    "description": "Unique identifier for the API operation"
+                  },
+                  "api_summary": {
+                    "type": "string",
+                    "description": "Brief summary of the API"
+                  },
+                  "api_tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of tags associated with the API"
+                  },
+                  "api_doc_hierarchy": {
+                    "type": "string",
+                    "description": "Hierarchy or structure of the API documentation"
+                  },
+                  "openapi_specification": {
+                    "type": "string",
+                    "description": "Complete OpenAPI spec as JSON string"
+                  },
+                  "documentation_url": {
+                    "type": "string",
+                    "description": "URL to the full documentation page"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description"
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "Meraki-API-OperationId-Search",
+        "description": "The MCP tool accepts an operationId as a parameter to identify and retrieve the relevant Meraki API associated with that unique identifier.",
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "operation_id": {
+              "type": "string",
+              "description": "Meraki API operationId",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          "required": [
+            "operation_id"
+          ]
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "DevNet MCP Tool Response - Flat Structure",
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "array",
+              "items": {
+                "description": "Individual search result or document item",
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "API or document name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Brief description or summary of the API or document"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Full content of the document"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of associated products"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of relevant tags or keywords"
+                  },
+                  "categories": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of categories the API or document belongs to"
+                  },
+                  "api_path": {
+                    "type": "string",
+                    "description": "The endpoint path of the API"
+                  },
+                  "api_description": {
+                    "type": "string",
+                    "description": "Detailed description of the API"
+                  },
+                  "api_method": {
+                    "type": "string",
+                    "description": "HTTP method used by the API (e.g., GET, POST)"
+                  },
+                  "api_operation_id": {
+                    "type": "string",
+                    "description": "Unique identifier for the API operation"
+                  },
+                  "api_summary": {
+                    "type": "string",
+                    "description": "Brief summary of the API"
+                  },
+                  "api_tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of tags associated with the API"
+                  },
+                  "api_doc_hierarchy": {
+                    "type": "string",
+                    "description": "Hierarchy or structure of the API documentation"
+                  },
+                  "openapi_specification": {
+                    "type": "string",
+                    "description": "Complete OpenAPI spec as JSON string"
+                  },
+                  "documentation_url": {
+                    "type": "string",
+                    "description": "URL to the full documentation page"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description"
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "CatalystCenter-API-Doc-Search",
+        "description": "Search Cisco Catalyst Center API documentation.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Search keyword for Catalyst Center API docs",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "top_k": {
+              "type": "integer",
+              "description": "Number of results to return",
+              "default": 3,
+              "minimum": 1,
+              "maximum": 10
+            },
+            "return_api_only": {
+              "type": "boolean",
+              "description": "If true, only return API specific documentation. This is useful for filtering out non-API content. If false, it will return all relevant documentation including guides and tutorials.",
+              "default": true
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "DevNet MCP Tool Response - Flat Structure",
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "array",
+              "items": {
+                "description": "Individual search result or document item",
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "API or document name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Brief description or summary of the API or document"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Full content of the document"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of associated products"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of relevant tags or keywords"
+                  },
+                  "categories": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of categories the API or document belongs to"
+                  },
+                  "api_path": {
+                    "type": "string",
+                    "description": "The endpoint path of the API"
+                  },
+                  "api_description": {
+                    "type": "string",
+                    "description": "Detailed description of the API"
+                  },
+                  "api_method": {
+                    "type": "string",
+                    "description": "HTTP method used by the API (e.g., GET, POST)"
+                  },
+                  "api_operation_id": {
+                    "type": "string",
+                    "description": "Unique identifier for the API operation"
+                  },
+                  "api_summary": {
+                    "type": "string",
+                    "description": "Brief summary of the API"
+                  },
+                  "api_tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of tags associated with the API"
+                  },
+                  "api_doc_hierarchy": {
+                    "type": "string",
+                    "description": "Hierarchy or structure of the API documentation"
+                  },
+                  "openapi_specification": {
+                    "type": "string",
+                    "description": "Complete OpenAPI spec as JSON string"
+                  },
+                  "documentation_url": {
+                    "type": "string",
+                    "description": "URL to the full documentation page"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
