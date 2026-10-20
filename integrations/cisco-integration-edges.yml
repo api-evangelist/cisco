@@ -26,6 +26,7 @@ checked:
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
 - microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 - slack/integrations/slack-integration-edges.yml
+- zendesk/integrations/zendesk-integration-edges.yml
 - zoom/integrations/zoom-integration-edges.yml
 marketplace_apps: []
 edges:
@@ -88,152 +89,62 @@ edges:
   - Verified domain
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
-- partner_name: ODVA (CIP / EtherNet/IP)
+- partner_name: OpenSSF (Open Source Security Foundation)
   partner: null
   partner_match: register
   type: register
-  direction: partner-built
-  evidence: https://marketplace.odva.org/organizations/132-cisco-systems-inc
-  category: CIP network products
   channel: standard-directory
   relationship: standard-participant
+  direction: partner-built
+  category: Open source security foundation membership
+  evidence: https://github.com/ossf/ossf-landscape/blob/0c5085851606608158f3adb796e5c22265ee174d/landscape.yml
   contract_reference:
-    register: ODVA Marketplace (marketplace.odva.org/organizations)
+    register: OpenSSF Landscape (github.com/ossf/ossf-landscape landscape.yml @0c50858516), OpenSSF Members
+    standard: OpenSSF
     spec_file: null
-    standard: CIP (EtherNet/IP, DeviceNet, ControlNet, CompoNet)
-    role: ODVA conformance-declared vendor
-    registered_name: Cisco Systems
-    website: http://www.cisco.com
+    role: openssf-member (General)
+    registered_name: Cisco Systems, Inc.
+    website: https://cisco.com/
     matched_domain: cisco.com
     matched_by: domain+name-among-holders
-    licensed_technologies:
-    - EtherNet/IP
-    certified_products:
-    - product: EtherNet/IP
-      listed_products: 14
-      lapsed: false
-    signal_note: certified_products = one entry per TECHNOLOGY with a listed (Declaration of Conformity) product;
-      listed_products is context, never read
-    detected_by: sweep-industrial-robotics.py
-    detected: '2026-10-15'
-  detected_by: sweep-industrial-robotics.py
-  first_seen: '2026-10-15'
-- partner_name: ODVA (CIP / EtherNet/IP)
+    member_tier: General
+    in_market_tags:
+    - security
+    signal_note: 'participation only: foundation membership is standard-participant evidence, never depth; the tier
+      is context. Members outside the market''s business are held (out-of-market)'
+    detected_by: sweep-software-supply-chain.py
+    detected: '2026-10-18'
+  detected_by: sweep-software-supply-chain.py
+  first_seen: '2026-10-18'
+- partner_name: OpenChain Project
   partner: null
   partner_match: register
   type: register
-  direction: partner-built
-  evidence: https://marketplace.odva.org/organizations/132-cisco-systems-inc
-  category: CIP network products
-  channel: standard-directory
-  relationship: compatible
-  shape: ethernet-ip
-  evidence_kind: conformance-register
-  degree: declared-conformance
-  report_only: true
-  contract_reference:
-    register: ODVA Marketplace (marketplace.odva.org/organizations)
-    spec_file: null
-    standard: EtherNet/IP
-    role: ethernet-ip-conformance-declared
-    registered_name: Cisco Systems
-    matched_domain: cisco.com
-    detected_by: sweep-industrial-robotics.py
-    detected: '2026-10-15'
-  detected_by: sweep-industrial-robotics.py
-  first_seen: '2026-10-15'
-- partner_name: Microsoft Sentinel (own)
-  partner: microsoft-sentinel
-  partner_match: mirror
-  mirror_match: domain+name-among-holders
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/Cisco%20ETD
-  mirror_of: microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
-  apps:
-  - Cisco ETD
-  - Cisco Firepower EStreamer
-  - Cisco SD-WAN
-  listing_count: 3
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Security - Threat Protection
-  badges:
-  - support-tier:partner
-- partner_name: CNCF (Cloud Native Landscape)
-  partner: cncf
-  partner_match: register
-  type: register
-  direction: partner-built
-  category: Cloud native landscape
-  evidence: https://github.com/cncf/landscape/blob/3a7d378b1824b82e729a453bb03fa6f1e37557e1/landscape.yml
   channel: standard-directory
   relationship: standard-participant
-  contract_reference:
-    register: CNCF Cloud Native Landscape (github.com/cncf/landscape landscape.yml @3a7d378b18)
-    spec_file: null
-    standard: Cloud Native (CNCF)
-    role: cncf-member (Silver)
-    registered_name: Cisco
-    registered_names:
-    - Cisco
-    website: https://www.cisco.com/
-    matched_domain: cisco.com
-    matched_by: domain+name-among-holders
-    member_tier: Silver
-    joined: '2016-01-01'
-    end_user: false
-    cncf_projects: []
-    landscape_categories: []
-    landscape_entries: 0
-    signal_note: 'participation only: a landscape listing is standard-participant evidence, not depth. Entries,
-      categories, tier and projects are CONTEXT, never read (breadth is not credit)'
-    detected_by: sweep-cloud-native.py
-    detected: '2026-10-15'
-  detected_by: sweep-cloud-native.py
-  first_seen: '2026-10-15'
-- partner_name: MLCommons MLPerf
-  partner: mlcommons
-  partner_match: register
-  type: register
   direction: partner-built
-  category: ML benchmark results
-  evidence: https://github.com/mlcommons/inference_results_v6.1/tree/main/closed/Cisco
-  channel: standard-directory
-  relationship: standard-participant
+  category: Open source compliance programme (OpenChain)
+  evidence: https://www.openchainproject.org/community-of-conformance
   contract_reference:
-    register: MLCommons MLPerf results (github.com/mlcommons/<family>_results_v<round>, closed/ + open/ submitter
-      directories)
+    register: OpenChain Community of Conformance (openchainproject.org/community-of-conformance)
+    standard: OpenChain (ISO/IEC 5230, ISO/IEC 18974)
     spec_file: null
-    standard: MLPerf (MLCommons)
-    role: mlperf-submitter
+    role: openchain-self-declared-conformance
     registered_name: Cisco
-    register_directories:
-    - Cisco
+    website: http://cisco.com
     matched_domain: cisco.com
     matched_by: domain+name-among-holders
-    identity_source: wikidata Q173395 'Cisco' P856 https://www.cisco.com/
-    identity_note: 'MLPerf publishes names only: domain from Wikidata P856 (labelled lookup, Kin 2026-10-15 decision
-      1), then partner_link (domain + name check)'
-    certified_products:
-    - product: MLPerf Inference (closed division)
-      newest_round: v6.1
-      lapsed: false
-    - product: MLPerf Training (closed division)
-      newest_round: v6.0
-      lapsed: false
-    open_division_only: []
-    current_window: each family's newest 2 rounds
-    signal_note: certified_products = one entry per benchmark FAMILY with a closed-division (peer-reviewed, reference-rules)
-      result, lapsed outside the current window; open-division families, rounds and result counts are context, never
-      read
-    detected_by: sweep-mlops.py
-    detected: '2026-10-15'
-  detected_by: sweep-mlops.py
-  first_seen: '2026-10-15'
+    standards:
+    - ISO/IEC 5230
+    self_declared: true
+    in_market_tags:
+    - security
+    signal_note: 'participation only: SELF-DECLARED conformance of the organisation''s own compliance programme
+      (not a product certification), so no certified_products'
+    detected_by: sweep-software-supply-chain.py
+    detected: '2026-10-18'
+  detected_by: sweep-software-supply-chain.py
+  first_seen: '2026-10-18'
 - partner_name: FedRAMP
   partner: null
   partner_match: register
@@ -326,62 +237,152 @@ edges:
       latest_authorization: '2026-08-06'
   detected_by: sweep-gov-cloud.py
   first_seen: '2026-10-15'
-- partner_name: OpenSSF (Open Source Security Foundation)
+- partner_name: ODVA (CIP / EtherNet/IP)
   partner: null
   partner_match: register
   type: register
+  direction: partner-built
+  evidence: https://marketplace.odva.org/organizations/132-cisco-systems-inc
+  category: CIP network products
   channel: standard-directory
   relationship: standard-participant
-  direction: partner-built
-  category: Open source security foundation membership
-  evidence: https://github.com/ossf/ossf-landscape/blob/0c5085851606608158f3adb796e5c22265ee174d/landscape.yml
   contract_reference:
-    register: OpenSSF Landscape (github.com/ossf/ossf-landscape landscape.yml @0c50858516), OpenSSF Members
-    standard: OpenSSF
+    register: ODVA Marketplace (marketplace.odva.org/organizations)
     spec_file: null
-    role: openssf-member (General)
-    registered_name: Cisco Systems, Inc.
-    website: https://cisco.com/
+    standard: CIP (EtherNet/IP, DeviceNet, ControlNet, CompoNet)
+    role: ODVA conformance-declared vendor
+    registered_name: Cisco Systems
+    website: http://www.cisco.com
     matched_domain: cisco.com
     matched_by: domain+name-among-holders
-    member_tier: General
-    in_market_tags:
-    - security
-    signal_note: 'participation only: foundation membership is standard-participant evidence, never depth; the tier
-      is context. Members outside the market''s business are held (out-of-market)'
-    detected_by: sweep-software-supply-chain.py
-    detected: '2026-10-18'
-  detected_by: sweep-software-supply-chain.py
-  first_seen: '2026-10-18'
-- partner_name: OpenChain Project
+    licensed_technologies:
+    - EtherNet/IP
+    certified_products:
+    - product: EtherNet/IP
+      listed_products: 14
+      lapsed: false
+    signal_note: certified_products = one entry per TECHNOLOGY with a listed (Declaration of Conformity) product;
+      listed_products is context, never read
+    detected_by: sweep-industrial-robotics.py
+    detected: '2026-10-19'
+  detected_by: sweep-industrial-robotics.py
+  first_seen: '2026-10-15'
+- partner_name: ODVA (CIP / EtherNet/IP)
   partner: null
   partner_match: register
   type: register
+  direction: partner-built
+  evidence: https://marketplace.odva.org/organizations/132-cisco-systems-inc
+  category: CIP network products
+  channel: standard-directory
+  relationship: compatible
+  shape: ethernet-ip
+  evidence_kind: conformance-register
+  degree: declared-conformance
+  report_only: true
+  contract_reference:
+    register: ODVA Marketplace (marketplace.odva.org/organizations)
+    spec_file: null
+    standard: EtherNet/IP
+    role: ethernet-ip-conformance-declared
+    registered_name: Cisco Systems
+    matched_domain: cisco.com
+    detected_by: sweep-industrial-robotics.py
+    detected: '2026-10-19'
+  detected_by: sweep-industrial-robotics.py
+  first_seen: '2026-10-15'
+- partner_name: MLCommons MLPerf
+  partner: mlcommons
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: ML benchmark results
+  evidence: https://github.com/mlcommons/inference_results_v6.1/tree/main/closed/Cisco
   channel: standard-directory
   relationship: standard-participant
-  direction: partner-built
-  category: Open source compliance programme (OpenChain)
-  evidence: https://www.openchainproject.org/community-of-conformance
   contract_reference:
-    register: OpenChain Community of Conformance (openchainproject.org/community-of-conformance)
-    standard: OpenChain (ISO/IEC 5230, ISO/IEC 18974)
+    register: MLCommons MLPerf results (github.com/mlcommons/<family>_results_v<round>, closed/ + open/ submitter
+      directories)
     spec_file: null
-    role: openchain-self-declared-conformance
+    standard: MLPerf (MLCommons)
+    role: mlperf-submitter
     registered_name: Cisco
-    website: http://cisco.com
+    register_directories:
+    - Cisco
     matched_domain: cisco.com
     matched_by: domain+name-among-holders
-    standards:
-    - ISO/IEC 5230
-    self_declared: true
-    in_market_tags:
-    - security
-    signal_note: 'participation only: SELF-DECLARED conformance of the organisation''s own compliance programme
-      (not a product certification), so no certified_products'
-    detected_by: sweep-software-supply-chain.py
-    detected: '2026-10-18'
-  detected_by: sweep-software-supply-chain.py
-  first_seen: '2026-10-18'
+    identity_source: wikidata Q173395 'Cisco' P856 https://www.cisco.com/
+    identity_note: 'MLPerf publishes names only: domain from Wikidata P856 (labelled lookup, Kin 2026-10-15 decision
+      1), then partner_link (domain + name check)'
+    certified_products:
+    - product: MLPerf Inference (closed division)
+      newest_round: v6.1
+      lapsed: false
+    - product: MLPerf Training (closed division)
+      newest_round: v6.0
+      lapsed: false
+    open_division_only: []
+    current_window: each family's newest 2 rounds
+    signal_note: certified_products = one entry per benchmark FAMILY with a closed-division (peer-reviewed, reference-rules)
+      result, lapsed outside the current window; open-division families, rounds and result counts are context, never
+      read
+    detected_by: sweep-mlops.py
+    detected: '2026-10-19'
+  detected_by: sweep-mlops.py
+  first_seen: '2026-10-15'
+- partner_name: CNCF (Cloud Native Landscape)
+  partner: cncf
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: Cloud native landscape
+  evidence: https://github.com/cncf/landscape/blob/42dd4cd91dad8ec8558ac02467a43f0805b9957a/landscape.yml
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: CNCF Cloud Native Landscape (github.com/cncf/landscape landscape.yml @42dd4cd91d)
+    spec_file: null
+    standard: Cloud Native (CNCF)
+    role: cncf-member (Silver)
+    registered_name: Cisco
+    registered_names:
+    - Cisco
+    website: https://www.cisco.com/
+    matched_domain: cisco.com
+    matched_by: domain+name-among-holders
+    member_tier: Silver
+    joined: '2016-01-01'
+    end_user: false
+    cncf_projects: []
+    landscape_categories: []
+    landscape_entries: 0
+    signal_note: 'participation only: a landscape listing is standard-participant evidence, not depth. Entries,
+      categories, tier and projects are CONTEXT, never read (breadth is not credit)'
+    detected_by: sweep-cloud-native.py
+    detected: '2026-10-19'
+  detected_by: sweep-cloud-native.py
+  first_seen: '2026-10-15'
+- partner_name: Microsoft Sentinel (own)
+  partner: microsoft-sentinel
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/Cisco%20ETD
+  mirror_of: microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+  apps:
+  - Cisco ETD
+  - Cisco Firepower EStreamer
+  - Cisco SD-WAN
+  listing_count: 3
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Security - Threat Protection
+  badges:
+  - support-tier:partner
 - partner_name: Microsoft Teams (own)
   partner: microsoft-teams
   partner_match: mirror
@@ -419,6 +420,23 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: Slack app
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/202570/webex-contact-center/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - Webex Contact Center
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Contact Center
 - partner_name: Zoom (own)
   partner: zoom
   partner_match: mirror
