@@ -525,3 +525,1542 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: cisco-sequoia-capital
+  label: Sequoia Capital
+  partner: sequoia-capital
+  partner_name: Sequoia Capital
+  category: vc portfolio participation
+  type: register
+  channel: standard-directory
+  evidence: https://sequoiacap.com/companies/cisco
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Sequoia Capital companies (sequoiacap.com/companies/<slug>, from the site's sitemap.xml)
+    standard: null
+    spec_file: null
+    role: vc-portfolio-company
+    registered_name: Cisco
+    register_id: https://sequoiacap.com/companies/cisco
+    register_country: null
+    register_website: https://www.cisco.com
+    matched_domain: cisco.com
+    matched_by: domain+name-among-holders
+    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-vc-portfolios.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-splash-access
+  label: Splash Access
+  partner_name: Splash Access
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380853
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-vapp-srl
+  label: VAPP Srl
+  partner_name: VAPP Srl
+  category: Automation & Orchestration, Building Management, Energy Consumption
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381288
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-cloudi-fi
+  label: Cloudi-Fi
+  partner_name: Cloudi-Fi
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380862
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-taoglas
+  label: Taoglas
+  partner_name: Taoglas
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380646
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-penguinin
+  label: PenguinIN
+  partner_name: PenguinIN
+  category: Client Analytics, Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381495
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-kloudspot
+  label: Kloudspot
+  partner_name: Kloudspot
+  category: Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381291
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-trackerwave
+  label: Trackerwave
+  partner_name: Trackerwave
+  category: AIOps, Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381723
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-gozone-wifi
+  label: GoZone WiFi
+  partner_name: GoZone WiFi
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380775
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-ekahau
+  label: EKAHAU
+  partner_name: EKAHAU
+  category: Wireless Assurance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/404921
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-degree-analytics
+  label: Degree Analytics
+  partner_name: Degree Analytics
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380799
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-rayven
+  label: Rayven
+  partner_name: Rayven
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/428329
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-nibblecomm-inc
+  label: Nibblecomm, Inc
+  partner_name: Nibblecomm, Inc
+  category: Guest Wi-Fi, Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380865
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-firemon
+  label: FireMon
+  partner: firemon
+  partner_name: FireMon
+  category: Policy Compliance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380898
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-skyfii
+  label: Skyfii
+  partner_name: Skyfii
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381486
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-innerspace
+  label: Innerspace
+  partner: innerspace
+  partner_name: Innerspace
+  category: Smart Workspace
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381729
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-paessler-ag
+  label: Paessler AG
+  partner_name: Paessler AG
+  category: Cisco App Marketplace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/406727
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-adentro
+  label: Adentro
+  partner: adentro
+  partner_name: Adentro
+  category: Omnichannel Marketing, Proximity Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380790
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-aislelabs
+  label: Aislelabs
+  partner_name: Aislelabs
+  category: Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380703
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-camect
+  label: Camect
+  partner_name: Camect
+  category: Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/419770
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-placeos
+  label: PlaceOS
+  partner_name: PlaceOS
+  category: Smart Workspace
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381252
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-perch-security
+  label: Perch Security
+  partner_name: Perch Security
+  category: Threat Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381381
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-aware-software
+  label: Aware Software
+  partner_name: Aware Software
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380718
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-devnetapps
+  label: DevNetApps
+  partner_name: DevNetApps
+  category: Energy Consumption
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/422678
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-whofi
+  label: WhoFi
+  partner_name: WhoFi
+  category: Customer Demographics, Guest Wi-Fi, Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381327
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-imatik
+  label: Imatik
+  partner_name: Imatik
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381870
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-foot-analytics
+  label: Foot Analytics
+  partner_name: Foot Analytics
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/411620
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-ipera-solutions
+  label: Ipera Solutions
+  partner_name: Ipera Solutions
+  category: Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381846
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-brandfi
+  label: Brandfi
+  partner_name: Brandfi
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380694
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-singlewire-software
+  label: Singlewire Software
+  partner_name: Singlewire Software
+  category: Mass Communication
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380751
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-l-squared
+  label: L Squared
+  partner_name: L Squared
+  category: Digital Signage
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/427569
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-immix
+  label: Immix
+  partner_name: Immix
+  category: Physical Security
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/448100
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-amtt-group
+  label: AMTT Group
+  partner_name: AMTT Group
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/387510
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-vantiq-inc
+  label: Vantiq, Inc
+  partner_name: Vantiq, Inc
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/428029
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-lumu-technologies
+  label: Lumu Technologies
+  partner_name: Lumu Technologies
+  category: Threat Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/413671
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-spintly
+  label: Spintly
+  partner_name: Spintly
+  category: Access Control
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/437008
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-qwasi
+  label: QWASI
+  partner_name: QWASI
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381489
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-flame-analytics
+  label: Flame Analytics
+  partner_name: Flame Analytics
+  category: Customer Demographics, Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/396162
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-iwrobotx
+  label: IWROBOTX
+  partner_name: IWROBOTX
+  category: AIOps, Client Analytics, Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381819
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-ecofye
+  label: Ecofye
+  partner_name: Ecofye
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/417290
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-ip-fabric
+  label: IP Fabric
+  partner_name: IP Fabric
+  category: Automation & Orchestration
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/400064
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-pinmicro
+  label: Pinmicro
+  partner_name: Pinmicro
+  category: Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/412839
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-ivalu8
+  label: iVAlu8
+  partner_name: iVAlu8
+  category: Proximity Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380631
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-securonix
+  label: Securonix
+  partner: securonix
+  partner_name: Securonix
+  category: Cyber Threat Response, Threat Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/389454
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-meldcx
+  label: meldCX
+  partner_name: meldCX
+  category: Footfall Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381393
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-airia
+  label: AIRIA
+  partner_name: AIRIA
+  category: Footfall Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/415669
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-everyangle
+  label: EVERYANGLE
+  partner_name: EVERYANGLE
+  category: Loss Prevention, Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381726
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-wegzwei
+  label: WEGZWEI
+  partner_name: WEGZWEI
+  category: Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/417609
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-purple-wifi
+  label: Purple WiFi
+  partner_name: Purple WiFi
+  category: Wayfinding & Mapping
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381348
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-gogoguest-dba-dial-iq-inc
+  label: GoGoGuest dba Dial IQ, Inc.
+  partner_name: GoGoGuest dba Dial IQ, Inc.
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/411925
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-datavalet-technologies
+  label: Datavalet Technologies
+  partner_name: Datavalet Technologies
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/428872
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-tapway-solutions-sdn-bhd
+  label: Tapway Solutions Sdn Bhd
+  partner_name: Tapway Solutions Sdn Bhd
+  category: Customer Demographics, Location Analytics, Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380649
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-zoox-smart-data
+  label: Zoox Smart Data
+  partner_name: Zoox Smart Data
+  category: Guest Wi-Fi, Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/400859
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-airsita-flow
+  label: Airsita Flow
+  partner_name: Airsita Flow
+  category: Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381258
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-encapto
+  label: Encapto
+  partner_name: Encapto
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/488357
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-statseeker
+  label: Statseeker
+  partner_name: Statseeker
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/412492
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-callis-tech
+  label: Callis Tech
+  partner_name: Callis Tech
+  category: Guest Wi-Fi, Proximity Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381801
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-dtiq
+  label: DTiQ
+  partner_name: DTiQ
+  category: Loss Prevention, Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/407017
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-teridion
+  label: Teridion
+  partner_name: Teridion
+  category: SD-WAN Performance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380760
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-penguin-location-services
+  label: Penguin Location Services
+  partner_name: Penguin Location Services
+  category: Location Analytics, Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381501
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-crisisgo
+  label: CrisisGo
+  partner_name: CrisisGo
+  category: Threat Management, Visitor Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/428030
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-purple
+  label: Purple
+  partner_name: Purple
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/435745
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-synchroweb-technology
+  label: Synchroweb Technology
+  partner_name: Synchroweb Technology
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/410889
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-flow-solutions-inc
+  label: Flow Solutions Inc
+  partner_name: Flow Solutions Inc
+  category: Footfall Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381867
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-building-intelligence-inc
+  label: Building Intelligence Inc.
+  partner_name: Building Intelligence Inc.
+  category: Building Management, Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/419088
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-cogniac
+  label: Cogniac
+  partner: cogniac
+  partner_name: Cogniac
+  category: Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/405969
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-airista
+  label: AiRISTA
+  partner_name: AiRISTA
+  category: Health and Safety Compliance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381480
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-discovery
+  label: Discovery
+  partner_name: Discovery
+  category: Guest Wi-Fi, Smart Workspace
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381756
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-mpro5
+  label: mpro5
+  partner_name: mpro5
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/410452
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-beonic
+  label: Beonic
+  partner_name: Beonic
+  category: Client Analytics, Customer Demographics, Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380859
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-eleven
+  label: Eleven
+  partner_name: Eleven
+  category: Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380856
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-plate-recognizer
+  label: Plate Recognizer
+  partner_name: Plate Recognizer
+  category: Automatic License Plate Reader
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381351
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-pimloc
+  label: Pimloc
+  partner_name: Pimloc
+  category: Physical Security, Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/421438
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-wiliot
+  label: Wiliot
+  partner: wiliot
+  partner_name: Wiliot
+  category: Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/407769
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-aireye
+  label: AirEye
+  partner: aireye
+  partner_name: AirEye
+  category: IoT Security
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381753
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-sensing-vision
+  label: Sensing Vision
+  partner_name: Sensing Vision
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/413256
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-back2blu
+  label: Back2Blu
+  partner_name: Back2Blu
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/422683
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-plainsight
+  label: Plainsight
+  partner_name: Plainsight
+  category: Health and Safety Compliance, Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381762
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-wiflex
+  label: Wiflex
+  partner_name: Wiflex
+  category: BYOD Onboarding & Security
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/413935
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-softelinet
+  label: Softelinet
+  partner_name: Softelinet
+  category: Client Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/417817
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-agilence
+  label: Agilence
+  partner_name: Agilence
+  category: Loss Prevention, Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381750
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-abl-solutions-gmbh
+  label: abl solutions GmbH
+  partner_name: abl solutions GmbH
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/402794
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-sord-data-systems
+  label: Sord Data Systems
+  partner_name: Sord Data Systems
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/445546
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-tag-n-trac
+  label: Tag-N-Trac
+  partner_name: Tag-N-Trac
+  category: Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381774
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-platformity
+  label: Platformity
+  partner_name: Platformity
+  category: Threat Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/411929
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-armis
+  label: Armis
+  partner: armis
+  partner_name: Armis
+  category: Identity Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380895
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-airista-flow
+  label: Airista Flow
+  partner_name: Airista Flow
+  category: Health and Safety Compliance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381216
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-bloom-intelligence
+  label: Bloom Intelligence
+  partner_name: Bloom Intelligence
+  category: Guest Wi-Fi, Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380874
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-loch-io
+  label: Loch IO
+  partner_name: Loch IO
+  category: Monitoring & Performance, Wireless Assurance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381720
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-myplace
+  label: MyPlace
+  partner_name: MyPlace
+  category: Cisco App Marketplace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/455131
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-waittime
+  label: WaitTime
+  partner_name: WaitTime
+  category: Footfall Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381279
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-techflipp
+  label: Techflipp
+  partner_name: Techflipp
+  category: Client Analytics, Guest Wi-Fi, Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381834
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-3data-analytics
+  label: 3Data Analytics
+  partner_name: 3Data Analytics
+  category: Cisco App Marketplace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380700
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-phunware
+  label: Phunware
+  partner_name: Phunware
+  category: Location Analytics, Proximity Marketing, Wayfinding & Mapping
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380814
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-solarwinds
+  label: SolarWinds
+  partner: solarwinds
+  partner_name: SolarWinds
+  category: Monitoring & Performance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381483
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-analytiks
+  label: Analytiks
+  partner_name: Analytiks
+  category: Footfall Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381342
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-vapp-srl
+  label: VAPP srl
+  partner_name: VAPP srl
+  category: Health and Safety Compliance, Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381318
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-gospace-ai
+  label: GoSpace AI
+  partner_name: GoSpace AI
+  category: Smart Workspace
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/411282
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-kisi-inc
+  label: Kisi Inc
+  partner: kisi
+  partner_name: Kisi Inc
+  category: Physical Asset Tracking
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380847
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-adipsys
+  label: ADIPSYS
+  partner_name: ADIPSYS
+  category: Cisco App Marketplace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/452163
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-aerwave
+  label: Aerwave
+  partner_name: Aerwave
+  category: Cisco App Marketplace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380826
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-purple-transform
+  label: Purple Transform
+  partner_name: Purple Transform
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/413827
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-datawifi
+  label: Datawifi
+  partner_name: Datawifi
+  category: Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/428284
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-optifi
+  label: OPTiFi
+  partner_name: OPTiFi
+  category: Footfall Analytics, Visitor Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380733
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-wizzie
+  label: Wizzie
+  partner_name: Wizzie
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/397358
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-zensors-inc
+  label: Zensors Inc.
+  partner_name: Zensors Inc.
+  category: Footfall Analytics, Health and Safety Compliance, Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381231
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-agreefy
+  label: Agreefy
+  partner_name: Agreefy
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380877
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-footprints-ai
+  label: Footprints AI
+  partner_name: Footprints AI
+  category: Proximity Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/411928
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-rebiz
+  label: ReBiz
+  partner_name: ReBiz
+  category: Video Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381273
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-faydam-inovasyon
+  label: FAYDAM INOVASYON
+  partner_name: FAYDAM INOVASYON
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/445547
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-basking-automation
+  label: Basking Automation
+  partner_name: Basking Automation
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381981
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-u-factor-io
+  label: u-factor.io
+  partner_name: u-factor.io
+  category: Smart Workspace, Wayfinding & Mapping
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381966
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-inpixon
+  label: Inpixon
+  partner_name: Inpixon
+  category: Smart Workspace
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381300
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-onelogin
+  label: OneLogin
+  partner: onelogin
+  partner_name: OneLogin
+  category: BYOD Onboarding & Security, Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380904
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-senturo
+  label: Senturo
+  partner_name: Senturo
+  category: Cisco App Marketplace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/454548
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-weblib
+  label: Weblib
+  partner_name: Weblib
+  category: Guest Wi-Fi
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/415259
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-moovit
+  label: Moovit
+  partner_name: Moovit
+  category: Proximity Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/394821
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-ipmagix
+  label: IPMagiX
+  partner_name: IPMagiX
+  category: Customer Demographics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380673
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-lenels2
+  label: LenelS2
+  partner_name: LenelS2
+  category: Access Control
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/454899
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-omniup
+  label: OMNIUP
+  partner_name: OMNIUP
+  category: Proximity Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/406733
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-thinaer
+  label: Thinaer
+  partner_name: Thinaer
+  category: Environmental Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/392772
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-limitless-insight
+  label: Limitless Insight
+  partner_name: Limitless Insight
+  category: Location Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381990
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-rapid7
+  label: Rapid7
+  partner: rapid7
+  partner_name: Rapid7
+  category: Cisco App Marketplace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381462
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-hanshow
+  label: Hanshow
+  partner_name: Hanshow
+  category: Electronic Shelf Labels
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/406845
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-spoton-wifi
+  label: SpotOn WiFi
+  partner_name: SpotOn WiFi
+  category: Customer Demographics, Guest Wi-Fi, Omnichannel Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/380892
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-backloop-srl
+  label: Backloop srl
+  partner_name: Backloop srl
+  category: Monitoring & Performance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/412605
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
