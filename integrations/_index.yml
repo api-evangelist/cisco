@@ -2424,3 +2424,121 @@
     identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
   status: not-a-workflow
   arazzo: null
+- slug: cisco-ismap
+  label: ISMAP
+  partner_name: ISMAP
+  category: Japan government cloud security assessment (ISMAP)
+  type: contract
+  channel: regulator-register
+  evidence: https://www.ismap.go.jp/csm?id=cloud_service_list
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: ISMAP / ISMAP-LIU cloud service lists (www.ismap.go.jp)
+    standard: ISMAP
+    spec_file: null
+    role: ismap-registered
+    registrations:
+    - register_number: C25-0096-2
+      registration_type: ISMAP
+      service: Cisco Networking Cloud - Meraki
+      registered_name: Cisco Systems, Inc.
+      service_url: https://meraki.cisco.com/
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+      evidence_url: https://www.ismap.go.jp/csm?id=cloud_service_list
+      scope_of_statement: https://www.ismap.go.jp/sys_attachment.do?sys_id=d1aa21c92bd48710f0bbfd69fe91bff8
+    - register_number: C25-0098-2
+      registration_type: ISMAP
+      service: Cisco Secure Access
+      registered_name: Cisco Systems, Inc.
+      service_url: https://www.cisco.com/site/jp/ja/products/security/secure-access/index.html
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+      evidence_url: https://www.ismap.go.jp/csm?id=cloud_service_list
+      scope_of_statement: https://www.ismap.go.jp/sys_attachment.do?sys_id=e2431e1b2bb60710434ff14a6e91bf58
+    signal_note: certified_products = one entry per ISMAP registration TYPE (ISMAP, ISMAP-LIU), never per service;
+      services are context, never counted. The lists carry current registrations only (a filed renewal keeps a registration
+      valid), so lapsed is always false
+    certified_products:
+    - product: ISMAP
+      standard: ISMAP
+      registration_type: ISMAP
+      lapsed: false
+    detected_by: sweep-japan-ismap-tisax-assessments.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-cve-program-cve-numbering-authorities
+  label: CVE Program (CVE Numbering Authorities)
+  partner_name: CVE Program (CVE Numbering Authorities)
+  category: Vulnerability disclosure (CVE Numbering Authority)
+  type: register
+  channel: standard-directory
+  evidence: https://www.cve.org/PartnerInformation/ListofPartners/partner/cisco
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: CVE Program CNA list (github.com/CVEProject/cve-website CNAsList.json @ 239d3d9b68e0)
+    standard: CVE Program CNA Operational Rules (CVE Numbering Authority)
+    spec_file: null
+    role: cve-numbering-authority
+    registered_name: Cisco Systems, Inc.
+    matched_domain: cisco.com
+    matched_by: domain+name-among-holders
+    cna_id: CNA-2007-0001
+    cna_short_name: cisco
+    cna_types:
+    - Hosted Service
+    - Open Source
+    - Researcher
+    - Vendor
+    cna_roles:
+    - CNA
+    scope: All Cisco products, and any third-party research targets that are not in another CNA’s scope. Cisco will
+      not issue a CVE ID for issues reported on products that are past the Last Day of Support milestone, as defined
+      on Cisco’s End-of-Life Policy, which is available at <a href='https://www.cisco.com/c/en/us/products/eos-eol-policy.html'
+      target='_blank'>https://www.cisco.com/c/en/us/products/eos-eol
+    top_level_root: MITRE Corporation
+    root: n/a
+    security_advisories:
+    - https://tools.cisco.com/security/center/resources/security_vulnerability_policy.html#sa
+    - https://duo.com/labs/psa/
+    disclosure_policy:
+    - https://www.cisco.com/c/en/us/about/security-center/security-vulnerability-policy.html
+    country: USA
+    signal_note: listing as a CVE Numbering Authority = participation (a public commitment to assign CVE IDs and
+      publish advisories for its scope); never a count of CVEs
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: cisco-first-forum-of-incident-response-and-security-teams
+  label: FIRST (Forum of Incident Response and Security Teams)
+  partner_name: FIRST (Forum of Incident Response and Security Teams)
+  category: Incident response / PSIRT (FIRST member team)
+  type: register
+  channel: standard-directory
+  evidence: https://www.first.org/members/teams/cisco_systems
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FIRST member teams (api.first.org/data/v1/teams, public JSON API)
+    standard: FIRST (Forum of Incident Response and Security Teams) membership
+    spec_file: null
+    role: first-member-team
+    registered_name: Cisco
+    matched_domain: cisco.com
+    matched_by: domain+name-among-holders
+    teams:
+    - id: cisco_systems
+      team: Cisco Systems
+      team_type: CSIRT
+      member_since: January 1, 1991
+      country: US
+    signal_note: FIRST full membership of an incident-response / product-security team = participation; team_type
+      names CSIRT / PSIRT / SOC; never a count
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
