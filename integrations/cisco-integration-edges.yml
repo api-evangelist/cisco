@@ -76,6 +76,9 @@ checked:
 - chef-software/integrations/chef-software-integration-edges.yml
 - https://store.servicenow.com/store/app/
 - https://store.servicenow.com/store/sitemap_xml
+- https://buf.build/buf.registry.module.v1.ModuleService/ListModules
+- https://buf.build/buf.registry.owner.v1.OwnerService/GetOwners
+- https://buf.build/explore
 marketplace_apps: []
 edges:
 - partner_name: OpenTelemetry
@@ -4770,6 +4773,38 @@ edges:
     detected_by: sweep-servicenow-store.py
     detected: '2026-10-23'
   detected_by: sweep-servicenow-store.py
+  first_seen: '2026-10-23'
+- partner_name: Buf Schema Registry (BSR) public modules
+  partner: buf
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: third-party
+  evidence: https://buf.build/cisco-mobility
+  category: Protocol Buffers schema publishing (BSR)
+  contract_reference:
+    register: Buf Schema Registry (BSR) public modules
+    spec_file: null
+    standard: Protocol Buffers
+    role: schema-publisher
+    registrations:
+    - registered_name: cisco-mobility
+      register_status: public-modules
+      evidence_url: https://buf.build/cisco-mobility
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+      url_source: owner-url
+    modules:
+    - module: buf.build/cisco-mobility/beta
+      state: active
+      lapsed: false
+      created: '2024-10-25'
+    signal_note: 'participation only: the owner publishes Protocol Buffers schema modules on the public BSR; a listing
+      is not conformance (no certified_products)'
+    detected_by: sweep-buf-schema-registry.py
+    detected: '2026-10-23'
+  detected_by: sweep-buf-schema-registry.py
   first_seen: '2026-10-23'
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
