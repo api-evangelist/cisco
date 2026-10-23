@@ -71,6 +71,7 @@ checked:
 - https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list
 - https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules/search/all
 - https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules/search?SearchMode=Advanced&Standard=140-2&CertificateStatus=Historical&ValidationYear=0
+- https://dir.texas.gov/resource-library-item/tx-ramp-certified-cloud-products
 marketplace_apps: []
 edges:
 - partner_name: OpenTelemetry
@@ -4323,6 +4324,336 @@ edges:
     vendor_country: USA
     identity_source: register website (CMVP certificate Vendor panel)
   detected_by: sweep-nist-cmvp-fips-140-modules.py
+  first_seen: '2026-10-22'
+- partner_name: TX-RAMP
+  partner: null
+  partner_match: register
+  partner_tier: Level 2
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://dir.texas.gov/resource-library-item/tx-ramp-certified-cloud-products
+  category: Texas state cloud security certification (TX-RAMP)
+  contract_reference:
+    register: TX-RAMP Certified Cloud Products (Texas DIR)
+    standard: TX-RAMP
+    spec_file: null
+    role: tx-ramp-certified
+    register_file: https://dir.texas.gov/sites/default/files/2026-10/Copy%20of%20TX-RAMP%20Certified%20Cloud%20Products_1.xlsx
+    registrations:
+    - certification_id: TX1207369
+      product: Cisco Security Cloud for Government
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1216933
+      product: Secure Endpoint
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-01-26'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1216934
+      product: Secure Malware Analytics
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-01-26'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1294586
+      product: Duo
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-01-26'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1469908
+      product: Secure Email Threat Defense
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-02-22'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1480523
+      product: CX/PX Cloud
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-03-22'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1532115
+      product: Cisco Catalyst SD-WAN
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Acknowledgement and Inventory Form
+      expires: '2027-06-12'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1564013
+      product: Cisco Umbrella
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-08-16'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1565111
+      product: Cisco Intersight
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-09-05'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1565647
+      product: Cisco XDR
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-08-21'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1568311
+      product: Cisco ThousandEyes
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-09-03'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1584311
+      product: Cisco Spaces
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-10-28'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1585071
+      product: Cisco Secure Access
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-11-01'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1649920
+      product: Meraki Dashboard
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2028-04-07'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1706716
+      product: Webex Contact Center
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2028-06-08'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1843817
+      product: Splunk AppDynamics
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2029-03-16'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1870920
+      product: AI Defense
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2029-04-14'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX1960125
+      product: Splunk Cloud Platform
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2029-07-16'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985393
+      product: AppDynamics GovAPM
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985395
+      product: Cisco Cloudlock for Government
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985400
+      product: Cisco Managed Services Accelerator (MSX)
+      registered_vendor: Cisco Systems
+      certification_level: Provisional
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985401
+      product: Cisco Meraki for Government
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985410
+      product: Cisco Unified Communications Manager Cloud for Government (Cisco UCM Cloud for Government)
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985416
+      product: WebEx Contact Center Enterprise for Government (WxCCE-G)
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985417
+      product: Webex for Government
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX985437
+      product: Duo Federal
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: Certification Due to Existing Other RAMP-Certification
+      expires: null
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    - certification_id: TX992422
+      product: Cisco WebEx
+      registered_vendor: Cisco Systems
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: DIR Assessment
+      expires: '2026-12-13'
+      lapsed: false
+      matched_domain: cisco.com
+      matched_by: domain+name-among-holders
+    identity: wikidata Q173395 'Cisco' P856 https://www.cisco.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    signal_note: 'certified_products = one entry per cloud category (SaaS / PaaS / IaaS) the vendor holds a TX-RAMP
+      certification in, never per product; products are context, never counted. certification_level = the highest
+      level in that category; lapsed: true when every product in the category is past its expiry date. partner_tier
+      = the highest CURRENT level'
+    certified_products:
+    - product: SaaS
+      product_type: SaaS
+      standard: TX-RAMP
+      certification_level: Level 2
+      lapsed: false
+    detected_by: sweep-tx-ramp-certified-cloud.py
+    detected: '2026-10-22'
+  detected_by: sweep-tx-ramp-certified-cloud.py
   first_seen: '2026-10-22'
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
