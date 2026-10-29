@@ -1,4 +1,4 @@
-# Cisco (cisco)
+# Cisco
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,123 +64,199 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Cisco provides a comprehensive suite of APIs across its networking, security, collaboration, and cloud infrastructure platforms. Through Cisco DevNet, developers can access REST APIs, SDKs, and developer tools for Meraki, Webex, Catalyst Center, ACI, ISE, Intersight, ThousandEyes, SD-WAN, and other Cisco products.
+Cisco provides a comprehensive suite of APIs across its networking, security, collaboration, and cloud infrastructure platforms. Through Cisco DevNet, developers can access REST APIs, SDKs, and developer tools for Meraki, Webex, Catalyst Center, ACI, ISE, Intersight, ThousandEyes, SD-WAN, and other Cisco products to automate network operations, build integrations, and extend platform capabilities.
 
-**URL:** [https://raw.githubusercontent.com/api-evangelist/cisco/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/cisco/refs/heads/main/apis.yml)
+**Areas:** Fortune 100 · Collaboration · Enterprise · Networking · Security · SD-WAN
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Cisco on APIs.io
 
-## Tags:
+Everything profiled for Cisco is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cisco/](https://apis.io/providers/cisco/)** — or go straight to one of the APIs or properties below.
 
- - Collaboration, Enterprise, Networking, Security, SD-WAN
+### APIs (9)
 
-## Timestamps
+- [Cisco Meraki Dashboard API](https://apis.io/apis/cisco/meraki-api/) — RESTful API for managing Cisco Meraki cloud-managed networking devices including wireless access points, switches, security appliances, and cameras.…
+- [Cisco Webex API](https://apis.io/apis/cisco/webex-api/) — REST API for Webex collaboration platform enabling messaging, meeting management, device control, and administration. Supports bots, integrations, and…
+- [Cisco Catalyst Center API](https://apis.io/apis/cisco/catalyst-center-api/) — REST API for Cisco Catalyst Center (formerly DNA Center), providing intent-based networking capabilities including network design, provisioning, assurance,…
+- [Cisco ACI API](https://apis.io/apis/cisco/aci-api/) — REST API for Cisco Application Centric Infrastructure (ACI) providing programmable access to data center network fabric configuration, policy management,…
+- [Cisco ISE API](https://apis.io/apis/cisco/ise-api/) — REST API for Cisco Identity Services Engine (ISE) enabling network access policy management, guest services, BYOD onboarding, and security group…
+- [Cisco Intersight API](https://apis.io/apis/cisco/intersight-api/) — REST API for Cisco Intersight cloud operations platform providing infrastructure management, workload optimization, and lifecycle automation for Cisco UCS,…
+- [Cisco SD-WAN API](https://apis.io/apis/cisco/sdwan-api/) — REST API for Cisco SD-WAN (formerly Viptela) providing programmatic access to WAN edge device management, policy configuration, monitoring, and analytics…
+- [Cisco ThousandEyes API](https://apis.io/apis/cisco/thousandeyes-api/) — REST API for Cisco ThousandEyes digital experience monitoring platform, providing access to network, application, and internet visibility data for…
+- [Cisco Messages API](https://apis.io/apis/cisco/cisco-messages-api/) — The Messages API from Cisco — 1 operation(s) for messages.
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-04-18
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Cisco Meraki Dashboard API
-RESTful API for managing Cisco Meraki cloud-managed networking devices.
+#### Arazzo workflows (2)
 
-### Cisco Webex API
-REST API for Webex collaboration platform.
+Multi-step workflows that chain operations into a business task.
 
-### Cisco Catalyst Center API
-REST API for intent-based networking with Cisco Catalyst Center.
+- [Cisco Meraki Network Inventory Snapshot](https://apis.io/arazzos/cisco/cisco-meraki-network-inventory-workflow/)
+- [Cisco Meraki Provision an Organization Network](https://apis.io/arazzos/cisco/cisco-provision-meraki-network-workflow/)
 
-### Cisco ACI API
-REST API for Cisco Application Centric Infrastructure.
+#### AsyncAPI (1)
 
-### Cisco ISE API
-REST API for Cisco Identity Services Engine.
+Event-driven and webhook contracts.
 
-### Cisco Intersight API
-REST API for Cisco Intersight cloud operations platform.
+- [Cisco Webhooks](https://apis.io/asyncapis/cisco/cisco-webhooks/)
 
-### Cisco SD-WAN API
-REST API for Cisco SD-WAN management.
+#### GraphQL (1)
 
-### Cisco ThousandEyes API
-REST API for digital experience monitoring.
+GraphQL schemas.
 
-## Features
+- [Moved to /providers/cisco/](https://apis.io/graphqls/cisco/cisco-graphql/)
 
-| Name | Description |
-|------|-------------|
-| Network Automation | Automate network device configuration across campus, branch, and data center environments. |
-| Intent-Based Networking | Define business intent and let the network translate it into device configurations. |
-| Cloud-Managed Networking | Manage distributed networks from the cloud with Meraki APIs. |
-| Digital Experience Monitoring | Monitor end-to-end digital experiences with ThousandEyes. |
-| Zero Trust Security | Implement zero-trust network access policies with ISE APIs. |
-| Infrastructure as Code | Define and manage network infrastructure programmatically. |
+#### MCP servers (1)
 
-## Use Cases
+Model Context Protocol servers that expose the API to agents.
 
-| Name | Description |
-|------|-------------|
-| Network Configuration Management | Automate network device configuration changes across thousands of devices. |
-| Security Policy Automation | Programmatically manage access control policies and security groups. |
-| Collaboration Integration | Build bots and integrations on the Webex platform. |
-| Cloud Infrastructure Management | Manage hybrid cloud infrastructure with Intersight APIs. |
-| Network Monitoring and Analytics | Collect and analyze network telemetry data. |
+- [cisco-mcp.yml](https://apis.io/servers/cisco/cisco-mcp-yml/)
 
-## Integrations
+#### JSON Schema (4)
 
-| Name | Description |
-|------|-------------|
-| Ansible | Network automation modules for Cisco platforms. |
-| Terraform | Terraform providers for Cisco ACI, Intersight, and Meraki. |
-| ServiceNow | ITSM integration for automated incident management. |
-| Splunk | Security and network analytics integration. |
-| Python | Python SDKs for all major Cisco platforms. |
+The data models the API reads and writes.
 
-## Artifacts
+- [GetV1MessagesY2Lzy29Zcgfyazovl3Vzl01Fu1Nbr0Uvmzizzwuyzjatowf](https://apis.io/schemas/cisco/cisco-get-v1-messages-y2-lzy29-zcgfyazovl3-vzl01-fu1-nbr0-uvmzizzwuyzjatowf/)
+- [Device](https://apis.io/schemas/cisco/cisco-meraki-api-device/)
+- [Network](https://apis.io/schemas/cisco/cisco-meraki-api-network/)
+- [Organization](https://apis.io/schemas/cisco/cisco-meraki-api-organization/)
 
-Machine-readable API specifications organized by format.
+#### JSON-LD (1)
 
-### OpenAPI
+Linked-data contexts for the provider's vocabulary.
 
-- [cisco-meraki (see all/cisco-meraki/openapi/)](https://raw.githubusercontent.com/api-evangelist/cisco-meraki/refs/heads/main/openapi/cisco-meraki-organizations-api-openapi.json)
+- [Cisco Context](https://apis.io/jsonld/cisco/cisco-context/)
 
-### JSON Schema
+#### Vocabulary (1)
 
-- [cisco-meraki-api-device-schema.json](json-schema/cisco-meraki-api-device-schema.json)
-- [cisco-meraki-api-network-schema.json](json-schema/cisco-meraki-api-network-schema.json)
-- [cisco-meraki-api-organization-schema.json](json-schema/cisco-meraki-api-organization-schema.json)
+The provider's domain terms, defined.
 
-### JSON-LD
+- [Cisco Vocabulary](https://apis.io/vocabularies/cisco/cisco-vocabulary/)
 
-- [cisco-context.jsonld](json-ld/cisco-context.jsonld)
+#### Examples (3)
 
-### Examples
+Example requests and responses.
 
-- [cisco-meraki-api-device-example.json](examples/cisco-meraki-api-device-example.json)
-- [cisco-meraki-api-network-example.json](examples/cisco-meraki-api-network-example.json)
-- [cisco-meraki-api-organization-example.json](examples/cisco-meraki-api-organization-example.json)
+- [Cisco Meraki Api Device Example](https://apis.io/examples/cisco/cisco-meraki-api-device-example/)
+- [Cisco Meraki Api Network Example](https://apis.io/examples/cisco/cisco-meraki-api-network-example/)
+- [Cisco Meraki Api Organization Example](https://apis.io/examples/cisco/cisco-meraki-api-organization-example/)
 
-## Capabilities
+#### Collections (4)
 
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
+Postman and Open Collection request collections.
 
-### Shared Per-API Definitions
+- [Cisco Meraki Dashboard Clients API](https://apis.io/collections/cisco/postman-cisco-clients-api/)
+- [Cisco Meraki Dashboard Clients Devices API](https://apis.io/collections/cisco/postman-cisco-devices-api/)
+- [Cisco Meraki Dashboard Clients Networks API](https://apis.io/collections/cisco/postman-cisco-networks-api/)
+- [Cisco Meraki Dashboard Clients Organizations API](https://apis.io/collections/cisco/postman-cisco-organizations-api/)
 
-- [meraki.yaml](capabilities/shared/meraki.yaml)
+#### Overlays (1)
 
-### Workflow Capabilities
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [network-management.yaml](capabilities/network-management.yaml)
+- [Cisco Meraki Api Overlay](https://apis.io/overlays/cisco/cisco-meraki-api-overlay/)
 
-## Vocabulary
+#### Governance rules (4)
 
-- [cisco-vocabulary.yaml](vocabulary/cisco-vocabulary.yaml)
+Spectral rulesets for the provider's contracts.
 
-## Rules
+- [Cisco — flowlint rules](https://apis.io/rules/cisco/cisco-flowlint-spectral-rules/)
+- [Cisco — jsonschema rules](https://apis.io/rules/cisco/cisco-jsonschema-spectral-rules/)
+- [Cisco API Rules](https://apis.io/rules/cisco/cisco-rules/)
+- [Cisco API Rules](https://apis.io/rules/cisco/cisco-spectral-rules/)
 
-- [cisco-spectral-rules.yml](rules/cisco-spectral-rules.yml)
+#### Security (3)
 
-## Maintainers
+Authentication, trust centre, and vulnerability disclosure.
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+- [Cisco Authentication](https://apis.io/security/cisco/cisco-authentication/)
+- [Cisco Domain Security](https://apis.io/security/cisco/cisco-domain-security/)
+- [Cisco Vulnerability Disclosure](https://apis.io/security/cisco/cisco-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Cisco Plans Pricing](https://apis.io/plans/cisco/cisco-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Cisco Rate Limits](https://apis.io/rate-limits/cisco/cisco-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Cisco Finops](https://apis.io/finops/cisco/cisco-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.cisco.com/)
+- [Documentation](https://developer.cisco.com/docs/)
+- [Getting started](https://developer.cisco.com/learning/)
+- [Support](https://developer.cisco.com/site/support/)
+- [Blog](https://blogs.cisco.com/developer)
+- [Security](https://sec.cloudapps.cisco.com/security/center/resources/security_vulnerability_policy.html)
+- [Terms of service](https://www.cisco.com/c/en/us/about/legal/cloud-and-software.html)
+- [Privacy policy](https://www.cisco.com/c/en/us/about/legal/privacy-full.html)
+- [GitHub](https://github.com/CiscoDevNet)
+
+## API Evangelist rating
+
+**Kin Score 54.3** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.3 |
+| Contract quality | 27.6 |
+| Contract governance | 86.4 |
+| Operational transparency | 50.0 |
+| Developer ergonomics | 75.7 |
+| Access clarity | 28.9 |
+
+**Agent readiness 42.0** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | unknown |
+| Reversibility Documented | na |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cisco/](https://apis.io/providers/cisco/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cisco: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cisco/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
